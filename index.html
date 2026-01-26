@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Parametric Shed - Project Board</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <header>
+    <h1>🏠 Parametric Shed Project Board</h1>
+    <button id="addCardBtn" class="add-btn">+ Add Card</button>
+  </header>
+
+  <main class="board">
+    <div class="column" data-status="ideas">
+      <div class="column-header">
+        <span class="column-icon">💡</span>
+        <h2>Ideas</h2>
+        <span class="card-count">0</span>
+      </div>
+      <div class="cards" data-status="ideas"></div>
+    </div>
+
+    <div class="column" data-status="backlog">
+      <div class="column-header">
+        <span class="column-icon">📋</span>
+        <h2>Backlog</h2>
+        <span class="card-count">0</span>
+      </div>
+      <div class="cards" data-status="backlog"></div>
+    </div>
+
+    <div class="column" data-status="in-progress">
+      <div class="column-header">
+        <span class="column-icon">🔨</span>
+        <h2>In Progress</h2>
+        <span class="card-count">0</span>
+      </div>
+      <div class="cards" data-status="in-progress"></div>
+    </div>
+
+    <div class="column" data-status="done">
+      <div class="column-header">
+        <span class="column-icon">✅</span>
+        <h2>Done</h2>
+        <span class="card-count">0</span>
+      </div>
+      <div class="cards" data-status="done"></div>
+    </div>
+  </main>
+
+  <!-- Add/Edit Card Modal -->
+  <div id="modal" class="modal hidden">
+    <div class="modal-content">
+      <h3 id="modalTitle">Add Card</h3>
+      <form id="cardForm">
+        <input type="hidden" id="cardId">
+        <div class="form-group">
+          <label for="cardTitle">Title</label>
+          <input type="text" id="cardTitle" required placeholder="What needs to be done?">
+        </div>
+        <div class="form-group">
+          <label for="cardDescription">Description</label>
+          <textarea id="cardDescription" rows="3" placeholder="Add details (optional)"></textarea>
+        </div>
+        <div class="form-group">
+          <label for="cardStatus">Status</label>
+          <select id="cardStatus">
+            <option value="ideas">💡 Ideas</option>
+            <option value="backlog">📋 Backlog</option>
+            <option value="in-progress">🔨 In Progress</option>
+            <option value="done">✅ Done</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label for="cardPriority">Priority</label>
+          <select id="cardPriority">
+            <option value="low">Low</option>
+            <option value="medium" selected>Medium</option>
+            <option value="high">High</option>
+          </select>
+        </div>
+        <div class="form-actions">
+          <button type="button" id="cancelBtn" class="btn-secondary">Cancel</button>
+          <button type="button" id="deleteBtn" class="btn-danger hidden">Delete</button>
+          <button type="submit" class="btn-primary">Save</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>
