@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>3D Brain - Knowledge Graph</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      background: #0a0a1a;
+      color: #e0e0e0;
+      overflow: hidden;
+    }
+    
+    #container {
+      width: 100vw;
+      height: 100vh;
+    }
+    
+    #info-panel {
+      position: fixed;
+      top: 20px;
+      left: 20px;
+      background: rgba(20, 20, 40, 0.9);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 12px;
+      padding: 20px;
+      max-width: 350px;
+      z-index: 100;
+      backdrop-filter: blur(10px);
+    }
+    
+    #info-panel h1 {
+      font-size: 1.2rem;
+      margin-bottom: 8px;
+      color: #4ade80;
+    }
+    
+    #info-panel .subtitle {
+      font-size: 0.85rem;
+      color: #808080;
+      margin-bottom: 16px;
+    }
+    
+    #current-node {
+      background: rgba(74, 222, 128, 0.1);
+      border-radius: 8px;
+      padding: 12px;
+      margin-bottom: 12px;
+    }
+    
+    #current-node .label {
+      font-size: 0.75rem;
+      color: #4ade80;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      margin-bottom: 4px;
+    }
+    
+    #current-node .name {
+      font-size: 1.1rem;
+      font-weight: 600;
+    }
+    
+    #current-node .description {
+      font-size: 0.85rem;
+      color: #a0a0a0;
+      margin-top: 8px;
+      line-height: 1.4;
+    }
+    
+    #connections {
+      font-size: 0.8rem;
+      color: #808080;
+    }
+    
+    #connections strong {
+      color: #e0e0e0;
+    }
+    
+    #controls {
+      position: fixed;
+      bottom: 20px;
+      left: 20px;
+      font-size: 0.75rem;
+      color: #606060;
+    }
+    
+    #controls kbd {
+      background: rgba(255,255,255,0.1);
+      padding: 2px 6px;
+      border-radius: 4px;
+      margin: 0 2px;
+    }
+    
+    .node-label {
+      font-size: 12px;
+      padding: 2px 6px;
+      background: rgba(0,0,0,0.7);
+      border-radius: 4px;
+      color: white;
+      pointer-events: none;
+    }
+  </style>
+</head>
+<body>
+  <div id="container"></div>
+  
+  <div id="info-panel">
+    <h1>🧠 3D Brain</h1>
+    <p class="subtitle">Click any node to recenter the view</p>
+    <nav style="margin-bottom: 12px; font-size: 0.8rem;">
+      <a href="index.html" style="color: #4ade80; text-decoration: none; margin-right: 12px;">📋 Kanban</a>
+      <a href="decisions.html" style="color: #4ade80; text-decoration: none;">🗺️ Decisions</a>
+    </nav>
+    
+    <div id="current-node">
+      <div class="label">Current Focus</div>
+      <div class="name" id="nodeName">Bespoke Garden Buildings</div>
+      <div class="description" id="nodeDesc">The central hub for the entire project ecosystem</div>
+    </div>
+    
+    <div id="connections">
+      <strong id="connCount">8</strong> connections
+    </div>
+  </div>
+  
+  <div id="controls">
+    <kbd>Click</kbd> node to focus · 
+    <kbd>Drag</kbd> to rotate · 
+    <kbd>Scroll</kbd> to zoom
+  </div>
+
+  <script src="https://unpkg.com/3d-force-graph@1.73.0/dist/3d-force-graph.min.js"></script>
+  <script>
+    // Sample data - Bespoke Garden Buildings knowledge graph
+    const graphData = {
+      nodes: [
+        // Central node
+        { id: 'central', name: 'Bespoke Garden Buildings', description: 'The central hub — parametric systems for timber structures', group: 'core', size: 20 },
+        
+        // Main branches
+        { id: 'configurator', name: 'Parametric Configurator', description: '3D Babylon.js configurator with real timber logic', group: 'tech', size: 15 },
+        { id: 'website', name: 'Website', description: 'bespokeshedcompany.co.uk — business presence', group: 'business', size: 12 },
+        { id: 'monetization', name: 'Monetization', description: 'Revenue paths and business models', group: 'business', size: 15 },
+        { id: 'marketing', name: 'Marketing', description: 'SEO, competitors, positioning', group: 'business', size: 12 },
+        { id: 'products', name: 'Product Types', description: 'Different building categories and uses', group: 'products', size: 14 },
+        { id: 'operations', name: 'Operations', description: 'Tools, workflows, project management', group: 'ops', size: 10 },
+        { id: 'ai-workflow', name: 'AI Workflow', description: 'Collaboration patterns with AI assistants', group: 'ops', size: 10 },
+        
+        // Configurator children
+        { id: 'babylon', name: 'Babylon.js', description: '3D engine for real-time visualization', group: 'tech', size: 8 },
+        { id: 'geometry', name: 'Geometry System', description: 'mm-precision timber framing logic', group: 'tech', size: 8 },
+        { id: 'bom', name: 'BOM Generation', description: 'Automatic cutting lists', group: 'tech', size: 8 },
+        { id: 'presets', name: 'Presets', description: 'Saved configurations (potting shed, etc.)', group: 'tech', size: 8 },
+        { id: 'mobile-ux', name: 'Mobile UX', description: 'Touch controls, responsive layout', group: 'tech', size: 6 },
+        
+        // Monetization children  
+        { id: 'direct-sales', name: 'Enhanced Direct Sales', description: 'Configurator → leads → builds', group: 'business', size: 10 },
+        { id: 'diy-plans', name: 'DIY Plans', description: 'Sell design outputs (£49-149)', group: 'business', size: 8 },
+        { id: 'licensing', name: 'Licensing', description: 'White-label SaaS for other builders', group: 'business', size: 8 },
+        { id: 'niche-builds', name: 'Niche Builds', description: 'Specialist structures (mushrooms, etc.)', group: 'business', size: 8 },
+        { id: 'spectrum', name: 'DIY-Turnkey Spectrum', description: 'Multiple price points same engine', group: 'business', size: 8 },
+        
+        // Product types
+        { id: 'sheds', name: 'Storage Sheds', description: 'Basic garden storage', group: 'products', size: 8 },
+        { id: 'workshops', name: 'Workshops', description: 'Hobby and trade workspaces', group: 'products', size: 8 },
+        { id: 'offices', name: 'Garden Offices', description: 'Remote work spaces', group: 'products', size: 8 },
+        { id: 'studios', name: 'Studios', description: 'Art, music, yoga spaces', group: 'products', size: 8 },
+        { id: 'growing', name: 'Growing Spaces', description: 'Potting sheds, greenhouses', group: 'products', size: 8 },
+        
+        // Marketing
+        { id: 'seo', name: 'SEO', description: 'Search optimization for local visibility', group: 'business', size: 6 },
+        { id: 'competitors', name: 'Competitor Analysis', description: 'Quick Garden, etc.', group: 'business', size: 6 },
+        
+        // Operations
+        { id: 'kanban', name: 'Project Board', description: 'Kanban + Decision Map', group: 'ops', size: 6 },
+        { id: 'github', name: 'GitHub Repos', description: 'Parametric-shed2, shed-project-board', group: 'ops', size: 6 },
+        
+        // Meta
+        { id: 'shed-codec', name: 'Shed Codec', description: 'The bigger vision — encoding craft knowledge', group: 'core', size: 12 },
+        { id: 'brain-3d', name: '3D Brain', description: 'This tool — knowledge visualization', group: 'ops', size: 8 }
+      ],
+      links: [
+        // Central connections
+        { source: 'central', target: 'configurator' },
+        { source: 'central', target: 'website' },
+        { source: 'central', target: 'monetization' },
+        { source: 'central', target: 'marketing' },
+        { source: 'central', target: 'products' },
+        { source: 'central', target: 'operations' },
+        { source: 'central', target: 'ai-workflow' },
+        { source: 'central', target: 'shed-codec' },
+        
+        // Configurator
+        { source: 'configurator', target: 'babylon' },
+        { source: 'configurator', target: 'geometry' },
+        { source: 'configurator', target: 'bom' },
+        { source: 'configurator', target: 'presets' },
+        { source: 'configurator', target: 'mobile-ux' },
+        
+        // Monetization
+        { source: 'monetization', target: 'direct-sales' },
+        { source: 'monetization', target: 'diy-plans' },
+        { source: 'monetization', target: 'licensing' },
+        { source: 'monetization', target: 'niche-builds' },
+        { source: 'monetization', target: 'spectrum' },
+        
+        // Products
+        { source: 'products', target: 'sheds' },
+        { source: 'products', target: 'workshops' },
+        { source: 'products', target: 'offices' },
+        { source: 'products', target: 'studios' },
+        { source: 'products', target: 'growing' },
+        
+        // Marketing
+        { source: 'marketing', target: 'seo' },
+        { source: 'marketing', target: 'competitors' },
+        
+        // Operations
+        { source: 'operations', target: 'kanban' },
+        { source: 'operations', target: 'github' },
+        { source: 'operations', target: 'brain-3d' },
+        
+        // Cross-links
+        { source: 'direct-sales', target: 'configurator' },
+        { source: 'diy-plans', target: 'bom' },
+        { source: 'website', target: 'seo' },
+        { source: 'website', target: 'configurator' },
+        { source: 'shed-codec', target: 'configurator' },
+        { source: 'niche-builds', target: 'growing' },
+        { source: 'presets', target: 'growing' }
+      ]
+    };
+
+    // Color scheme by group
+    const groupColors = {
+      core: '#4ade80',
+      tech: '#60a5fa',
+      business: '#f59e0b',
+      products: '#a78bfa',
+      ops: '#9ca3af'
+    };
+
+    // Initialize the 3D graph
+    const Graph = ForceGraph3D()
+      (document.getElementById('container'))
+      .graphData(graphData)
+      .nodeLabel('name')
+      .nodeColor(node => groupColors[node.group] || '#ffffff')
+      .nodeVal(node => node.size || 10)
+      .nodeOpacity(0.9)
+      .linkColor(() => 'rgba(255,255,255,0.2)')
+      .linkWidth(1)
+      .linkOpacity(0.6)
+      .backgroundColor('#0a0a1a')
+      .onNodeClick(node => {
+        // Fly to node
+        const distance = 200;
+        const distRatio = 1 + distance / Math.hypot(node.x, node.y, node.z);
+        
+        Graph.cameraPosition(
+          { x: node.x * distRatio, y: node.y * distRatio, z: node.z * distRatio },
+          node,
+          1500
+        );
+        
+        // Update info panel
+        document.getElementById('nodeName').textContent = node.name;
+        document.getElementById('nodeDesc').textContent = node.description || '';
+        
+        // Count connections
+        const connections = graphData.links.filter(
+          l => l.source.id === node.id || l.target.id === node.id ||
+               l.source === node.id || l.target === node.id
+        ).length;
+        document.getElementById('connCount').textContent = connections;
+      })
+      .onNodeHover(node => {
+        document.body.style.cursor = node ? 'pointer' : 'default';
+      });
+
+    // Initial camera position
+    setTimeout(() => {
+      const centralNode = graphData.nodes.find(n => n.id === 'central');
+      if (centralNode) {
+        Graph.cameraPosition({ x: 0, y: 0, z: 500 }, { x: 0, y: 0, z: 0 }, 0);
+      }
+    }, 500);
+
+    // Add some gentle rotation when idle
+    let angle = 0;
+    let isUserInteracting = false;
+    
+    document.getElementById('container').addEventListener('mousedown', () => isUserInteracting = true);
+    document.getElementById('container').addEventListener('mouseup', () => {
+      setTimeout(() => isUserInteracting = false, 2000);
+    });
+  </script>
+</body>
+</html>
