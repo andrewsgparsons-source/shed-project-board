@@ -10,11 +10,12 @@ const DEFAULT_DECISIONS = [
     question: 'Open Source License',
     context: 'What license to use for the parametric shed repo?',
     options: [
-      { id: 'opt1', text: 'MIT License', selected: false, linksTo: null },
-      { id: 'opt2', text: 'GPL', selected: false, linksTo: null },
-      { id: 'opt3', text: 'Apache 2.0', selected: false, linksTo: null }
+      { id: 'opt1', text: 'MIT License', selected: true, linksTo: null, notes: 'Simple, widely understood, doesn\'t scare off users/contributors. Most Babylon.js projects use it.' },
+      { id: 'opt2', text: 'GPL', selected: false, linksTo: null, notes: 'Share-alike — derivatives must also be open source. More restrictive.' },
+      { id: 'opt3', text: 'Apache 2.0', selected: false, linksTo: null, notes: 'Like MIT but with explicit patent protection. More corporate-friendly.' }
     ],
-    status: 'open',
+    evaluation: '**Decision: MIT License**\n\n**Key arguments:**\n- This is a niche project (garden building configurator) — unlikely anyone would profit from it more than Andrew could\n- The value isn\'t just the code, it\'s understanding timber framing, realistic dimensions, customer needs — that\'s Andrew\'s expertise\n- Someone would need to fork it, customize, host, market, handle customers — at that point they might as well build their own\n- Andrew has the head start, knows the codebase, has the business\n\n**Realistic scenarios:**\n- Someone uses it to plan their own shed ✓ (free marketing)\n- A developer learns from the code ✓ (good for reputation)\n- Someone contributes improvements back ✓ (Andrew benefits)\n- A competitor forks it — they\'d still need building expertise and customer base\n\n**Conclusion:** The code is just one piece. The business is Andrew.',
+    status: 'decided',
     x: 100,
     y: 100
   }
@@ -110,6 +111,8 @@ function createDecisionNode(decision) {
     </div>
   `).join('');
 
+  const hasEvaluation = decision.evaluation && decision.evaluation.trim();
+  
   div.innerHTML = `
     <button class="decision-edit-btn" data-action="edit">✏️ Edit</button>
     <div class="decision-header">
@@ -120,6 +123,12 @@ function createDecisionNode(decision) {
     <div class="decision-options">
       ${optionsHtml}
     </div>
+    ${hasEvaluation ? `
+    <div class="decision-evaluation">
+      <button class="evaluation-toggle" data-action="toggle-eval">📋 Evaluation</button>
+      <div class="evaluation-content hidden">${formatEvaluation(decision.evaluation)}</div>
+    </div>
+    ` : ''}
   `;
 
   // Drag events
@@ -260,6 +269,19 @@ function handleNodeClick(e) {
     return;
   }
 
+  // Toggle evaluation
+  if (e.target.closest('[data-action="toggle-eval"]')) {
+    const evalContent = node.querySelector('.evaluation-content');
+    if (evalContent) {
+      evalContent.classList.toggle('hidden');
+      const btn = e.target.closest('.evaluation-toggle');
+      if (btn) {
+        btn.textContent = evalContent.classList.contains('hidden') ? '📋 Evaluation' : '📋 Hide';
+      }
+    }
+    return;
+  }
+
   // Link button
   if (e.target.closest('[data-action="link"]')) {
     const optionEl = e.target.closest('.decision-option');
@@ -303,6 +325,7 @@ function openAddModal() {
   document.getElementById('decisionId').value = '';
   document.getElementById('decisionQuestion').value = '';
   document.getElementById('decisionContext').value = '';
+  document.getElementById('decisionEvaluation').value = '';
   document.getElementById('decisionStatus').value = 'open';
   document.getElementById('decisionDeleteBtn').classList.add('hidden');
   
@@ -322,6 +345,7 @@ function openEditModal(decision) {
   document.getElementById('decisionId').value = decision.id;
   document.getElementById('decisionQuestion').value = decision.question;
   document.getElementById('decisionContext').value = decision.context || '';
+  document.getElementById('decisionEvaluation').value = decision.evaluation || '';
   document.getElementById('decisionStatus').value = decision.status;
   document.getElementById('decisionDeleteBtn').classList.remove('hidden');
 
@@ -370,6 +394,7 @@ function handleDecisionFormSubmit(e) {
   const id = document.getElementById('decisionId').value;
   const question = document.getElementById('decisionQuestion').value.trim();
   const context = document.getElementById('decisionContext').value.trim();
+  const evaluation = document.getElementById('decisionEvaluation').value.trim();
   const status = document.getElementById('decisionStatus').value;
 
   if (!question) return;
@@ -403,6 +428,7 @@ function handleDecisionFormSubmit(e) {
     if (decision) {
       decision.question = question;
       decision.context = context;
+      decision.evaluation = evaluation;
       decision.status = status;
       decision.options = options;
     }
@@ -416,6 +442,7 @@ function handleDecisionFormSubmit(e) {
       id: Date.now().toString(),
       question,
       context,
+      evaluation,
       options,
       status,
       x: maxX + 350,
@@ -594,6 +621,14 @@ function formatStatus(status) {
     'blocked': 'Blocked'
   };
   return labels[status] || status;
+}
+
+// Simple markdown-like formatting for evaluation text
+function formatEvaluation(text) {
+  return escapeHtml(text)
+    .replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>')
+    .replace(/\n/g, '<br>')
+    .replace(/- /g, '• ');
 }
 
 // Start the app

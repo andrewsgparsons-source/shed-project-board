@@ -224,6 +224,50 @@
   color: #4ade80;
 }
 
+/* Evaluation section */
+.decision-evaluation {
+  padding: 8px 16px 12px;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.evaluation-toggle {
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  color: #a0a0a0;
+  padding: 6px 12px;
+  border-radius: 6px;
+  font-size: 0.8rem;
+  cursor: pointer;
+  transition: all 0.15s;
+  width: 100%;
+  text-align: left;
+}
+
+.evaluation-toggle:hover {
+  background: rgba(255, 255, 255, 0.1);
+  color: #e0e0e0;
+}
+
+.evaluation-content {
+  margin-top: 10px;
+  padding: 12px;
+  background: rgba(0, 0, 0, 0.2);
+  border-radius: 6px;
+  font-size: 0.8rem;
+  line-height: 1.5;
+  color: #c0c0c0;
+  max-height: 300px;
+  overflow-y: auto;
+}
+
+.evaluation-content strong {
+  color: #4ade80;
+}
+
+.evaluation-content.hidden {
+  display: none;
+}
+
 /* Edit button */
 .decision-edit-btn {
   position: absolute;
