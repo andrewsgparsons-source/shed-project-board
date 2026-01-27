@@ -3,8 +3,13 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#1a1a2e">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
   <title>Parametric Shed - Project Board</title>
   <link rel="stylesheet" href="styles.css">
+  <link rel="manifest" href="manifest.json">
+  <link rel="apple-touch-icon" href="icon-192.png">
 </head>
 <body>
   <header>
@@ -23,6 +28,13 @@
       <input type="file" id="importFile" accept=".json" style="display:none">
     </div>
   </header>
+
+  <nav class="mobile-tabs">
+    <button class="mobile-tab active" data-status="ideas">💡 Ideas <span class="tab-count"></span></button>
+    <button class="mobile-tab" data-status="backlog">📋 Backlog <span class="tab-count"></span></button>
+    <button class="mobile-tab" data-status="in-progress">🔨 Active <span class="tab-count"></span></button>
+    <button class="mobile-tab" data-status="done">✅ Done <span class="tab-count"></span></button>
+  </nav>
 
   <main class="board">
     <div class="column" data-status="ideas">

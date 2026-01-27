@@ -174,12 +174,20 @@ function createCardElement(card) {
   return div;
 }
 
-// Update card counts in column headers
+// Update card counts in column headers and mobile tabs
 function updateCardCounts() {
   document.querySelectorAll('.column').forEach(col => {
     const status = col.dataset.status;
     const count = cards.filter(c => c.status === status).length;
     col.querySelector('.card-count').textContent = count;
+  });
+  
+  // Update mobile tab counts
+  document.querySelectorAll('.mobile-tab').forEach(tab => {
+    const status = tab.dataset.status;
+    const count = cards.filter(c => c.status === status).length;
+    const countEl = tab.querySelector('.tab-count');
+    if (countEl) countEl.textContent = count > 0 ? `(${count})` : '';
   });
 }
 
@@ -338,6 +346,28 @@ function setupEventListeners() {
     col.addEventListener('dragleave', handleDragLeave);
     col.addEventListener('drop', handleDrop);
   });
+  
+  // Mobile tabs
+  document.querySelectorAll('.mobile-tab').forEach(tab => {
+    tab.addEventListener('click', () => {
+      // Update active tab
+      document.querySelectorAll('.mobile-tab').forEach(t => t.classList.remove('active'));
+      tab.classList.add('active');
+      
+      // Show corresponding column
+      const status = tab.dataset.status;
+      document.querySelectorAll('.column').forEach(col => {
+        col.classList.toggle('active', col.dataset.status === status);
+      });
+    });
+  });
+  
+  // Set initial active column on mobile
+  const firstTab = document.querySelector('.mobile-tab');
+  if (firstTab) {
+    const status = firstTab.dataset.status;
+    document.querySelector(`.column[data-status="${status}"]`)?.classList.add('active');
+  }
 }
 
 // Utility functions
