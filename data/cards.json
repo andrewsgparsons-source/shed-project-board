@@ -1,6 +1,6 @@
 {
-  "version": 3,
-  "lastUpdated": "2026-01-27T10:17:00Z",
+  "version": 4,
+  "lastUpdated": "2026-01-27T11:04:00Z",
   "updatedBy": "James",
   "categories": [
     { "id": "configurator", "name": "Configurator", "emoji": "🔧" },
@@ -111,18 +111,18 @@
     },
     {
       "id": "12",
-      "title": "Monetization strategy",
-      "description": "Research and develop monetization options for the configurator.",
-      "status": "ideas",
-      "priority": "medium",
+      "title": "Monetization decision mapping",
+      "description": "Map monetization paths in Decision Map with full arguments and evaluation. Options: Enhanced direct sales, DIY plans, Licensing, Niche builds, Spectrum model.",
+      "status": "done",
+      "priority": "high",
       "category": "business",
       "createdAt": "2026-01-27T09:40:00Z"
     },
     {
       "id": "13",
       "title": "Competitor analysis - UK garden buildings",
-      "description": "Research competitors in the UK garden building industry. Identify gaps and opportunities.",
-      "status": "backlog",
+      "description": "Research competitors in the UK garden building industry. Identify gaps and opportunities. Started: Quick Garden.",
+      "status": "in-progress",
       "priority": "medium",
       "category": "marketing",
       "createdAt": "2026-01-27T09:40:00Z"
@@ -148,7 +148,7 @@
     {
       "id": "16",
       "title": "Website rebuild strategy",
-      "description": "Decide on approach: refresh current, full rebuild, add e-commerce/quote system, or hybrid configurator model.",
+      "description": "Decide on approach: refresh current, full rebuild, add e-commerce/quote system, or hybrid configurator model. See Decision Map.",
       "status": "ideas",
       "priority": "high",
       "category": "website",
@@ -162,6 +162,33 @@
       "priority": "medium",
       "category": "configurator",
       "createdAt": "2026-01-27T10:05:00Z"
+    },
+    {
+      "id": "18",
+      "title": "Monetization strategy document",
+      "description": "Create comprehensive monetization strategy doc in the repo. Cover: direct sales, DIY plans, licensing, niche builds, spectrum model, supplier partnerships.",
+      "status": "backlog",
+      "priority": "high",
+      "category": "business",
+      "createdAt": "2026-01-27T11:04:00Z"
+    },
+    {
+      "id": "19",
+      "title": "Fastest-to-revenue roadmap",
+      "description": "Prioritize monetization paths by speed-to-revenue. Create actionable roadmap: Week 1, Month 1, Quarter 1 milestones.",
+      "status": "backlog",
+      "priority": "high",
+      "category": "business",
+      "createdAt": "2026-01-27T11:04:00Z"
+    },
+    {
+      "id": "20",
+      "title": "Embed configurator on bespokeshedcompany.co.uk",
+      "description": "Deploy parametric configurator on the business website. First monetization step: capture leads, enable quotes.",
+      "status": "backlog",
+      "priority": "high",
+      "category": "website",
+      "createdAt": "2026-01-27T11:04:00Z"
     }
   ]
 }

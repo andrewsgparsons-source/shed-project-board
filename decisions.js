@@ -18,6 +18,37 @@ const DEFAULT_DECISIONS = [
     status: 'decided',
     x: 100,
     y: 100
+  },
+  {
+    id: '2',
+    question: 'Primary Monetization Path',
+    context: 'What is the fastest route to revenue from the parametric system?',
+    options: [
+      { id: 'mon1', text: 'Enhanced Direct Sales', selected: false, linksTo: null, notes: 'Use configurator to win more bespoke jobs. Faster quotes, pre-qualified leads, value visible before price discussed. FASTEST to revenue.' },
+      { id: 'mon2', text: 'DIY Plans & Kits', selected: false, linksTo: null, notes: 'Sell design outputs: PDF plans (£49-149), cut lists, material bundles. Captures customers who can\'t afford turnkey. Low effort once set up.' },
+      { id: 'mon3', text: 'License to Other Builders', selected: false, linksTo: null, notes: 'White-label SaaS for other shed companies (£99-299/mo). High upside but slow to build, risks empowering competitors.' },
+      { id: 'mon4', text: 'Niche Specialist Buildings', selected: false, linksTo: null, notes: 'Mushroom rooms, micro-greens, fermentation spaces. Information-dense customers, price-insensitive, value proven systems. Higher margin.' },
+      { id: 'mon5', text: 'DIY-Assisted-Turnkey Spectrum', selected: false, linksTo: null, notes: 'Multiple price points: design-only → DIY kit → assisted build → turnkey. Keeps people in ecosystem even if they can\'t afford full build.' }
+    ],
+    evaluation: '**Context:**\nThe parametric system is a translation layer between craft knowledge and digital systems. The shed is proof of concept, not the limit.\n\n**Core insight:**\n"Value-based pricing disguised as configuration" — the configurator makes customers understand why quality costs what it costs.\n\n**Fastest path analysis:**\n\n1. **Enhanced Direct Sales** — Weeks to revenue\n   - Embed configurator on website\n   - Capture leads after design\n   - Quote faster using BOM output\n   - Minimal new build work required\n\n2. **DIY Plans** — Weeks to revenue\n   - Parametric model already generates BOM\n   - Package as PDF plans\n   - Sell to confident DIYers\n   - £49-149 per design\n\n3. **Licensing** — Months to revenue\n   - Requires productization, onboarding, support\n   - High upside but slow\n   - Risk of empowering competitors\n\n4. **Niche Builds** — Medium-term\n   - Requires market research, specialized presets\n   - But higher margins once established\n\n**The spectrum model:**\nSame parametric engine serves: Design-only → DIY kit → Assisted → Turnkey\nThis captures revenue at every price point without losing customers.\n\n**Key principle:**\n"Bespoke but reliable" — most builders do bespoke without systems, most systems kill bespoke. Threading this needle is the competitive advantage.\n\n**Recommendation:**\nStart with Enhanced Direct Sales + DIY Plans (fastest). Layer in niche builds and licensing over time.',
+    status: 'open',
+    x: 450,
+    y: 100
+  },
+  {
+    id: '3',
+    question: 'Website Rebuild Strategy',
+    context: 'How should bespokeshedcompany.co.uk evolve?',
+    options: [
+      { id: 'web1', text: 'Refresh Current Site', selected: false, linksTo: null, notes: 'Keep WordPress, improve SEO, update content. Fastest, lowest risk. Addresses immediate SEO needs.' },
+      { id: 'web2', text: 'Full Rebuild (Brochure + Configurator)', selected: false, linksTo: null, notes: 'New site from scratch with embedded configurator. More work but cleaner integration.' },
+      { id: 'web3', text: 'Add E-commerce / Quote System', selected: false, linksTo: null, notes: 'Enable online quotes or deposits. Risk: may commoditize the bespoke relationship.' },
+      { id: 'web4', text: 'Hybrid Approach', selected: false, linksTo: null, notes: 'Configurator for engagement, human consultation for close. Preserves bespoke feel while capturing leads.' }
+    ],
+    evaluation: '**The tension:**\n- E-commerce = self-service, quick transactions, price comparison\n- Your business = conversations, tailored solutions, trust-building\n\n**Where e-commerce could work:**\n- Configurator-led quotes (not "buy now" but "design, get quote, start conversation")\n- Deposit/booking system (reserving your time, not selling sheds)\n- Ancillary products (accessories, treatments)\n- Lead generation (configurator captures contacts)\n\n**Where it could go wrong:**\n- Price-focused customers expecting Amazon-style transactions\n- Race to the bottom with cheap competitors\n- Losing the personal touch that differentiates you\n\n**SEO is the immediate need:**\n- Current title "Home - Bespoke Shed Company" is weak\n- Need better page titles, meta descriptions, local keywords\n- Schema markup for LocalBusiness\n- Copyright date outdated (2022)\n\n**Recommendation:**\nStart with SEO improvements on current site (quick wins). Then decide on rebuild scope based on monetization path chosen.',
+    status: 'open',
+    x: 450,
+    y: 350
   }
 ];
 
