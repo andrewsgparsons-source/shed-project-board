@@ -2,6 +2,7 @@
 // Interactive flowchart for strategic decisions
 
 const STORAGE_KEY = 'shed-decision-map';
+const REPO_JSON_URL = 'data/decisions.json';
 
 // Default decisions for first load
 const DEFAULT_DECISIONS = [
@@ -65,21 +66,103 @@ const decisionForm = document.getElementById('decisionForm');
 const connectModal = document.getElementById('connectModal');
 
 // Initialize
-function init() {
-  loadDecisions();
+async function init() {
+  await loadDecisions();
   renderAll();
   setupEventListeners();
 }
 
-// Load from localStorage
-function loadDecisions() {
+// Load decisions - fetch from repo JSON, use localStorage as override
+async function loadDecisions() {
   const stored = localStorage.getItem(STORAGE_KEY);
-  if (stored) {
-    decisions = JSON.parse(stored);
-  } else {
-    decisions = DEFAULT_DECISIONS;
-    saveDecisions();
+  const localData = stored ? JSON.parse(stored) : null;
+  
+  try {
+    const response = await fetch(REPO_JSON_URL + '?t=' + Date.now());
+    if (response.ok) {
+      const repoData = await response.json();
+      const repoDecisions = repoData.decisions || [];
+      const repoVersion = repoData.version || 0;
+      
+      const localVersion = parseInt(localStorage.getItem(STORAGE_KEY + '_repoVersion') || '0');
+      
+      if (!localData || repoVersion > localVersion) {
+        decisions = repoDecisions;
+        localStorage.setItem(STORAGE_KEY, JSON.stringify(decisions));
+        localStorage.setItem(STORAGE_KEY + '_repoVersion', repoVersion.toString());
+        console.log('[Decisions] Loaded from repo JSON (version ' + repoVersion + ')');
+      } else {
+        decisions = localData;
+        console.log('[Decisions] Using local data (repo version ' + localVersion + ')');
+      }
+    } else {
+      throw new Error('HTTP ' + response.status);
+    }
+  } catch (e) {
+    console.warn('[Decisions] Could not fetch repo JSON, using localStorage:', e.message);
+    decisions = localData || DEFAULT_DECISIONS;
   }
+}
+
+// Force reload from repo JSON
+async function reloadFromRepo() {
+  if (!confirm('This will discard your local changes and reload from the repo. Continue?')) {
+    return;
+  }
+  localStorage.removeItem(STORAGE_KEY);
+  localStorage.removeItem(STORAGE_KEY + '_repoVersion');
+  await loadDecisions();
+  renderAll();
+}
+
+// Export decisions as JSON download
+function exportDecisions() {
+  const data = {
+    version: parseInt(localStorage.getItem(STORAGE_KEY + '_repoVersion') || '1') + 1,
+    lastUpdated: new Date().toISOString(),
+    updatedBy: 'Andrew',
+    decisions: decisions
+  };
+  const blob = new Blob([JSON.stringify(data, null, 2)], { type: 'application/json' });
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  a.href = url;
+  a.download = 'decisions.json';
+  a.click();
+  URL.revokeObjectURL(url);
+}
+
+// Import decisions from JSON file
+function importDecisions(file) {
+  const reader = new FileReader();
+  reader.onload = function(e) {
+    try {
+      const data = JSON.parse(e.target.result);
+      const importedDecisions = data.decisions || data;
+      
+      if (!Array.isArray(importedDecisions)) {
+        alert('Invalid JSON format - expected decisions array');
+        return;
+      }
+      
+      decisions = importedDecisions;
+      saveDecisions();
+      renderAll();
+      
+      if (data.version) {
+        localStorage.setItem(STORAGE_KEY + '_repoVersion', data.version.toString());
+      }
+      
+      alert('Imported ' + decisions.length + ' decisions successfully!');
+    } catch (err) {
+      alert('Failed to parse JSON: ' + err.message);
+    }
+  };
+  reader.readAsText(file);
+}
+
+function triggerImport() {
+  document.getElementById('importFile').click();
 }
 
 // Save to localStorage
@@ -600,6 +683,17 @@ function setupEventListeners() {
   
   // Fit view
   document.getElementById('fitViewBtn').addEventListener('click', fitView);
+  
+  // Import, export, sync
+  document.getElementById('importBtn').addEventListener('click', triggerImport);
+  document.getElementById('importFile').addEventListener('change', function(e) {
+    if (e.target.files.length > 0) {
+      importDecisions(e.target.files[0]);
+      e.target.value = '';
+    }
+  });
+  document.getElementById('exportBtn').addEventListener('click', exportDecisions);
+  document.getElementById('reloadBtn').addEventListener('click', reloadFromRepo);
 
   // Decision modal
   document.getElementById('decisionCancelBtn').addEventListener('click', closeDecisionModal);
