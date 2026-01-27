@@ -1,7 +1,7 @@
 {
-  "version": 5,
-  "lastUpdated": "2026-01-27T11:09:16.424Z",
-  "updatedBy": "Andrew",
+  "version": 7,
+  "lastUpdated": "2026-01-27T12:06:00.000Z",
+  "updatedBy": "James",
   "categories": [
     { "id": "configurator", "name": "Configurator", "emoji": "🔧" },
     { "id": "website", "name": "Website", "emoji": "🌐" },
@@ -121,8 +121,8 @@
     {
       "id": "13",
       "title": "Competitor analysis - UK garden buildings",
-      "description": "Research competitors in the UK garden building industry. Identify gaps and opportunities. Started: Quick Garden.",
-      "status": "in-progress",
+      "description": "Research competitors in the UK garden building industry. Identify gaps and opportunities. Completed: Quick Garden, Crane, Garden Buildings Direct, Tiger, Scotts. Report saved to competitor-analysis.md",
+      "status": "done",
       "priority": "medium",
       "category": "marketing",
       "createdAt": "2026-01-27T09:40:00Z"
