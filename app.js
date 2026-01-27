@@ -92,6 +92,41 @@ function exportCards() {
   URL.revokeObjectURL(url);
 }
 
+// Import cards from JSON file
+function importCards(file) {
+  const reader = new FileReader();
+  reader.onload = function(e) {
+    try {
+      const data = JSON.parse(e.target.result);
+      const importedCards = data.cards || data; // Support both {cards:[]} and raw array
+      
+      if (!Array.isArray(importedCards)) {
+        alert('Invalid JSON format - expected cards array');
+        return;
+      }
+      
+      cards = importedCards;
+      saveCards();
+      renderCards();
+      
+      // Update version if present
+      if (data.version) {
+        localStorage.setItem(STORAGE_KEY + '_repoVersion', data.version.toString());
+      }
+      
+      alert('Imported ' + cards.length + ' cards successfully!');
+    } catch (err) {
+      alert('Failed to parse JSON: ' + err.message);
+    }
+  };
+  reader.readAsText(file);
+}
+
+// Trigger file picker for import
+function triggerImport() {
+  document.getElementById('importFile').click();
+}
+
 // Save cards to localStorage
 function saveCards() {
   localStorage.setItem(STORAGE_KEY, JSON.stringify(cards));
@@ -269,7 +304,14 @@ function setupEventListeners() {
   // Add card button
   addCardBtn.addEventListener('click', openAddModal);
   
-  // Export and reload buttons
+  // Import, export, and reload buttons
+  document.getElementById('importBtn').addEventListener('click', triggerImport);
+  document.getElementById('importFile').addEventListener('change', function(e) {
+    if (e.target.files.length > 0) {
+      importCards(e.target.files[0]);
+      e.target.value = ''; // Reset so same file can be imported again
+    }
+  });
   document.getElementById('exportBtn').addEventListener('click', exportCards);
   document.getElementById('reloadBtn').addEventListener('click', reloadFromRepo);
   
