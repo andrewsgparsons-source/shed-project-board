@@ -1,7 +1,7 @@
 {
-  "name": "Shed Project Board",
-  "short_name": "Shed Board",
-  "description": "Kanban board for the Parametric Shed project",
+  "name": "Bespoke Garden Buildings",
+  "short_name": "BGB Board",
+  "description": "Project board for Bespoke Garden Buildings business",
   "start_url": "/shed-project-board/",
   "display": "standalone",
   "background_color": "#1a1a2e",

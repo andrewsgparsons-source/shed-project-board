@@ -1,7 +1,14 @@
 {
-  "version": 2,
-  "lastUpdated": "2026-01-27T10:02:00Z",
-  "updatedBy": "Andrew",
+  "version": 3,
+  "lastUpdated": "2026-01-27T10:17:00Z",
+  "updatedBy": "James",
+  "categories": [
+    { "id": "configurator", "name": "Configurator", "emoji": "🔧" },
+    { "id": "website", "name": "Website", "emoji": "🌐" },
+    { "id": "business", "name": "Business", "emoji": "📈" },
+    { "id": "marketing", "name": "Marketing", "emoji": "📣" },
+    { "id": "operations", "name": "Operations", "emoji": "🛠️" }
+  ],
   "cards": [
     {
       "id": "1",
@@ -9,6 +16,7 @@
       "description": "Max 8m x 4m in either orientation. Validation working.",
       "status": "done",
       "priority": "high",
+      "category": "configurator",
       "createdAt": "2026-01-26T12:00:00Z"
     },
     {
@@ -17,6 +25,7 @@
       "description": "Fixed rotation and positioning for all 4 attachment directions (left, right, front, back).",
       "status": "done",
       "priority": "high",
+      "category": "configurator",
       "createdAt": "2026-01-26T12:00:00Z"
     },
     {
@@ -25,6 +34,7 @@
       "description": "Add min/max validation for eave and crest heights.",
       "status": "backlog",
       "priority": "medium",
+      "category": "configurator",
       "createdAt": "2026-01-26T12:00:00Z"
     },
     {
@@ -33,6 +43,7 @@
       "description": "Prevent unrealistic opening sizes.",
       "status": "backlog",
       "priority": "medium",
+      "category": "configurator",
       "createdAt": "2026-01-26T12:00:00Z"
     },
     {
@@ -41,6 +52,7 @@
       "description": "Create a landing page to showcase the configurator.",
       "status": "ideas",
       "priority": "low",
+      "category": "marketing",
       "createdAt": "2026-01-26T12:00:00Z"
     },
     {
@@ -49,6 +61,7 @@
       "description": "Write comprehensive README for the GitHub repo.",
       "status": "done",
       "priority": "medium",
+      "category": "configurator",
       "createdAt": "2026-01-26T12:00:00Z"
     },
     {
@@ -57,6 +70,7 @@
       "description": "Added MIT license to the Parametric-shed2 repo.",
       "status": "done",
       "priority": "medium",
+      "category": "configurator",
       "createdAt": "2026-01-27T08:41:00Z"
     },
     {
@@ -65,6 +79,7 @@
       "description": "Interactive flowchart for mapping strategic decisions. Added to project board app.",
       "status": "done",
       "priority": "medium",
+      "category": "operations",
       "createdAt": "2026-01-27T08:49:00Z"
     },
     {
@@ -73,6 +88,7 @@
       "description": "Created and saved potting shed preset (2m × 3.6m) with three windows and pent roof.",
       "status": "done",
       "priority": "medium",
+      "category": "configurator",
       "createdAt": "2026-01-27T09:34:00Z"
     },
     {
@@ -81,6 +97,7 @@
       "description": "Add shelving as a new element type (like doors/windows). Parameters: wall, inside/outside, height, starting position, length. Include in BOM.",
       "status": "ideas",
       "priority": "medium",
+      "category": "configurator",
       "createdAt": "2026-01-27T09:09:00Z"
     },
     {
@@ -89,6 +106,7 @@
       "description": "Set up browser access so James can interact with the configurator directly for testing and screenshots.",
       "status": "ideas",
       "priority": "low",
+      "category": "operations",
       "createdAt": "2026-01-27T09:40:00Z"
     },
     {
@@ -97,6 +115,7 @@
       "description": "Research and develop monetization options for the configurator.",
       "status": "ideas",
       "priority": "medium",
+      "category": "business",
       "createdAt": "2026-01-27T09:40:00Z"
     },
     {
@@ -105,6 +124,7 @@
       "description": "Research competitors in the UK garden building industry. Identify gaps and opportunities.",
       "status": "backlog",
       "priority": "medium",
+      "category": "marketing",
       "createdAt": "2026-01-27T09:40:00Z"
     },
     {
@@ -113,7 +133,35 @@
       "description": "Grab a nice screenshot or GIF of the configurator for the README hero image.",
       "status": "backlog",
       "priority": "medium",
+      "category": "configurator",
       "createdAt": "2026-01-27T09:52:00Z"
+    },
+    {
+      "id": "15",
+      "title": "SEO improvements",
+      "description": "Improve SEO on bespokeshedcompany.co.uk: better page titles, meta descriptions, local keywords, schema markup.",
+      "status": "backlog",
+      "priority": "high",
+      "category": "website",
+      "createdAt": "2026-01-27T10:15:00Z"
+    },
+    {
+      "id": "16",
+      "title": "Website rebuild strategy",
+      "description": "Decide on approach: refresh current, full rebuild, add e-commerce/quote system, or hybrid configurator model.",
+      "status": "ideas",
+      "priority": "high",
+      "category": "website",
+      "createdAt": "2026-01-27T10:17:00Z"
+    },
+    {
+      "id": "17",
+      "title": "Mobile UX for configurator",
+      "description": "Improve mobile experience: fix zoom control, auto-collapse panel on load, touch-friendly controls.",
+      "status": "backlog",
+      "priority": "medium",
+      "category": "configurator",
+      "createdAt": "2026-01-27T10:05:00Z"
     }
   ]
 }

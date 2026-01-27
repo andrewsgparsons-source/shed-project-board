@@ -148,14 +148,28 @@ function renderCards() {
   updateCardCounts();
 }
 
+// Category definitions
+const CATEGORIES = {
+  configurator: { name: 'Configurator', emoji: '🔧' },
+  website: { name: 'Website', emoji: '🌐' },
+  business: { name: 'Business', emoji: '📈' },
+  marketing: { name: 'Marketing', emoji: '📣' },
+  operations: { name: 'Operations', emoji: '🛠️' }
+};
+
 // Create card DOM element
 function createCardElement(card) {
   const div = document.createElement('div');
   div.className = `card priority-${card.priority}`;
   div.draggable = true;
   div.dataset.id = card.id;
+  
+  const cat = CATEGORIES[card.category] || { name: card.category || 'General', emoji: '📌' };
 
   div.innerHTML = `
+    <div class="card-header">
+      <span class="category-badge" data-category="${card.category || ''}">${cat.emoji} ${cat.name}</span>
+    </div>
     <div class="card-title">${escapeHtml(card.title)}</div>
     ${card.description ? `<div class="card-description">${escapeHtml(card.description)}</div>` : ''}
     <div class="card-meta">
@@ -239,6 +253,7 @@ function openAddModal() {
   cardForm.reset();
   document.getElementById('cardId').value = '';
   document.getElementById('cardStatus').value = 'ideas';
+  document.getElementById('cardCategory').value = 'configurator';
   deleteBtn.classList.add('hidden');
   modal.classList.remove('hidden');
   document.getElementById('cardTitle').focus();
@@ -250,6 +265,7 @@ function openEditModal(card) {
   document.getElementById('cardTitle').value = card.title;
   document.getElementById('cardDescription').value = card.description || '';
   document.getElementById('cardStatus').value = card.status;
+  document.getElementById('cardCategory').value = card.category || 'configurator';
   document.getElementById('cardPriority').value = card.priority;
   deleteBtn.classList.remove('hidden');
   modal.classList.remove('hidden');
@@ -267,6 +283,7 @@ function handleFormSubmit(e) {
   const title = document.getElementById('cardTitle').value.trim();
   const description = document.getElementById('cardDescription').value.trim();
   const status = document.getElementById('cardStatus').value;
+  const category = document.getElementById('cardCategory').value;
   const priority = document.getElementById('cardPriority').value;
 
   if (!title) return;
@@ -278,6 +295,7 @@ function handleFormSubmit(e) {
       card.title = title;
       card.description = description;
       card.status = status;
+      card.category = category;
       card.priority = priority;
     }
   } else {
@@ -287,6 +305,7 @@ function handleFormSubmit(e) {
       title,
       description,
       status,
+      category,
       priority,
       createdAt: new Date().toISOString()
     });
