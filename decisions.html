@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Parametric Shed - Decision Map</title>
+  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="decisions.css">
+</head>
+<body>
+  <header>
+    <div class="header-left">
+      <h1>🗺️ Decision Map</h1>
+      <nav class="nav-links">
+        <a href="index.html">📋 Kanban</a>
+        <a href="decisions.html" class="active">🗺️ Decisions</a>
+      </nav>
+    </div>
+    <div class="header-actions">
+      <button id="addDecisionBtn" class="add-btn">+ Add Decision</button>
+      <button id="fitViewBtn" class="btn-secondary">Fit View</button>
+    </div>
+  </header>
+
+  <main class="canvas-container">
+    <svg id="connections" class="connections-layer"></svg>
+    <div id="canvas" class="decision-canvas"></div>
+  </main>
+
+  <!-- Decision Modal -->
+  <div id="decisionModal" class="modal hidden">
+    <div class="modal-content decision-modal-content">
+      <h3 id="decisionModalTitle">Add Decision</h3>
+      <form id="decisionForm">
+        <input type="hidden" id="decisionId">
+        <div class="form-group">
+          <label for="decisionQuestion">Decision / Question</label>
+          <input type="text" id="decisionQuestion" required placeholder="What decision needs to be made?">
+        </div>
+        <div class="form-group">
+          <label for="decisionContext">Context (optional)</label>
+          <textarea id="decisionContext" rows="2" placeholder="Background or constraints"></textarea>
+        </div>
+        <div class="form-group">
+          <label>Options</label>
+          <div id="optionsContainer" class="options-container"></div>
+          <button type="button" id="addOptionBtn" class="btn-add-option">+ Add Option</button>
+        </div>
+        <div class="form-group">
+          <label for="decisionStatus">Status</label>
+          <select id="decisionStatus">
+            <option value="open">🔵 Open</option>
+            <option value="leaning">🟡 Leaning</option>
+            <option value="decided">🟢 Decided</option>
+            <option value="blocked">🔴 Blocked</option>
+          </select>
+        </div>
+        <div class="form-actions">
+          <button type="button" id="decisionCancelBtn" class="btn-secondary">Cancel</button>
+          <button type="button" id="decisionDeleteBtn" class="btn-danger hidden">Delete</button>
+          <button type="submit" class="btn-primary">Save</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- Connect Modal (for linking decisions) -->
+  <div id="connectModal" class="modal hidden">
+    <div class="modal-content">
+      <h3>Connect to Decision</h3>
+      <p class="connect-hint">Select which decision this option leads to:</p>
+      <div id="connectTargets" class="connect-targets"></div>
+      <div class="form-actions">
+        <button type="button" id="connectCancelBtn" class="btn-secondary">Cancel</button>
+        <button type="button" id="disconnectBtn" class="btn-danger hidden">Remove Link</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="decisions.js"></script>
+</body>
+</html>
