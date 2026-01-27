@@ -1,59 +1,11 @@
 // Kanban Board Application
-// Data stored in localStorage
+// Data stored in localStorage + synced from repo JSON
 
 const STORAGE_KEY = 'shed-project-board';
+const REPO_JSON_URL = 'data/cards.json';
 
-// Initial sample cards
-const DEFAULT_CARDS = [
-  {
-    id: '1',
-    title: 'Dimension constraints implemented',
-    description: 'Max 8m x 4m in either orientation. Validation working.',
-    status: 'done',
-    priority: 'high',
-    createdAt: new Date().toISOString()
-  },
-  {
-    id: '2',
-    title: 'Pent roof positioning for attachments',
-    description: 'Fixed rotation and positioning for all 4 attachment directions (left, right, front, back).',
-    status: 'done',
-    priority: 'high',
-    createdAt: new Date().toISOString()
-  },
-  {
-    id: '3',
-    title: 'Roof height constraints',
-    description: 'Add min/max validation for eave and crest heights.',
-    status: 'backlog',
-    priority: 'medium',
-    createdAt: new Date().toISOString()
-  },
-  {
-    id: '4',
-    title: 'Door/window size validation',
-    description: 'Prevent unrealistic opening sizes.',
-    status: 'backlog',
-    priority: 'medium',
-    createdAt: new Date().toISOString()
-  },
-  {
-    id: '5',
-    title: 'Marketing landing page',
-    description: 'Create a landing page to showcase the configurator.',
-    status: 'ideas',
-    priority: 'low',
-    createdAt: new Date().toISOString()
-  },
-  {
-    id: '6',
-    title: 'README documentation',
-    description: 'Write comprehensive README for the GitHub repo.',
-    status: 'backlog',
-    priority: 'medium',
-    createdAt: new Date().toISOString()
-  }
-];
+// Fallback cards if JSON fails to load
+const DEFAULT_CARDS = [];
 
 // State
 let cards = [];
@@ -68,21 +20,76 @@ const deleteBtn = document.getElementById('deleteBtn');
 const modalTitle = document.getElementById('modalTitle');
 
 // Initialize
-function init() {
-  loadCards();
+async function init() {
+  await loadCards();
   renderCards();
   setupEventListeners();
 }
 
-// Load cards from localStorage
-function loadCards() {
+// Load cards - fetch from repo JSON, use localStorage as override
+async function loadCards() {
+  // Check localStorage first
   const stored = localStorage.getItem(STORAGE_KEY);
-  if (stored) {
-    cards = JSON.parse(stored);
-  } else {
-    cards = DEFAULT_CARDS;
-    saveCards();
+  const localData = stored ? JSON.parse(stored) : null;
+  
+  // Try to fetch repo JSON
+  try {
+    const response = await fetch(REPO_JSON_URL + '?t=' + Date.now()); // Cache bust
+    if (response.ok) {
+      const repoData = await response.json();
+      const repoCards = repoData.cards || [];
+      const repoVersion = repoData.version || 0;
+      
+      // Check if we have a local version marker
+      const localVersion = localData?._repoVersion || 0;
+      
+      if (!localData || repoVersion > localVersion) {
+        // Repo is newer or no local data - use repo
+        cards = repoCards;
+        // Store with version marker
+        localStorage.setItem(STORAGE_KEY, JSON.stringify(cards));
+        localStorage.setItem(STORAGE_KEY + '_repoVersion', repoVersion.toString());
+        console.log('[Kanban] Loaded from repo JSON (version ' + repoVersion + ')');
+      } else {
+        // Local is current - use local
+        cards = localData;
+        console.log('[Kanban] Using local data (repo version ' + localVersion + ')');
+      }
+    } else {
+      throw new Error('HTTP ' + response.status);
+    }
+  } catch (e) {
+    console.warn('[Kanban] Could not fetch repo JSON, using localStorage:', e.message);
+    cards = localData || DEFAULT_CARDS;
   }
+}
+
+// Force reload from repo JSON (discards local changes)
+async function reloadFromRepo() {
+  if (!confirm('This will discard your local changes and reload from the repo. Continue?')) {
+    return;
+  }
+  localStorage.removeItem(STORAGE_KEY);
+  localStorage.removeItem(STORAGE_KEY + '_repoVersion');
+  await loadCards();
+  renderCards();
+}
+
+// Export current cards as JSON download
+function exportCards() {
+  const data = {
+    version: parseInt(localStorage.getItem(STORAGE_KEY + '_repoVersion') || '1') + 1,
+    lastUpdated: new Date().toISOString(),
+    updatedBy: 'Andrew',
+    cards: cards
+  };
+  const blob = new Blob([JSON.stringify(data, null, 2)], { type: 'application/json' });
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  a.href = url;
+  a.download = 'cards.json';
+  a.click();
+  URL.revokeObjectURL(url);
 }
 
 // Save cards to localStorage
@@ -261,6 +268,10 @@ function handleDelete() {
 function setupEventListeners() {
   // Add card button
   addCardBtn.addEventListener('click', openAddModal);
+  
+  // Export and reload buttons
+  document.getElementById('exportBtn').addEventListener('click', exportCards);
+  document.getElementById('reloadBtn').addEventListener('click', reloadFromRepo);
   
   // Modal
   cancelBtn.addEventListener('click', closeModal);

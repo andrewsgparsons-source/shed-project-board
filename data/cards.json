@@ -1,0 +1,119 @@
+{
+  "version": 1,
+  "lastUpdated": "2026-01-27T09:52:00Z",
+  "updatedBy": "James",
+  "cards": [
+    {
+      "id": "1",
+      "title": "Dimension constraints implemented",
+      "description": "Max 8m x 4m in either orientation. Validation working.",
+      "status": "done",
+      "priority": "high",
+      "createdAt": "2026-01-26T12:00:00Z"
+    },
+    {
+      "id": "2",
+      "title": "Pent roof positioning for attachments",
+      "description": "Fixed rotation and positioning for all 4 attachment directions (left, right, front, back).",
+      "status": "done",
+      "priority": "high",
+      "createdAt": "2026-01-26T12:00:00Z"
+    },
+    {
+      "id": "3",
+      "title": "Roof height constraints",
+      "description": "Add min/max validation for eave and crest heights.",
+      "status": "backlog",
+      "priority": "medium",
+      "createdAt": "2026-01-26T12:00:00Z"
+    },
+    {
+      "id": "4",
+      "title": "Door/window size validation",
+      "description": "Prevent unrealistic opening sizes.",
+      "status": "backlog",
+      "priority": "medium",
+      "createdAt": "2026-01-26T12:00:00Z"
+    },
+    {
+      "id": "5",
+      "title": "Marketing landing page",
+      "description": "Create a landing page to showcase the configurator.",
+      "status": "ideas",
+      "priority": "low",
+      "createdAt": "2026-01-26T12:00:00Z"
+    },
+    {
+      "id": "6",
+      "title": "README documentation",
+      "description": "Write comprehensive README for the GitHub repo.",
+      "status": "done",
+      "priority": "medium",
+      "createdAt": "2026-01-26T12:00:00Z"
+    },
+    {
+      "id": "7",
+      "title": "MIT License added",
+      "description": "Added MIT license to the Parametric-shed2 repo.",
+      "status": "done",
+      "priority": "medium",
+      "createdAt": "2026-01-27T08:41:00Z"
+    },
+    {
+      "id": "8",
+      "title": "Decision Map page",
+      "description": "Interactive flowchart for mapping strategic decisions. Added to project board app.",
+      "status": "done",
+      "priority": "medium",
+      "createdAt": "2026-01-27T08:49:00Z"
+    },
+    {
+      "id": "9",
+      "title": "Potting Shed preset",
+      "description": "Created and saved potting shed preset (2m × 3.6m) with three windows and pent roof.",
+      "status": "done",
+      "priority": "medium",
+      "createdAt": "2026-01-27T09:34:00Z"
+    },
+    {
+      "id": "10",
+      "title": "Parametric shelving system",
+      "description": "Add shelving as a new element type (like doors/windows). Parameters: wall, inside/outside, height, starting position, length. Include in BOM.",
+      "status": "ideas",
+      "priority": "medium",
+      "createdAt": "2026-01-27T09:09:00Z"
+    },
+    {
+      "id": "11",
+      "title": "Browser access for James",
+      "description": "Set up browser access so James can interact with the configurator directly for testing and screenshots.",
+      "status": "ideas",
+      "priority": "low",
+      "createdAt": "2026-01-27T09:40:00Z"
+    },
+    {
+      "id": "12",
+      "title": "Monetization strategy",
+      "description": "Research and develop monetization options for the configurator.",
+      "status": "ideas",
+      "priority": "medium",
+      "createdAt": "2026-01-27T09:40:00Z"
+    },
+    {
+      "id": "13",
+      "title": "Competitor analysis - UK garden buildings",
+      "description": "Research competitors in the UK garden building industry. Identify gaps and opportunities.",
+      "status": "ideas",
+      "priority": "medium",
+      "createdAt": "2026-01-27T09:40:00Z"
+    },
+    {
+      "id": "14",
+      "title": "Add screenshot to README",
+      "description": "Grab a nice screenshot or GIF of the configurator for the README hero image.",
+      "status": "backlog",
+      "priority": "medium",
+      "createdAt": "2026-01-27T09:52:00Z"
+    }
+  ]
+}
