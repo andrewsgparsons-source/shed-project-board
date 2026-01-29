@@ -1,6 +1,6 @@
 {
-  "version": 19,
-  "lastUpdated": "2026-01-29T14:28:00.000Z",
+  "version": 20,
+  "lastUpdated": "2026-01-29T14:45:00.000Z",
   "updatedBy": "James",
   "categories": [
     { "id": "configurator", "name": "Configurator", "emoji": "🔧" },
@@ -325,12 +325,13 @@
     {
       "id": "34",
       "title": "📊 Competitor: Crane deep-dive",
-      "description": "Full profile of Crane Garden Buildings. Norfolk workshop, 50+ years, 13 UK showrooms, National Trust partnership. Has 'configurator' but likely just options selector. HIGH threat — similar premium positioning.\n\n**Parent:** Competitor Intelligence (#13)",
-      "status": "backlog",
+      "description": "Full profile of Crane Garden Buildings. Norfolk workshop, 50+ years, 13 UK showrooms, National Trust partnership. Confirmed: their 'configurator' is just an options selector, NOT parametric 3D. Key weakness identified.\n\n**Parent:** Competitor Intelligence (#13)\n**File:** /competitor-crane-deep-dive.md",
+      "status": "done",
       "priority": "medium",
       "category": "marketing",
       "parentId": "13",
-      "createdAt": "2026-01-29T12:06:00Z"
+      "createdAt": "2026-01-29T12:06:00Z",
+      "completedAt": "2026-01-29T14:45:00Z"
     },
     {
       "id": "35",
