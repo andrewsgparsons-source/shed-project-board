@@ -1,6 +1,6 @@
 {
-  "version": 21,
-  "lastUpdated": "2026-01-29T14:43:00.000Z",
+  "version": 22,
+  "lastUpdated": "2026-01-29T15:05:00.000Z",
   "updatedBy": "James",
   "categories": [
     { "id": "configurator", "name": "Configurator", "emoji": "🔧" },
@@ -663,6 +663,25 @@
       "priority": "medium",
       "category": "configurator",
       "createdAt": "2026-01-29T14:43:00Z"
+    },
+    {
+      "id": "71",
+      "title": "Douglas Fir research",
+      "description": "Research on Douglas fir timber properties, comparison to competitors (Scandinavian Redwood), untreated vs treated, and marketing angles.\n\n**File:** /research-douglas-fir.md\n\n**Key finding:** Douglas fir is stronger, harder, and stiffer than the Scandinavian Redwood competitors use. Andrew's preference for untreated is valid — better workability, customer can choose finish.",
+      "status": "done",
+      "priority": "medium",
+      "category": "marketing",
+      "createdAt": "2026-01-29T15:01:00Z",
+      "completedAt": "2026-01-29T15:05:00Z"
+    },
+    {
+      "id": "72",
+      "title": "\"Why Douglas Fir?\" website content",
+      "description": "Create content explaining Douglas fir choice:\n• Stronger, harder, stiffer than standard redwood\n• Preferred by craftsmen for workability\n• Untreated by default (nicer to work with, customer choice on finish)\n• Ages beautifully to silver-grey\n• Genuine quality differentiator vs competitors\n\nCould be website page and/or blog post.",
+      "status": "ideas",
+      "priority": "medium",
+      "category": "website",
+      "createdAt": "2026-01-29T15:05:00Z"
     }
   ]
 }
