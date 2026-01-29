@@ -1,6 +1,6 @@
 {
-  "version": 22,
-  "lastUpdated": "2026-01-29T15:05:00.000Z",
+  "version": 23,
+  "lastUpdated": "2026-01-29T15:14:00.000Z",
   "updatedBy": "James",
   "categories": [
     { "id": "configurator", "name": "Configurator", "emoji": "🔧" },
@@ -682,6 +682,16 @@
       "priority": "medium",
       "category": "website",
       "createdAt": "2026-01-29T15:05:00Z"
+    },
+    {
+      "id": "73",
+      "title": "Marketing Strategy document",
+      "description": "Consolidated marketing strategy bringing together all insights: brand story, differentiators, target customer, competitive position, messaging pillars, content strategy, SEO, sales funnel, social proof needs, pricing strategy, and action items.\n\n**File:** /marketing-strategy.md\n\n**References:**\n• /competitor-analysis.md\n• /competitor-crane-deep-dive.md\n• /research-douglas-fir.md\n• /memory/seo-analysis-bespokeshedcompany.md",
+      "status": "done",
+      "priority": "high",
+      "category": "marketing",
+      "createdAt": "2026-01-29T15:13:00Z",
+      "completedAt": "2026-01-29T15:14:00Z"
     }
   ]
 }
