@@ -1,6 +1,6 @@
 {
-  "version": 20,
-  "lastUpdated": "2026-01-29T14:45:00.000Z",
+  "version": 21,
+  "lastUpdated": "2026-01-29T14:43:00.000Z",
   "updatedBy": "James",
   "categories": [
     { "id": "configurator", "name": "Configurator", "emoji": "🔧" },
@@ -654,6 +654,15 @@
       "priority": "high",
       "category": "business",
       "createdAt": "2026-01-29T14:28:00Z"
+    },
+    {
+      "id": "70",
+      "title": "Paint and colour options",
+      "description": "Add colour/paint selection to configurator. Options could include:\n• Exterior paint colours (similar to Crane's range)\n• Wood stains/preservatives\n• Farrow & Ball or premium options\n• Two-tone (body + trim different colours)\n\nVisual update in 3D model + include in BOM/quote. Note: Crane offers Exterior range, Farrow & Ball, and Sikkens stains.",
+      "status": "ideas",
+      "priority": "medium",
+      "category": "configurator",
+      "createdAt": "2026-01-29T14:43:00Z"
     }
   ]
 }
