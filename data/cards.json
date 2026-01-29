@@ -684,6 +684,15 @@
       "createdAt": "2026-01-29T15:05:00Z"
     },
     {
+      "id": "74",
+      "title": "Attachment apex roof refinements",
+      "description": "Improvements to attachment building apex roof:\n• Cripple studs (king posts) - refine positioning\n• Ridge beam/purlins - review and align with primary building\n• General apex roof quality parity with main building\n\nNot urgent - parked for later. Current implementation functional.",
+      "status": "backlog",
+      "priority": "medium",
+      "category": "configurator",
+      "createdAt": "2026-01-29T19:20:00Z"
+    },
+    {
       "id": "73",
       "title": "Marketing Strategy document",
       "description": "Consolidated marketing strategy bringing together all insights: brand story, differentiators, target customer, competitive position, messaging pillars, content strategy, SEO, sales funnel, social proof needs, pricing strategy, and action items.\n\n**File:** /marketing-strategy.md\n\n**References:**\n• /competitor-analysis.md\n• /competitor-crane-deep-dive.md\n• /research-douglas-fir.md\n• /memory/seo-analysis-bespokeshedcompany.md",
