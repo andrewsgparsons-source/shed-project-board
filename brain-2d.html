@@ -1,0 +1,443 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>2D Brain - Knowledge Graph</title>
+  <script src="https://d3js.org/d3.v7.min.js"></script>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      background: #0a0a1a;
+      color: #e0e0e0;
+      overflow: hidden;
+    }
+    
+    #container {
+      width: 100vw;
+      height: 100vh;
+    }
+    
+    svg {
+      width: 100%;
+      height: 100%;
+    }
+    
+    .node {
+      cursor: pointer;
+    }
+    
+    .node circle {
+      stroke: rgba(255,255,255,0.3);
+      stroke-width: 2px;
+      transition: stroke-width 0.2s;
+    }
+    
+    .node:hover circle {
+      stroke-width: 4px;
+      stroke: rgba(255,255,255,0.8);
+    }
+    
+    .node.selected circle {
+      stroke-width: 4px;
+      stroke: #fff;
+    }
+    
+    .node text {
+      font-size: 11px;
+      fill: #e0e0e0;
+      pointer-events: none;
+      text-anchor: middle;
+      dominant-baseline: middle;
+    }
+    
+    .link {
+      stroke: rgba(255, 255, 255, 0.15);
+      stroke-width: 1.5px;
+    }
+    
+    .link.highlighted {
+      stroke: rgba(255, 255, 255, 0.6);
+      stroke-width: 2.5px;
+    }
+    
+    #info-panel {
+      position: fixed;
+      top: 20px;
+      left: 20px;
+      background: rgba(20, 20, 40, 0.95);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 12px;
+      padding: 20px;
+      max-width: 320px;
+      z-index: 100;
+    }
+    
+    #info-panel h1 {
+      font-size: 1.2rem;
+      margin-bottom: 4px;
+      color: #4ade80;
+    }
+    
+    #info-panel .subtitle {
+      font-size: 0.8rem;
+      color: #808080;
+      margin-bottom: 16px;
+    }
+    
+    #info-panel nav {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-bottom: 16px;
+      font-size: 0.8rem;
+    }
+    
+    #info-panel nav a {
+      color: #4ade80;
+      text-decoration: none;
+    }
+    
+    #info-panel nav a:hover {
+      text-decoration: underline;
+    }
+    
+    #current-node {
+      background: rgba(255,255,255,0.05);
+      border-radius: 8px;
+      padding: 12px;
+      margin-bottom: 12px;
+    }
+    
+    #current-node .label {
+      font-size: 0.7rem;
+      color: #666;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      margin-bottom: 4px;
+    }
+    
+    #current-node .name {
+      font-size: 1.1rem;
+      font-weight: 600;
+      color: #fff;
+      margin-bottom: 4px;
+    }
+    
+    #current-node .description {
+      font-size: 0.85rem;
+      color: #aaa;
+      line-height: 1.4;
+    }
+    
+    #connections {
+      font-size: 0.85rem;
+      color: #888;
+    }
+    
+    #connections strong {
+      color: #4ade80;
+    }
+    
+    #legend {
+      position: fixed;
+      bottom: 20px;
+      left: 20px;
+      background: rgba(20, 20, 40, 0.95);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 8px;
+      padding: 12px 16px;
+      display: flex;
+      gap: 16px;
+      font-size: 0.75rem;
+      z-index: 100;
+    }
+    
+    .legend-item {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+    
+    .legend-dot {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+    }
+    
+    #controls {
+      position: fixed;
+      top: 20px;
+      right: 20px;
+      display: flex;
+      gap: 8px;
+      z-index: 100;
+    }
+    
+    #controls button {
+      background: rgba(20, 20, 40, 0.95);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      color: #e0e0e0;
+      padding: 8px 12px;
+      border-radius: 6px;
+      cursor: pointer;
+      font-size: 0.85rem;
+    }
+    
+    #controls button:hover {
+      background: rgba(40, 40, 60, 0.95);
+      border-color: rgba(255, 255, 255, 0.4);
+    }
+    
+    #view-toggle {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      z-index: 100;
+    }
+    
+    #view-toggle a {
+      display: inline-block;
+      background: rgba(74, 222, 128, 0.2);
+      border: 1px solid rgba(74, 222, 128, 0.4);
+      color: #4ade80;
+      padding: 10px 16px;
+      border-radius: 8px;
+      text-decoration: none;
+      font-size: 0.85rem;
+    }
+    
+    #view-toggle a:hover {
+      background: rgba(74, 222, 128, 0.3);
+    }
+  </style>
+</head>
+<body>
+  <div id="container">
+    <svg></svg>
+  </div>
+  
+  <div id="info-panel">
+    <h1>🧠 2D Brain</h1>
+    <p class="subtitle">Click nodes to explore • Drag to rearrange • Scroll to zoom</p>
+    <nav>
+      <a href="index.html">📋 Kanban</a>
+      <a href="decisions.html">🗺️ Decisions</a>
+      <a href="rules.html">⚠️ Rules</a>
+    </nav>
+    
+    <div id="current-node">
+      <div class="label">Selected Node</div>
+      <div class="name" id="nodeName">Bespoke Garden Buildings</div>
+      <div class="description" id="nodeDesc">Click any node to see details</div>
+    </div>
+    
+    <div id="connections">
+      <strong id="connCount">0</strong> connections
+    </div>
+  </div>
+  
+  <div id="legend">
+    <div class="legend-item"><span class="legend-dot" style="background: #4ade80;"></span> Core</div>
+    <div class="legend-item"><span class="legend-dot" style="background: #60a5fa;"></span> Tech</div>
+    <div class="legend-item"><span class="legend-dot" style="background: #f59e0b;"></span> Business</div>
+    <div class="legend-item"><span class="legend-dot" style="background: #a78bfa;"></span> Products</div>
+    <div class="legend-item"><span class="legend-dot" style="background: #9ca3af;"></span> Ops</div>
+  </div>
+  
+  <div id="controls">
+    <button id="resetBtn">Reset View</button>
+    <button id="centerBtn">Center</button>
+  </div>
+  
+  <div id="view-toggle">
+    <a href="brain.html">🌐 Switch to 3D View</a>
+  </div>
+
+  <script>
+    // Load data from shared JSON file
+    let graphData = null;
+    let groupColors = null;
+    
+    async function init() {
+      try {
+        const response = await fetch('data/brain.json?t=' + Date.now());
+        const data = await response.json();
+        graphData = { nodes: data.nodes, links: data.links };
+        groupColors = data.groupColors;
+        setupGraph();
+      } catch (err) {
+        console.error('Failed to load brain data:', err);
+        document.getElementById('nodeName').textContent = 'Error loading data';
+        document.getElementById('nodeDesc').textContent = 'Check console for details';
+      }
+    }
+    
+    function setupGraph() {
+    // Setup
+    const container = document.getElementById('container');
+    const width = container.clientWidth;
+    const height = container.clientHeight;
+    
+    const svg = d3.select('svg')
+      .attr('width', width)
+      .attr('height', height);
+    
+    // Create zoom behavior
+    const zoom = d3.zoom()
+      .scaleExtent([0.2, 4])
+      .on('zoom', (event) => {
+        g.attr('transform', event.transform);
+      });
+    
+    svg.call(zoom);
+    
+    // Main group for zoom/pan
+    const g = svg.append('g');
+    
+    // Create force simulation
+    const simulation = d3.forceSimulation(graphData.nodes)
+      .force('link', d3.forceLink(graphData.links).id(d => d.id).distance(100))
+      .force('charge', d3.forceManyBody().strength(-400))
+      .force('center', d3.forceCenter(width / 2, height / 2))
+      .force('collision', d3.forceCollide().radius(d => d.size + 20));
+    
+    // Draw links
+    const link = g.append('g')
+      .selectAll('line')
+      .data(graphData.links)
+      .join('line')
+      .attr('class', 'link');
+    
+    // Draw nodes
+    const node = g.append('g')
+      .selectAll('g')
+      .data(graphData.nodes)
+      .join('g')
+      .attr('class', 'node')
+      .call(d3.drag()
+        .on('start', dragstarted)
+        .on('drag', dragged)
+        .on('end', dragended));
+    
+    node.append('circle')
+      .attr('r', d => d.size)
+      .attr('fill', d => groupColors[d.group] || '#fff');
+    
+    node.append('text')
+      .text(d => d.name)
+      .attr('dy', d => d.size + 14);
+    
+    // Node click handler
+    let selectedNode = null;
+    
+    node.on('click', (event, d) => {
+      event.stopPropagation();
+      selectNode(d);
+    });
+    
+    svg.on('click', () => {
+      deselectNode();
+    });
+    
+    function selectNode(d) {
+      selectedNode = d;
+      
+      // Update info panel
+      document.getElementById('nodeName').textContent = d.name;
+      document.getElementById('nodeDesc').textContent = d.description;
+      
+      // Count connections
+      const connections = graphData.links.filter(l => 
+        l.source.id === d.id || l.target.id === d.id
+      ).length;
+      document.getElementById('connCount').textContent = connections;
+      
+      // Highlight
+      node.classed('selected', n => n.id === d.id);
+      link.classed('highlighted', l => l.source.id === d.id || l.target.id === d.id);
+    }
+    
+    function deselectNode() {
+      selectedNode = null;
+      document.getElementById('nodeName').textContent = 'Bespoke Garden Buildings';
+      document.getElementById('nodeDesc').textContent = 'Click any node to see details';
+      document.getElementById('connCount').textContent = graphData.links.length;
+      
+      node.classed('selected', false);
+      link.classed('highlighted', false);
+    }
+    
+    // Drag handlers
+    function dragstarted(event, d) {
+      if (!event.active) simulation.alphaTarget(0.3).restart();
+      d.fx = d.x;
+      d.fy = d.y;
+    }
+    
+    function dragged(event, d) {
+      d.fx = event.x;
+      d.fy = event.y;
+    }
+    
+    function dragended(event, d) {
+      if (!event.active) simulation.alphaTarget(0);
+      d.fx = null;
+      d.fy = null;
+    }
+    
+    // Simulation tick
+    simulation.on('tick', () => {
+      link
+        .attr('x1', d => d.source.x)
+        .attr('y1', d => d.source.y)
+        .attr('x2', d => d.target.x)
+        .attr('y2', d => d.target.y);
+      
+      node.attr('transform', d => `translate(${d.x},${d.y})`);
+    });
+    
+    // Control buttons
+    document.getElementById('resetBtn').addEventListener('click', () => {
+      svg.transition().duration(750).call(
+        zoom.transform,
+        d3.zoomIdentity
+      );
+      simulation.alpha(1).restart();
+    });
+    
+    document.getElementById('centerBtn').addEventListener('click', () => {
+      const bounds = g.node().getBBox();
+      const fullWidth = width;
+      const fullHeight = height;
+      const midX = bounds.x + bounds.width / 2;
+      const midY = bounds.y + bounds.height / 2;
+      const scale = 0.8 / Math.max(bounds.width / fullWidth, bounds.height / fullHeight);
+      const translate = [fullWidth / 2 - scale * midX, fullHeight / 2 - scale * midY];
+      
+      svg.transition().duration(750).call(
+        zoom.transform,
+        d3.zoomIdentity.translate(translate[0], translate[1]).scale(scale)
+      );
+    });
+    
+    // Handle resize
+    window.addEventListener('resize', () => {
+      const newWidth = container.clientWidth;
+      const newHeight = container.clientHeight;
+      svg.attr('width', newWidth).attr('height', newHeight);
+      simulation.force('center', d3.forceCenter(newWidth / 2, newHeight / 2));
+      simulation.alpha(0.3).restart();
+    });
+    
+    // Initial state
+    document.getElementById('connCount').textContent = graphData.links.length;
+    }
+    
+    // Start the app
+    init();
+  </script>
+</body>
+</html>

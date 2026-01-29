@@ -1,0 +1,106 @@
+{
+  "version": 1,
+  "lastUpdated": "2026-01-29T11:47:00.000Z",
+  "updatedBy": "James",
+  "groupColors": {
+    "core": "#4ade80",
+    "tech": "#60a5fa",
+    "business": "#f59e0b",
+    "products": "#a78bfa",
+    "ops": "#9ca3af"
+  },
+  "groups": [
+    { "id": "core", "name": "Core", "description": "Central concepts and vision" },
+    { "id": "tech", "name": "Tech", "description": "Technical systems and tools" },
+    { "id": "business", "name": "Business", "description": "Revenue, marketing, strategy" },
+    { "id": "products", "name": "Products", "description": "What we build and sell" },
+    { "id": "ops", "name": "Ops", "description": "Operations and workflow" }
+  ],
+  "nodes": [
+    { "id": "central", "name": "Bespoke Garden Buildings", "description": "The central hub for the entire project ecosystem", "group": "core", "size": 20 },
+    
+    { "id": "configurator", "name": "3D Configurator", "description": "Parametric model with real geometry + BOM output", "group": "tech", "size": 14 },
+    { "id": "website", "name": "Website", "description": "bespokeshedcompany.co.uk - needs SEO work", "group": "business", "size": 12 },
+    { "id": "monetization", "name": "Monetization", "description": "Revenue strategies and business models", "group": "business", "size": 12 },
+    { "id": "marketing", "name": "Marketing", "description": "SEO, competitors, market positioning", "group": "business", "size": 12 },
+    { "id": "products", "name": "Product Types", "description": "The range of buildings we design/build", "group": "products", "size": 12 },
+    { "id": "operations", "name": "Operations", "description": "Tools, processes, workflow", "group": "ops", "size": 12 },
+    { "id": "ai-workflow", "name": "AI Workflow", "description": "James + automation + this management system", "group": "ops", "size": 10 },
+    
+    { "id": "babylon", "name": "Babylon.js", "description": "3D rendering engine powering the configurator", "group": "tech", "size": 8 },
+    { "id": "geometry", "name": "Parametric Geometry", "description": "Walls, roof, framing, CSG operations", "group": "tech", "size": 8 },
+    { "id": "bom", "name": "Bill of Materials", "description": "Cutting lists, material costs, quantities", "group": "tech", "size": 8 },
+    { "id": "presets", "name": "Presets", "description": "Potting shed, workshop, Avon View, etc.", "group": "tech", "size": 8 },
+    { "id": "mobile-ux", "name": "Mobile UX", "description": "Touch-friendly interface with drawer panel", "group": "tech", "size": 8 },
+    
+    { "id": "direct-sales", "name": "Direct Sales", "description": "Quote → Build model for local customers", "group": "business", "size": 8 },
+    { "id": "diy-plans", "name": "DIY Plans", "description": "Sell cutting lists for self-builders", "group": "business", "size": 8 },
+    { "id": "licensing", "name": "Licensing", "description": "License the system to other builders", "group": "business", "size": 8 },
+    { "id": "niche-builds", "name": "Niche Builds", "description": "Shepherd huts, glamping pods, specials", "group": "business", "size": 8 },
+    { "id": "spectrum", "name": "Spectrum Model", "description": "DIY ↔ Assisted ↔ Full Build range", "group": "business", "size": 8 },
+    
+    { "id": "sheds", "name": "Sheds", "description": "Storage and utility buildings", "group": "products", "size": 8 },
+    { "id": "workshops", "name": "Workshops", "description": "Hobby and trade workspaces", "group": "products", "size": 8 },
+    { "id": "offices", "name": "Garden Offices", "description": "Remote work and studio spaces", "group": "products", "size": 8 },
+    { "id": "studios", "name": "Studios", "description": "Art, music, yoga, creative spaces", "group": "products", "size": 8 },
+    { "id": "growing", "name": "Growing Spaces", "description": "Potting sheds, greenhouses, propagation", "group": "products", "size": 8 },
+    
+    { "id": "seo", "name": "SEO", "description": "Search optimization - see analysis in Kanban", "group": "business", "size": 6 },
+    { "id": "competitors", "name": "Competitor Analysis", "description": "Quick Garden, Crane, etc. - analysis complete", "group": "business", "size": 6 },
+    
+    { "id": "kanban", "name": "Project Board", "description": "Kanban task management (this tool)", "group": "ops", "size": 6 },
+    { "id": "github", "name": "GitHub Repos", "description": "Parametric-shed2, shed-project-board", "group": "ops", "size": 6 },
+    { "id": "brain", "name": "Knowledge Graph", "description": "2D + 3D visualization (this view)", "group": "ops", "size": 8 },
+    { "id": "rules", "name": "Hard Rules", "description": "Working guidelines and constraints", "group": "ops", "size": 6 },
+    { "id": "decisions", "name": "Decision Map", "description": "Strategic decision tracking", "group": "ops", "size": 6 },
+    
+    { "id": "shed-codec", "name": "Shed Codec", "description": "The bigger vision: encoding craft knowledge into scalable systems", "group": "core", "size": 12 }
+  ],
+  "links": [
+    { "source": "central", "target": "configurator" },
+    { "source": "central", "target": "website" },
+    { "source": "central", "target": "monetization" },
+    { "source": "central", "target": "marketing" },
+    { "source": "central", "target": "products" },
+    { "source": "central", "target": "operations" },
+    { "source": "central", "target": "ai-workflow" },
+    { "source": "central", "target": "shed-codec" },
+    
+    { "source": "configurator", "target": "babylon" },
+    { "source": "configurator", "target": "geometry" },
+    { "source": "configurator", "target": "bom" },
+    { "source": "configurator", "target": "presets" },
+    { "source": "configurator", "target": "mobile-ux" },
+    
+    { "source": "monetization", "target": "direct-sales" },
+    { "source": "monetization", "target": "diy-plans" },
+    { "source": "monetization", "target": "licensing" },
+    { "source": "monetization", "target": "niche-builds" },
+    { "source": "monetization", "target": "spectrum" },
+    
+    { "source": "products", "target": "sheds" },
+    { "source": "products", "target": "workshops" },
+    { "source": "products", "target": "offices" },
+    { "source": "products", "target": "studios" },
+    { "source": "products", "target": "growing" },
+    
+    { "source": "marketing", "target": "seo" },
+    { "source": "marketing", "target": "competitors" },
+    
+    { "source": "operations", "target": "kanban" },
+    { "source": "operations", "target": "github" },
+    { "source": "operations", "target": "brain" },
+    { "source": "operations", "target": "rules" },
+    { "source": "operations", "target": "decisions" },
+    
+    { "source": "direct-sales", "target": "configurator" },
+    { "source": "diy-plans", "target": "bom" },
+    { "source": "website", "target": "seo" },
+    { "source": "website", "target": "configurator" },
+    { "source": "shed-codec", "target": "configurator" },
+    { "source": "niche-builds", "target": "growing" },
+    { "source": "presets", "target": "growing" },
+    { "source": "ai-workflow", "target": "kanban" },
+    { "source": "ai-workflow", "target": "rules" }
+  ]
+}
