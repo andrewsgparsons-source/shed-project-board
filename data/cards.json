@@ -1,6 +1,6 @@
 {
-  "version": 17,
-  "lastUpdated": "2026-01-29T14:22:00.000Z",
+  "version": 18,
+  "lastUpdated": "2026-01-29T14:24:00.000Z",
   "updatedBy": "James",
   "categories": [
     { "id": "configurator", "name": "Configurator", "emoji": "🔧" },
@@ -500,6 +500,15 @@
       "priority": "high",
       "category": "configurator",
       "createdAt": "2026-01-29T14:22:00Z"
+    },
+    {
+      "id": "53",
+      "title": "Doors/openings on attachments and dividers",
+      "description": "Add ability to place doors, windows, and openings on:\n• Attachment buildings (currently only primary building supports openings)\n• Internal dividers (for doorways between rooms)\n\nWould enable proper multi-room layouts with access between spaces.",
+      "status": "backlog",
+      "priority": "high",
+      "category": "configurator",
+      "createdAt": "2026-01-29T14:24:00Z"
     }
   ]
 }
