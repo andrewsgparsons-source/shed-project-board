@@ -1,6 +1,6 @@
 {
-  "version": 18,
-  "lastUpdated": "2026-01-29T14:24:00.000Z",
+  "version": 19,
+  "lastUpdated": "2026-01-29T14:28:00.000Z",
   "updatedBy": "James",
   "categories": [
     { "id": "configurator", "name": "Configurator", "emoji": "🔧" },
@@ -509,6 +509,150 @@
       "priority": "high",
       "category": "configurator",
       "createdAt": "2026-01-29T14:24:00Z"
+    },
+    {
+      "id": "54",
+      "title": "More cladding options",
+      "description": "Add variety of cladding types: shiplap, featheredge, T&G, board-on-board, composite, etc. Visual appearance + material specs for BOM.",
+      "status": "ideas",
+      "priority": "medium",
+      "category": "configurator",
+      "createdAt": "2026-01-29T14:28:00Z"
+    },
+    {
+      "id": "55",
+      "title": "More window options",
+      "description": "Expand window types: fixed, opening (casement, top-hung), Georgian style, circular/porthole, etc. Different frame styles and sizes.",
+      "status": "ideas",
+      "priority": "medium",
+      "category": "configurator",
+      "createdAt": "2026-01-29T14:28:00Z"
+    },
+    {
+      "id": "56",
+      "title": "Window openers/hardware",
+      "description": "Add opening mechanisms to windows: stays, handles, locks. Include in BOM. Visual indication of which windows open.",
+      "status": "ideas",
+      "priority": "low",
+      "category": "configurator",
+      "createdAt": "2026-01-29T14:28:00Z"
+    },
+    {
+      "id": "57",
+      "title": "Stable door option",
+      "description": "Add stable door (split horizontally, top/bottom open independently). Popular for potting sheds, workshops, stables.",
+      "status": "ideas",
+      "priority": "medium",
+      "category": "configurator",
+      "createdAt": "2026-01-29T14:28:00Z"
+    },
+    {
+      "id": "58",
+      "title": "Half doors",
+      "description": "Add half-height door option. Useful for certain applications.",
+      "status": "ideas",
+      "priority": "low",
+      "category": "configurator",
+      "createdAt": "2026-01-29T14:28:00Z"
+    },
+    {
+      "id": "59",
+      "title": "Skids for field shelters",
+      "description": "Add skid runners to base for field shelters. Makes them moveable. Include in BOM. Toggle option for mobile vs fixed.",
+      "status": "ideas",
+      "priority": "medium",
+      "category": "configurator",
+      "createdAt": "2026-01-29T14:28:00Z"
+    },
+    {
+      "id": "60",
+      "title": "Pillars/posts",
+      "description": "Add ability to place structural pillars/posts. Useful for carports, covered areas, verandas.",
+      "status": "ideas",
+      "priority": "medium",
+      "category": "configurator",
+      "createdAt": "2026-01-29T14:28:00Z"
+    },
+    {
+      "id": "61",
+      "title": "Decking with railings",
+      "description": "Add decking platform option with configurable railings. Multiple railing styles (vertical slats, horizontal, glass, wire). Include in BOM.",
+      "status": "ideas",
+      "priority": "medium",
+      "category": "configurator",
+      "createdAt": "2026-01-29T14:28:00Z"
+    },
+    {
+      "id": "62",
+      "title": "More roof covering options",
+      "description": "Expand roof materials: felt, shingles, EPDM, corrugated, tiles, green roof, etc. Visual + BOM implications.",
+      "status": "ideas",
+      "priority": "medium",
+      "category": "configurator",
+      "createdAt": "2026-01-29T14:28:00Z"
+    },
+    {
+      "id": "63",
+      "title": "Skylights/roof windows",
+      "description": "Add skylights and roof windows. Position on roof slope, various sizes. Include flashing in BOM.",
+      "status": "ideas",
+      "priority": "medium",
+      "category": "configurator",
+      "createdAt": "2026-01-29T14:28:00Z"
+    },
+    {
+      "id": "64",
+      "title": "Soffit boards",
+      "description": "Add soffit boards to roof overhangs. Visual finish detail + BOM.",
+      "status": "ideas",
+      "priority": "low",
+      "category": "configurator",
+      "createdAt": "2026-01-29T14:28:00Z"
+    },
+    {
+      "id": "65",
+      "title": "Verify/debug BOM and cutting lists",
+      "description": "Comprehensive audit of Bill of Materials and cutting list output. Check calculations, quantities, dimensions against real builds. Fix any discrepancies.",
+      "status": "backlog",
+      "priority": "high",
+      "category": "configurator",
+      "createdAt": "2026-01-29T14:28:00Z"
+    },
+    {
+      "id": "66",
+      "title": "Price lists and supplier partnerships",
+      "description": "Build price lists from real supplier costs. Explore partnerships with timber merchants, hardware suppliers. Enable accurate live pricing in configurator.",
+      "status": "backlog",
+      "priority": "high",
+      "category": "business",
+      "createdAt": "2026-01-29T14:28:00Z"
+    },
+    {
+      "id": "67",
+      "title": "User activity tracking/analytics",
+      "description": "Track when users log in, interact with models, save designs. Dashboard to see engagement. Helps identify serious enquiries vs browsers.",
+      "status": "ideas",
+      "priority": "medium",
+      "category": "configurator",
+      "createdAt": "2026-01-29T14:28:00Z"
+    },
+    {
+      "id": "68",
+      "title": "AI UI assistant",
+      "description": "Introduce AI-powered UI for the configurator. Natural language input: 'I need a 3x4m workshop with double doors'. Voice or text interaction.",
+      "status": "ideas",
+      "priority": "medium",
+      "category": "configurator",
+      "createdAt": "2026-01-29T14:28:00Z"
+    },
+    {
+      "id": "69",
+      "title": "Simplified website version + 'Design Together' flow",
+      "description": "Two-tier approach:\n1. Simplified configurator on website for self-service exploration\n2. Invite to 'design together' session: 'I can come and we can design your building together'\n\nConverts self-service browsers into consultative sales.",
+      "status": "ideas",
+      "priority": "high",
+      "category": "business",
+      "createdAt": "2026-01-29T14:28:00Z"
     }
   ]
 }
