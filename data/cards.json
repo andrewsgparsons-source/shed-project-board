@@ -1,6 +1,6 @@
 {
-  "version": 14,
-  "lastUpdated": "2026-01-29T12:07:00.000Z",
+  "version": 15,
+  "lastUpdated": "2026-01-29T13:50:00.000Z",
   "updatedBy": "James",
   "categories": [
     { "id": "configurator", "name": "Configurator", "emoji": "🔧" },
@@ -361,6 +361,127 @@
       "category": "marketing",
       "parentId": "13",
       "createdAt": "2026-01-29T12:06:00Z"
+    },
+    {
+      "id": "38",
+      "title": "Avon View Garden Room preset",
+      "description": "Customer enquiry preset. 7'8\" × 9'6\" (2340 × 2900mm), apex roof 2m eaves → 2.4m ridge. Door centered on front + 2 narrow windows flanking, picture window on left side.",
+      "status": "done",
+      "priority": "medium",
+      "category": "configurator",
+      "createdAt": "2026-01-27T14:00:00Z",
+      "completedAt": "2026-01-27T14:30:00Z"
+    },
+    {
+      "id": "39",
+      "title": "URL state sharing",
+      "description": "Configs can be shared via URL: ?profile=viewer&c=<base64-encoded-state>. Profile=viewer required to parse URL state. Enables sharing designs with customers.",
+      "status": "done",
+      "priority": "medium",
+      "category": "configurator",
+      "createdAt": "2026-01-27T14:00:00Z",
+      "completedAt": "2026-01-27T14:00:00Z"
+    },
+    {
+      "id": "40",
+      "title": "Project board PWA support",
+      "description": "Mobile-friendly progressive web app. Installable on phone home screen. Touch-friendly interface.",
+      "status": "done",
+      "priority": "low",
+      "category": "operations",
+      "createdAt": "2026-01-27T10:00:00Z",
+      "completedAt": "2026-01-27T10:30:00Z"
+    },
+    {
+      "id": "41",
+      "title": "Studs showing through plywood (z-fighting)",
+      "description": "Front wall exterior - studs appeared to show through plywood. Fixed by adjusting geometry/face orientation.",
+      "status": "done",
+      "priority": "medium",
+      "category": "configurator",
+      "createdAt": "2026-01-27T17:00:00Z",
+      "completedAt": "2026-01-27T18:00:00Z"
+    },
+    {
+      "id": "42",
+      "title": "Customer photography & case studies",
+      "description": "Photograph past builds for website and marketing. Create case study pages with before/after, specs, customer quotes. Identified as gap vs competitors (Crane has extensive gallery).",
+      "status": "backlog",
+      "priority": "high",
+      "category": "marketing",
+      "createdAt": "2026-01-29T13:49:00Z"
+    },
+    {
+      "id": "43",
+      "title": "Google Reviews campaign",
+      "description": "Get 5+ Google reviews from past customers. Major SEO quick win — currently showing zero reviews on all product pages. Ask satisfied customers for reviews.",
+      "status": "backlog",
+      "priority": "high",
+      "category": "marketing",
+      "createdAt": "2026-01-29T13:49:00Z"
+    },
+    {
+      "id": "44",
+      "title": "STT/voice input for James",
+      "description": "Set up speech-to-text so James can receive voice messages directly. Needs OpenAI API key (Whisper). Would enable true voice conversations.",
+      "status": "backlog",
+      "priority": "medium",
+      "category": "operations",
+      "createdAt": "2026-01-29T13:49:00Z"
+    },
+    {
+      "id": "45",
+      "title": "Roof insulation",
+      "description": "Add insulation layer to roof (between rafters). Logical extension of wall insulation feature. Include in BOM for insulated variant.",
+      "status": "ideas",
+      "priority": "medium",
+      "category": "configurator",
+      "createdAt": "2026-01-29T13:49:00Z"
+    },
+    {
+      "id": "46",
+      "title": "Floor framing system",
+      "description": "Add floor joists/framing to configurator if not already present. Include in BOM. Consider bearer/joist options.",
+      "status": "ideas",
+      "priority": "medium",
+      "category": "configurator",
+      "createdAt": "2026-01-29T13:49:00Z"
+    },
+    {
+      "id": "47",
+      "title": "Context management alerts",
+      "description": "Proactive alerts before context compaction. James should warn Andrew when context is getting full so important info can be saved.",
+      "status": "ideas",
+      "priority": "low",
+      "category": "operations",
+      "createdAt": "2026-01-29T13:49:00Z"
+    },
+    {
+      "id": "48",
+      "title": "Planning permission guide (blog)",
+      "description": "Blog post: 'Garden Building Planning Permission Guide'. Common customer concern. Good for SEO, builds trust, answers FAQs.",
+      "status": "ideas",
+      "priority": "low",
+      "category": "website",
+      "createdAt": "2026-01-29T13:49:00Z"
+    },
+    {
+      "id": "49",
+      "title": "\"Why Parametric?\" explainer page",
+      "description": "Website page explaining the parametric difference. Why mm-precision matters, what cutting lists mean, how it's different from competitors' configurators.",
+      "status": "ideas",
+      "priority": "medium",
+      "category": "website",
+      "createdAt": "2026-01-29T13:49:00Z"
+    },
+    {
+      "id": "50",
+      "title": "Attached building frame penetrating primary plywood",
+      "description": "BUG: Geometry from attached building frame is showing through the plywood of the primary building. Needs CSG subtraction or geometry adjustment to resolve overlap.",
+      "status": "backlog",
+      "priority": "high",
+      "category": "configurator",
+      "createdAt": "2026-01-29T13:49:00Z"
     }
   ]
 }
