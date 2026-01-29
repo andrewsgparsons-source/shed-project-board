@@ -1,0 +1,37 @@
+{
+  "version": 1,
+  "lastUpdated": "2026-01-29T11:41:00.000Z",
+  "updatedBy": "James",
+  "rules": [
+    {
+      "id": "1",
+      "title": "Update Kanban as we work",
+      "description": "Real-time updates throughout sessions, not at the end. Keeps us honest and gives visibility on progress.",
+      "category": "process",
+      "active": true,
+      "createdAt": "2026-01-29T11:41:00Z"
+    },
+    {
+      "id": "2",
+      "title": "Strict no-drift policy",
+      "description": "One task at a time. If something else 'could be improved', flag it for the backlog rather than diving in. No side quests.",
+      "category": "process",
+      "active": true,
+      "createdAt": "2026-01-29T11:41:00Z"
+    },
+    {
+      "id": "3",
+      "title": "Don't touch working code",
+      "description": "If something works, leave it alone unless there's a specific, justified reason to change it. 'Working' beats 'theoretically better'. Remember the roof assembly incident (2026-01-28).",
+      "category": "coding",
+      "active": true,
+      "createdAt": "2026-01-29T11:41:00Z"
+    }
+  ],
+  "categories": [
+    { "id": "process", "name": "Process", "emoji": "📋" },
+    { "id": "coding", "name": "Coding", "emoji": "💻" },
+    { "id": "communication", "name": "Communication", "emoji": "💬" },
+    { "id": "quality", "name": "Quality", "emoji": "✅" }
+  ]
+}

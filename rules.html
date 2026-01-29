@@ -1,0 +1,413 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#1a1a2e">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <title>Hard Rules - Bespoke Garden Buildings</title>
+  <link rel="stylesheet" href="styles.css">
+  <link rel="manifest" href="manifest.json">
+  <style>
+    .rules-container {
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 20px;
+    }
+    
+    .rules-intro {
+      background: rgba(255, 193, 7, 0.1);
+      border: 1px solid rgba(255, 193, 7, 0.3);
+      border-radius: 8px;
+      padding: 16px;
+      margin-bottom: 24px;
+    }
+    
+    .rules-intro p {
+      margin: 0;
+      color: #ffc107;
+      font-size: 14px;
+    }
+    
+    .rules-list {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+    
+    .rule-card {
+      background: var(--card-bg, #2a2a4a);
+      border-radius: 8px;
+      padding: 20px;
+      border-left: 4px solid #4CAF50;
+      cursor: pointer;
+      transition: transform 0.15s, box-shadow 0.15s;
+    }
+    
+    .rule-card:hover {
+      transform: translateX(4px);
+      box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+    }
+    
+    .rule-card.inactive {
+      opacity: 0.5;
+      border-left-color: #666;
+    }
+    
+    .rule-header {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 8px;
+    }
+    
+    .rule-number {
+      background: rgba(76, 175, 80, 0.2);
+      color: #4CAF50;
+      font-weight: bold;
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 14px;
+    }
+    
+    .rule-card.inactive .rule-number {
+      background: rgba(102, 102, 102, 0.2);
+      color: #666;
+    }
+    
+    .rule-title {
+      font-size: 18px;
+      font-weight: 600;
+      color: #fff;
+      flex: 1;
+    }
+    
+    .rule-category {
+      font-size: 12px;
+      padding: 4px 8px;
+      border-radius: 4px;
+      background: rgba(255,255,255,0.1);
+    }
+    
+    .rule-description {
+      color: #aaa;
+      font-size: 14px;
+      line-height: 1.5;
+      margin-left: 44px;
+    }
+    
+    .empty-state {
+      text-align: center;
+      padding: 60px 20px;
+      color: #666;
+    }
+    
+    .empty-state p {
+      margin-bottom: 20px;
+    }
+
+    /* Modal adjustments for rules */
+    #ruleForm .form-group.checkbox-group {
+      flex-direction: row;
+      align-items: center;
+      gap: 8px;
+    }
+    
+    #ruleForm .form-group.checkbox-group label {
+      margin-bottom: 0;
+    }
+    
+    #ruleForm input[type="checkbox"] {
+      width: 20px;
+      height: 20px;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="header-left">
+      <h1>🏠 Bespoke Garden Buildings</h1>
+      <nav class="nav-links">
+        <a href="index.html">📋 Kanban</a>
+        <a href="decisions.html">🗺️ Decisions</a>
+        <a href="brain.html">🧠 3D Brain</a>
+        <a href="rules.html" class="active">⚠️ Rules</a>
+      </nav>
+    </div>
+    <div class="header-actions">
+      <button id="exportBtn" class="btn-secondary" title="Export rules as JSON">📤 Export</button>
+      <button id="reloadBtn" class="btn-secondary" title="Reload from repo">🔄 Sync</button>
+      <button id="addRuleBtn" class="add-btn">+ Add Rule</button>
+    </div>
+  </header>
+
+  <main class="rules-container">
+    <div class="rules-intro">
+      <p>⚠️ <strong>Hard Rules</strong> — These are non-negotiable guidelines for how we work together. Follow them strictly.</p>
+    </div>
+    
+    <div id="rulesList" class="rules-list">
+      <!-- Rules loaded dynamically -->
+    </div>
+    
+    <div id="emptyState" class="empty-state hidden">
+      <p>No rules defined yet.</p>
+      <button id="addFirstRule" class="btn-primary">+ Add First Rule</button>
+    </div>
+  </main>
+
+  <!-- Add/Edit Rule Modal -->
+  <div id="modal" class="modal hidden">
+    <div class="modal-content">
+      <h3 id="modalTitle">Add Rule</h3>
+      <form id="ruleForm">
+        <input type="hidden" id="ruleId">
+        <div class="form-group">
+          <label for="ruleTitle">Title</label>
+          <input type="text" id="ruleTitle" required placeholder="Short rule name">
+        </div>
+        <div class="form-group">
+          <label for="ruleDescription">Description</label>
+          <textarea id="ruleDescription" rows="4" placeholder="Explain the rule and why it matters"></textarea>
+        </div>
+        <div class="form-group">
+          <label for="ruleCategory">Category</label>
+          <select id="ruleCategory">
+            <option value="process">📋 Process</option>
+            <option value="coding">💻 Coding</option>
+            <option value="communication">💬 Communication</option>
+            <option value="quality">✅ Quality</option>
+          </select>
+        </div>
+        <div class="form-group checkbox-group">
+          <input type="checkbox" id="ruleActive" checked>
+          <label for="ruleActive">Active</label>
+        </div>
+        <div class="form-actions">
+          <button type="button" id="cancelBtn" class="btn-secondary">Cancel</button>
+          <button type="button" id="deleteBtn" class="btn-danger hidden">Delete</button>
+          <button type="submit" class="btn-primary">Save</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <script>
+    // Rules app
+    const DATA_URL = 'data/rules.json';
+    let rulesData = null;
+    let categories = {};
+
+    // DOM elements
+    const rulesList = document.getElementById('rulesList');
+    const emptyState = document.getElementById('emptyState');
+    const modal = document.getElementById('modal');
+    const modalTitle = document.getElementById('modalTitle');
+    const ruleForm = document.getElementById('ruleForm');
+    const addRuleBtn = document.getElementById('addRuleBtn');
+    const addFirstRule = document.getElementById('addFirstRule');
+    const cancelBtn = document.getElementById('cancelBtn');
+    const deleteBtn = document.getElementById('deleteBtn');
+    const exportBtn = document.getElementById('exportBtn');
+    const reloadBtn = document.getElementById('reloadBtn');
+
+    // Load rules
+    async function loadRules() {
+      try {
+        const response = await fetch(DATA_URL + '?t=' + Date.now());
+        rulesData = await response.json();
+        categories = {};
+        rulesData.categories.forEach(c => categories[c.id] = c);
+        renderRules();
+      } catch (err) {
+        console.error('Failed to load rules:', err);
+        rulesList.innerHTML = '<p style="color: #f44336;">Failed to load rules. Check console.</p>';
+      }
+    }
+
+    // Render rules
+    function renderRules() {
+      const activeRules = rulesData.rules.filter(r => r.active);
+      const inactiveRules = rulesData.rules.filter(r => !r.active);
+      const allRules = [...activeRules, ...inactiveRules];
+      
+      if (allRules.length === 0) {
+        rulesList.classList.add('hidden');
+        emptyState.classList.remove('hidden');
+        return;
+      }
+      
+      rulesList.classList.remove('hidden');
+      emptyState.classList.add('hidden');
+      
+      rulesList.innerHTML = allRules.map((rule, index) => {
+        const cat = categories[rule.category] || { emoji: '📌', name: rule.category };
+        return `
+          <div class="rule-card ${rule.active ? '' : 'inactive'}" data-id="${rule.id}">
+            <div class="rule-header">
+              <span class="rule-number">${rule.active ? activeRules.indexOf(rule) + 1 : '—'}</span>
+              <span class="rule-title">${escapeHtml(rule.title)}</span>
+              <span class="rule-category">${cat.emoji} ${cat.name}</span>
+            </div>
+            <p class="rule-description">${escapeHtml(rule.description)}</p>
+          </div>
+        `;
+      }).join('');
+      
+      // Add click handlers
+      document.querySelectorAll('.rule-card').forEach(card => {
+        card.addEventListener('click', () => editRule(card.dataset.id));
+      });
+    }
+
+    // Escape HTML
+    function escapeHtml(text) {
+      const div = document.createElement('div');
+      div.textContent = text || '';
+      return div.innerHTML;
+    }
+
+    // Open modal for new rule
+    function openNewRuleModal() {
+      modalTitle.textContent = 'Add Rule';
+      ruleForm.reset();
+      document.getElementById('ruleId').value = '';
+      document.getElementById('ruleActive').checked = true;
+      deleteBtn.classList.add('hidden');
+      modal.classList.remove('hidden');
+      document.getElementById('ruleTitle').focus();
+    }
+
+    // Edit existing rule
+    function editRule(id) {
+      const rule = rulesData.rules.find(r => r.id === id);
+      if (!rule) return;
+      
+      modalTitle.textContent = 'Edit Rule';
+      document.getElementById('ruleId').value = rule.id;
+      document.getElementById('ruleTitle').value = rule.title;
+      document.getElementById('ruleDescription').value = rule.description || '';
+      document.getElementById('ruleCategory').value = rule.category || 'process';
+      document.getElementById('ruleActive').checked = rule.active !== false;
+      deleteBtn.classList.remove('hidden');
+      modal.classList.remove('hidden');
+      document.getElementById('ruleTitle').focus();
+    }
+
+    // Save rule
+    function saveRule(e) {
+      e.preventDefault();
+      
+      const id = document.getElementById('ruleId').value;
+      const ruleData = {
+        id: id || String(Date.now()),
+        title: document.getElementById('ruleTitle').value.trim(),
+        description: document.getElementById('ruleDescription').value.trim(),
+        category: document.getElementById('ruleCategory').value,
+        active: document.getElementById('ruleActive').checked,
+        createdAt: new Date().toISOString()
+      };
+      
+      if (id) {
+        // Update existing
+        const index = rulesData.rules.findIndex(r => r.id === id);
+        if (index !== -1) {
+          ruleData.createdAt = rulesData.rules[index].createdAt;
+          rulesData.rules[index] = ruleData;
+        }
+      } else {
+        // Add new
+        rulesData.rules.push(ruleData);
+      }
+      
+      rulesData.version++;
+      rulesData.lastUpdated = new Date().toISOString();
+      
+      modal.classList.add('hidden');
+      renderRules();
+      
+      // Show save reminder
+      showToast('Rule saved locally. Export to save permanently.');
+    }
+
+    // Delete rule
+    function deleteRule() {
+      const id = document.getElementById('ruleId').value;
+      if (!id) return;
+      
+      if (!confirm('Delete this rule?')) return;
+      
+      rulesData.rules = rulesData.rules.filter(r => r.id !== id);
+      rulesData.version++;
+      rulesData.lastUpdated = new Date().toISOString();
+      
+      modal.classList.add('hidden');
+      renderRules();
+      showToast('Rule deleted. Export to save permanently.');
+    }
+
+    // Export rules
+    function exportRules() {
+      const blob = new Blob([JSON.stringify(rulesData, null, 2)], { type: 'application/json' });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = 'rules.json';
+      a.click();
+      URL.revokeObjectURL(url);
+      showToast('Rules exported. Replace data/rules.json in repo.');
+    }
+
+    // Toast notification
+    function showToast(message) {
+      const existing = document.querySelector('.toast');
+      if (existing) existing.remove();
+      
+      const toast = document.createElement('div');
+      toast.className = 'toast';
+      toast.textContent = message;
+      toast.style.cssText = `
+        position: fixed;
+        bottom: 20px;
+        left: 50%;
+        transform: translateX(-50%);
+        background: #333;
+        color: #fff;
+        padding: 12px 24px;
+        border-radius: 8px;
+        z-index: 1000;
+        animation: fadeIn 0.3s;
+      `;
+      document.body.appendChild(toast);
+      setTimeout(() => toast.remove(), 3000);
+    }
+
+    // Event listeners
+    addRuleBtn.addEventListener('click', openNewRuleModal);
+    addFirstRule.addEventListener('click', openNewRuleModal);
+    cancelBtn.addEventListener('click', () => modal.classList.add('hidden'));
+    deleteBtn.addEventListener('click', deleteRule);
+    ruleForm.addEventListener('submit', saveRule);
+    exportBtn.addEventListener('click', exportRules);
+    reloadBtn.addEventListener('click', loadRules);
+    
+    modal.addEventListener('click', (e) => {
+      if (e.target === modal) modal.classList.add('hidden');
+    });
+    
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && !modal.classList.contains('hidden')) {
+        modal.classList.add('hidden');
+      }
+    });
+
+    // Initial load
+    loadRules();
+  </script>
+</body>
+</html>
