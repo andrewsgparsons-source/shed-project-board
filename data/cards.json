@@ -1,6 +1,6 @@
 {
-  "version": 15,
-  "lastUpdated": "2026-01-29T13:50:00.000Z",
+  "version": 16,
+  "lastUpdated": "2026-01-29T14:21:00.000Z",
   "updatedBy": "James",
   "categories": [
     { "id": "configurator", "name": "Configurator", "emoji": "🔧" },
@@ -482,6 +482,15 @@
       "priority": "high",
       "category": "configurator",
       "createdAt": "2026-01-29T13:49:00Z"
+    },
+    {
+      "id": "51",
+      "title": "Divider UI improvements (mobile)",
+      "description": "Divider controls don't present well, especially on mobile. Review and improve the UI/UX for adding and configuring dividers. Make touch-friendly and visually clearer.",
+      "status": "backlog",
+      "priority": "medium",
+      "category": "configurator",
+      "createdAt": "2026-01-29T14:21:00Z"
     }
   ]
 }
