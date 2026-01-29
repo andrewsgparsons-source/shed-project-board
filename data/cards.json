@@ -1,6 +1,6 @@
 {
-  "version": 8,
-  "lastUpdated": "2026-01-27T15:01:00.000Z",
+  "version": 12,
+  "lastUpdated": "2026-01-29T11:38:00.000Z",
   "updatedBy": "James",
   "categories": [
     { "id": "configurator", "name": "Configurator", "emoji": "🔧" },
@@ -103,9 +103,9 @@
     {
       "id": "11",
       "title": "Browser access for James",
-      "description": "Set up browser access so James can interact with the configurator directly for testing and screenshots.",
-      "status": "ideas",
-      "priority": "low",
+      "description": "Set up browser access so James can see and interact with the configurator. Options: (1) Clawdbot browser tool with Chrome extension relay, (2) Puppeteer/Playwright automation, (3) VNC/remote desktop. Would enable: screenshots for README, direct visual testing, debugging UI issues like purlin positioning.",
+      "status": "backlog",
+      "priority": "high",
       "category": "operations",
       "createdAt": "2026-01-27T09:40:00Z"
     },
@@ -139,11 +139,13 @@
     {
       "id": "15",
       "title": "SEO improvements",
-      "description": "Improve SEO on bespokeshedcompany.co.uk: better page titles, meta descriptions, local keywords, schema markup.",
+      "description": "Improve SEO on bespokeshedcompany.co.uk. Full analysis: /home/ser/clawd/memory/seo-analysis-bespokeshedcompany.md\n\n**Critical issues:**\n• Thin content (~100 words per product page, need 500+)\n• Poor page titles (numbered, generic)\n• No blog content since 2019\n• Weak location targeting (one mention of Wiltshire)\n• Zero reviews showing\n• Configurator not mentioned anywhere\n\n**Quick wins:**\n1. Fix page titles (remove numbers, add keywords + location)\n2. Write 500+ words per product page\n3. Get 5 Google reviews\n4. Add 'Design Your Own' page linking to configurator\n\n**Medium term:**\n• Location landing pages (/garden-buildings-salisbury/ etc)\n• Blog with case studies\n• FAQ schema markup",
       "status": "backlog",
       "priority": "high",
       "category": "website",
-      "createdAt": "2026-01-27T10:15:00Z"
+      "createdAt": "2026-01-27T10:15:00Z",
+      "analysisFile": "memory/seo-analysis-bespokeshedcompany.md",
+      "analysisDate": "2026-01-29"
     },
     {
       "id": "16",
@@ -189,6 +191,82 @@
       "priority": "high",
       "category": "website",
       "createdAt": "2026-01-27T11:04:00Z"
+    },
+    {
+      "id": "21",
+      "title": "Hipped roof implementation",
+      "description": "Add hipped roof style option. Currently placeholder in roof style dropdown. Requires new geometry: hip rafters from corners to ridge, jack rafters on all four sides.",
+      "status": "backlog",
+      "priority": "medium",
+      "category": "configurator",
+      "createdAt": "2026-01-28T09:12:00Z"
+    },
+    {
+      "id": "22",
+      "title": "Fix apex roof on attached buildings",
+      "description": "Apex roof on attached buildings not working properly. Needs investigation and fix.",
+      "status": "backlog",
+      "priority": "high",
+      "category": "configurator",
+      "createdAt": "2026-01-28T09:12:00Z"
+    },
+    {
+      "id": "23",
+      "title": "Wall insulation + plywood lining",
+      "description": "50mm PIR insulation between studs, 12mm plywood lining inside. Skips door/window openings. Tied to insulated variant. Added to BOM.",
+      "status": "done",
+      "priority": "high",
+      "category": "configurator",
+      "createdAt": "2026-01-27T15:00:00Z",
+      "completedAt": "2026-01-27T18:00:00Z"
+    },
+    {
+      "id": "24",
+      "title": "Cripple studs below windows",
+      "description": "Added missing cripple studs from bottom plate to window sill. Works for all wall orientations.",
+      "status": "done",
+      "priority": "medium",
+      "category": "configurator",
+      "createdAt": "2026-01-27T16:00:00Z",
+      "completedAt": "2026-01-27T18:00:00Z"
+    },
+    {
+      "id": "25",
+      "title": "Divider height modes",
+      "description": "Added heightMode: 'walls' (to eaves) or 'roof' (fill to crest). Z-axis dividers get triangular gable frames, X-axis get flat fill.",
+      "status": "done",
+      "priority": "medium",
+      "category": "configurator",
+      "createdAt": "2026-01-27T14:00:00Z",
+      "completedAt": "2026-01-27T15:00:00Z"
+    },
+    {
+      "id": "26",
+      "title": "CSG boolean cuts for plywood around openings",
+      "description": "Plywood panels now use CSG subtraction to cut around doors/windows instead of skipping walls with openings.",
+      "status": "done",
+      "priority": "medium",
+      "category": "configurator",
+      "createdAt": "2026-01-27T17:00:00Z",
+      "completedAt": "2026-01-27T18:00:00Z"
+    },
+    {
+      "id": "27",
+      "title": "Fix apex purlins - horizontal positioning",
+      "description": "Purlins should be HORIZONTAL (not tilted with slope) and SIT ON TOP of rafters. Currently broken - parenting to roofRoot causes unexpected tilt. Needs investigation into transform hierarchy.",
+      "status": "backlog",
+      "priority": "high",
+      "category": "configurator",
+      "createdAt": "2026-01-28T21:30:00Z"
+    },
+    {
+      "id": "28",
+      "title": "Code documentation + JSDoc comments",
+      "description": "Add proper JSDoc comments to roof.js, walls.js, attachments.js. Clean up dead code, improve console logging. PROGRESS: roof.js done (126 lines added), walls.js partial (45 lines), attachments.js partial (64 lines).",
+      "status": "in-progress",
+      "priority": "medium",
+      "category": "configurator",
+      "createdAt": "2026-01-29T09:48:00Z"
     }
   ]
 }
