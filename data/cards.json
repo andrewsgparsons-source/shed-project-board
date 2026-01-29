@@ -1,6 +1,6 @@
 {
-  "version": 13,
-  "lastUpdated": "2026-01-29T11:50:00.000Z",
+  "version": 14,
+  "lastUpdated": "2026-01-29T12:07:00.000Z",
   "updatedBy": "James",
   "categories": [
     { "id": "configurator", "name": "Configurator", "emoji": "🔧" },
@@ -120,12 +120,13 @@
     },
     {
       "id": "13",
-      "title": "Competitor analysis - UK garden buildings",
-      "description": "Research competitors in the UK garden building industry. Identify gaps and opportunities. Completed: Quick Garden, Crane, Garden Buildings Direct, Tiger, Scotts. Report saved to competitor-analysis.md",
-      "status": "done",
+      "title": "🔄 Competitor Intelligence (ongoing)",
+      "description": "Continuous market awareness and competitor monitoring. This is a parent project — never 'done'. See linked deliverables below.\n\n**Completed deliverables:**\n• Initial landscape analysis (card #31)\n• Tech gap analysis (card #32)\n• Quick Garden profile (card #33)\n\n**Files:**\n• /competitor-analysis.md (main report)\n• /shed-project-board/competitors.md (profiles)\n\n**Backlog:**\n• Deep-dive: Crane Garden Buildings\n• Deep-dive: Scotts of Thrapston\n• Keyword/SEO competitor research\n• Pricing intelligence\n• Quarterly refresh",
+      "status": "in-progress",
       "priority": "medium",
       "category": "marketing",
-      "createdAt": "2026-01-27T09:40:00Z"
+      "createdAt": "2026-01-27T09:40:00Z",
+      "projectType": "ongoing"
     },
     {
       "id": "14",
@@ -287,6 +288,79 @@
       "category": "operations",
       "createdAt": "2026-01-29T11:47:00Z",
       "completedAt": "2026-01-29T11:50:00Z"
+    },
+    {
+      "id": "31",
+      "title": "📊 Competitor: Landscape analysis",
+      "description": "Initial UK market landscape. Three-tier breakdown: Budget (BillyOh, Tiger), Premium Prefab (Quick Garden, Crane, Scotts), True Bespoke. Market positioning identified.\n\n**Parent:** Competitor Intelligence (#13)\n**File:** /competitor-analysis.md",
+      "status": "done",
+      "priority": "medium",
+      "category": "marketing",
+      "parentId": "13",
+      "createdAt": "2026-01-27T09:40:00Z",
+      "completedAt": "2026-01-27T12:00:00Z"
+    },
+    {
+      "id": "32",
+      "title": "📊 Competitor: Tech gap analysis",
+      "description": "Comparison table: 3D visualisation, parametric model, real-time pricing, cutting lists. Key finding: NO UK competitor has true parametric 3D with cutting list output. Major differentiator.\n\n**Parent:** Competitor Intelligence (#13)\n**File:** /competitor-analysis.md",
+      "status": "done",
+      "priority": "medium",
+      "category": "marketing",
+      "parentId": "13",
+      "createdAt": "2026-01-27T09:40:00Z",
+      "completedAt": "2026-01-27T12:00:00Z"
+    },
+    {
+      "id": "33",
+      "title": "📊 Competitor: Quick Garden profile",
+      "description": "Deep-dive on Quick Garden. European manufacturer, 26k+ customers, log cabin specialists. No online configurator — manual bespoke process. Lead times 4-10 weeks. Pricing examples gathered.\n\n**Parent:** Competitor Intelligence (#13)\n**File:** /shed-project-board/competitors.md",
+      "status": "done",
+      "priority": "medium",
+      "category": "marketing",
+      "parentId": "13",
+      "createdAt": "2026-01-27T09:40:00Z",
+      "completedAt": "2026-01-27T12:00:00Z"
+    },
+    {
+      "id": "34",
+      "title": "📊 Competitor: Crane deep-dive",
+      "description": "Full profile of Crane Garden Buildings. Norfolk workshop, 50+ years, 13 UK showrooms, National Trust partnership. Has 'configurator' but likely just options selector. HIGH threat — similar premium positioning.\n\n**Parent:** Competitor Intelligence (#13)",
+      "status": "backlog",
+      "priority": "medium",
+      "category": "marketing",
+      "parentId": "13",
+      "createdAt": "2026-01-29T12:06:00Z"
+    },
+    {
+      "id": "35",
+      "title": "📊 Competitor: Scotts deep-dive",
+      "description": "Full profile of Scotts of Thrapston. 100+ years, hardwood specialists, equestrian/garages. Very traditional consultative model. Different customer journey but worth understanding.\n\n**Parent:** Competitor Intelligence (#13)",
+      "status": "backlog",
+      "priority": "low",
+      "category": "marketing",
+      "parentId": "13",
+      "createdAt": "2026-01-29T12:06:00Z"
+    },
+    {
+      "id": "36",
+      "title": "📊 Competitor: SEO/keyword research",
+      "description": "Research what keywords competitors rank for. Identify gaps and opportunities. Tools: Ubersuggest, SEMrush free tier, or manual Google research.\n\n**Parent:** Competitor Intelligence (#13)",
+      "status": "backlog",
+      "priority": "medium",
+      "category": "marketing",
+      "parentId": "13",
+      "createdAt": "2026-01-29T12:06:00Z"
+    },
+    {
+      "id": "37",
+      "title": "📊 Competitor: Pricing intelligence",
+      "description": "Gather real pricing data across competitors. Build comparison matrix. Understand where Andrew sits in the market and identify pricing strategy opportunities.\n\n**Parent:** Competitor Intelligence (#13)",
+      "status": "backlog",
+      "priority": "medium",
+      "category": "marketing",
+      "parentId": "13",
+      "createdAt": "2026-01-29T12:06:00Z"
     }
   ]
 }
