@@ -1,6 +1,6 @@
 {
-  "version": 12,
-  "lastUpdated": "2026-01-29T11:38:00.000Z",
+  "version": 13,
+  "lastUpdated": "2026-01-29T11:50:00.000Z",
   "updatedBy": "James",
   "categories": [
     { "id": "configurator", "name": "Configurator", "emoji": "🔧" },
@@ -267,6 +267,26 @@
       "priority": "medium",
       "category": "configurator",
       "createdAt": "2026-01-29T09:48:00Z"
+    },
+    {
+      "id": "29",
+      "title": "Hard Rules page",
+      "description": "Added Rules page to project board with full CRUD. View, add, edit, delete rules. Pre-loaded with working guidelines. Data in data/rules.json.",
+      "status": "done",
+      "priority": "high",
+      "category": "operations",
+      "createdAt": "2026-01-29T11:41:00Z",
+      "completedAt": "2026-01-29T11:45:00Z"
+    },
+    {
+      "id": "30",
+      "title": "2D Brain view",
+      "description": "Added 2D force-directed graph view as alternative to 3D brain. Uses D3.js. Pan/zoom, click nodes for details, drag to rearrange. Shared data file (data/brain.json) keeps 2D and 3D in sync.",
+      "status": "done",
+      "priority": "medium",
+      "category": "operations",
+      "createdAt": "2026-01-29T11:47:00Z",
+      "completedAt": "2026-01-29T11:50:00Z"
     }
   ]
 }
