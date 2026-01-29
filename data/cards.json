@@ -1,6 +1,6 @@
 {
-  "version": 16,
-  "lastUpdated": "2026-01-29T14:21:00.000Z",
+  "version": 17,
+  "lastUpdated": "2026-01-29T14:22:00.000Z",
   "updatedBy": "James",
   "categories": [
     { "id": "configurator", "name": "Configurator", "emoji": "🔧" },
@@ -491,6 +491,15 @@
       "priority": "medium",
       "category": "configurator",
       "createdAt": "2026-01-29T14:21:00Z"
+    },
+    {
+      "id": "52",
+      "title": "3D camera controls too fast/sensitive",
+      "description": "User feedback: 3D model navigation is too fast and hard to control. Need to dampen camera movement, slow down rotation/zoom, add smoothing/inertia. Make it much easier for non-technical users to navigate the model.",
+      "status": "backlog",
+      "priority": "high",
+      "category": "configurator",
+      "createdAt": "2026-01-29T14:22:00Z"
     }
   ]
 }
