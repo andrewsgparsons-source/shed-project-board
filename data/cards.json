@@ -1,5 +1,5 @@
 {
-  "version": 25,
+  "version": 26,
   "lastUpdated": "2026-01-31T07:30:00Z",
   "updatedBy": "James",
   "categories": [
@@ -825,6 +825,16 @@
       "parentId": "77",
       "createdAt": "2026-01-31T00:30:00Z",
       "completedAt": "2026-01-31T01:10:00Z"
+    },
+    {
+      "id": "85",
+      "title": "Visual timeline editor in configurator",
+      "description": "In-browser timeline UI for building animations visually:\n\n**Features:**\n• Timeline bar at bottom of configurator\n• Scrub playhead to preview any point in animation\n• Click to add keyframe (captures camera + model state)\n• Drag keyframes to retime\n• Click keyframe to edit\n• Real-time preview playback\n• Export to JSON for render script\n\n**Benefits:**\n• Andrew can build sequences visually without manual frame numbers\n• Iterate timing without James in the loop\n• See the animation as you build it\n\n**Complexity:** Medium-high. Needs Babylon camera hooks + preset system integration.\n\n**Parent:** Animation Production Pipeline (#77)",
+      "status": "ideas",
+      "priority": "high",
+      "category": "animation",
+      "parentId": "77",
+      "createdAt": "2026-01-31T07:30:00Z"
     }
   ]
 }
