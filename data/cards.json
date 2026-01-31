@@ -1,13 +1,38 @@
 {
-  "version": 23,
-  "lastUpdated": "2026-01-29T15:14:00.000Z",
+  "version": 25,
+  "lastUpdated": "2026-01-31T07:30:00Z",
   "updatedBy": "James",
   "categories": [
-    { "id": "configurator", "name": "Configurator", "emoji": "🔧" },
-    { "id": "website", "name": "Website", "emoji": "🌐" },
-    { "id": "business", "name": "Business", "emoji": "📈" },
-    { "id": "marketing", "name": "Marketing", "emoji": "📣" },
-    { "id": "operations", "name": "Operations", "emoji": "🛠️" }
+    {
+      "id": "configurator",
+      "name": "Configurator",
+      "emoji": "🔧"
+    },
+    {
+      "id": "website",
+      "name": "Website",
+      "emoji": "🌐"
+    },
+    {
+      "id": "business",
+      "name": "Business",
+      "emoji": "📈"
+    },
+    {
+      "id": "marketing",
+      "name": "Marketing",
+      "emoji": "📣"
+    },
+    {
+      "id": "operations",
+      "name": "Operations",
+      "emoji": "🛠️"
+    },
+    {
+      "id": "animation",
+      "name": "Animation/Video",
+      "emoji": "🎬"
+    }
   ],
   "cards": [
     {
@@ -693,6 +718,15 @@
       "createdAt": "2026-01-29T19:20:00Z"
     },
     {
+      "id": "75",
+      "title": "Attachment fascia board refinements",
+      "description": "Further improvements to fascia boards on attachment apex roof:\n• Eaves fascia / barge board joint alignment\n• Ensure clean meeting at corners\n• Review positioning tolerances\n\nCurrent implementation works but has room for polish.",
+      "status": "backlog",
+      "priority": "low",
+      "category": "configurator",
+      "createdAt": "2026-01-29T20:06:00Z"
+    },
+    {
       "id": "73",
       "title": "Marketing Strategy document",
       "description": "Consolidated marketing strategy bringing together all insights: brand story, differentiators, target customer, competitive position, messaging pillars, content strategy, SEO, sales funnel, social proof needs, pricing strategy, and action items.\n\n**File:** /marketing-strategy.md\n\n**References:**\n• /competitor-analysis.md\n• /competitor-crane-deep-dive.md\n• /research-douglas-fir.md\n• /memory/seo-analysis-bespokeshedcompany.md",
@@ -701,6 +735,96 @@
       "category": "marketing",
       "createdAt": "2026-01-29T15:13:00Z",
       "completedAt": "2026-01-29T15:14:00Z"
+    },
+    {
+      "id": "76",
+      "title": "Attachment apex gable end cladding infill",
+      "description": "Revisit the gable end cladding for attachment buildings with apex roofs. Currently the triangular gable area may need better infill/trimming.",
+      "status": "backlog",
+      "priority": "low",
+      "category": "configurator",
+      "createdAt": "2026-01-29T22:26:00Z"
+    },
+    {
+      "id": "77",
+      "title": "🎬 Animation Production Pipeline (ongoing)",
+      "description": "Template system for producing professional animated videos from the configurator. Enables rapid visual demos for clients with minimal manual input.\n\n**Goal:** Andrew describes what he wants in natural language → James produces production-ready video.\n\n**Components:**\n• Keyframe template (JSON format)\n• Render script (captures frames via CDP)\n• Shot library (reusable camera moves)\n\n**Files:**\n• /keyframes-v6.json (current keyframe data)\n• /render-v8.js (capture script)\n• /keyframe-editor.html (browser-based editor)\n• /DEVELOPER-UPDATE-QUESTIONNAIRE.md",
+      "status": "in-progress",
+      "priority": "high",
+      "category": "animation",
+      "createdAt": "2026-01-31T07:30:00Z",
+      "projectType": "ongoing"
+    },
+    {
+      "id": "78",
+      "title": "Document keyframe JSON format",
+      "description": "Create proper documentation for the keyframe JSON schema:\n• frame (number) - frame index\n• camera (string) - \"alpha, beta, radius\"\n• note (string|null) - description\n• preset (object|null) - full shed-designer-v1 preset\n\nDocument best practices for timing, spacing, transitions.\n\n**Parent:** Animation Production Pipeline (#77)",
+      "status": "backlog",
+      "priority": "medium",
+      "category": "animation",
+      "parentId": "77",
+      "createdAt": "2026-01-31T07:30:00Z"
+    },
+    {
+      "id": "79",
+      "title": "Configurable render script",
+      "description": "Make render script accept parameters:\n• Model URL (not hardcoded)\n• Output folder\n• FPS (currently 12)\n• WebSocket endpoint\n• Preset delay timing\n\nEnable deploying on any model variant without code changes.\n\n**Parent:** Animation Production Pipeline (#77)",
+      "status": "backlog",
+      "priority": "medium",
+      "category": "animation",
+      "parentId": "77",
+      "createdAt": "2026-01-31T07:30:00Z"
+    },
+    {
+      "id": "80",
+      "title": "Shot library - reusable camera sequences",
+      "description": "Build library of named camera moves that can be referenced by name:\n• orbit - 360° rotation around model\n• door-focus - zoom to door, pause, zoom out\n• roof-sweep - pan across roof showing structure\n• approach - start far, end close\n• explode - decladding sequence\n• walkthrough - full feature tour\n\nAllows Andrew to say \"do an orbit and door-focus\" and James knows exactly what that means.\n\n**Parent:** Animation Production Pipeline (#77)",
+      "status": "backlog",
+      "priority": "high",
+      "category": "animation",
+      "parentId": "77",
+      "createdAt": "2026-01-31T07:30:00Z"
+    },
+    {
+      "id": "81",
+      "title": "Detect model-ready state (reduce delays)",
+      "description": "Currently using fixed 4s delay after preset imports because model rebuild time is unpredictable. Investigate detecting when model is actually ready:\n• Poll for mesh count stabilization\n• Use scene.executeWhenReady()\n• Listen for rebuild-complete events\n\nWould significantly speed up capture process.\n\n**Parent:** Animation Production Pipeline (#77)",
+      "status": "backlog",
+      "priority": "medium",
+      "category": "animation",
+      "parentId": "77",
+      "createdAt": "2026-01-31T07:30:00Z"
+    },
+    {
+      "id": "82",
+      "title": "Natural language → animation mapping",
+      "description": "Build understanding of Andrew's shorthand so James can interpret requests like:\n• \"log store\" = attachment on left\n• \"walkthrough\" = specific shot sequence\n• \"show off the door detail\" = door-focus shot\n• \"nice orbit\" = smooth 360° rotation\n\nLearned over time through collaboration. Document mappings as they emerge.\n\n**Parent:** Animation Production Pipeline (#77)",
+      "status": "in-progress",
+      "priority": "high",
+      "category": "animation",
+      "parentId": "77",
+      "createdAt": "2026-01-31T07:30:00Z"
+    },
+    {
+      "id": "83",
+      "title": "Keyframe editor improvements",
+      "description": "Enhance the browser-based keyframe editor:\n• ✅ Editable frame numbers in list\n• Visual timeline representation\n• Preview camera positions\n• Drag-and-drop reordering\n• Import presets from configurator clipboard\n\n**File:** /keyframe-editor.html\n\n**Parent:** Animation Production Pipeline (#77)",
+      "status": "backlog",
+      "priority": "medium",
+      "category": "animation",
+      "parentId": "77",
+      "createdAt": "2026-01-31T07:30:00Z"
+    },
+    {
+      "id": "84",
+      "title": "v8 animation capture complete",
+      "description": "Successfully captured 65-frame animation with proper rendering (no wireframe flicker).\n\n**Sequence:**\n• Frames 1-40: Zoom in\n• Frames 41-53: Door widening (1000→1350mm, 2-frame gaps)\n• Frame 55: Style change to double M&T\n• Frames 55-65: Door close + zoom out\n\n**Fix applied:** 4s delay after preset imports + forced render cycles.\n\n**Parent:** Animation Production Pipeline (#77)",
+      "status": "done",
+      "priority": "high",
+      "category": "animation",
+      "parentId": "77",
+      "createdAt": "2026-01-31T00:30:00Z",
+      "completedAt": "2026-01-31T01:10:00Z"
     }
   ]
 }
