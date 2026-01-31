@@ -1,6 +1,6 @@
 {
-  "version": 27,
-  "lastUpdated": "2026-01-31T21:12:00Z",
+  "version": 28,
+  "lastUpdated": "2026-01-31T23:13:00Z",
   "updatedBy": "James",
   "categories": [
     {
@@ -856,6 +856,16 @@
       "category": "configurator",
       "createdAt": "2026-01-31T20:55:00Z",
       "completedAt": "2026-01-31T21:05:00Z"
+    },
+    {
+      "id": "88",
+      "title": "Review animation pipeline architecture",
+      "description": "Design review: how voice-to-preset, camera tracks, keyframe editor, and visual preview all connect.\n\n**Components:**\n• Voice-to-preset: Natural language → JSON preset → share URL\n• Camera tracks: Reusable camera movements (orbit, zoom, approach)\n• Keyframe editor: Browser tool for building sequences\n• Visual preview: Timeline slider, thumbnail strips, frame verification\n\n**Goal:** Sketch architecture diagram showing data flow from voice input to rendered video.\n\n**See also:** Mind map updated with Animation Pipeline node cluster.",
+      "status": "backlog",
+      "priority": "high",
+      "category": "animation",
+      "parentId": "77",
+      "createdAt": "2026-01-31T23:13:00Z"
     }
   ]
 }

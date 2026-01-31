@@ -1,6 +1,6 @@
 {
-  "version": 1,
-  "lastUpdated": "2026-01-29T11:47:00.000Z",
+  "version": 2,
+  "lastUpdated": "2026-01-31T23:13:00.000Z",
   "updatedBy": "James",
   "groupColors": {
     "core": "#4ade80",
@@ -32,6 +32,12 @@
     { "id": "bom", "name": "Bill of Materials", "description": "Cutting lists, material costs, quantities", "group": "tech", "size": 8 },
     { "id": "presets", "name": "Presets", "description": "Potting shed, workshop, Avon View, etc.", "group": "tech", "size": 8 },
     { "id": "mobile-ux", "name": "Mobile UX", "description": "Touch-friendly interface with drawer panel", "group": "tech", "size": 8 },
+    
+    { "id": "animation-pipeline", "name": "Animation Pipeline", "description": "Deterministic video production system — voice → preset → camera → render", "group": "tech", "size": 12 },
+    { "id": "voice-to-preset", "name": "Voice-to-Preset", "description": "Natural language design → JSON preset + share URL", "group": "tech", "size": 8 },
+    { "id": "camera-tracks", "name": "Camera Tracks", "description": "Reusable camera movements (orbit, zoom, approach)", "group": "tech", "size": 8 },
+    { "id": "keyframe-editor", "name": "Keyframe Editor", "description": "Browser tool for building animation sequences", "group": "tech", "size": 8 },
+    { "id": "visual-preview", "name": "Visual Preview", "description": "Timeline slider, thumbnail strips, frame verification", "group": "tech", "size": 8 },
     
     { "id": "direct-sales", "name": "Direct Sales", "description": "Quote → Build model for local customers", "group": "business", "size": 8 },
     { "id": "diy-plans", "name": "DIY Plans", "description": "Sell cutting lists for self-builders", "group": "business", "size": 8 },
@@ -71,6 +77,15 @@
     { "source": "configurator", "target": "bom" },
     { "source": "configurator", "target": "presets" },
     { "source": "configurator", "target": "mobile-ux" },
+    { "source": "configurator", "target": "animation-pipeline" },
+    
+    { "source": "animation-pipeline", "target": "voice-to-preset" },
+    { "source": "animation-pipeline", "target": "camera-tracks" },
+    { "source": "animation-pipeline", "target": "keyframe-editor" },
+    { "source": "animation-pipeline", "target": "visual-preview" },
+    { "source": "voice-to-preset", "target": "presets" },
+    { "source": "voice-to-preset", "target": "ai-workflow" },
+    { "source": "animation-pipeline", "target": "marketing" },
     
     { "source": "monetization", "target": "direct-sales" },
     { "source": "monetization", "target": "diy-plans" },
