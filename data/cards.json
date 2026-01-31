@@ -1,6 +1,6 @@
 {
-  "version": 28,
-  "lastUpdated": "2026-01-31T23:13:00Z",
+  "version": 29,
+  "lastUpdated": "2026-01-31T23:37:00Z",
   "updatedBy": "James",
   "categories": [
     {
@@ -866,6 +866,15 @@
       "category": "animation",
       "parentId": "77",
       "createdAt": "2026-01-31T23:13:00Z"
+    },
+    {
+      "id": "89",
+      "title": "Design sub-agent prompts: Hygiene + Strategy",
+      "description": "Create prompt specs for two specialized sub-agents:\n\n**Hygiene Agent**\n- Reviews memory files periodically\n- Identifies clutter and outdated info\n- Proposes consolidations and archives\n- Reports recommendations for approval\n\n**Strategy Agent**\n- Reviews capability landscape (mind map, tools, recent work)\n- Looks for cross-pollination opportunities\n- Proposes new combinations and experiments\n- \"What if we connected X to Y?\" thinking\n\n**Design considerations:**\n- Clear scope and boundaries\n- Access to right files\n- Report format\n- Approval workflow\n- Run frequency (heartbeat? scheduled?)",
+      "status": "backlog",
+      "priority": "high",
+      "category": "operations",
+      "createdAt": "2026-01-31T23:37:00Z"
     }
   ]
 }
