@@ -1,6 +1,6 @@
 {
-  "version": 26,
-  "lastUpdated": "2026-01-31T07:30:00Z",
+  "version": 27,
+  "lastUpdated": "2026-01-31T21:12:00Z",
   "updatedBy": "James",
   "categories": [
     {
@@ -458,11 +458,12 @@
     {
       "id": "45",
       "title": "Roof insulation",
-      "description": "Add insulation layer to roof (between rafters). Logical extension of wall insulation feature. Include in BOM for insulated variant.",
-      "status": "ideas",
+      "description": "Add insulation layer to roof (between rafters). Sloped panels (L+R) from eaves to raised tie beam level, horizontal panel between tie beams. Fully parametric - adapts to truss count and building size. Only active for tieBeam: 'raised' configuration. Uses vis.roofIns visibility flag.",
+      "status": "done",
       "priority": "medium",
       "category": "configurator",
-      "createdAt": "2026-01-29T13:49:00Z"
+      "createdAt": "2026-01-29T13:49:00Z",
+      "completedAt": "2026-01-31T16:30:00Z"
     },
     {
       "id": "46",
@@ -835,6 +836,26 @@
       "category": "animation",
       "parentId": "77",
       "createdAt": "2026-01-31T07:30:00Z"
+    },
+    {
+      "id": "86",
+      "title": "Back gable insulation positioning fix",
+      "description": "Fixed back gable insulation panel positioning. For back gable, interior faces toward -Z, so FRONT face of insulation (at z_mm) should be flush with inner face of back gable.\n\n**Commit:** ab398a6",
+      "status": "done",
+      "priority": "medium",
+      "category": "configurator",
+      "createdAt": "2026-01-31T20:45:00Z",
+      "completedAt": "2026-01-31T20:45:00Z"
+    },
+    {
+      "id": "87",
+      "title": "Hide 'At Eaves' tie beam for insulated apex",
+      "description": "Insulated apex roofs require raised tie beam for roof insulation to work. UI now hides and disables 'At Eaves' option when variant=insulated AND roof=apex. Auto-forces 'raised' if 'eaves' was previously selected. Shows option again when switching back to Basic.\n\n**Commits:** 0614077, 059f66f\n**Verified:** Browser DOM check confirmed display:none + disabled:true",
+      "status": "done",
+      "priority": "medium",
+      "category": "configurator",
+      "createdAt": "2026-01-31T20:55:00Z",
+      "completedAt": "2026-01-31T21:05:00Z"
     }
   ]
 }
