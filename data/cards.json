@@ -1,6 +1,6 @@
 {
-  "version": 30,
-  "lastUpdated": "2026-02-04T11:19:00Z",
+  "version": 31,
+  "lastUpdated": "2026-02-04T11:35:00Z",
   "updatedBy": "James",
   "categories": [
     {
@@ -884,6 +884,16 @@
       "priority": "medium",
       "category": "operations",
       "createdAt": "2026-02-04T11:19:00Z"
+    },
+    {
+      "id": "91",
+      "title": "YouTube video summarization",
+      "description": "James can now fetch YouTube transcripts and summarize videos.\n\n**Script:** /scripts/youtube-summarize.py\n**Usage:** Send YouTube link + ask for summary\n**Supports:** Manual captions, auto-generated, translation from other languages",
+      "status": "done",
+      "priority": "medium",
+      "category": "operations",
+      "createdAt": "2026-02-04T11:30:00Z",
+      "completedAt": "2026-02-04T11:35:00Z"
     }
   ]
 }
