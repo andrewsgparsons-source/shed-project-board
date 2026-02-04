@@ -1,6 +1,6 @@
 {
-  "version": 29,
-  "lastUpdated": "2026-01-31T23:37:00Z",
+  "version": 30,
+  "lastUpdated": "2026-02-04T11:19:00Z",
   "updatedBy": "James",
   "categories": [
     {
@@ -875,6 +875,15 @@
       "priority": "high",
       "category": "operations",
       "createdAt": "2026-01-31T23:37:00Z"
+    },
+    {
+      "id": "90",
+      "title": "Voice-to-voice chat with James",
+      "description": "Real-time voice conversation capability. Speak → James hears → James responds with voice.\n\n**Prototype built:** /voice-chat/\n- Browser-based speech recognition\n- Routes through Clawdbot CLI\n- TTS responses\n\n**Issues encountered:**\n- Cloudflare quick tunnels are ephemeral (new URL each time)\n- Transcript accumulation bug (fixed)\n- Server/tunnel die when sandbox restarts\n\n**For proper implementation:**\n- Persistent tunnel (Cloudflare account) or real domain\n- Keep server running reliably\n- Consider WebRTC for lower latency\n- Mobile-friendly UI improvements",
+      "status": "backlog",
+      "priority": "medium",
+      "category": "operations",
+      "createdAt": "2026-02-04T11:19:00Z"
     }
   ]
 }
