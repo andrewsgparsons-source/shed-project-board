@@ -1,6 +1,6 @@
 {
-  "version": 31,
-  "lastUpdated": "2026-02-04T11:35:00Z",
+  "version": 33,
+  "lastUpdated": "2026-02-04T16:59:00Z",
   "updatedBy": "James",
   "categories": [
     {
@@ -894,6 +894,185 @@
       "category": "operations",
       "createdAt": "2026-02-04T11:30:00Z",
       "completedAt": "2026-02-04T11:35:00Z"
+    },
+    {
+      "id": "92",
+      "title": "Concrete pier foundation system",
+      "description": "Dense concrete blocks on Type 1 MOT base. Stronger than timber-on-ground, never rots. Include in BOM: blocks, MOT quantity, mortar.",
+      "status": "backlog",
+      "priority": "high",
+      "category": "configurator",
+      "createdAt": "2026-02-04T12:07:00Z",
+      "source": "YouTube research - The DIY Guy"
+    },
+    {
+      "id": "93",
+      "title": "Floor frame bearers and joists",
+      "description": "5x2 or 6x2 treated timber frame on piers. Bearers run length, joists at 400mm centres. Include L-bracket fixings in BOM.",
+      "status": "backlog",
+      "priority": "high",
+      "category": "configurator",
+      "createdAt": "2026-02-04T12:07:00Z",
+      "source": "YouTube research - The DIY Guy"
+    },
+    {
+      "id": "94",
+      "title": "Anti-racking diagonal braces",
+      "description": "Diagonal braces for walls without OSB sheathing. Runs corner-to-corner on inside face. Critical for structural integrity of shed-style builds.",
+      "status": "backlog",
+      "priority": "high",
+      "category": "configurator",
+      "createdAt": "2026-02-04T12:07:00Z",
+      "source": "YouTube research - The DIY Guy"
+    },
+    {
+      "id": "95",
+      "title": "Noggins / horizontal blocking",
+      "description": "Horizontal braces between studs at mid-wall height. Strengthens wall, provides fixing points. Standard practice in UK shed building.",
+      "status": "backlog",
+      "priority": "high",
+      "category": "configurator",
+      "createdAt": "2026-02-04T12:07:00Z",
+      "source": "YouTube research - The DIY Guy"
+    },
+    {
+      "id": "96",
+      "title": "King studs and trimmers around openings",
+      "description": "Doubled-up framing around doors/windows. King stud runs full height, trimmer bears the header. Standard structural framing practice.",
+      "status": "backlog",
+      "priority": "medium",
+      "category": "configurator",
+      "createdAt": "2026-02-04T12:07:00Z",
+      "source": "YouTube research - The DIY Guy"
+    },
+    {
+      "id": "97",
+      "title": "Header beams over openings",
+      "description": "Load-bearing timber spanning door/window openings. Transfers load to king studs. Critical for structural integrity.",
+      "status": "backlog",
+      "priority": "medium",
+      "category": "configurator",
+      "createdAt": "2026-02-04T12:07:00Z",
+      "source": "YouTube research - The DIY Guy"
+    },
+    {
+      "id": "98",
+      "title": "Roof pitch calculator",
+      "description": "Input pitch in degrees, auto-calculate rafter length and cuts. Use formula or app logic (Essential Roofing App style). Display pitch angle in UI.",
+      "status": "backlog",
+      "priority": "high",
+      "category": "configurator",
+      "createdAt": "2026-02-04T12:07:00Z",
+      "source": "YouTube research - The DIY Guy"
+    },
+    {
+      "id": "99",
+      "title": "Roof overhang / eaves parameter",
+      "description": "Adjustable rafter overhang beyond wall line. Affects fascia position, soffit requirement, and weather protection. Common values: 0-300mm.",
+      "status": "backlog",
+      "priority": "high",
+      "category": "configurator",
+      "createdAt": "2026-02-04T12:07:00Z",
+      "source": "YouTube research - The DIY Guy"
+    },
+    {
+      "id": "100",
+      "title": "Ridge beam as separate element",
+      "description": "Distinct ridge beam running length of building. Rafters meet at ridge. Include in BOM separately from rafters.",
+      "status": "backlog",
+      "priority": "medium",
+      "category": "configurator",
+      "createdAt": "2026-02-04T12:07:00Z",
+      "source": "YouTube research - The DIY Guy"
+    },
+    {
+      "id": "101",
+      "title": "OSB roof deck / sheathing",
+      "description": "18mm T&G OSB on rafters before roofing membrane. Half-bond joints for strength. Include in BOM with sheet count.",
+      "status": "backlog",
+      "priority": "medium",
+      "category": "configurator",
+      "createdAt": "2026-02-04T12:07:00Z",
+      "source": "YouTube research - The DIY Guy"
+    },
+    {
+      "id": "102",
+      "title": "Cladding cover calculation",
+      "description": "Account for tongue/groove overlap when calculating cladding quantity. Cover ≠ board width. Critical for accurate BOM.",
+      "status": "backlog",
+      "priority": "high",
+      "category": "configurator",
+      "createdAt": "2026-02-04T12:07:00Z",
+      "source": "YouTube research - The DIY Guy"
+    },
+    {
+      "id": "103",
+      "title": "Shiplap cladding detail",
+      "description": "Tongue & groove with rebate visualization. Show overlap joint detail. Different from current flat panel representation.",
+      "status": "backlog",
+      "priority": "medium",
+      "category": "configurator",
+      "createdAt": "2026-02-04T12:07:00Z",
+      "source": "YouTube research - The DIY Guy"
+    },
+    {
+      "id": "104",
+      "title": "Corner posts / trim pieces",
+      "description": "22x22mm corner posts where cladding meets. Covers end grain, gives neat finish. Include in BOM.",
+      "status": "backlog",
+      "priority": "medium",
+      "category": "configurator",
+      "createdAt": "2026-02-04T12:07:00Z",
+      "source": "YouTube research - The DIY Guy"
+    },
+    {
+      "id": "105",
+      "title": "Window and door trim pieces",
+      "description": "Finishing trim around openings. Covers cladding edges, gives professional look. Various profile options.",
+      "status": "backlog",
+      "priority": "medium",
+      "category": "configurator",
+      "createdAt": "2026-02-04T12:07:00Z",
+      "source": "YouTube research - The DIY Guy"
+    },
+    {
+      "id": "106",
+      "title": "Featheredge cladding option",
+      "description": "Alternative to shiplap - overlapping wedge-profile boards. Traditional look, different BOM calculation.",
+      "status": "backlog",
+      "priority": "medium",
+      "category": "configurator",
+      "createdAt": "2026-02-04T12:07:00Z",
+      "source": "YouTube research"
+    },
+    {
+      "id": "107",
+      "title": "Soffit boards",
+      "description": "Underside of roof overhang. Closes gap between fascia and wall. Various widths depending on overhang.",
+      "status": "backlog",
+      "priority": "medium",
+      "category": "configurator",
+      "createdAt": "2026-02-04T12:07:00Z",
+      "source": "YouTube research - The DIY Guy"
+    },
+    {
+      "id": "108",
+      "title": "Bargeboards on gable ends",
+      "description": "Trim boards following roof pitch on gable ends. Finishes roof edge, protects rafter ends.",
+      "status": "backlog",
+      "priority": "medium",
+      "category": "configurator",
+      "createdAt": "2026-02-04T12:07:00Z",
+      "source": "YouTube research - The DIY Guy"
+    },
+    {
+      "id": "109",
+      "title": "Synthetic slate tile roof covering",
+      "description": "Full layer stack for slate tile roofs (Tapco-style synthetic slate):\n\n**Completed layers:**\n• Breathable membrane (light blue, 0.5mm) - sits on OSB\n• Tile battens (25x38mm treated timber, 143mm spacing)\n• Ridge battens (25mm from ridge line, both slopes)\n• Eaves battens (25mm from eaves edge)\n• Slate tile surface (pewter grey, 5mm thick)\n\n**Still to do:**\n• Ridge tiles (V-profile cap along ridge)\n• Texture/normal map for realistic appearance\n• Visibility toggles for construction breakdown\n\n**Files:**\n• docs/src/elements/roof-tiles.js\n\n**Branch:** feature/slate-tile-roof @ b3bc44d",
+      "status": "in-progress",
+      "priority": "high",
+      "category": "configurator",
+      "createdAt": "2026-02-04T15:30:00Z"
     }
   ]
 }
