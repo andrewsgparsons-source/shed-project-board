@@ -1,6 +1,6 @@
 {
-  "version": 33,
-  "lastUpdated": "2026-02-04T16:59:00Z",
+  "version": 34,
+  "lastUpdated": "2026-02-06T16:48:00Z",
   "updatedBy": "James",
   "categories": [
     {
@@ -1073,6 +1073,15 @@
       "priority": "high",
       "category": "configurator",
       "createdAt": "2026-02-04T15:30:00Z"
+    },
+    {
+      "id": "110",
+      "title": "Internal wall cladding options",
+      "description": "Add dropdown for internal wall finish options:\n• Plywood (current default for insulated)\n• Tongue & groove (8mm planed)\n• Painted/primed options\n\nVisual update in 3D + include in BOM. Requested by customer enquiry for fully insulated build.",
+      "status": "backlog",
+      "priority": "medium",
+      "category": "configurator",
+      "createdAt": "2026-02-06T16:48:00Z"
     }
   ]
 }
