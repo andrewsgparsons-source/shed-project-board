@@ -1,6 +1,6 @@
 {
   "version": 34,
-  "lastUpdated": "2026-02-06T16:48:00Z",
+  "lastUpdated": "2026-02-09T19:55:00Z",
   "updatedBy": "James",
   "categories": [
     {
@@ -723,10 +723,11 @@
       "id": "75",
       "title": "Attachment fascia board refinements",
       "description": "Further improvements to fascia boards on attachment apex roof:\n\u2022 Eaves fascia / barge board joint alignment\n\u2022 Ensure clean meeting at corners\n\u2022 Review positioning tolerances\n\nCurrent implementation works but has room for polish.",
-      "status": "backlog",
+      "status": "done",
       "priority": "low",
       "category": "configurator",
-      "createdAt": "2026-01-29T20:06:00Z"
+      "createdAt": "2026-01-29T20:06:00Z",
+      "completedAt": "2026-02-09T10:00:00Z"
     },
     {
       "id": "73",
@@ -1119,6 +1120,66 @@
       "priority": "medium",
       "category": "configurator",
       "createdAt": "2026-02-09T15:34:00Z"
+    },
+    {
+      "id": "115",
+      "title": "Fix share URL missing state fields",
+      "description": "Share URLs were missing roof covering, tie beam, cladding style, and attachment roof visibility fields. Added them. Commit 7b9d077.",
+      "status": "done",
+      "priority": "medium",
+      "category": "configurator",
+      "createdAt": "2026-02-09T00:13:00Z",
+      "completedAt": "2026-02-09T00:13:00Z"
+    },
+    {
+      "id": "116",
+      "title": "Fix attachment height capping 168mm too low",
+      "description": "Eaves heights should be from floor surface not ground level. Was 168mm short. Commit cea3d74.",
+      "status": "done",
+      "priority": "medium",
+      "category": "configurator",
+      "createdAt": "2026-02-09T10:42:00Z",
+      "completedAt": "2026-02-09T10:42:00Z"
+    },
+    {
+      "id": "117",
+      "title": "Preset overhaul: new presets, categories, cleanup",
+      "description": "Updated hipped garage, added Apex Garden Room + Small Pent Shed, removed debug/old presets, fixed hipped membrane/battens. 10 commits pushed.",
+      "status": "done",
+      "priority": "medium",
+      "category": "configurator",
+      "createdAt": "2026-02-09T08:00:00Z",
+      "completedAt": "2026-02-09T08:37:00Z"
+    },
+    {
+      "id": "118",
+      "title": "Pent insulation + ply follows roof slope",
+      "description": "Wall insulation and ply lining on pent roofs now follows the slope per-bay using vertex modification (not CSG). Per-wall heights for left/right walls. Multiple iterations. Commits d33558d \u2192 dfc865e.",
+      "status": "done",
+      "priority": "high",
+      "category": "configurator",
+      "createdAt": "2026-02-09T15:37:00Z",
+      "completedAt": "2026-02-09T18:25:00Z"
+    },
+    {
+      "id": "119",
+      "title": "Fix pent plyboard ghost wireframe above frame",
+      "description": "enableEdgesRendering() was called before vertex slope adjustment, causing ghost outline at original box shape. Fix: moved to after vertex mod, added updatable:true + refreshBoundingInfo(). Commit d778f6f.",
+      "status": "done",
+      "priority": "medium",
+      "category": "configurator",
+      "createdAt": "2026-02-09T18:40:00Z",
+      "completedAt": "2026-02-09T19:12:00Z"
+    },
+    {
+      "id": "120",
+      "title": "Fix pent roof plateThickness in floor stack calculation",
+      "description": "plateThickness was incorrectly included in FLOOR_STACK_MM in roof.js \u2014 it's part of the wall frame, not the floor. Removed to align with walls.js pentStackAdjust. Commit 13c0aa3.",
+      "status": "done",
+      "priority": "medium",
+      "category": "configurator",
+      "createdAt": "2026-02-09T19:20:00Z",
+      "completedAt": "2026-02-09T19:43:00Z"
     }
   ]
 }
