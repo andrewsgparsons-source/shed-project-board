@@ -1110,6 +1110,15 @@
       "priority": "high",
       "category": "configurator",
       "createdAt": "2026-02-09T07:02:00Z"
+    },
+    {
+      "id": "114",
+      "title": "Attachment building polish: visibility checkboxes + insulation/ply organisation",
+      "description": "Attached buildings have good progress but need finishing touches:\n1. Visibility checkboxes not working properly for attachment elements\n2. Insulation and ply liner layers need better organisation in the attachment context\n\nLow priority - park for now, revisit later.",
+      "status": "backlog",
+      "priority": "medium",
+      "category": "configurator",
+      "createdAt": "2026-02-09T15:34:00Z"
     }
   ]
 }
