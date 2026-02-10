@@ -1,6 +1,6 @@
 {
-  "version": 35,
-  "lastUpdated": "2026-02-10T09:18:00Z",
+  "version": 36,
+  "lastUpdated": "2026-02-10T11:03:00Z",
   "updatedBy": "James",
   "categories": [
     {
@@ -1198,6 +1198,15 @@
       "priority": "high",
       "category": "operations",
       "createdAt": "2026-02-10T09:18:00Z"
+    },
+    {
+      "id": "123",
+      "title": "Seamless voice interaction with James",
+      "description": "High-quality, reliable voice calling between Andrew and James. Current state: Tailscale funnel + Clawdbot dashboard voice exists but setup is fragile (bind issues, DNS, auth). Goal: one-tap voice call from phone, reliable connection, natural conversation quality. Investigate: LiveKit, WebRTC, Clawdbot native voice, persistent tunnel setup.",
+      "status": "backlog",
+      "priority": "high",
+      "category": "operations",
+      "createdAt": "2026-02-10T11:03:00Z"
     }
   ]
 }
