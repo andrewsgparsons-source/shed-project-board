@@ -1,6 +1,6 @@
 {
-  "version": 36,
-  "lastUpdated": "2026-02-10T11:03:00Z",
+  "version": 37,
+  "lastUpdated": "2026-02-10T14:34:00Z",
   "updatedBy": "James",
   "categories": [
     {
@@ -1207,6 +1207,15 @@
       "priority": "high",
       "category": "operations",
       "createdAt": "2026-02-10T11:03:00Z"
+    },
+    {
+      "id": "124",
+      "title": "Budget buildings range \u2014 mushroom/microgreen grow sheds",
+      "description": "Research and develop cheapest possible insulated shed range designed as controlled environments for growing mushrooms and microgreens. Includes: supplier research, material costs, insulation options, ventilation/humidity requirements, pricing.",
+      "status": "in-progress",
+      "priority": "high",
+      "category": "business",
+      "createdAt": "2026-02-10T14:34:00Z"
     }
   ]
 }
