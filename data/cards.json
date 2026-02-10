@@ -1,6 +1,6 @@
 {
-  "version": 34,
-  "lastUpdated": "2026-02-09T20:01:00Z",
+  "version": 35,
+  "lastUpdated": "2026-02-10T09:18:00Z",
   "updatedBy": "James",
   "categories": [
     {
@@ -1189,6 +1189,15 @@
       "priority": "high",
       "category": "configurator",
       "createdAt": "2026-02-09T20:01:00Z"
+    },
+    {
+      "id": "122",
+      "title": "Fix memory_search \u2014 add embeddings API key",
+      "description": "memory_search is failing for all agents due to missing OpenAI/Google embeddings API key in auth-profiles.json. Only Anthropic key configured. Need to run: clawdbot agents auth main --provider openai --token sk-xxx (or Google). Semantic search across memory files is broken \u2014 workaround is manual file reads.",
+      "status": "backlog",
+      "priority": "high",
+      "category": "operations",
+      "createdAt": "2026-02-10T09:18:00Z"
     }
   ]
 }
