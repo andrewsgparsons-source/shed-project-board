@@ -1,6 +1,6 @@
 {
-  "version": 38,
-  "lastUpdated": "2026-02-11T13:19:14Z",
+  "version": 39,
+  "lastUpdated": "2026-02-11T21:56:53Z",
   "updatedBy": "James",
   "categories": [
     {
@@ -1225,6 +1225,24 @@
       "priority": "medium",
       "category": "configurator",
       "createdAt": "2026-02-11T13:19:14Z"
+    },
+    {
+      "id": "126",
+      "title": "Building Type Selector \u2014 Phase 1 (Gazebo)",
+      "description": "Add building type dropdown replacing 'Design Your Shed' title. First type: Gazebo \u2014 4 corner posts (150x150), hipped roof, no walls/cladding. Store buildingType in state, hide irrelevant controls.",
+      "status": "in-progress",
+      "priority": "high",
+      "category": "configurator",
+      "createdAt": "2026-02-11T21:56:53Z"
+    },
+    {
+      "id": "127",
+      "title": "Building Type Selector \u2014 Phase 2 (Full Range)",
+      "description": "Extend building type dropdown with: Summer House, Garden Room, Garage, Workshop, Lean-to, Field Shelter. Each type defines its own defaults, visible controls, and rendering rules.",
+      "status": "backlog",
+      "priority": "high",
+      "category": "configurator",
+      "createdAt": "2026-02-11T21:56:53Z"
     }
   ]
 }
