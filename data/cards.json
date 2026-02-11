@@ -1,6 +1,6 @@
 {
-  "version": 37,
-  "lastUpdated": "2026-02-10T14:34:00Z",
+  "version": 38,
+  "lastUpdated": "2026-02-11T13:19:14Z",
   "updatedBy": "James",
   "categories": [
     {
@@ -1216,6 +1216,15 @@
       "priority": "high",
       "category": "business",
       "createdAt": "2026-02-10T14:34:00Z"
+    },
+    {
+      "id": "125",
+      "title": "Budget cladding render issues & colour logic",
+      "description": "Box profile/corrugated steel cladding renders too thin/transparent. Colour picker logic needs verification \u2014 materials not applying visibly. Also check galvanised trim, corner flashings, and fascia material for budget styles. Infinite loop crash fixed (CLAD_H=0) but visual quality needs work.",
+      "status": "backlog",
+      "priority": "medium",
+      "category": "configurator",
+      "createdAt": "2026-02-11T13:19:14Z"
     }
   ]
 }
