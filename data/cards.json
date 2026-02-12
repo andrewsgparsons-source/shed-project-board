@@ -1072,10 +1072,11 @@
       "id": "109",
       "title": "Synthetic slate tile roof covering",
       "description": "Full layer stack for slate tile roofs (Tapco-style synthetic slate):\n\n**Completed layers:**\n\u2022 Breathable membrane (light blue, 0.5mm) - sits on OSB\n\u2022 Tile battens (25x38mm treated timber, 143mm spacing)\n\u2022 Ridge battens (25mm from ridge line, both slopes)\n\u2022 Eaves battens (25mm from eaves edge)\n\u2022 Slate tile surface (pewter grey, 5mm thick)\n\n**Still to do:**\n\u2022 Ridge tiles (V-profile cap along ridge)\n\u2022 Texture/normal map for realistic appearance\n\u2022 Visibility toggles for construction breakdown\n\n**Files:**\n\u2022 docs/src/elements/roof-tiles.js\n\n**Branch:** feature/slate-tile-roof @ b3bc44d",
-      "status": "in-progress",
+      "status": "done",
       "priority": "high",
       "category": "configurator",
-      "createdAt": "2026-02-04T15:30:00Z"
+      "createdAt": "2026-02-04T15:30:00Z",
+      "completedAt": "2026-02-12T21:38:00Z"
     },
     {
       "id": "110",
