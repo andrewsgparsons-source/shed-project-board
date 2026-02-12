@@ -1254,6 +1254,15 @@
       "priority": "high",
       "category": "configurator",
       "createdAt": "2026-02-12T21:29:00Z"
+    },
+    {
+      "id": "129",
+      "title": "Whelpley Farm: mobile first-load is blank/zoomed out",
+      "description": "On mobile, dashboard loads looking like a blank screen \u2014 have to zoom and pan to find the content. Needs to load zoomed in on the dashboard features. Check viewport meta, sidebar collapse on mobile, initial scroll position. First impression matters.",
+      "status": "backlog",
+      "priority": "high",
+      "category": "operations",
+      "createdAt": "2026-02-12T21:42:00Z"
     }
   ]
 }
