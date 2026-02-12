@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Garden Buildings — Dashboard</title>
+  <link rel="stylesheet" href="src/ui/dashboard.css">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.7/dist/chart.umd.min.js"></script>
+</head>
+<body>
+
+  <div id="sidebar">
+    <!-- Header -->
+    <div class="gb-header">
+      <div class="gb-logo">🏡</div>
+      <h1 class="gb-title">Garden Buildings</h1>
+      <div class="gb-subtitle">Select for</div>
+      <select id="businessSelect" class="gb-select">
+        <option value="garden-buildings">Garden Buildings</option>
+      </select>
+    </div>
+
+    <!-- Dashboard summary strip -->
+    <div class="gb-dashboard" id="dashSummary">
+      <div class="gb-dash-row">
+        <div class="gb-dash-item" data-filter="in-progress">
+          <span class="gb-dash-label">In Progress</span>
+          <span class="gb-dash-value" id="dash-inprogress">—</span>
+        </div>
+        <div class="gb-dash-item" data-filter="backlog">
+          <span class="gb-dash-label">Backlog</span>
+          <span class="gb-dash-value" id="dash-backlog">—</span>
+        </div>
+      </div>
+      <div class="gb-dash-row">
+        <div class="gb-dash-item accent" data-filter="done">
+          <span class="gb-dash-label">Done</span>
+          <span class="gb-dash-value" id="dash-done">—</span>
+        </div>
+        <div class="gb-dash-item" data-filter="all">
+          <span class="gb-dash-label">Total</span>
+          <span class="gb-dash-value" id="dash-total">—</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Navigation steps -->
+    <nav class="gb-steps" id="navSteps">
+      <!-- Populated by JS -->
+    </nav>
+
+    <!-- Footer -->
+    <div class="gb-footer">
+      <span class="gb-footer-text">Garden Buildings &copy; 2026</span>
+    </div>
+  </div>
+
+  <!-- Flyout panel -->
+  <div class="gb-flyout" id="flyout">
+    <div class="gb-flyout-header">
+      <span class="gb-flyout-title" id="flyoutTitle">Section</span>
+      <button class="gb-flyout-close" id="flyoutClose">&times;</button>
+    </div>
+    <div class="gb-flyout-body" id="flyoutBody">
+      <!-- Content loads here -->
+    </div>
+  </div>
+
+  <!-- Main content area -->
+  <main id="mainContent">
+    <div class="gb-welcome">
+      <h2>🏡 Garden Buildings Dashboard</h2>
+      <p>Select a section from the sidebar to explore the project.</p>
+    </div>
+  </main>
+
+  <script src="src/app.js"></script>
+</body>
+</html>
