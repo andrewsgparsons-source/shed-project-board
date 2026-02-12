@@ -222,10 +222,11 @@
       "id": "21",
       "title": "Hipped roof implementation",
       "description": "Add hipped roof style option. Currently placeholder in roof style dropdown. Requires new geometry: hip rafters from corners to ridge, jack rafters on all four sides.",
-      "status": "backlog",
+      "status": "done",
       "priority": "medium",
       "category": "configurator",
-      "createdAt": "2026-01-28T09:12:00Z"
+      "createdAt": "2026-01-28T09:12:00Z",
+      "completedAt": "2026-02-12T20:56:00Z"
     },
     {
       "id": "22",
