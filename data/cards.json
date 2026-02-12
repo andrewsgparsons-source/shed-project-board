@@ -1281,6 +1281,15 @@
       "priority": "high",
       "category": "operations",
       "createdAt": "2026-02-12T22:09:00Z"
+    },
+    {
+      "id": "132",
+      "title": "Mobile: no building type selector (can't access gazebo)",
+      "description": "buildingTypeSelect dropdown is only in sidebar-wizard.js (desktop). Mobile configurator never creates it, so users can't switch building type on mobile. Fix: add building type selector to mobile layout, probably at top of Size step. Also needs to trigger updateBuildingTypeUI() and hide irrelevant steps for gazebo.",
+      "status": "backlog",
+      "priority": "high",
+      "category": "configurator",
+      "createdAt": "2026-02-12T22:25:00Z"
     }
   ]
 }
