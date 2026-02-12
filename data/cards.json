@@ -1248,7 +1248,7 @@
     {
       "id": "128",
       "title": "Photo paste/attach support in dashboards",
-      "description": "Ability to paste or attach photographs into dashboard cards/ideas. Useful for on-site progress shots, reference photos, etc. Needs a storage approach (Base64 in localStorage, GitHub repo via API, or external hosting). Apply across all dashboards.",
+      "description": "Paste or attach photos into dashboard cards/ideas. Must be visible to ALL users including mobile (not localStorage). Approach: paste/drop image \u2192 Base64 \u2192 commit to data/images/ via GitHub API \u2192 serve from Pages. Needs a GitHub token flow (could be a one-time paste into settings). Apply across all dashboards.",
       "status": "ideas",
       "priority": "medium",
       "category": "configurator",
