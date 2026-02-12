@@ -1272,6 +1272,15 @@
       "priority": "high",
       "category": "configurator",
       "createdAt": "2026-02-12T21:52:00Z"
+    },
+    {
+      "id": "131",
+      "title": "Work sizing: Projects / Jobs / Tasks hierarchy",
+      "description": "Introduce 3-level sizing across all dashboards. Task = \u22642 hours (single action). Job = ~1 day (group of tasks). Project = multiple days (group of jobs). Add as a field to cards. Enables better time estimation, prioritisation, and filtering. Could nest Jobs under Projects and Tasks under Jobs.",
+      "status": "backlog",
+      "priority": "high",
+      "category": "operations",
+      "createdAt": "2026-02-12T22:09:00Z"
     }
   ]
 }
