@@ -459,6 +459,14 @@
     var date = card.createdAt ? formatDate(card.createdAt) : "";
     var completedDate = card.completedAt ? " • Completed: " + formatDate(card.completedAt) : "";
 
+    var deliverableBtn = '';
+    if (card.status === 'done') {
+      var hasDeliverable = getDeliverable(card.id);
+      var btnLabel = hasDeliverable ? '📄 View Deliverable' : '📝 Add Deliverable';
+      var btnClass = hasDeliverable ? 'deliverable-btn has-content' : 'deliverable-btn';
+      deliverableBtn = '<button class="' + btnClass + '" data-card-id="' + card.id + '">' + btnLabel + '</button>';
+    }
+
     return '<details class="task-card status-' + card.status + '" data-id="' + card.id + '">' +
       '<summary class="task-summary">' +
       '<span class="task-title">' + escHtml(card.title) + '</span>' +
@@ -472,12 +480,111 @@
       '<span class="task-date">Created: ' + date + completedDate + '</span>' +
       '<span class="badge badge-category">' + (CAT_EMOJI[card.category] || "") + ' ' + card.category + '</span>' +
       '</div>' +
+      deliverableBtn +
       '</div>' +
       '</details>';
   }
 
+  // ── Deliverables system ──
+  var DELIVERABLES_KEY = 'gb_deliverables';
+
+  function loadDeliverables() {
+    try { return JSON.parse(localStorage.getItem(DELIVERABLES_KEY)) || {}; } catch(e) { return {}; }
+  }
+  function saveDeliverables(d) { localStorage.setItem(DELIVERABLES_KEY, JSON.stringify(d)); }
+  function getDeliverable(cardId) { return loadDeliverables()[cardId] || null; }
+
+  function seedDeliverables() {
+    var d = loadDeliverables();
+    if (Object.keys(d).length > 0) return;
+    // Pre-populate a few key deliverables
+    d['1'] = {
+      summary: 'Dimension constraints are fully implemented and validated.',
+      details: 'Maximum dimensions set to 8m × 4m in either orientation. The UI enforces min/max/step values for width and depth via params.js. Validation prevents impossible configurations.',
+      looseEnds: 'None — this is fully complete.',
+      updated: '2026-01-26'
+    };
+    d['2'] = {
+      summary: 'Roof system supports Apex, Pent, and Hipped styles with automatic geometry recalculation.',
+      details: 'Roof pitch, ridge height, and eave positions all derive from wall plate height and span. Switching between styles triggers a clean full rebuild. Hipped roof includes hip rafters, jack rafters, OSB, membrane, battens, and tile layers.',
+      looseEnds: 'Flat roof style not yet implemented. Roof tile material options could be expanded.',
+      updated: '2026-02-01'
+    };
+    d['5'] = {
+      summary: 'Building type selector implemented with Gazebo as the first alternative type.',
+      details: 'Dropdown replaces "Design Your Shed" title. 8 building types listed (Shed, Gazebo, Summer House, Garden Room, Workshop, Log Cabin, Garage, Carport). Gazebo renders with 4 corner posts, ring beams, hipped roof, fascia boards, and 8 knee braces at 45°. Auto-bumps to hipped minimum dimensions and hides irrelevant UI sections.',
+      looseEnds: 'Remaining 6 building types need wiring up with their own defaults and rendering rules. Gazebo knee brace rotation may need final tweaking.',
+      updated: '2026-02-11'
+    };
+    saveDeliverables(d);
+  }
+  seedDeliverables();
+
+  function openDeliverablePage(cardId) {
+    var card = cards.find(function(c) { return c.id === cardId; });
+    if (!card) return;
+    var del = getDeliverable(cardId) || {};
+    var mainContent = document.getElementById('mainContent');
+
+    var html = '<div class="deliverable-page">';
+    html += '<button class="gb-back-btn" id="delBackBtn">← Back</button>';
+    html += '<div class="del-header">';
+    html += '<span class="badge badge-category">' + (CAT_EMOJI[card.category] || "") + ' ' + card.category + '</span>';
+    html += '<span class="badge badge-priority-' + card.priority + '">' + card.priority + '</span>';
+    if (card.completedAt) html += '<span class="del-date">Completed: ' + formatDate(card.completedAt) + '</span>';
+    html += '</div>';
+    html += '<h2 class="del-title">✅ ' + escHtml(card.title) + '</h2>';
+
+    // Editable sections
+    html += '<div class="del-section">';
+    html += '<h3>Executive Summary</h3>';
+    html += '<textarea id="delSummary" class="del-textarea" placeholder="What was delivered? Key outcomes...">' + escHtml(del.summary || '') + '</textarea>';
+    html += '</div>';
+
+    html += '<div class="del-section">';
+    html += '<h3>Deliverable Details</h3>';
+    html += '<textarea id="delDetails" class="del-textarea del-textarea-lg" placeholder="Technical details, what was built, how it works, screenshots/evidence...">' + escHtml(del.details || '') + '</textarea>';
+    html += '</div>';
+
+    html += '<div class="del-section">';
+    html += '<h3>Loose Ends & Follow-ups</h3>';
+    html += '<textarea id="delLooseEnds" class="del-textarea" placeholder="Any remaining issues, future improvements, things to watch...">' + escHtml(del.looseEnds || '') + '</textarea>';
+    html += '</div>';
+
+    html += '<button id="delSaveBtn" class="gb-save-btn">💾 Save Deliverable</button>';
+    html += '</div>';
+
+    mainContent.innerHTML = html;
+
+    document.getElementById('delBackBtn').addEventListener('click', function() {
+      mainContent.innerHTML = '<div class="gb-welcome"><h2>Garden Buildings</h2><p>Select a section from the sidebar.</p></div>';
+    });
+
+    document.getElementById('delSaveBtn').addEventListener('click', function() {
+      var deliverables = loadDeliverables();
+      deliverables[cardId] = {
+        summary: document.getElementById('delSummary').value.trim(),
+        details: document.getElementById('delDetails').value.trim(),
+        looseEnds: document.getElementById('delLooseEnds').value.trim(),
+        updated: new Date().toISOString().slice(0, 10)
+      };
+      saveDeliverables(deliverables);
+      // Visual feedback
+      var btn = document.getElementById('delSaveBtn');
+      btn.textContent = '✅ Saved!';
+      btn.style.background = '#2D5016';
+      setTimeout(function() { btn.textContent = '💾 Save Deliverable'; btn.style.background = ''; }, 1500);
+    });
+  }
+
   function attachCardEvents(container) {
-    // No mutable events needed for now (read-only dashboard)
+    container.querySelectorAll('.deliverable-btn').forEach(function(btn) {
+      btn.addEventListener('click', function(e) {
+        e.preventDefault();
+        e.stopPropagation();
+        openDeliverablePage(btn.getAttribute('data-card-id'));
+      });
+    });
   }
 
   // ── Render: All Tasks ──
