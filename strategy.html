@@ -1,0 +1,529 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#1a1a2e">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <title>Strategy - Bespoke Garden Buildings</title>
+  <link rel="stylesheet" href="styles.css">
+  <link rel="manifest" href="manifest.json">
+  <style>
+    .strategy-container {
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 24px 20px 60px;
+    }
+
+    .strategy-hero {
+      text-align: center;
+      padding: 40px 20px;
+      margin-bottom: 32px;
+      background: linear-gradient(135deg, rgba(74, 222, 128, 0.08) 0%, rgba(59, 130, 246, 0.08) 100%);
+      border: 1px solid rgba(74, 222, 128, 0.2);
+      border-radius: 12px;
+    }
+
+    .strategy-hero h2 {
+      font-size: 1.6rem;
+      color: #fff;
+      margin-bottom: 12px;
+    }
+
+    .strategy-hero .subtitle {
+      font-size: 1rem;
+      color: #a0a0a0;
+      max-width: 600px;
+      margin: 0 auto;
+      line-height: 1.6;
+    }
+
+    .strategy-hero .core-thesis {
+      margin-top: 20px;
+      padding: 16px 24px;
+      background: rgba(0, 0, 0, 0.3);
+      border-radius: 8px;
+      display: inline-block;
+    }
+
+    .strategy-hero .core-thesis p {
+      color: #4ade80;
+      font-size: 0.95rem;
+      font-weight: 500;
+      line-height: 1.5;
+      font-style: italic;
+    }
+
+    .phase-timeline {
+      position: relative;
+      margin-bottom: 40px;
+    }
+
+    .phase-timeline::before {
+      content: '';
+      position: absolute;
+      left: 28px;
+      top: 0;
+      bottom: 0;
+      width: 2px;
+      background: rgba(255, 255, 255, 0.1);
+    }
+
+    .phase-card {
+      position: relative;
+      margin-bottom: 20px;
+      padding-left: 68px;
+    }
+
+    .phase-number {
+      position: absolute;
+      left: 8px;
+      top: 0;
+      width: 42px;
+      height: 42px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 700;
+      font-size: 1rem;
+      z-index: 1;
+    }
+
+    .phase-number.current {
+      background: #4ade80;
+      color: #1a1a2e;
+      box-shadow: 0 0 16px rgba(74, 222, 128, 0.4);
+    }
+
+    .phase-number.future {
+      background: rgba(255, 255, 255, 0.1);
+      color: #a0a0a0;
+      border: 2px solid rgba(255, 255, 255, 0.2);
+    }
+
+    .phase-number.optional {
+      background: rgba(255, 255, 255, 0.05);
+      color: #707070;
+      border: 2px dashed rgba(255, 255, 255, 0.15);
+    }
+
+    .phase-body {
+      background: rgba(255, 255, 255, 0.05);
+      border-radius: 10px;
+      padding: 20px;
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      transition: transform 0.15s, box-shadow 0.15s;
+    }
+
+    .phase-body:hover {
+      transform: translateX(4px);
+      box-shadow: 0 4px 16px rgba(0, 0, 0, 0.3);
+    }
+
+    .phase-body.active {
+      border-color: rgba(74, 222, 128, 0.3);
+      background: rgba(74, 222, 128, 0.05);
+    }
+
+    .phase-label {
+      font-size: 0.7rem;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      font-weight: 600;
+      margin-bottom: 6px;
+    }
+
+    .phase-label.now { color: #4ade80; }
+    .phase-label.next { color: #3b82f6; }
+    .phase-label.later { color: #f59e0b; }
+    .phase-label.opt { color: #707070; }
+
+    .phase-title {
+      font-size: 1.15rem;
+      font-weight: 600;
+      color: #fff;
+      margin-bottom: 10px;
+    }
+
+    .phase-details {
+      color: #a0a0a0;
+      font-size: 0.9rem;
+      line-height: 1.6;
+    }
+
+    .phase-details ul {
+      margin: 8px 0 0 0;
+      padding-left: 20px;
+    }
+
+    .phase-details li {
+      margin-bottom: 4px;
+    }
+
+    .section {
+      margin-bottom: 32px;
+    }
+
+    .section-header {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 16px;
+    }
+
+    .section-icon {
+      width: 40px;
+      height: 40px;
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.3rem;
+    }
+
+    .section-icon.margin { background: rgba(34, 197, 94, 0.15); }
+    .section-icon.ai { background: rgba(139, 92, 246, 0.15); }
+    .section-icon.guardrails { background: rgba(239, 68, 68, 0.15); }
+    .section-icon.principle { background: rgba(59, 130, 246, 0.15); }
+
+    .section-title {
+      font-size: 1.15rem;
+      font-weight: 600;
+      color: #fff;
+    }
+
+    .section-body {
+      background: rgba(255, 255, 255, 0.05);
+      border-radius: 10px;
+      padding: 20px;
+      border: 1px solid rgba(255, 255, 255, 0.08);
+    }
+
+    .section-body p, .section-body li {
+      color: #a0a0a0;
+      font-size: 0.9rem;
+      line-height: 1.6;
+    }
+
+    .section-body ul {
+      margin: 8px 0;
+      padding-left: 20px;
+    }
+
+    .section-body li {
+      margin-bottom: 6px;
+    }
+
+    .comparison-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+      margin-top: 12px;
+    }
+
+    .comparison-box {
+      padding: 16px;
+      border-radius: 8px;
+      font-size: 0.85rem;
+    }
+
+    .comparison-box.old {
+      background: rgba(239, 68, 68, 0.08);
+      border: 1px solid rgba(239, 68, 68, 0.2);
+    }
+
+    .comparison-box.new {
+      background: rgba(74, 222, 128, 0.08);
+      border: 1px solid rgba(74, 222, 128, 0.2);
+    }
+
+    .comparison-box .label {
+      font-size: 0.7rem;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      font-weight: 600;
+      margin-bottom: 8px;
+    }
+
+    .comparison-box.old .label { color: #ef4444; }
+    .comparison-box.new .label { color: #4ade80; }
+
+    .comparison-box p {
+      color: #c0c0c0;
+      line-height: 1.5;
+    }
+
+    .ai-examples {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      margin-top: 12px;
+    }
+
+    .ai-example {
+      background: rgba(139, 92, 246, 0.08);
+      border: 1px solid rgba(139, 92, 246, 0.15);
+      padding: 10px 14px;
+      border-radius: 8px;
+      color: #a78bfa;
+      font-size: 0.88rem;
+      font-style: italic;
+    }
+
+    .ai-example::before {
+      content: '💬 ';
+    }
+
+    .principle-quote {
+      text-align: center;
+      padding: 28px 24px;
+      background: linear-gradient(135deg, rgba(59, 130, 246, 0.08) 0%, rgba(139, 92, 246, 0.08) 100%);
+      border: 1px solid rgba(59, 130, 246, 0.2);
+      border-radius: 10px;
+    }
+
+    .principle-quote blockquote {
+      font-size: 1.1rem;
+      color: #fff;
+      font-weight: 500;
+      line-height: 1.6;
+      font-style: italic;
+      margin-bottom: 12px;
+    }
+
+    .principle-quote .attribution {
+      font-size: 0.8rem;
+      color: #707070;
+    }
+
+    .meta-footer {
+      text-align: center;
+      margin-top: 40px;
+      padding-top: 24px;
+      border-top: 1px solid rgba(255, 255, 255, 0.08);
+      color: #505050;
+      font-size: 0.8rem;
+    }
+
+    @media (max-width: 768px) {
+      .strategy-hero {
+        padding: 28px 16px;
+      }
+
+      .strategy-hero h2 {
+        font-size: 1.3rem;
+      }
+
+      .comparison-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .phase-card {
+        padding-left: 56px;
+      }
+
+      .phase-timeline::before {
+        left: 20px;
+      }
+
+      .phase-number {
+        left: 0;
+        width: 40px;
+        height: 40px;
+        font-size: 0.9rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="header-left">
+      <h1>🏠 Bespoke Garden Buildings</h1>
+      <nav class="nav-links">
+        <a href="index.html">📋 Kanban</a>
+        <a href="decisions.html">🗺️ Decisions</a>
+        <a href="brain-2d.html">🧠 Brain</a>
+        <a href="rules.html">⚠️ Rules</a>
+        <a href="strategy.html" class="active">📄 Strategy</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="strategy-container">
+
+    <!-- Hero -->
+    <div class="strategy-hero">
+      <h2>Parametric Shed Automation</h2>
+      <p class="subtitle">1-Page Executive Summary</p>
+      <div class="core-thesis">
+        <p>We are not building a shed configurator. We are building a parametric design and cost engine that encodes structural logic, material rules, planning constraints, manufacturable outputs, and cost structure.<br><br>The shed is the first application. The system is the long-term asset.</p>
+      </div>
+    </div>
+
+    <!-- Phase Timeline -->
+    <div class="section">
+      <div class="section-header">
+        <div class="section-title">Sequencing Plan</div>
+      </div>
+
+      <div class="phase-timeline">
+
+        <div class="phase-card">
+          <div class="phase-number current">1</div>
+          <div class="phase-body active">
+            <div class="phase-label now">Current Phase</div>
+            <div class="phase-title">Internal Optimisation</div>
+            <div class="phase-details">
+              <p>Use the engine to strengthen our core building business. This internal advantage funds everything else.</p>
+              <ul>
+                <li>Faster and more accurate quoting</li>
+                <li>Fewer design and build errors</li>
+                <li>Clearer client conversations</li>
+                <li>Reduced cognitive load</li>
+                <li>Higher close rates</li>
+                <li>Improved margin protection</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <div class="phase-card">
+          <div class="phase-number future">2</div>
+          <div class="phase-body">
+            <div class="phase-label next">Next</div>
+            <div class="phase-title">Structured Cost Transparency</div>
+            <div class="phase-details">
+              <p>Introduce controlled cost clarity. Instead of opaque pricing, clients see:</p>
+              <ul>
+                <li>Materials</li>
+                <li>Labour</li>
+                <li>Overheads</li>
+                <li>Trade-offs between options</li>
+              </ul>
+              <p style="margin-top: 12px;">The system ensures no structurally invalid configurations, no underspec'd builds, no hidden compromises. Price becomes a consequence of choices, not a negotiation tool.</p>
+              <p style="margin-top: 8px;"><strong style="color: #e0e0e0;">We are not racing to the bottom. We are reframing value around informed decisions.</strong></p>
+            </div>
+          </div>
+        </div>
+
+        <div class="phase-card">
+          <div class="phase-number future">3</div>
+          <div class="phase-body">
+            <div class="phase-label later">Future</div>
+            <div class="phase-title">Controlled Supplier &amp; Labour Competition</div>
+            <div class="phase-details">
+              <p>The engine can eventually host multiple material suppliers and defined labour providers. Suppliers compete inside strict parametric constraints:</p>
+              <ul>
+                <li>Grade</li>
+                <li>Lead time</li>
+                <li>Reliability</li>
+                <li>Cost bands</li>
+              </ul>
+              <p style="margin-top: 12px;">Because the system defines what a "valid build" is, quality cannot degrade through competition. We own the rules. Others operate within them.</p>
+              <p style="margin-top: 8px;"><strong style="color: #e0e0e0;">This is not an open marketplace. It is a constrained, rules-based ecosystem.</strong></p>
+            </div>
+          </div>
+        </div>
+
+        <div class="phase-card">
+          <div class="phase-number optional">4</div>
+          <div class="phase-body">
+            <div class="phase-label opt">Optional</div>
+            <div class="phase-title">Platform Licensing</div>
+            <div class="phase-details">
+              <p>License the parametric engine to other builders or industries. The system — not the shed — is the product.</p>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- Strategic Margin Shift -->
+    <div class="section">
+      <div class="section-header">
+        <div class="section-icon margin">💰</div>
+        <div class="section-title">Strategic Margin Shift</div>
+      </div>
+      <div class="section-body">
+        <p>Traditional builder margin relies partly on opacity. Our model shifts margin to:</p>
+        <ul>
+          <li>System ownership</li>
+          <li>Decision compression</li>
+          <li>Error reduction</li>
+          <li>Speed</li>
+          <li>Risk elimination</li>
+          <li>Preset expertise</li>
+        </ul>
+        <div class="comparison-grid">
+          <div class="comparison-box old">
+            <div class="label">We stop selling</div>
+            <p>"A shed."</p>
+          </div>
+          <div class="comparison-box new">
+            <div class="label">We start selling</div>
+            <p>"A resolved, de-risked decision."</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Role of AI -->
+    <div class="section">
+      <div class="section-header">
+        <div class="section-icon ai">🤖</div>
+        <div class="section-title">Role of AI</div>
+      </div>
+      <div class="section-body">
+        <p>AI is not a gimmick feature. It functions as an optimisation layer, a trade-off explainer, and a filter through complexity. AI reduces cognitive burden, not adds to it.</p>
+        <div class="ai-examples">
+          <div class="ai-example">"Optimise for longevity under £X"</div>
+          <div class="ai-example">"Minimise lifetime cost"</div>
+          <div class="ai-example">"What changes if insulation increases?"</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Risks & Guardrails -->
+    <div class="section">
+      <div class="section-header">
+        <div class="section-icon guardrails">🛡️</div>
+        <div class="section-title">Risks &amp; Guardrails</div>
+      </div>
+      <div class="section-body">
+        <p><strong style="color: #e0e0e0;">Risks:</strong></p>
+        <ul>
+          <li>Premature full transparency</li>
+          <li>Uncontrolled supplier marketplace</li>
+          <li>Loss of strategic focus</li>
+        </ul>
+        <p style="margin-top: 12px;"><strong style="color: #e0e0e0;">Guardrails:</strong></p>
+        <ul>
+          <li>Layered rollout</li>
+          <li>Invite-only supplier participation</li>
+          <li>Maintain internal advantage before external exposure</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- Strategic Principle -->
+    <div class="section">
+      <div class="section-header">
+        <div class="section-icon principle">🎯</div>
+        <div class="section-title">Strategic Principle</div>
+      </div>
+      <div class="principle-quote">
+        <blockquote>"We are not building a shed marketplace. We are encoding what a good shed is and allowing competition only inside that encoded truth."</blockquote>
+        <p class="attribution">The system defines quality. That system is the competitive advantage.</p>
+      </div>
+    </div>
+
+    <div class="meta-footer">
+      Document authored 12 February 2026 · Andrew Parsons
+    </div>
+
+  </main>
+</body>
+</html>
