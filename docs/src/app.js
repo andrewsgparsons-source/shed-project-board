@@ -814,6 +814,19 @@
     localStorage.setItem("gb-ideas", JSON.stringify(ideas));
   }
 
+  // Seed default ideas if empty
+  (function seedDefaultIdeas() {
+    var ideas = getLocalIdeas();
+    if (ideas.length > 0) return;
+    ideas.push({
+      id: "idea-seed-001",
+      title: "AI Transition Coaching Business",
+      description: "New business concept: help people and small businesses leverage AI the way Andrew has.\n\nThe insight: In 2 weeks, Andrew went from a traditional garden buildings business to having a parametric 3D configurator, two business dashboards, automated data pipelines, and a multi-business farm management platform — all built with AI assistance.\n\nMost people don't know this is possible yet. The ones who are starting to realise are scared, confused, or don't know where to begin.\n\nPossible directions:\n\nA) Consultancy/coaching — Work 1-to-1 with small business owners to set up AI-assisted workflows. Walk them through the same journey.\n\nB) Course/community — Package the journey into a course. 'From spreadsheets to dashboards in a weekend.' Build a community around it.\n\nC) Done-for-you service — Build dashboards, configurators, automation for other businesses. Productised service.\n\nD) All of the above — start with consultancy, document everything, turn it into a course, then scale.\n\nKey selling point: Andrew is the living proof of concept. Not a tech company saying 'use our AI tool' — a real person running real businesses who can show the results.\n\nWith the advent of AI, a lot of people will find themselves displaced. But this is a transition. AI will generate way more jobs than it takes eventually. This business helps people through that transition.",
+      createdAt: "2026-02-12T11:34:00Z"
+    });
+    saveLocalIdeas(ideas);
+  })();
+
   // ── Helpers ──
   function formatDate(iso) {
     if (!iso) return "—";
