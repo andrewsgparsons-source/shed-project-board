@@ -1263,6 +1263,15 @@
       "priority": "high",
       "category": "operations",
       "createdAt": "2026-02-12T21:42:00Z"
+    },
+    {
+      "id": "130",
+      "title": "Mobile dashboard UX: split-screen like configurator",
+      "description": "All dashboards on mobile are tough to use with the sidebar-wizard pattern. Apply the configurator split-screen approach: content top, navigation bottom, drag handle. Consistent mobile UX across all dashboards (Forge AI, Whelpley Farm, GrowCabin, Command Center, Shed Board). Major UX unification piece.",
+      "status": "backlog",
+      "priority": "high",
+      "category": "configurator",
+      "createdAt": "2026-02-12T21:52:00Z"
     }
   ]
 }
