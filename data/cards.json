@@ -1244,6 +1244,15 @@
       "priority": "high",
       "category": "configurator",
       "createdAt": "2026-02-11T21:56:53Z"
+    },
+    {
+      "id": "128",
+      "title": "Photo paste/attach support in dashboards",
+      "description": "Ability to paste or attach photographs into dashboard cards/ideas. Useful for on-site progress shots, reference photos, etc. Needs a storage approach (Base64 in localStorage, GitHub repo via API, or external hosting). Apply across all dashboards.",
+      "status": "ideas",
+      "priority": "medium",
+      "category": "configurator",
+      "createdAt": "2026-02-12T21:29:00Z"
     }
   ]
 }
