@@ -433,8 +433,7 @@
       var statusCards = catCards.filter(function (c) { return c.status === status; });
       if (statusCards.length === 0) return;
 
-      var collapsed = status === "done" ? " collapsed" : "";
-      html += '<div class="task-group' + collapsed + '">';
+      html += '<div class="task-group">';
       html += '<div class="task-group-header status-' + status + '" onclick="this.parentElement.classList.toggle(\'collapsed\')">';
       html += '<h3>' + STATUS_LABELS[status] + '</h3>';
       html += '<span class="count">' + statusCards.length + '</span>';
@@ -459,12 +458,34 @@
     var date = card.createdAt ? formatDate(card.createdAt) : "";
     var completedDate = card.completedAt ? " • Completed: " + formatDate(card.completedAt) : "";
 
-    var deliverableBtn = '';
+    // For done cards: make the whole card a clickable deliverable launcher
     if (card.status === 'done') {
       var hasDeliverable = getDeliverable(card.id);
-      var btnLabel = hasDeliverable ? '📄 View Deliverable' : '📝 Add Deliverable';
-      var btnClass = hasDeliverable ? 'deliverable-btn has-content' : 'deliverable-btn';
-      deliverableBtn = '<button class="' + btnClass + '" data-card-id="' + card.id + '">' + btnLabel + '</button>';
+      var extracted = extractDeliverables(card);
+      var hasArtifacts = extracted.length > 0 || hasDeliverable;
+
+      var artifactHint = '';
+      if (extracted.length > 0) {
+        var types = {};
+        extracted.forEach(function(e) { types[e.type] = (types[e.type] || 0) + 1; });
+        var hints = [];
+        if (types.file) hints.push(types.file + ' file' + (types.file > 1 ? 's' : ''));
+        if (types.commit) hints.push(types.commit + ' commit' + (types.commit > 1 ? 's' : ''));
+        if (types.url) hints.push(types.url + ' link' + (types.url > 1 ? 's' : ''));
+        if (types.branch) hints.push(types.branch + ' branch' + (types.branch > 1 ? 'es' : ''));
+        artifactHint = '<span class="del-artifact-hint">' + hints.join(', ') + '</span>';
+      }
+
+      return '<div class="task-card status-done done-clickable' + (hasArtifacts ? ' has-artifacts' : '') + '" data-id="' + card.id + '" data-deliverable-id="' + card.id + '">' +
+        '<div class="task-summary">' +
+        '<span class="task-title">' + escHtml(card.title) + '</span>' +
+        '<span class="task-badges">' +
+        artifactHint +
+        '<span class="badge badge-priority-' + card.priority + '">' + card.priority + '</span>' +
+        '<span class="del-open-icon">→</span>' +
+        '</span>' +
+        '</div>' +
+        '</div>';
     }
 
     return '<details class="task-card status-' + card.status + '" data-id="' + card.id + '">' +
@@ -480,13 +501,13 @@
       '<span class="task-date">Created: ' + date + completedDate + '</span>' +
       '<span class="badge badge-category">' + (CAT_EMOJI[card.category] || "") + ' ' + card.category + '</span>' +
       '</div>' +
-      deliverableBtn +
       '</div>' +
       '</details>';
   }
 
   // ── Deliverables system ──
   var DELIVERABLES_KEY = 'gb_deliverables';
+  var GITHUB_REPO = 'https://github.com/andrewsgparsons-source/Parametric-shed2-staging';
 
   function loadDeliverables() {
     try { return JSON.parse(localStorage.getItem(DELIVERABLES_KEY)) || {}; } catch(e) { return {}; }
@@ -494,28 +515,210 @@
   function saveDeliverables(d) { localStorage.setItem(DELIVERABLES_KEY, JSON.stringify(d)); }
   function getDeliverable(cardId) { return loadDeliverables()[cardId] || null; }
 
+  // ── Auto-extract deliverables from card description ──
+  function extractDeliverables(card) {
+    var desc = card.description || '';
+    var items = [];
+    var seen = {};
+
+    function addItem(type, value, label) {
+      var key = type + ':' + value;
+      if (seen[key]) return;
+      seen[key] = true;
+      items.push({ type: type, value: value, label: label || value });
+    }
+
+    // Files: **File:** /path or **Files:** section or **Script:** /path or **References:** section
+    var filePatterns = [
+      /\*\*(?:File|Script|Files?|References?):\*\*\s*([^\n*]+)/gi,
+      /\*\*(?:File|Script|Files?|References?):\*\*\s*\n((?:\s*[•\-]\s*[^\n]+\n?)+)/gi
+    ];
+    filePatterns.forEach(function(re) {
+      var m;
+      while ((m = re.exec(desc)) !== null) {
+        var block = m[1].trim();
+        // Handle bullet lists
+        var bullets = block.match(/[•\-]\s*([^\n]+)/g);
+        if (bullets) {
+          bullets.forEach(function(b) {
+            var path = b.replace(/^[•\-]\s*/, '').trim();
+            // Extract just the file path if there's extra text
+            var pathMatch = path.match(/(\/[\w./_-]+(?:\.\w+)?)/);
+            if (pathMatch) addItem('file', pathMatch[1], pathMatch[1]);
+          });
+        } else {
+          var pathMatch = block.match(/(\/[\w./_-]+(?:\.\w+)?)/);
+          if (pathMatch) addItem('file', pathMatch[1], pathMatch[1]);
+        }
+      }
+    });
+
+    // Standalone file paths: /path/to/file.ext or /file.ext (not already matched)
+    var fpRe = /(?:^|\s)(\/[\w._-]+(?:\/[\w._-]+)*(?:\.\w+))/gm;
+    var fpM;
+    while ((fpM = fpRe.exec(desc)) !== null) {
+      addItem('file', fpM[1].trim(), fpM[1].trim());
+    }
+
+    // Commits: **Commit:** hash or **Commits:** list or "Commit hash" inline
+    var commitPatterns = [
+      /\*\*Commits?:\*\*\s*([^\n]+)/gi,
+      /(?:^|\s)(?:Commit|commit)\s+([a-f0-9]{7,40})/gm
+    ];
+    commitPatterns.forEach(function(re) {
+      var m;
+      while ((m = re.exec(desc)) !== null) {
+        var block = m[1].trim();
+        // Extract all hex hashes from the line
+        var hashes = block.match(/[a-f0-9]{7,40}/g);
+        if (hashes) {
+          hashes.forEach(function(h) {
+            addItem('commit', h, h.slice(0, 7));
+          });
+        }
+      }
+    });
+
+    // Branch: **Branch:** name or "Branch:" inline
+    var branchRe = /\*?\*?Branch:?\*?\*?\s*([^\s,]+)/gi;
+    var brM;
+    while ((brM = branchRe.exec(desc)) !== null) {
+      var br = brM[1].replace(/[*`]/g, '').trim();
+      if (br.length > 1 && br !== 'safety') addItem('branch', br, br);
+    }
+
+    // URLs: https://... or http://...
+    var urlRe = /(https?:\/\/[^\s,)\]]+)/gi;
+    var urlM;
+    while ((urlM = urlRe.exec(desc)) !== null) {
+      addItem('url', urlM[1], urlM[1]);
+    }
+
+    // Parent card references: **Parent:** Name (#id)
+    var parentRe = /\*\*Parent:\*\*\s*([^(]+)\(#(\d+)\)/gi;
+    var parM;
+    while ((parM = parentRe.exec(desc)) !== null) {
+      addItem('parent', parM[2], parM[1].trim() + ' (#' + parM[2] + ')');
+    }
+
+    return items;
+  }
+
+  // ── Build deliverable link/display ──
+  function deliverableItemHtml(item) {
+    var icon, href, subtitle;
+
+    switch (item.type) {
+      case 'file':
+        icon = '📄';
+        subtitle = 'File';
+        href = null; // Local files aren't linkable from web
+        break;
+      case 'commit':
+        icon = '🔨';
+        subtitle = 'Commit';
+        href = GITHUB_REPO + '/commit/' + item.value;
+        break;
+      case 'branch':
+        icon = '🌿';
+        subtitle = 'Branch';
+        href = GITHUB_REPO + '/tree/' + item.value;
+        break;
+      case 'url':
+        icon = '🔗';
+        subtitle = 'Link';
+        href = item.value;
+        break;
+      case 'parent':
+        icon = '🔗';
+        subtitle = 'Parent project';
+        href = null;
+        break;
+      default:
+        icon = '📌';
+        subtitle = '';
+        href = null;
+    }
+
+    var linkOpen = href ? '<a href="' + escAttr(href) + '" target="_blank" rel="noopener" class="del-artifact-link">' : '<span class="del-artifact-link no-link">';
+    var linkClose = href ? '</a>' : '</span>';
+
+    return '<div class="del-artifact">' +
+      linkOpen +
+      '<span class="del-artifact-icon">' + icon + '</span>' +
+      '<div class="del-artifact-info">' +
+      '<span class="del-artifact-label">' + escHtml(item.label) + '</span>' +
+      '<span class="del-artifact-type">' + subtitle + (href ? ' ↗' : '') + '</span>' +
+      '</div>' +
+      linkClose +
+      '</div>';
+  }
+
   function seedDeliverables() {
     var d = loadDeliverables();
-    if (Object.keys(d).length > 0) return;
-    // Pre-populate a few key deliverables
+    if (d._seeded_v2) return;
+    // Pre-populate key deliverables
     d['1'] = {
       summary: 'Dimension constraints are fully implemented and validated.',
       details: 'Maximum dimensions set to 8m × 4m in either orientation. The UI enforces min/max/step values for width and depth via params.js. Validation prevents impossible configurations.',
-      looseEnds: 'None — this is fully complete.',
+      looseEnds: '',
       updated: '2026-01-26'
     };
-    d['2'] = {
-      summary: 'Roof system supports Apex, Pent, and Hipped styles with automatic geometry recalculation.',
-      details: 'Roof pitch, ridge height, and eave positions all derive from wall plate height and span. Switching between styles triggers a clean full rebuild. Hipped roof includes hip rafters, jack rafters, OSB, membrane, battens, and tile layers.',
-      looseEnds: 'Flat roof style not yet implemented. Roof tile material options could be expanded.',
-      updated: '2026-02-01'
+    d['6'] = {
+      summary: 'Comprehensive README with feature overview, tech details, and contribution guide.',
+      details: 'README.md covers: what the configurator does, parametric features, supported building types, how to run locally, architecture overview, and license info.',
+      looseEnds: 'Could use a hero screenshot/GIF (see card #14).',
+      updated: '2026-01-26'
     };
-    d['5'] = {
-      summary: 'Building type selector implemented with Gazebo as the first alternative type.',
-      details: 'Dropdown replaces "Design Your Shed" title. 8 building types listed (Shed, Gazebo, Summer House, Garden Room, Workshop, Log Cabin, Garage, Carport). Gazebo renders with 4 corner posts, ring beams, hipped roof, fascia boards, and 8 knee braces at 45°. Auto-bumps to hipped minimum dimensions and hides irrelevant UI sections.',
-      looseEnds: 'Remaining 6 building types need wiring up with their own defaults and rendering rules. Gazebo knee brace rotation may need final tweaking.',
-      updated: '2026-02-11'
+    d['17'] = {
+      summary: 'Mobile-first responsive control panel with bottom drawer UX.',
+      details: 'Bottom drawer panel at 55vh height. Larger fonts (14-16px). Touch-friendly controls with adequate tap targets. Auto-collapse on initial load. Tap-to-close. Modern IKEA-inspired clean theme. Works well on phones and tablets.',
+      looseEnds: 'Further mobile UX improvements planned (see research/mobile-ux-plan.md).',
+      updated: '2026-01-27'
     };
+    d['23'] = {
+      summary: '50mm PIR insulation between studs with 12mm plywood lining. Fully parametric.',
+      details: 'Insulation panels adapt to wall dimensions automatically. Plywood uses CSG boolean subtraction to cut cleanly around door and window openings (card #26). Skips walls that have no insulation variant selected. Added to BOM with accurate quantities.',
+      looseEnds: 'Hipped roof insulation not working yet (card #113).',
+      updated: '2026-01-27'
+    };
+    d['27'] = {
+      summary: 'Apex purlins now render horizontally and sit on top of rafters correctly.',
+      details: 'Root cause was transform hierarchy — parenting to roofRoot caused unexpected tilt. Fixed by computing purlin positions in world space, accounting for roof slope angle. Purlins are horizontal beams that sit ON the rafters rather than following the slope.',
+      looseEnds: '',
+      updated: '2026-02-09'
+    };
+    d['39'] = {
+      summary: 'Shed configurations shareable via URL with Base64-encoded state.',
+      details: 'Format: ?profile=viewer&c=<base64>. Encodes full building state including dimensions, roof type, openings, materials, attachments. Profile=viewer triggers URL state parsing on load. Enables sharing designs with customers via simple link.',
+      looseEnds: 'Some state fields were initially missing (fixed in card #115).',
+      updated: '2026-01-27'
+    };
+    d['73'] = {
+      summary: 'Consolidated marketing strategy document bringing together all competitive intelligence and positioning insights.',
+      details: 'Covers: brand story, key differentiators (parametric 3D, Douglas fir, cutting lists), target customer profiles, competitive positioning vs Crane/Quick Garden/budget brands, messaging pillars, content strategy, SEO priorities, sales funnel design, social proof needs, and prioritised action items.',
+      looseEnds: 'Needs regular review as market intelligence grows.',
+      updated: '2026-01-29'
+    };
+    d['84'] = {
+      summary: '65-frame animation captured with proper rendering — first successful video production.',
+      details: 'Sequence: zoom in (40 frames), door widening 1000→1350mm in 2-frame steps, style change to double M&T, door close + zoom out. Key fix: 4-second delay after preset imports plus forced render cycles eliminated wireframe flicker. Established the animation capture pipeline workflow.',
+      looseEnds: 'Pipeline still evolving — see parent card #77.',
+      updated: '2026-01-31'
+    };
+    d['109'] = {
+      summary: 'Synthetic slate tile roof covering with full layer stack — membrane, battens, tiles.',
+      details: 'Complete layer stack: breathable membrane (light blue, 0.5mm on OSB), tile battens (25×38mm at 143mm spacing), ridge battens, eaves battens, and pewter grey slate surface (5mm). All layers are parametric and adapt to building dimensions.',
+      looseEnds: 'Ridge tiles (V-profile cap) still needed. Texture/normal maps for realistic appearance. Visibility toggles for construction breakdown view.',
+      updated: '2026-02-04'
+    };
+    d['118'] = {
+      summary: 'Pent roof insulation and ply lining follow the roof slope per-bay using vertex modification.',
+      details: 'Instead of CSG (expensive), uses direct vertex modification on box meshes to match slope. Calculates per-wall heights for left and right walls independently. Multiple iterations to get the geometry right across all pent configurations.',
+      looseEnds: 'Ghost wireframe issue discovered and fixed separately (card #119).',
+      updated: '2026-02-09'
+    };
+    d._seeded_v2 = true;
     saveDeliverables(d);
   }
   seedDeliverables();
@@ -524,42 +727,105 @@
     var card = cards.find(function(c) { return c.id === cardId; });
     if (!card) return;
     var del = getDeliverable(cardId) || {};
+    var extracted = extractDeliverables(card);
     var mainContent = document.getElementById('mainContent');
+
+    // Close the flyout when viewing a deliverable
+    document.getElementById("flyout").classList.remove("open");
 
     var html = '<div class="deliverable-page">';
     html += '<button class="gb-back-btn" id="delBackBtn">← Back</button>';
+
+    // Hero card
+    html += '<div class="del-hero">';
+    html += '<div class="del-hero-check">✅</div>';
+    html += '<h2 class="del-title">' + escHtml(card.title) + '</h2>';
     html += '<div class="del-header">';
     html += '<span class="badge badge-category">' + (CAT_EMOJI[card.category] || "") + ' ' + card.category + '</span>';
     html += '<span class="badge badge-priority-' + card.priority + '">' + card.priority + '</span>';
-    if (card.completedAt) html += '<span class="del-date">Completed: ' + formatDate(card.completedAt) + '</span>';
+    if (card.completedAt) html += '<span class="del-date">✅ Completed ' + formatDate(card.completedAt) + '</span>';
+    if (card.createdAt) html += '<span class="del-date">📅 Created ' + formatDate(card.createdAt) + '</span>';
     html += '</div>';
-    html += '<h2 class="del-title">✅ ' + escHtml(card.title) + '</h2>';
+    html += '</div>';
 
-    // Editable sections
+    // Card description (from JSON)
+    if (card.description) {
+      html += '<div class="del-section">';
+      html += '<h3>📋 Card Description</h3>';
+      html += '<div class="del-description-block">' + formatDescription(card.description) + '</div>';
+      html += '</div>';
+    }
+
+    // Auto-extracted artifacts
+    if (extracted.length > 0) {
+      html += '<div class="del-section">';
+      html += '<h3>📦 Artifacts & References</h3>';
+      html += '<div class="del-artifacts-grid">';
+      extracted.forEach(function(item) {
+        html += deliverableItemHtml(item);
+      });
+      html += '</div>';
+      html += '</div>';
+    }
+
+    // Linked child cards (if this is a parent)
+    var children = cards.filter(function(c) { return c.parentId === cardId; });
+    if (children.length > 0) {
+      html += '<div class="del-section">';
+      html += '<h3>🔗 Linked Tasks</h3>';
+      html += '<div class="del-children">';
+      children.forEach(function(child) {
+        var statusIcon = child.status === 'done' ? '✅' : child.status === 'in-progress' ? '🔨' : '📋';
+        html += '<div class="del-child-card" data-child-id="' + child.id + '">';
+        html += '<span class="del-child-status">' + statusIcon + '</span>';
+        html += '<span class="del-child-title">' + escHtml(child.title) + '</span>';
+        html += '<span class="badge badge-status-' + child.status + '">' + STATUS_LABELS[child.status] + '</span>';
+        html += '</div>';
+      });
+      html += '</div>';
+      html += '</div>';
+    }
+
+    // Editable deliverable notes
     html += '<div class="del-section">';
-    html += '<h3>Executive Summary</h3>';
-    html += '<textarea id="delSummary" class="del-textarea" placeholder="What was delivered? Key outcomes...">' + escHtml(del.summary || '') + '</textarea>';
+    html += '<h3>📝 Deliverable Notes</h3>';
+    html += '<p class="del-section-hint">Add your own summary, evidence, or notes about what was delivered.</p>';
     html += '</div>';
 
-    html += '<div class="del-section">';
-    html += '<h3>Deliverable Details</h3>';
-    html += '<textarea id="delDetails" class="del-textarea del-textarea-lg" placeholder="Technical details, what was built, how it works, screenshots/evidence...">' + escHtml(del.details || '') + '</textarea>';
+    html += '<div class="del-edit-grid">';
+
+    html += '<div class="del-edit-card">';
+    html += '<label class="del-edit-label">Executive Summary</label>';
+    html += '<textarea id="delSummary" class="del-textarea" placeholder="What was delivered? Key outcomes in 1-2 sentences...">' + escHtml(del.summary || '') + '</textarea>';
     html += '</div>';
 
-    html += '<div class="del-section">';
-    html += '<h3>Loose Ends & Follow-ups</h3>';
-    html += '<textarea id="delLooseEnds" class="del-textarea" placeholder="Any remaining issues, future improvements, things to watch...">' + escHtml(del.looseEnds || '') + '</textarea>';
+    html += '<div class="del-edit-card">';
+    html += '<label class="del-edit-label">Details & Evidence</label>';
+    html += '<textarea id="delDetails" class="del-textarea del-textarea-lg" placeholder="Technical details, what was built, how it works, lessons learned...">' + escHtml(del.details || '') + '</textarea>';
     html += '</div>';
 
-    html += '<button id="delSaveBtn" class="gb-save-btn">💾 Save Deliverable</button>';
+    html += '<div class="del-edit-card">';
+    html += '<label class="del-edit-label">Loose Ends & Follow-ups</label>';
+    html += '<textarea id="delLooseEnds" class="del-textarea" placeholder="Remaining issues, future improvements, things to watch...">' + escHtml(del.looseEnds || '') + '</textarea>';
     html += '</div>';
+
+    html += '</div>'; // end edit-grid
+
+    html += '<div class="del-actions">';
+    html += '<button id="delSaveBtn" class="gb-save-btn">💾 Save Notes</button>';
+    if (del.updated) html += '<span class="del-last-saved">Last saved: ' + del.updated + '</span>';
+    html += '</div>';
+
+    html += '</div>'; // end deliverable-page
 
     mainContent.innerHTML = html;
 
+    // Back button
     document.getElementById('delBackBtn').addEventListener('click', function() {
-      mainContent.innerHTML = '<div class="gb-welcome"><h2>Garden Buildings</h2><p>Select a section from the sidebar.</p></div>';
+      mainContent.innerHTML = '<div class="gb-welcome"><h2>🏡 Garden Buildings Dashboard</h2><p>Select a section from the sidebar to explore the project.</p></div>';
     });
 
+    // Save button
     document.getElementById('delSaveBtn').addEventListener('click', function() {
       var deliverables = loadDeliverables();
       deliverables[cardId] = {
@@ -569,15 +835,48 @@
         updated: new Date().toISOString().slice(0, 10)
       };
       saveDeliverables(deliverables);
-      // Visual feedback
       var btn = document.getElementById('delSaveBtn');
       btn.textContent = '✅ Saved!';
       btn.style.background = '#2D5016';
-      setTimeout(function() { btn.textContent = '💾 Save Deliverable'; btn.style.background = ''; }, 1500);
+      setTimeout(function() { btn.textContent = '💾 Save Notes'; btn.style.background = ''; }, 1500);
+    });
+
+    // Child card click handlers
+    mainContent.querySelectorAll('.del-child-card').forEach(function(el) {
+      el.addEventListener('click', function() {
+        var childId = el.getAttribute('data-child-id');
+        var child = cards.find(function(c) { return c.id === childId; });
+        if (child && child.status === 'done') {
+          openDeliverablePage(childId);
+        }
+      });
     });
   }
 
+  // Format description text with markdown-light rendering
+  function formatDescription(text) {
+    // Escape HTML first
+    var safe = escHtml(text);
+    // Bold: **text**
+    safe = safe.replace(/\*\*([^*]+)\*\*/g, '<strong>$1</strong>');
+    // Bullets: • or - at start of line
+    safe = safe.replace(/^([•\-])\s+/gm, '<span class="del-bullet">$1</span> ');
+    // Checkmarks
+    safe = safe.replace(/✅/g, '<span class="del-check">✅</span>');
+    safe = safe.replace(/⬜/g, '<span class="del-todo">⬜</span>');
+    return safe;
+  }
+
   function attachCardEvents(container) {
+    // Done cards are fully clickable
+    container.querySelectorAll('[data-deliverable-id]').forEach(function(el) {
+      el.addEventListener('click', function(e) {
+        e.preventDefault();
+        e.stopPropagation();
+        openDeliverablePage(el.getAttribute('data-deliverable-id'));
+      });
+    });
+    // Legacy button support
     container.querySelectorAll('.deliverable-btn').forEach(function(btn) {
       btn.addEventListener('click', function(e) {
         e.preventDefault();
@@ -710,15 +1009,24 @@
     if (!tbody) return;
 
     tbody.innerHTML = filtered.map(function (c) {
-      return '<tr>' +
+      var rowClass = c.status === 'done' ? ' class="done-row"' : '';
+      var dataAttr = c.status === 'done' ? ' data-deliverable-id="' + c.id + '"' : '';
+      return '<tr' + rowClass + dataAttr + '>' +
         '<td>' + c.id + '</td>' +
-        '<td title="' + escAttr(c.description || '') + '"><strong>' + escHtml(c.title) + '</strong></td>' +
+        '<td title="' + escAttr(c.description || '') + '"><strong>' + escHtml(c.title) + '</strong>' + (c.status === 'done' ? ' <span class="table-del-hint">→ View</span>' : '') + '</td>' +
         '<td><span class="badge badge-status-' + c.status + '">' + STATUS_LABELS[c.status] + '</span></td>' +
         '<td><span class="badge badge-priority-' + c.priority + '">' + c.priority + '</span></td>' +
         '<td>' + (CAT_EMOJI[c.category] || "") + ' ' + c.category + '</td>' +
         '<td>' + formatDate(c.createdAt) + '</td>' +
         '</tr>';
     }).join("");
+
+    // Make Done rows clickable
+    tbody.querySelectorAll('.done-row').forEach(function(row) {
+      row.addEventListener('click', function() {
+        openDeliverablePage(row.getAttribute('data-deliverable-id'));
+      });
+    });
   }
 
   // ── Render: Ideas ──

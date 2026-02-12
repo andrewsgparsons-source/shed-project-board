@@ -745,6 +745,27 @@ html, body {
   background: var(--gb-primary-light);
 }
 
+.gb-table tbody tr.done-row {
+  cursor: pointer;
+}
+
+.gb-table tbody tr.done-row:hover {
+  background: rgba(39, 174, 96, 0.08);
+}
+
+.table-del-hint {
+  font-size: 10px;
+  color: var(--gb-text-muted);
+  opacity: 0;
+  transition: opacity 0.2s;
+  margin-left: 6px;
+}
+
+.gb-table tbody tr.done-row:hover .table-del-hint {
+  opacity: 1;
+  color: var(--status-done);
+}
+
 .gb-table tbody tr:nth-child(even) {
   background: rgba(45, 80, 22, 0.02);
 }
@@ -1019,9 +1040,15 @@ html, body {
 
 /* ===== DELIVERABLE PAGE ===== */
 .deliverable-page {
-  max-width: 800px;
+  max-width: 860px;
   margin: 0 auto;
   padding: 24px;
+  animation: delFadeIn 0.3s ease;
+}
+
+@keyframes delFadeIn {
+  from { opacity: 0; transform: translateY(12px); }
+  to   { opacity: 1; transform: translateY(0); }
 }
 
 .gb-back-btn {
@@ -1042,11 +1069,39 @@ html, body {
   color: #fff;
 }
 
+/* Hero section */
+.del-hero {
+  background: linear-gradient(135deg, var(--gb-primary-light) 0%, #fff 100%);
+  border: 1px solid var(--gb-border);
+  border-radius: var(--gb-radius);
+  padding: 28px 32px;
+  margin-bottom: 28px;
+  position: relative;
+  overflow: hidden;
+}
+
+.del-hero::after {
+  content: '';
+  position: absolute;
+  top: -20px;
+  right: -20px;
+  width: 120px;
+  height: 120px;
+  background: var(--gb-primary);
+  opacity: 0.04;
+  border-radius: 50%;
+}
+
+.del-hero-check {
+  font-size: 32px;
+  margin-bottom: 8px;
+}
+
 .del-header {
   display: flex;
   align-items: center;
   gap: 10px;
-  margin-bottom: 12px;
+  flex-wrap: wrap;
 }
 
 .del-date {
@@ -1056,15 +1111,15 @@ html, body {
 }
 
 .del-title {
-  font-size: 24px;
+  font-size: 22px;
   font-weight: 800;
   color: var(--gb-primary);
-  margin-bottom: 24px;
+  margin-bottom: 14px;
   line-height: 1.3;
 }
 
 .del-section {
-  margin-bottom: 20px;
+  margin-bottom: 24px;
 }
 
 .del-section h3 {
@@ -1073,9 +1128,178 @@ html, body {
   text-transform: uppercase;
   letter-spacing: 0.08em;
   color: var(--gb-primary);
-  margin-bottom: 8px;
+  margin-bottom: 12px;
   padding-bottom: 4px;
   border-bottom: 2px solid var(--gb-accent);
+}
+
+.del-section-hint {
+  font-size: 12px;
+  color: var(--gb-text-muted);
+  margin-top: -4px;
+  margin-bottom: 12px;
+}
+
+/* Description block (rendered from card) */
+.del-description-block {
+  font-size: 13px;
+  color: var(--gb-text-secondary);
+  line-height: 1.8;
+  padding: 16px 20px;
+  background: var(--gb-bg);
+  border-radius: var(--gb-radius-sm);
+  border-left: 4px solid var(--gb-accent);
+  white-space: pre-wrap;
+  word-break: break-word;
+}
+
+.del-description-block strong {
+  color: var(--gb-text);
+}
+
+.del-bullet {
+  color: var(--gb-accent-warm);
+  font-weight: 700;
+}
+
+.del-check {
+  font-size: 14px;
+}
+
+.del-todo {
+  font-size: 14px;
+  opacity: 0.5;
+}
+
+/* Artifacts grid */
+.del-artifacts-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+  gap: 10px;
+}
+
+.del-artifact {
+  background: var(--gb-bg-panel);
+  border: 1px solid var(--gb-border);
+  border-radius: var(--gb-radius-sm);
+  transition: all 0.2s;
+  overflow: hidden;
+}
+
+.del-artifact:hover {
+  border-color: var(--gb-primary);
+  box-shadow: 0 2px 12px rgba(45, 80, 22, 0.1);
+  transform: translateY(-1px);
+}
+
+.del-artifact-link {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 14px 16px;
+  text-decoration: none;
+  color: inherit;
+}
+
+.del-artifact-link.no-link {
+  cursor: default;
+}
+
+.del-artifact-icon {
+  font-size: 24px;
+  flex-shrink: 0;
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--gb-primary-light);
+  border-radius: 8px;
+}
+
+.del-artifact-info {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+}
+
+.del-artifact-label {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--gb-text);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.del-artifact-type {
+  font-size: 11px;
+  color: var(--gb-text-muted);
+  font-weight: 500;
+}
+
+/* Linked children */
+.del-children {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.del-child-card {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 16px;
+  background: var(--gb-bg-panel);
+  border: 1px solid var(--gb-border);
+  border-radius: var(--gb-radius-sm);
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.del-child-card:hover {
+  background: var(--gb-primary-light);
+  border-color: var(--gb-primary);
+}
+
+.del-child-status {
+  font-size: 16px;
+  flex-shrink: 0;
+}
+
+.del-child-title {
+  flex: 1;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--gb-text);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+/* Edit grid */
+.del-edit-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  margin-bottom: 20px;
+}
+
+.del-edit-card {
+  background: var(--gb-bg-panel);
+  border: 1px solid var(--gb-border);
+  border-radius: var(--gb-radius);
+  padding: 16px 20px;
+}
+
+.del-edit-label {
+  display: block;
+  font-size: 12px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--gb-primary);
+  margin-bottom: 8px;
 }
 
 .del-textarea {
@@ -1100,7 +1324,20 @@ html, body {
 }
 
 .del-textarea-lg {
-  min-height: 160px;
+  min-height: 140px;
+}
+
+/* Actions bar */
+.del-actions {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.del-last-saved {
+  font-size: 12px;
+  color: var(--gb-text-muted);
+  font-style: italic;
 }
 
 .gb-save-btn {
@@ -1118,4 +1355,79 @@ html, body {
 .gb-save-btn:hover {
   background: var(--gb-primary-hover);
   transform: translateY(-1px);
+}
+
+/* Done cards - clickable */
+.task-card.done-clickable {
+  cursor: pointer;
+  border-left-color: var(--status-done);
+  transition: all 0.2s;
+}
+
+.task-card.done-clickable:hover {
+  background: var(--gb-primary-light);
+  border-color: var(--gb-primary);
+  box-shadow: 0 2px 12px rgba(45, 80, 22, 0.1);
+  transform: translateX(2px);
+}
+
+.task-card.done-clickable .task-summary {
+  display: flex;
+  align-items: center;
+  padding: 10px 14px;
+  gap: 8px;
+}
+
+.task-card.done-clickable.has-artifacts .task-title::after {
+  content: '📦';
+  margin-left: 8px;
+  font-size: 12px;
+}
+
+.del-artifact-hint {
+  font-size: 10px;
+  color: var(--gb-text-muted);
+  font-weight: 500;
+  white-space: nowrap;
+}
+
+.del-open-icon {
+  font-size: 14px;
+  color: var(--gb-text-muted);
+  transition: all 0.2s;
+  flex-shrink: 0;
+}
+
+.task-card.done-clickable:hover .del-open-icon {
+  color: var(--gb-primary);
+  transform: translateX(3px);
+}
+
+/* Mobile deliverable page */
+@media (max-width: 768px) {
+  .deliverable-page {
+    padding: 16px;
+  }
+
+  .del-hero {
+    padding: 20px;
+  }
+
+  .del-title {
+    font-size: 18px;
+  }
+
+  .del-artifacts-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .del-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 6px;
+  }
+
+  .del-edit-card {
+    padding: 12px 14px;
+  }
 }
