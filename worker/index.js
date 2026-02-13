@@ -72,7 +72,7 @@ async function handleUpload(request, env) {
     const branch = env.GITHUB_BRANCH || 'main';
     const timestamp = Date.now();
     const filename = `card-${cardId}-${timestamp}.jpg`;
-    const filepath = `data/images/${filename}`;
+    const filepath = `docs/data/images/${filename}`;
 
     // 1. Commit the image file to GitHub
     const commitResult = await githubCreateFile(env.GITHUB_TOKEN, repo, branch, filepath, base64Data, `Add photo for card #${cardId}`);
@@ -87,7 +87,7 @@ async function handleUpload(request, env) {
       filename: filename,
       caption: caption || '',
       addedAt: new Date().toISOString(),
-      url: `https://${repo.split('/')[0]}.github.io/${repo.split('/')[1]}/data/images/${filename}`
+      url: `https://${repo.split('/')[0]}.github.io/${repo.split('/')[1]}/data/images/${filename}`  // GitHub Pages serves from docs/
     };
 
     const manifestResult = await updatePhotosManifest(env.GITHUB_TOKEN, repo, branch, photoEntry);
@@ -135,7 +135,7 @@ async function handleDelete(request, env) {
 
     const repo = resolveRepo(dashboard, env);
     const branch = env.GITHUB_BRANCH || 'main';
-    const filepath = `data/images/${filename}`;
+    const filepath = `docs/data/images/${filename}`;
 
     // Delete the image file from GitHub
     const deleteResult = await githubDeleteFile(env.GITHUB_TOKEN, repo, branch, filepath, `Remove photo ${filename}`);
@@ -216,7 +216,7 @@ async function githubDeleteFile(token, repo, branch, path, message) {
 }
 
 async function getPhotosManifest(token, repo, branch) {
-  const url = `https://api.github.com/repos/${repo}/contents/data/photos.json?ref=${branch}`;
+  const url = `https://api.github.com/repos/${repo}/contents/docs/data/photos.json?ref=${branch}`;
   const res = await fetch(url, {
     headers: {
       'Authorization': `token ${token}`,
@@ -242,7 +242,7 @@ async function updatePhotosManifest(token, repo, branch, newEntry) {
   const newContent = JSON.stringify({ photos: current.photos }, null, 2);
   const base64 = btoa(unescape(encodeURIComponent(newContent)));
 
-  const url = `https://api.github.com/repos/${repo}/contents/data/photos.json`;
+  const url = `https://api.github.com/repos/${repo}/contents/docs/data/photos.json`;
   const body = {
     message: `Add photo entry for card #${newEntry.cardId}`,
     content: base64,
@@ -270,7 +270,7 @@ async function removeFromManifest(token, repo, branch, filename) {
   const newContent = JSON.stringify({ photos: current.photos }, null, 2);
   const base64 = btoa(unescape(encodeURIComponent(newContent)));
 
-  const url = `https://api.github.com/repos/${repo}/contents/data/photos.json`;
+  const url = `https://api.github.com/repos/${repo}/contents/docs/data/photos.json`;
   const body = {
     message: `Remove photo ${filename}`,
     content: base64,
