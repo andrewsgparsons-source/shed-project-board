@@ -1,3 +1,11 @@
 {
-  "photos": []
+  "photos": [
+    {
+      "cardId": "17",
+      "filename": "card-17-1770994489268.jpg",
+      "caption": "mobile ux",
+      "addedAt": "2026-02-13T14:54:49.982Z",
+      "url": "https://andrewsgparsons-source.github.io/shed-project-board/data/images/card-17-1770994489268.jpg"
+    }
+  ]
 }
