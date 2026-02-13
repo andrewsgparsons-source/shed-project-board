@@ -396,14 +396,261 @@
     } catch (e) { return ''; }
   }
 
+  // ══════════════════════════════════════════
+  // ── FILES (any file type) ──
+  // ══════════════════════════════════════════
+
+  var filesCache = null;
+  var filesCacheTime = 0;
+  var FILES_CACHE_KEY = 'gb_files_cache';
+
+  var FILE_ICONS = {
+    pdf: '📄', doc: '📝', docx: '📝', xls: '📊', xlsx: '📊', csv: '📊',
+    txt: '📃', md: '📃', json: '📃', zip: '📦', rar: '📦', '7z': '📦',
+    mp4: '🎬', mov: '🎬', avi: '🎬', mp3: '🎵', wav: '🎵',
+    dwg: '📐', dxf: '📐', skp: '📐', step: '📐', stl: '📐'
+  };
+
+  function getFileIcon(filename) {
+    var ext = (filename || '').split('.').pop().toLowerCase();
+    return FILE_ICONS[ext] || '📎';
+  }
+
+  function formatFileSize(bytes) {
+    if (!bytes) return '';
+    if (bytes < 1024) return bytes + ' B';
+    if (bytes < 1024 * 1024) return Math.round(bytes / 1024) + ' KB';
+    return (bytes / (1024 * 1024)).toFixed(1) + ' MB';
+  }
+
+  function fetchFiles(callback) {
+    var now = Date.now();
+    if (filesCache && (now - filesCacheTime) < PHOTOS_CACHE_TTL) {
+      callback(filesCache);
+      return;
+    }
+
+    var workerUrl = getWorkerUrl();
+    if (!workerUrl) { fetchFilesDirect(callback); return; }
+
+    fetch(workerUrl + '/files')
+      .then(function (res) { return res.json(); })
+      .then(function (data) {
+        if (data.ok && data.files) {
+          filesCache = data.files;
+          filesCacheTime = Date.now();
+          try { localStorage.setItem(FILES_CACHE_KEY, JSON.stringify(data.files)); } catch (e) { }
+          callback(data.files);
+        } else {
+          fetchFilesDirect(callback);
+        }
+      })
+      .catch(function () { fetchFilesDirect(callback); });
+  }
+
+  function fetchFilesDirect(callback) {
+    var repoBase = window.location.origin + window.location.pathname.replace(/\/[^/]*$/, '');
+    fetch(repoBase + '/data/files.json')
+      .then(function (res) {
+        if (!res.ok) throw new Error('No files.json');
+        return res.json();
+      })
+      .then(function (data) {
+        filesCache = data.files || [];
+        filesCacheTime = Date.now();
+        callback(filesCache);
+      })
+      .catch(function () {
+        try { callback(JSON.parse(localStorage.getItem(FILES_CACHE_KEY) || '[]')); }
+        catch (e) { callback([]); }
+      });
+  }
+
+  function getFilesForCard(cardId, callback) {
+    fetchFiles(function (allFiles) {
+      callback(allFiles.filter(function (f) { return String(f.cardId) === String(cardId); }));
+    });
+  }
+
+  function uploadFile(cardId, base64, origName, caption, statusCallback) {
+    var workerUrl = getWorkerUrl();
+    var password = getUploadPassword();
+
+    statusCallback('uploading', 'Uploading file...');
+
+    fetch(workerUrl + '/upload-file', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        password: password,
+        cardId: String(cardId),
+        file: base64,
+        filename: origName,
+        caption: caption || '',
+        dashboard: 'shed'
+      })
+    })
+      .then(function (res) { return res.json(); })
+      .then(function (data) {
+        if (data.ok) {
+          filesCache = null;
+          filesCacheTime = 0;
+          statusCallback('success', 'File uploaded!', data.file);
+        } else {
+          statusCallback('error', data.error || 'Upload failed');
+        }
+      })
+      .catch(function (err) {
+        statusCallback('error', 'Network error: ' + err.message);
+      });
+  }
+
+  function deleteFile(filename, statusCallback) {
+    var workerUrl = getWorkerUrl();
+    var password = getUploadPassword();
+
+    statusCallback('deleting', 'Removing file...');
+
+    fetch(workerUrl + '/delete-file', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ password: password, filename: filename, dashboard: 'shed' })
+    })
+      .then(function (res) { return res.json(); })
+      .then(function (data) {
+        if (data.ok) {
+          filesCache = null;
+          filesCacheTime = 0;
+          statusCallback('success', 'File removed');
+        } else {
+          statusCallback('error', data.error || 'Delete failed');
+        }
+      })
+      .catch(function (err) {
+        statusCallback('error', 'Network error: ' + err.message);
+      });
+  }
+
+  // ── Render file list for a card ──
+  function renderFileList(container, cardId) {
+    var filesDiv = document.createElement('div');
+    filesDiv.className = 'file-list-section';
+    filesDiv.innerHTML = '<div class="photo-gallery-loading">Loading files...</div>';
+    container.appendChild(filesDiv);
+
+    getFilesForCard(cardId, function (files) {
+      var html = '';
+
+      html += '<div class="photo-gallery-header">';
+      html += '<h3>📎 Files' + (files.length > 0 ? ' (' + files.length + ')' : '') + '</h3>';
+      html += '<button class="photo-add-btn file-add-btn" data-card-id="' + cardId + '">📎 Add File</button>';
+      html += '</div>';
+
+      if (files.length > 0) {
+        html += '<div class="file-list">';
+        files.forEach(function (f) {
+          var icon = getFileIcon(f.originalName || f.filename);
+          html += '<div class="file-item">';
+          html += '<a href="' + escAttr(f.url) + '" target="_blank" rel="noopener" class="file-link">';
+          html += '<span class="file-icon">' + icon + '</span>';
+          html += '<div class="file-info">';
+          html += '<span class="file-name">' + escHtml(f.originalName || f.filename) + '</span>';
+          if (f.caption) html += '<span class="file-caption">' + escHtml(f.caption) + '</span>';
+          html += '<span class="file-date">' + formatPhotoDate(f.addedAt) + '</span>';
+          html += '</div>';
+          html += '</a>';
+          html += '<button class="file-delete-btn" title="Delete file" data-filename="' + escAttr(f.filename) + '">✕</button>';
+          html += '</div>';
+        });
+        html += '</div>';
+      } else {
+        html += '<div class="photo-empty">No files attached yet.</div>';
+      }
+
+      html += '<div class="photo-upload-status" id="fileStatus-' + cardId + '"></div>';
+      html += '<input type="file" class="file-input" id="fileInput-' + cardId + '" style="display:none">';
+
+      filesDiv.innerHTML = html;
+
+      // Wire add button
+      var addBtn = filesDiv.querySelector('.file-add-btn');
+      if (addBtn) {
+        addBtn.addEventListener('click', function () {
+          ensureConfig(function () {
+            document.getElementById('fileInput-' + cardId).click();
+          });
+        });
+      }
+
+      // Wire file input
+      var fileInput = document.getElementById('fileInput-' + cardId);
+      if (fileInput) {
+        fileInput.addEventListener('change', function (e) {
+          var file = e.target.files && e.target.files[0];
+          if (!file) return;
+
+          if (file.size > 5 * 1024 * 1024) {
+            alert('File too large. Maximum 5MB.');
+            return;
+          }
+
+          var caption = prompt('Description (optional):', '') || '';
+          var statusEl = document.getElementById('fileStatus-' + cardId);
+
+          var reader = new FileReader();
+          reader.onload = function (ev) {
+            var base64 = ev.target.result.split(',')[1];
+            uploadFile(cardId, base64, file.name, caption, function (status, message) {
+              if (statusEl) {
+                statusEl.textContent = message;
+                statusEl.className = 'photo-upload-status photo-status-' + status;
+              }
+              if (status === 'success') {
+                setTimeout(function () {
+                  filesDiv.innerHTML = '';
+                  renderFileList(filesDiv.parentNode, cardId);
+                  filesDiv.remove();
+                }, 1500);
+              }
+            });
+          };
+          reader.readAsDataURL(file);
+          fileInput.value = '';
+        });
+      }
+
+      // Wire delete buttons
+      filesDiv.querySelectorAll('.file-delete-btn').forEach(function (btn) {
+        btn.addEventListener('click', function (e) {
+          e.preventDefault();
+          e.stopPropagation();
+          var fn = btn.getAttribute('data-filename');
+          if (!confirm('Delete this file?')) return;
+          ensureConfig(function () {
+            deleteFile(fn, function (status, message) {
+              if (status === 'success') {
+                filesDiv.innerHTML = '';
+                renderFileList(filesDiv.parentNode, cardId);
+                filesDiv.remove();
+              } else {
+                alert(message);
+              }
+            });
+          });
+        });
+      });
+    });
+  }
+
   // ── Expose public API ──
   window.__photoModule = {
     renderPhotoGallery: renderPhotoGallery,
+    renderFileList: renderFileList,
     openLightbox: openLightbox,
     isConfigured: isConfigured,
     showConfigDialog: showConfigDialog,
     ensureConfig: ensureConfig,
-    invalidateCache: function () { photosCache = null; photosCacheTime = 0; }
+    invalidateCache: function () { photosCache = null; photosCacheTime = 0; filesCache = null; filesCacheTime = 0; }
   };
 
 })();

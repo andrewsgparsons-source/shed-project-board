@@ -30,12 +30,24 @@ export default {
       return handleUpload(request, env);
     }
 
+    if (url.pathname === '/upload-file' && request.method === 'POST') {
+      return handleFileUpload(request, env);
+    }
+
     if (url.pathname === '/photos' && request.method === 'GET') {
       return handleGetPhotos(env);
     }
 
+    if (url.pathname === '/files' && request.method === 'GET') {
+      return handleGetFiles(env);
+    }
+
     if (url.pathname === '/delete' && request.method === 'POST') {
       return handleDelete(request, env);
+    }
+
+    if (url.pathname === '/delete-file' && request.method === 'POST') {
+      return handleDeleteFile(request, env);
     }
 
     return jsonResponse({ error: 'Not found' }, 404);
@@ -273,6 +285,182 @@ async function removeFromManifest(token, repo, branch, filename) {
   const url = `https://api.github.com/repos/${repo}/contents/docs/data/photos.json`;
   const body = {
     message: `Remove photo ${filename}`,
+    content: base64,
+    branch: branch
+  };
+  if (current.sha) body.sha = current.sha;
+
+  const res = await fetch(url, {
+    method: 'PUT',
+    headers: {
+      'Authorization': `token ${token}`,
+      'Content-Type': 'application/json',
+      'User-Agent': 'gb-dashboard-worker'
+    },
+    body: JSON.stringify(body)
+  });
+
+  return { ok: res.ok };
+}
+
+// ── File upload handler ──
+async function handleFileUpload(request, env) {
+  try {
+    const body = await request.json();
+    const { password, cardId, file, filename: origName, caption, dashboard } = body;
+
+    if (!password || password !== env.UPLOAD_PASSWORD) {
+      return jsonResponse({ error: 'Invalid password' }, 401);
+    }
+    if (!cardId) {
+      return jsonResponse({ error: 'cardId is required' }, 400);
+    }
+    if (!file) {
+      return jsonResponse({ error: 'file (base64) is required' }, 400);
+    }
+
+    const base64Data = file.replace(/^data:[^;]+;base64,/, '');
+
+    // Max 5MB for general files
+    if (base64Data.length > 5 * 1024 * 1024) {
+      return jsonResponse({ error: 'File too large. Max 5MB.' }, 400);
+    }
+
+    const repo = resolveRepo(dashboard, env);
+    const branch = env.GITHUB_BRANCH || 'main';
+    const timestamp = Date.now();
+    // Sanitise original filename, keep extension
+    const safeName = (origName || 'file').replace(/[^a-zA-Z0-9._-]/g, '_');
+    const storedName = `card-${cardId}-${timestamp}-${safeName}`;
+    const filepath = `docs/data/files/${storedName}`;
+
+    const commitResult = await githubCreateFile(env.GITHUB_TOKEN, repo, branch, filepath, base64Data, `Add file for card #${cardId}: ${safeName}`);
+
+    if (!commitResult.ok) {
+      return jsonResponse({ error: 'GitHub commit failed: ' + commitResult.error }, 500);
+    }
+
+    const fileEntry = {
+      cardId: String(cardId),
+      filename: storedName,
+      originalName: origName || 'file',
+      caption: caption || '',
+      addedAt: new Date().toISOString(),
+      url: `https://${repo.split('/')[0]}.github.io/${repo.split('/')[1]}/data/files/${storedName}`
+    };
+
+    const manifestResult = await updateFilesManifest(env.GITHUB_TOKEN, repo, branch, fileEntry);
+
+    if (!manifestResult.ok) {
+      return jsonResponse({
+        ok: true,
+        warning: 'File saved but manifest update failed.',
+        file: fileEntry
+      }, 200);
+    }
+
+    return jsonResponse({ ok: true, file: fileEntry });
+
+  } catch (err) {
+    return jsonResponse({ error: 'Server error: ' + err.message }, 500);
+  }
+}
+
+// ── Get files manifest ──
+async function handleGetFiles(env) {
+  try {
+    const repo = env.GITHUB_REPO;
+    const branch = env.GITHUB_BRANCH || 'main';
+    const manifest = await getFilesManifest(env.GITHUB_TOKEN, repo, branch);
+    return jsonResponse({ ok: true, files: manifest.files || [] });
+  } catch (err) {
+    return jsonResponse({ error: err.message }, 500);
+  }
+}
+
+// ── Delete file ──
+async function handleDeleteFile(request, env) {
+  try {
+    const body = await request.json();
+    const { password, filename, dashboard } = body;
+
+    if (!password || password !== env.UPLOAD_PASSWORD) {
+      return jsonResponse({ error: 'Invalid password' }, 401);
+    }
+    if (!filename) {
+      return jsonResponse({ error: 'filename is required' }, 400);
+    }
+
+    const repo = resolveRepo(dashboard, env);
+    const branch = env.GITHUB_BRANCH || 'main';
+    const filepath = `docs/data/files/${filename}`;
+
+    await githubDeleteFile(env.GITHUB_TOKEN, repo, branch, filepath, `Remove file ${filename}`);
+    await removeFromFilesManifest(env.GITHUB_TOKEN, repo, branch, filename);
+
+    return jsonResponse({ ok: true, deleted: filename });
+
+  } catch (err) {
+    return jsonResponse({ error: 'Server error: ' + err.message }, 500);
+  }
+}
+
+// ── Files manifest helpers ──
+async function getFilesManifest(token, repo, branch) {
+  const url = `https://api.github.com/repos/${repo}/contents/docs/data/files.json?ref=${branch}`;
+  const res = await fetch(url, {
+    headers: {
+      'Authorization': `token ${token}`,
+      'User-Agent': 'gb-dashboard-worker'
+    }
+  });
+
+  if (!res.ok) return { files: [], sha: null };
+
+  const data = await res.json();
+  const content = atob(data.content.replace(/\n/g, ''));
+  const manifest = JSON.parse(content);
+  return { files: manifest.files || [], sha: data.sha };
+}
+
+async function updateFilesManifest(token, repo, branch, newEntry) {
+  const current = await getFilesManifest(token, repo, branch);
+  current.files.push(newEntry);
+
+  const newContent = JSON.stringify({ files: current.files }, null, 2);
+  const base64 = btoa(unescape(encodeURIComponent(newContent)));
+
+  const url = `https://api.github.com/repos/${repo}/contents/docs/data/files.json`;
+  const body = {
+    message: `Add file entry for card #${newEntry.cardId}`,
+    content: base64,
+    branch: branch
+  };
+  if (current.sha) body.sha = current.sha;
+
+  const res = await fetch(url, {
+    method: 'PUT',
+    headers: {
+      'Authorization': `token ${token}`,
+      'Content-Type': 'application/json',
+      'User-Agent': 'gb-dashboard-worker'
+    },
+    body: JSON.stringify(body)
+  });
+
+  return { ok: res.ok };
+}
+
+async function removeFromFilesManifest(token, repo, branch, filename) {
+  const current = await getFilesManifest(token, repo, branch);
+  current.files = current.files.filter(f => f.filename !== filename);
+
+  const newContent = JSON.stringify({ files: current.files }, null, 2);
+  const base64 = btoa(unescape(encodeURIComponent(newContent)));
+
+  const url = `https://api.github.com/repos/${repo}/contents/docs/data/files.json`;
+  const body = {
+    message: `Remove file ${filename}`,
     content: base64,
     branch: branch
   };

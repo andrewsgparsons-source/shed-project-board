@@ -826,11 +826,12 @@
 
     mainContent.innerHTML = html;
 
-    // Render photo gallery
+    // Render photo gallery and file list
     if (window.__photoModule) {
       var photoContainer = document.getElementById('delPhotos-' + cardId);
       if (photoContainer) {
         window.__photoModule.renderPhotoGallery(photoContainer, cardId);
+        window.__photoModule.renderFileList(photoContainer, cardId);
       }
     }
 
@@ -908,6 +909,7 @@
           if (!photoDiv || photoDiv.dataset.photosLoaded) return;
           photoDiv.dataset.photosLoaded = '1';
           window.__photoModule.renderPhotoGallery(photoDiv, photoDiv.dataset.photoCardId);
+          window.__photoModule.renderFileList(photoDiv, photoDiv.dataset.photoCardId);
         });
       });
     }
