@@ -501,6 +501,7 @@
       '<span class="task-date">Created: ' + date + completedDate + '</span>' +
       '<span class="badge badge-category">' + (CAT_EMOJI[card.category] || "") + ' ' + card.category + '</span>' +
       '</div>' +
+      '<div class="card-photos" data-photo-card-id="' + card.id + '"></div>' +
       '</div>' +
       '</details>';
   }
@@ -816,9 +817,22 @@
     if (del.updated) html += '<span class="del-last-saved">Last saved: ' + del.updated + '</span>';
     html += '</div>';
 
+    // Photo gallery placeholder
+    html += '<div class="del-section">';
+    html += '<div id="delPhotos-' + cardId + '"></div>';
+    html += '</div>';
+
     html += '</div>'; // end deliverable-page
 
     mainContent.innerHTML = html;
+
+    // Render photo gallery
+    if (window.__photoModule) {
+      var photoContainer = document.getElementById('delPhotos-' + cardId);
+      if (photoContainer) {
+        window.__photoModule.renderPhotoGallery(photoContainer, cardId);
+      }
+    }
 
     // Back button
     document.getElementById('delBackBtn').addEventListener('click', function() {
@@ -884,6 +898,19 @@
         openDeliverablePage(btn.getAttribute('data-card-id'));
       });
     });
+
+    // Lazy-load photo galleries when cards are expanded
+    if (window.__photoModule) {
+      container.querySelectorAll('details.task-card').forEach(function(det) {
+        det.addEventListener('toggle', function() {
+          if (!det.open) return;
+          var photoDiv = det.querySelector('.card-photos[data-photo-card-id]');
+          if (!photoDiv || photoDiv.dataset.photosLoaded) return;
+          photoDiv.dataset.photosLoaded = '1';
+          window.__photoModule.renderPhotoGallery(photoDiv, photoDiv.dataset.photoCardId);
+        });
+      });
+    }
   }
 
   // ── Render: All Tasks ──

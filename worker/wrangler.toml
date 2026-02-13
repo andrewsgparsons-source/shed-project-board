@@ -1,0 +1,10 @@
+name = "gb-photo-upload"
+main = "index.js"
+compatibility_date = "2024-01-01"
+
+[vars]
+GITHUB_REPO = "andrewsgparsons-source/shed-project-board"
+GITHUB_BRANCH = "main"
+# GITHUB_TOKEN and UPLOAD_PASSWORD should be set as secrets:
+#   npx wrangler secret put GITHUB_TOKEN
+#   npx wrangler secret put UPLOAD_PASSWORD

@@ -1,0 +1,269 @@
+/* ── Photo Gallery ── */
+
+.photo-gallery {
+  margin-top: 16px;
+  border-top: 1px solid rgba(255,255,255,0.1);
+  padding-top: 12px;
+}
+
+.photo-gallery-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 12px;
+}
+
+.photo-gallery-header h3 {
+  margin: 0;
+  font-size: 15px;
+  color: #e0e0e0;
+}
+
+.photo-add-btn {
+  background: #2D5016;
+  color: #fff;
+  border: none;
+  border-radius: 6px;
+  padding: 6px 14px;
+  font-size: 13px;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.photo-add-btn:hover {
+  background: #3a6b1e;
+}
+
+.photo-add-btn:active {
+  transform: scale(0.97);
+}
+
+/* Grid */
+.photo-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+  gap: 10px;
+  margin-bottom: 10px;
+}
+
+.photo-item {
+  position: relative;
+  border-radius: 8px;
+  overflow: hidden;
+  background: #1a1a2e;
+  border: 1px solid rgba(255,255,255,0.08);
+}
+
+.photo-item img {
+  width: 100%;
+  aspect-ratio: 4/3;
+  object-fit: cover;
+  display: block;
+  cursor: pointer;
+  transition: opacity 0.2s;
+}
+
+.photo-item img:hover {
+  opacity: 0.85;
+}
+
+.photo-caption {
+  padding: 4px 8px;
+  font-size: 11px;
+  color: #ccc;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.photo-meta {
+  padding: 2px 8px 6px;
+  font-size: 10px;
+  color: #888;
+}
+
+.photo-delete-btn {
+  position: absolute;
+  top: 4px;
+  right: 4px;
+  background: rgba(0,0,0,0.6);
+  color: #fff;
+  border: none;
+  border-radius: 50%;
+  width: 22px;
+  height: 22px;
+  font-size: 12px;
+  cursor: pointer;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  line-height: 1;
+}
+
+.photo-item:hover .photo-delete-btn {
+  display: flex;
+}
+
+.photo-empty {
+  text-align: center;
+  padding: 20px;
+  color: #666;
+  font-size: 13px;
+  font-style: italic;
+}
+
+.photo-gallery-loading {
+  text-align: center;
+  padding: 12px;
+  color: #888;
+  font-size: 13px;
+}
+
+/* Upload status */
+.photo-upload-status {
+  text-align: center;
+  padding: 6px;
+  font-size: 13px;
+  border-radius: 4px;
+  min-height: 0;
+  transition: all 0.3s;
+}
+
+.photo-status-uploading {
+  color: #f0c040;
+  background: rgba(240,192,64,0.1);
+}
+
+.photo-status-success {
+  color: #4CAF50;
+  background: rgba(76,175,80,0.1);
+}
+
+.photo-status-error {
+  color: #f44336;
+  background: rgba(244,67,54,0.1);
+}
+
+/* Config dialog */
+.photo-config-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.7);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 10000;
+}
+
+.photo-config-dialog {
+  background: #1e1e30;
+  border: 1px solid rgba(255,255,255,0.15);
+  border-radius: 12px;
+  padding: 24px;
+  width: 90%;
+  max-width: 400px;
+  color: #e0e0e0;
+}
+
+.photo-config-dialog h3 {
+  margin: 0 0 8px;
+}
+
+.photo-config-dialog p {
+  margin: 0 0 16px;
+  font-size: 13px;
+  color: #999;
+}
+
+.photo-config-dialog label {
+  display: block;
+  font-size: 12px;
+  color: #aaa;
+  margin-bottom: 12px;
+}
+
+.photo-config-dialog input {
+  display: block;
+  width: 100%;
+  margin-top: 4px;
+  padding: 8px;
+  border: 1px solid rgba(255,255,255,0.2);
+  border-radius: 6px;
+  background: #0d0d1a;
+  color: #e0e0e0;
+  font-size: 14px;
+  box-sizing: border-box;
+}
+
+.photo-config-actions {
+  display: flex;
+  gap: 10px;
+  justify-content: flex-end;
+  margin-top: 16px;
+}
+
+.photo-btn-cancel {
+  background: transparent;
+  color: #999;
+  border: 1px solid #555;
+  border-radius: 6px;
+  padding: 8px 16px;
+  cursor: pointer;
+}
+
+.photo-btn-save {
+  background: #2D5016;
+  color: #fff;
+  border: none;
+  border-radius: 6px;
+  padding: 8px 20px;
+  cursor: pointer;
+}
+
+/* Lightbox */
+.photo-lightbox {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.9);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 10001;
+  cursor: pointer;
+}
+
+.photo-lightbox-content {
+  max-width: 90vw;
+  max-height: 90vh;
+  text-align: center;
+}
+
+.photo-lightbox-content img {
+  max-width: 90vw;
+  max-height: 85vh;
+  border-radius: 4px;
+  object-fit: contain;
+}
+
+.photo-lightbox-caption {
+  color: #ccc;
+  margin-top: 8px;
+  font-size: 14px;
+}
+
+/* Mobile tweaks */
+@media (max-width: 600px) {
+  .photo-grid {
+    grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+    gap: 6px;
+  }
+
+  .photo-add-btn {
+    padding: 10px 18px;
+    font-size: 15px;
+  }
+
+  .photo-delete-btn {
+    display: flex; /* Always show on mobile — no hover */
+  }
+}
