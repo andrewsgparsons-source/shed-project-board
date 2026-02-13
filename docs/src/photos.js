@@ -296,7 +296,7 @@
       html += '<div class="photo-upload-status" id="photoStatus-' + cardId + '"></div>';
 
       // Hidden file input
-      html += '<input type="file" accept="image/*" capture="environment" class="photo-file-input" id="photoInput-' + cardId + '" style="display:none">';
+      html += '<input type="file" accept="image/*" class="photo-file-input" id="photoInput-' + cardId + '" style="display:none">';
 
       galleryDiv.innerHTML = html;
 
