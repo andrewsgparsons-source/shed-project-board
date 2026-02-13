@@ -1122,6 +1122,7 @@
         '<div class="idea-actions">' +
         '<button class="idea-delete" data-id="' + idea.id + '">🗑 Delete</button>' +
         '</div>' +
+        '<div class="card-photos" data-photo-card-id="' + idea.id + '"></div>' +
         '</div>' +
         '</details>';
     }).join("");
@@ -1137,6 +1138,20 @@
         buildNav();
       });
     });
+
+    // Lazy-load photo galleries when idea cards are expanded
+    if (window.__photoModule) {
+      list.querySelectorAll('details.idea-card').forEach(function(det) {
+        det.addEventListener('toggle', function() {
+          if (!det.open) return;
+          var photoDiv = det.querySelector('.card-photos[data-photo-card-id]');
+          if (!photoDiv || photoDiv.dataset.photosLoaded) return;
+          photoDiv.dataset.photosLoaded = '1';
+          window.__photoModule.renderPhotoGallery(photoDiv, photoDiv.dataset.photoCardId);
+          window.__photoModule.renderFileList(photoDiv, photoDiv.dataset.photoCardId);
+        });
+      });
+    }
   }
 
   function getLocalIdeas() {
