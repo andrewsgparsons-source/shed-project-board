@@ -1,1295 +1,1259 @@
-{
-  "version": 39,
-  "lastUpdated": "2026-02-11T21:56:53Z",
-  "updatedBy": "James",
-  "categories": [
-    {
-      "id": "configurator",
-      "name": "Configurator",
-      "emoji": "\ud83d\udd27"
-    },
-    {
-      "id": "website",
-      "name": "Website",
-      "emoji": "\ud83c\udf10"
-    },
-    {
-      "id": "business",
-      "name": "Business",
-      "emoji": "\ud83d\udcc8"
-    },
-    {
-      "id": "marketing",
-      "name": "Marketing",
-      "emoji": "\ud83d\udce3"
-    },
-    {
-      "id": "operations",
-      "name": "Operations",
-      "emoji": "\ud83d\udee0\ufe0f"
-    },
-    {
-      "id": "animation",
-      "name": "Animation/Video",
-      "emoji": "\ud83c\udfac"
-    }
-  ],
-  "cards": [
-    {
-      "id": "1",
-      "title": "Dimension constraints implemented",
-      "description": "Max 8m x 4m in either orientation. Validation working.",
-      "status": "done",
-      "priority": "high",
-      "category": "configurator",
-      "createdAt": "2026-01-26T12:00:00Z"
-    },
-    {
-      "id": "2",
-      "title": "Pent roof positioning for attachments",
-      "description": "Fixed rotation and positioning for all 4 attachment directions (left, right, front, back).",
-      "status": "done",
-      "priority": "high",
-      "category": "configurator",
-      "createdAt": "2026-01-26T12:00:00Z"
-    },
-    {
-      "id": "3",
-      "title": "Roof height constraints",
-      "description": "Apex: eaves 800-2400mm, crest 1000-4500mm. Pent: both walls 1000-2400mm. Crest must exceed eaves. Hipped: same as apex (geometry TODO).",
-      "status": "done",
-      "priority": "medium",
-      "category": "configurator",
-      "createdAt": "2026-01-26T12:00:00Z"
-    },
-    {
-      "id": "4",
-      "title": "Door/window size validation",
-      "description": "Openings can't overlap (50mm min gap), can't exceed wall boundaries (100mm from edges). Smart placement finds free spots. Blocks adding when no space left.",
-      "status": "done",
-      "priority": "medium",
-      "category": "configurator",
-      "createdAt": "2026-01-26T12:00:00Z"
-    },
-    {
-      "id": "5",
-      "title": "Marketing landing page",
-      "description": "Create a landing page to showcase the configurator.",
-      "status": "ideas",
-      "priority": "low",
-      "category": "marketing",
-      "createdAt": "2026-01-26T12:00:00Z"
-    },
-    {
-      "id": "6",
-      "title": "README documentation",
-      "description": "Write comprehensive README for the GitHub repo.",
-      "status": "done",
-      "priority": "medium",
-      "category": "configurator",
-      "createdAt": "2026-01-26T12:00:00Z"
-    },
-    {
-      "id": "7",
-      "title": "MIT License added",
-      "description": "Added MIT license to the Parametric-shed2 repo.",
-      "status": "done",
-      "priority": "medium",
-      "category": "configurator",
-      "createdAt": "2026-01-27T08:41:00Z"
-    },
-    {
-      "id": "8",
-      "title": "Decision Map page",
-      "description": "Interactive flowchart for mapping strategic decisions. Added to project board app.",
-      "status": "done",
-      "priority": "medium",
-      "category": "operations",
-      "createdAt": "2026-01-27T08:49:00Z"
-    },
-    {
-      "id": "9",
-      "title": "Potting Shed preset",
-      "description": "Created and saved potting shed preset (2m \u00d7 3.6m) with three windows and pent roof.",
-      "status": "done",
-      "priority": "medium",
-      "category": "configurator",
-      "createdAt": "2026-01-27T09:34:00Z"
-    },
-    {
-      "id": "10",
-      "title": "Parametric shelving system",
-      "description": "Add shelving as a new element type (like doors/windows). Parameters: wall, inside/outside, height, starting position, length. Include in BOM.",
-      "status": "ideas",
-      "priority": "medium",
-      "category": "configurator",
-      "createdAt": "2026-01-27T09:09:00Z"
-    },
-    {
-      "id": "11",
-      "title": "Browser access for James",
-      "description": "Set up browser access so James can see and interact with the configurator. Options: (1) Clawdbot browser tool with Chrome extension relay, (2) Puppeteer/Playwright automation, (3) VNC/remote desktop. Would enable: screenshots for README, direct visual testing, debugging UI issues like purlin positioning.",
-      "status": "backlog",
-      "priority": "high",
-      "category": "operations",
-      "createdAt": "2026-01-27T09:40:00Z"
-    },
-    {
-      "id": "12",
-      "title": "Monetization decision mapping",
-      "description": "Map monetization paths in Decision Map with full arguments and evaluation. Options: Enhanced direct sales, DIY plans, Licensing, Niche builds, Spectrum model.",
-      "status": "done",
-      "priority": "high",
-      "category": "business",
-      "createdAt": "2026-01-27T09:40:00Z"
-    },
-    {
-      "id": "13",
-      "title": "\ud83d\udd04 Competitor Intelligence (ongoing)",
-      "description": "Continuous market awareness and competitor monitoring. This is a parent project \u2014 never 'done'. See linked deliverables below.\n\n**Completed deliverables:**\n\u2022 Initial landscape analysis (card #31)\n\u2022 Tech gap analysis (card #32)\n\u2022 Quick Garden profile (card #33)\n\n**Files:**\n\u2022 /competitor-analysis.md (main report)\n\u2022 /shed-project-board/competitors.md (profiles)\n\n**Backlog:**\n\u2022 Deep-dive: Crane Garden Buildings\n\u2022 Deep-dive: Scotts of Thrapston\n\u2022 Keyword/SEO competitor research\n\u2022 Pricing intelligence\n\u2022 Quarterly refresh",
-      "status": "in-progress",
-      "priority": "medium",
-      "category": "marketing",
-      "createdAt": "2026-01-27T09:40:00Z",
-      "projectType": "ongoing"
-    },
-    {
-      "id": "14",
-      "title": "Add screenshot to README",
-      "description": "Grab a nice screenshot or GIF of the configurator for the README hero image.",
-      "status": "backlog",
-      "priority": "medium",
-      "category": "configurator",
-      "createdAt": "2026-01-27T09:52:00Z"
-    },
-    {
-      "id": "15",
-      "title": "SEO improvements",
-      "description": "Improve SEO on bespokeshedcompany.co.uk. Full analysis: /home/ser/clawd/memory/seo-analysis-bespokeshedcompany.md\n\n**Critical issues:**\n\u2022 Thin content (~100 words per product page, need 500+)\n\u2022 Poor page titles (numbered, generic)\n\u2022 No blog content since 2019\n\u2022 Weak location targeting (one mention of Wiltshire)\n\u2022 Zero reviews showing\n\u2022 Configurator not mentioned anywhere\n\n**Quick wins:**\n1. Fix page titles (remove numbers, add keywords + location)\n2. Write 500+ words per product page\n3. Get 5 Google reviews\n4. Add 'Design Your Own' page linking to configurator\n\n**Medium term:**\n\u2022 Location landing pages (/garden-buildings-salisbury/ etc)\n\u2022 Blog with case studies\n\u2022 FAQ schema markup",
-      "status": "backlog",
-      "priority": "high",
-      "category": "website",
-      "createdAt": "2026-01-27T10:15:00Z",
-      "analysisFile": "memory/seo-analysis-bespokeshedcompany.md",
-      "analysisDate": "2026-01-29"
-    },
-    {
-      "id": "16",
-      "title": "Website rebuild strategy",
-      "description": "Decide on approach: refresh current, full rebuild, add e-commerce/quote system, or hybrid configurator model. See Decision Map.",
-      "status": "ideas",
-      "priority": "high",
-      "category": "website",
-      "createdAt": "2026-01-27T10:17:00Z"
-    },
-    {
-      "id": "17",
-      "title": "Mobile UX for configurator",
-      "description": "Bottom drawer panel, 55vh height, larger fonts (14-16px), touch-friendly controls, auto-collapse on load, tap-to-close, modern IKEA-inspired theme.",
-      "status": "done",
-      "priority": "medium",
-      "category": "configurator",
-      "createdAt": "2026-01-27T10:05:00Z"
-    },
-    {
-      "id": "18",
-      "title": "Monetization strategy document",
-      "description": "Create comprehensive monetization strategy doc in the repo. Cover: direct sales, DIY plans, licensing, niche builds, spectrum model, supplier partnerships.",
-      "status": "backlog",
-      "priority": "high",
-      "category": "business",
-      "createdAt": "2026-01-27T11:04:00Z"
-    },
-    {
-      "id": "19",
-      "title": "Fastest-to-revenue roadmap",
-      "description": "Prioritize monetization paths by speed-to-revenue. Create actionable roadmap: Week 1, Month 1, Quarter 1 milestones.",
-      "status": "backlog",
-      "priority": "high",
-      "category": "business",
-      "createdAt": "2026-01-27T11:04:00Z"
-    },
-    {
-      "id": "20",
-      "title": "Embed configurator on bespokeshedcompany.co.uk",
-      "description": "Deploy parametric configurator on the business website. First monetization step: capture leads, enable quotes.",
-      "status": "backlog",
-      "priority": "high",
-      "category": "website",
-      "createdAt": "2026-01-27T11:04:00Z"
-    },
-    {
-      "id": "21",
-      "title": "Hipped roof implementation",
-      "description": "Add hipped roof style option. Currently placeholder in roof style dropdown. Requires new geometry: hip rafters from corners to ridge, jack rafters on all four sides.",
-      "status": "done",
-      "priority": "medium",
-      "category": "configurator",
-      "createdAt": "2026-01-28T09:12:00Z",
-      "completedAt": "2026-02-12T20:56:00Z"
-    },
-    {
-      "id": "22",
-      "title": "Fix apex roof on attached buildings",
-      "description": "Apex roof on attached buildings not working properly. Needs investigation and fix.",
-      "status": "backlog",
-      "priority": "high",
-      "category": "configurator",
-      "createdAt": "2026-01-28T09:12:00Z"
-    },
-    {
-      "id": "23",
-      "title": "Wall insulation + plywood lining",
-      "description": "50mm PIR insulation between studs, 12mm plywood lining inside. Skips door/window openings. Tied to insulated variant. Added to BOM.",
-      "status": "done",
-      "priority": "high",
-      "category": "configurator",
-      "createdAt": "2026-01-27T15:00:00Z",
-      "completedAt": "2026-01-27T18:00:00Z"
-    },
-    {
-      "id": "24",
-      "title": "Cripple studs below windows",
-      "description": "Added missing cripple studs from bottom plate to window sill. Works for all wall orientations.",
-      "status": "done",
-      "priority": "medium",
-      "category": "configurator",
-      "createdAt": "2026-01-27T16:00:00Z",
-      "completedAt": "2026-01-27T18:00:00Z"
-    },
-    {
-      "id": "25",
-      "title": "Divider height modes",
-      "description": "Added heightMode: 'walls' (to eaves) or 'roof' (fill to crest). Z-axis dividers get triangular gable frames, X-axis get flat fill.",
-      "status": "done",
-      "priority": "medium",
-      "category": "configurator",
-      "createdAt": "2026-01-27T14:00:00Z",
-      "completedAt": "2026-01-27T15:00:00Z"
-    },
-    {
-      "id": "26",
-      "title": "CSG boolean cuts for plywood around openings",
-      "description": "Plywood panels now use CSG subtraction to cut around doors/windows instead of skipping walls with openings.",
-      "status": "done",
-      "priority": "medium",
-      "category": "configurator",
-      "createdAt": "2026-01-27T17:00:00Z",
-      "completedAt": "2026-01-27T18:00:00Z"
-    },
-    {
-      "id": "27",
-      "title": "Fix apex purlins - horizontal positioning",
-      "description": "Purlins should be HORIZONTAL (not tilted with slope) and SIT ON TOP of rafters. Currently broken - parenting to roofRoot causes unexpected tilt. Needs investigation into transform hierarchy.",
-      "status": "done",
-      "priority": "high",
-      "category": "configurator",
-      "createdAt": "2026-01-28T21:30:00Z",
-      "completedAt": "2026-02-09T08:30:00Z"
-    },
-    {
-      "id": "28",
-      "title": "Code documentation + JSDoc comments",
-      "description": "Add proper JSDoc comments to roof.js, walls.js, attachments.js. Clean up dead code, improve console logging. PROGRESS: roof.js done (126 lines added), walls.js partial (45 lines), attachments.js partial (64 lines).",
-      "status": "in-progress",
-      "priority": "medium",
-      "category": "configurator",
-      "createdAt": "2026-01-29T09:48:00Z"
-    },
-    {
-      "id": "29",
-      "title": "Hard Rules page",
-      "description": "Added Rules page to project board with full CRUD. View, add, edit, delete rules. Pre-loaded with working guidelines. Data in data/rules.json.",
-      "status": "done",
-      "priority": "high",
-      "category": "operations",
-      "createdAt": "2026-01-29T11:41:00Z",
-      "completedAt": "2026-01-29T11:45:00Z"
-    },
-    {
-      "id": "30",
-      "title": "2D Brain view",
-      "description": "Added 2D force-directed graph view as alternative to 3D brain. Uses D3.js. Pan/zoom, click nodes for details, drag to rearrange. Shared data file (data/brain.json) keeps 2D and 3D in sync.",
-      "status": "done",
-      "priority": "medium",
-      "category": "operations",
-      "createdAt": "2026-01-29T11:47:00Z",
-      "completedAt": "2026-01-29T11:50:00Z"
-    },
-    {
-      "id": "31",
-      "title": "\ud83d\udcca Competitor: Landscape analysis",
-      "description": "Initial UK market landscape. Three-tier breakdown: Budget (BillyOh, Tiger), Premium Prefab (Quick Garden, Crane, Scotts), True Bespoke. Market positioning identified.\n\n**Parent:** Competitor Intelligence (#13)\n**File:** /competitor-analysis.md",
-      "status": "done",
-      "priority": "medium",
-      "category": "marketing",
-      "parentId": "13",
-      "createdAt": "2026-01-27T09:40:00Z",
-      "completedAt": "2026-01-27T12:00:00Z"
-    },
-    {
-      "id": "32",
-      "title": "\ud83d\udcca Competitor: Tech gap analysis",
-      "description": "Comparison table: 3D visualisation, parametric model, real-time pricing, cutting lists. Key finding: NO UK competitor has true parametric 3D with cutting list output. Major differentiator.\n\n**Parent:** Competitor Intelligence (#13)\n**File:** /competitor-analysis.md",
-      "status": "done",
-      "priority": "medium",
-      "category": "marketing",
-      "parentId": "13",
-      "createdAt": "2026-01-27T09:40:00Z",
-      "completedAt": "2026-01-27T12:00:00Z"
-    },
-    {
-      "id": "33",
-      "title": "\ud83d\udcca Competitor: Quick Garden profile",
-      "description": "Deep-dive on Quick Garden. European manufacturer, 26k+ customers, log cabin specialists. No online configurator \u2014 manual bespoke process. Lead times 4-10 weeks. Pricing examples gathered.\n\n**Parent:** Competitor Intelligence (#13)\n**File:** /shed-project-board/competitors.md",
-      "status": "done",
-      "priority": "medium",
-      "category": "marketing",
-      "parentId": "13",
-      "createdAt": "2026-01-27T09:40:00Z",
-      "completedAt": "2026-01-27T12:00:00Z"
-    },
-    {
-      "id": "34",
-      "title": "\ud83d\udcca Competitor: Crane deep-dive",
-      "description": "Full profile of Crane Garden Buildings. Norfolk workshop, 50+ years, 13 UK showrooms, National Trust partnership. Confirmed: their 'configurator' is just an options selector, NOT parametric 3D. Key weakness identified.\n\n**Parent:** Competitor Intelligence (#13)\n**File:** /competitor-crane-deep-dive.md",
-      "status": "done",
-      "priority": "medium",
-      "category": "marketing",
-      "parentId": "13",
-      "createdAt": "2026-01-29T12:06:00Z",
-      "completedAt": "2026-01-29T14:45:00Z"
-    },
-    {
-      "id": "35",
-      "title": "\ud83d\udcca Competitor: Scotts deep-dive",
-      "description": "Full profile of Scotts of Thrapston. 100+ years, hardwood specialists, equestrian/garages. Very traditional consultative model. Different customer journey but worth understanding.\n\n**Parent:** Competitor Intelligence (#13)",
-      "status": "backlog",
-      "priority": "low",
-      "category": "marketing",
-      "parentId": "13",
-      "createdAt": "2026-01-29T12:06:00Z"
-    },
-    {
-      "id": "36",
-      "title": "\ud83d\udcca Competitor: SEO/keyword research",
-      "description": "Research what keywords competitors rank for. Identify gaps and opportunities. Tools: Ubersuggest, SEMrush free tier, or manual Google research.\n\n**Parent:** Competitor Intelligence (#13)",
-      "status": "backlog",
-      "priority": "medium",
-      "category": "marketing",
-      "parentId": "13",
-      "createdAt": "2026-01-29T12:06:00Z"
-    },
-    {
-      "id": "37",
-      "title": "\ud83d\udcca Competitor: Pricing intelligence",
-      "description": "Gather real pricing data across competitors. Build comparison matrix. Understand where Andrew sits in the market and identify pricing strategy opportunities.\n\n**Parent:** Competitor Intelligence (#13)",
-      "status": "backlog",
-      "priority": "medium",
-      "category": "marketing",
-      "parentId": "13",
-      "createdAt": "2026-01-29T12:06:00Z"
-    },
-    {
-      "id": "38",
-      "title": "Avon View Garden Room preset",
-      "description": "Customer enquiry preset. 7'8\" \u00d7 9'6\" (2340 \u00d7 2900mm), apex roof 2m eaves \u2192 2.4m ridge. Door centered on front + 2 narrow windows flanking, picture window on left side.",
-      "status": "done",
-      "priority": "medium",
-      "category": "configurator",
-      "createdAt": "2026-01-27T14:00:00Z",
-      "completedAt": "2026-01-27T14:30:00Z"
-    },
-    {
-      "id": "39",
-      "title": "URL state sharing",
-      "description": "Configs can be shared via URL: ?profile=viewer&c=<base64-encoded-state>. Profile=viewer required to parse URL state. Enables sharing designs with customers.",
-      "status": "done",
-      "priority": "medium",
-      "category": "configurator",
-      "createdAt": "2026-01-27T14:00:00Z",
-      "completedAt": "2026-01-27T14:00:00Z"
-    },
-    {
-      "id": "40",
-      "title": "Project board PWA support",
-      "description": "Mobile-friendly progressive web app. Installable on phone home screen. Touch-friendly interface.",
-      "status": "done",
-      "priority": "low",
-      "category": "operations",
-      "createdAt": "2026-01-27T10:00:00Z",
-      "completedAt": "2026-01-27T10:30:00Z"
-    },
-    {
-      "id": "41",
-      "title": "Studs showing through plywood (z-fighting)",
-      "description": "Front wall exterior - studs appeared to show through plywood. Fixed by adjusting geometry/face orientation.",
-      "status": "done",
-      "priority": "medium",
-      "category": "configurator",
-      "createdAt": "2026-01-27T17:00:00Z",
-      "completedAt": "2026-01-27T18:00:00Z"
-    },
-    {
-      "id": "42",
-      "title": "Customer photography & case studies",
-      "description": "Photograph past builds for website and marketing. Create case study pages with before/after, specs, customer quotes. Identified as gap vs competitors (Crane has extensive gallery).",
-      "status": "backlog",
-      "priority": "high",
-      "category": "marketing",
-      "createdAt": "2026-01-29T13:49:00Z"
-    },
-    {
-      "id": "43",
-      "title": "Google Reviews campaign",
-      "description": "Get 5+ Google reviews from past customers. Major SEO quick win \u2014 currently showing zero reviews on all product pages. Ask satisfied customers for reviews.",
-      "status": "backlog",
-      "priority": "high",
-      "category": "marketing",
-      "createdAt": "2026-01-29T13:49:00Z"
-    },
-    {
-      "id": "44",
-      "title": "STT/voice input for James",
-      "description": "Set up speech-to-text so James can receive voice messages directly. Needs OpenAI API key (Whisper). Would enable true voice conversations.",
-      "status": "backlog",
-      "priority": "medium",
-      "category": "operations",
-      "createdAt": "2026-01-29T13:49:00Z"
-    },
-    {
-      "id": "45",
-      "title": "Roof insulation",
-      "description": "Add insulation layer to roof (between rafters). Sloped panels (L+R) from eaves to raised tie beam level, horizontal panel between tie beams. Fully parametric - adapts to truss count and building size. Only active for tieBeam: 'raised' configuration. Uses vis.roofIns visibility flag.",
-      "status": "done",
-      "priority": "medium",
-      "category": "configurator",
-      "createdAt": "2026-01-29T13:49:00Z",
-      "completedAt": "2026-01-31T16:30:00Z"
-    },
-    {
-      "id": "46",
-      "title": "Floor framing system",
-      "description": "Add floor joists/framing to configurator if not already present. Include in BOM. Consider bearer/joist options.",
-      "status": "ideas",
-      "priority": "medium",
-      "category": "configurator",
-      "createdAt": "2026-01-29T13:49:00Z"
-    },
-    {
-      "id": "47",
-      "title": "Context management alerts",
-      "description": "Proactive alerts before context compaction. James should warn Andrew when context is getting full so important info can be saved.",
-      "status": "ideas",
-      "priority": "low",
-      "category": "operations",
-      "createdAt": "2026-01-29T13:49:00Z"
-    },
-    {
-      "id": "48",
-      "title": "Planning permission guide (blog)",
-      "description": "Blog post: 'Garden Building Planning Permission Guide'. Common customer concern. Good for SEO, builds trust, answers FAQs.",
-      "status": "ideas",
-      "priority": "low",
-      "category": "website",
-      "createdAt": "2026-01-29T13:49:00Z"
-    },
-    {
-      "id": "49",
-      "title": "\"Why Parametric?\" explainer page",
-      "description": "Website page explaining the parametric difference. Why mm-precision matters, what cutting lists mean, how it's different from competitors' configurators.",
-      "status": "ideas",
-      "priority": "medium",
-      "category": "website",
-      "createdAt": "2026-01-29T13:49:00Z"
-    },
-    {
-      "id": "50",
-      "title": "Attached building frame penetrating primary plywood",
-      "description": "BUG: Geometry from attached building frame is showing through the plywood of the primary building. Needs CSG subtraction or geometry adjustment to resolve overlap.",
-      "status": "backlog",
-      "priority": "high",
-      "category": "configurator",
-      "createdAt": "2026-01-29T13:49:00Z"
-    },
-    {
-      "id": "51",
-      "title": "Divider UI improvements (mobile)",
-      "description": "Divider controls don't present well, especially on mobile. Review and improve the UI/UX for adding and configuring dividers. Make touch-friendly and visually clearer.",
-      "status": "backlog",
-      "priority": "medium",
-      "category": "configurator",
-      "createdAt": "2026-01-29T14:21:00Z"
-    },
-    {
-      "id": "52",
-      "title": "3D camera controls too fast/sensitive",
-      "description": "User feedback: 3D model navigation is too fast and hard to control. Need to dampen camera movement, slow down rotation/zoom, add smoothing/inertia. Make it much easier for non-technical users to navigate the model.",
-      "status": "backlog",
-      "priority": "high",
-      "category": "configurator",
-      "createdAt": "2026-01-29T14:22:00Z"
-    },
-    {
-      "id": "53",
-      "title": "Doors/openings on attachments and dividers",
-      "description": "Add ability to place doors, windows, and openings on:\n\u2022 Attachment buildings (currently only primary building supports openings)\n\u2022 Internal dividers (for doorways between rooms)\n\nWould enable proper multi-room layouts with access between spaces.",
-      "status": "backlog",
-      "priority": "high",
-      "category": "configurator",
-      "createdAt": "2026-01-29T14:24:00Z"
-    },
-    {
-      "id": "54",
-      "title": "More cladding options",
-      "description": "Add variety of cladding types: shiplap, featheredge, T&G, board-on-board, composite, etc. Visual appearance + material specs for BOM.",
-      "status": "ideas",
-      "priority": "medium",
-      "category": "configurator",
-      "createdAt": "2026-01-29T14:28:00Z"
-    },
-    {
-      "id": "55",
-      "title": "More window options",
-      "description": "Expand window types: fixed, opening (casement, top-hung), Georgian style, circular/porthole, etc. Different frame styles and sizes.",
-      "status": "ideas",
-      "priority": "medium",
-      "category": "configurator",
-      "createdAt": "2026-01-29T14:28:00Z"
-    },
-    {
-      "id": "56",
-      "title": "Window openers/hardware",
-      "description": "Add opening mechanisms to windows: stays, handles, locks. Include in BOM. Visual indication of which windows open.",
-      "status": "ideas",
-      "priority": "low",
-      "category": "configurator",
-      "createdAt": "2026-01-29T14:28:00Z"
-    },
-    {
-      "id": "57",
-      "title": "Stable door option",
-      "description": "Add stable door (split horizontally, top/bottom open independently). Popular for potting sheds, workshops, stables.",
-      "status": "ideas",
-      "priority": "medium",
-      "category": "configurator",
-      "createdAt": "2026-01-29T14:28:00Z"
-    },
-    {
-      "id": "58",
-      "title": "Half doors",
-      "description": "Add half-height door option. Useful for certain applications.",
-      "status": "ideas",
-      "priority": "low",
-      "category": "configurator",
-      "createdAt": "2026-01-29T14:28:00Z"
-    },
-    {
-      "id": "59",
-      "title": "Skids for field shelters",
-      "description": "Add skid runners to base for field shelters. Makes them moveable. Include in BOM. Toggle option for mobile vs fixed.",
-      "status": "ideas",
-      "priority": "medium",
-      "category": "configurator",
-      "createdAt": "2026-01-29T14:28:00Z"
-    },
-    {
-      "id": "60",
-      "title": "Pillars/posts",
-      "description": "Add ability to place structural pillars/posts. Useful for carports, covered areas, verandas.",
-      "status": "ideas",
-      "priority": "medium",
-      "category": "configurator",
-      "createdAt": "2026-01-29T14:28:00Z"
-    },
-    {
-      "id": "61",
-      "title": "Decking with railings",
-      "description": "Add decking platform option with configurable railings. Multiple railing styles (vertical slats, horizontal, glass, wire). Include in BOM.",
-      "status": "ideas",
-      "priority": "medium",
-      "category": "configurator",
-      "createdAt": "2026-01-29T14:28:00Z"
-    },
-    {
-      "id": "62",
-      "title": "More roof covering options",
-      "description": "Expand roof materials: felt, shingles, EPDM, corrugated, tiles, green roof, etc. Visual + BOM implications.",
-      "status": "ideas",
-      "priority": "medium",
-      "category": "configurator",
-      "createdAt": "2026-01-29T14:28:00Z"
-    },
-    {
-      "id": "63",
-      "title": "Skylights/roof windows",
-      "description": "Add skylights and roof windows. Position on roof slope, various sizes. Include flashing in BOM.",
-      "status": "ideas",
-      "priority": "medium",
-      "category": "configurator",
-      "createdAt": "2026-01-29T14:28:00Z"
-    },
-    {
-      "id": "64",
-      "title": "Soffit boards",
-      "description": "Add soffit boards to roof overhangs. Visual finish detail + BOM.",
-      "status": "ideas",
-      "priority": "low",
-      "category": "configurator",
-      "createdAt": "2026-01-29T14:28:00Z"
-    },
-    {
-      "id": "65",
-      "title": "Verify/debug BOM and cutting lists",
-      "description": "Comprehensive audit of Bill of Materials and cutting list output. Check calculations, quantities, dimensions against real builds. Fix any discrepancies.",
-      "status": "backlog",
-      "priority": "high",
-      "category": "configurator",
-      "createdAt": "2026-01-29T14:28:00Z"
-    },
-    {
-      "id": "66",
-      "title": "Price lists and supplier partnerships",
-      "description": "Build price lists from real supplier costs. Explore partnerships with timber merchants, hardware suppliers. Enable accurate live pricing in configurator.",
-      "status": "backlog",
-      "priority": "high",
-      "category": "business",
-      "createdAt": "2026-01-29T14:28:00Z"
-    },
-    {
-      "id": "67",
-      "title": "User activity tracking/analytics",
-      "description": "Track when users log in, interact with models, save designs. Dashboard to see engagement. Helps identify serious enquiries vs browsers.",
-      "status": "ideas",
-      "priority": "medium",
-      "category": "configurator",
-      "createdAt": "2026-01-29T14:28:00Z"
-    },
-    {
-      "id": "68",
-      "title": "AI UI assistant",
-      "description": "Introduce AI-powered UI for the configurator. Natural language input: 'I need a 3x4m workshop with double doors'. Voice or text interaction.",
-      "status": "ideas",
-      "priority": "medium",
-      "category": "configurator",
-      "createdAt": "2026-01-29T14:28:00Z"
-    },
-    {
-      "id": "69",
-      "title": "Simplified website version + 'Design Together' flow",
-      "description": "Two-tier approach:\n1. Simplified configurator on website for self-service exploration\n2. Invite to 'design together' session: 'I can come and we can design your building together'\n\nConverts self-service browsers into consultative sales.",
-      "status": "ideas",
-      "priority": "high",
-      "category": "business",
-      "createdAt": "2026-01-29T14:28:00Z"
-    },
-    {
-      "id": "70",
-      "title": "Paint and colour options",
-      "description": "Add colour/paint selection to configurator. Options could include:\n\u2022 Exterior paint colours (similar to Crane's range)\n\u2022 Wood stains/preservatives\n\u2022 Farrow & Ball or premium options\n\u2022 Two-tone (body + trim different colours)\n\nVisual update in 3D model + include in BOM/quote. Note: Crane offers Exterior range, Farrow & Ball, and Sikkens stains.",
-      "status": "ideas",
-      "priority": "medium",
-      "category": "configurator",
-      "createdAt": "2026-01-29T14:43:00Z"
-    },
-    {
-      "id": "71",
-      "title": "Douglas Fir research",
-      "description": "Research on Douglas fir timber properties, comparison to competitors (Scandinavian Redwood), untreated vs treated, and marketing angles.\n\n**File:** /research-douglas-fir.md\n\n**Key finding:** Douglas fir is stronger, harder, and stiffer than the Scandinavian Redwood competitors use. Andrew's preference for untreated is valid \u2014 better workability, customer can choose finish.",
-      "status": "done",
-      "priority": "medium",
-      "category": "marketing",
-      "createdAt": "2026-01-29T15:01:00Z",
-      "completedAt": "2026-01-29T15:05:00Z"
-    },
-    {
-      "id": "72",
-      "title": "\"Why Douglas Fir?\" website content",
-      "description": "Create content explaining Douglas fir choice:\n\u2022 Stronger, harder, stiffer than standard redwood\n\u2022 Preferred by craftsmen for workability\n\u2022 Untreated by default (nicer to work with, customer choice on finish)\n\u2022 Ages beautifully to silver-grey\n\u2022 Genuine quality differentiator vs competitors\n\nCould be website page and/or blog post.",
-      "status": "ideas",
-      "priority": "medium",
-      "category": "website",
-      "createdAt": "2026-01-29T15:05:00Z"
-    },
-    {
-      "id": "74",
-      "title": "Attachment apex roof refinements",
-      "description": "Improvements to attachment building apex roof:\n\u2022 Cripple studs (king posts) - refine positioning\n\u2022 Ridge beam/purlins - review and align with primary building\n\u2022 General apex roof quality parity with main building\n\nNot urgent - parked for later. Current implementation functional.",
-      "status": "backlog",
-      "priority": "medium",
-      "category": "configurator",
-      "createdAt": "2026-01-29T19:20:00Z"
-    },
-    {
-      "id": "75",
-      "title": "Attachment fascia board refinements",
-      "description": "Further improvements to fascia boards on attachment apex roof:\n\u2022 Eaves fascia / barge board joint alignment\n\u2022 Ensure clean meeting at corners\n\u2022 Review positioning tolerances\n\nCurrent implementation works but has room for polish.",
-      "status": "done",
-      "priority": "low",
-      "category": "configurator",
-      "createdAt": "2026-01-29T20:06:00Z",
-      "completedAt": "2026-02-09T10:00:00Z"
-    },
-    {
-      "id": "73",
-      "title": "Marketing Strategy document",
-      "description": "Consolidated marketing strategy bringing together all insights: brand story, differentiators, target customer, competitive position, messaging pillars, content strategy, SEO, sales funnel, social proof needs, pricing strategy, and action items.\n\n**File:** /marketing-strategy.md\n\n**References:**\n\u2022 /competitor-analysis.md\n\u2022 /competitor-crane-deep-dive.md\n\u2022 /research-douglas-fir.md\n\u2022 /memory/seo-analysis-bespokeshedcompany.md",
-      "status": "done",
-      "priority": "high",
-      "category": "marketing",
-      "createdAt": "2026-01-29T15:13:00Z",
-      "completedAt": "2026-01-29T15:14:00Z"
-    },
-    {
-      "id": "76",
-      "title": "Attachment apex gable end cladding infill",
-      "description": "Revisit the gable end cladding for attachment buildings with apex roofs. Currently the triangular gable area may need better infill/trimming.",
-      "status": "backlog",
-      "priority": "low",
-      "category": "configurator",
-      "createdAt": "2026-01-29T22:26:00Z"
-    },
-    {
-      "id": "77",
-      "title": "\ud83c\udfac Animation Production Pipeline (ongoing)",
-      "description": "Template system for producing professional animated videos from the configurator. Enables rapid visual demos for clients with minimal manual input.\n\n**Goal:** Andrew describes what he wants in natural language \u2192 James produces production-ready video.\n\n**Components:**\n\u2022 Keyframe template (JSON format)\n\u2022 Render script (captures frames via CDP)\n\u2022 Shot library (reusable camera moves)\n\n**Files:**\n\u2022 /keyframes-v6.json (current keyframe data)\n\u2022 /render-v8.js (capture script)\n\u2022 /keyframe-editor.html (browser-based editor)\n\u2022 /DEVELOPER-UPDATE-QUESTIONNAIRE.md",
-      "status": "in-progress",
-      "priority": "high",
-      "category": "animation",
-      "createdAt": "2026-01-31T07:30:00Z",
-      "projectType": "ongoing"
-    },
-    {
-      "id": "78",
-      "title": "Document keyframe JSON format",
-      "description": "Create proper documentation for the keyframe JSON schema:\n\u2022 frame (number) - frame index\n\u2022 camera (string) - \"alpha, beta, radius\"\n\u2022 note (string|null) - description\n\u2022 preset (object|null) - full shed-designer-v1 preset\n\nDocument best practices for timing, spacing, transitions.\n\n**Parent:** Animation Production Pipeline (#77)",
-      "status": "backlog",
-      "priority": "medium",
-      "category": "animation",
-      "parentId": "77",
-      "createdAt": "2026-01-31T07:30:00Z"
-    },
-    {
-      "id": "79",
-      "title": "Configurable render script",
-      "description": "Make render script accept parameters:\n\u2022 Model URL (not hardcoded)\n\u2022 Output folder\n\u2022 FPS (currently 12)\n\u2022 WebSocket endpoint\n\u2022 Preset delay timing\n\nEnable deploying on any model variant without code changes.\n\n**Parent:** Animation Production Pipeline (#77)",
-      "status": "backlog",
-      "priority": "medium",
-      "category": "animation",
-      "parentId": "77",
-      "createdAt": "2026-01-31T07:30:00Z"
-    },
-    {
-      "id": "80",
-      "title": "Shot library - reusable camera sequences",
-      "description": "Build library of named camera moves that can be referenced by name:\n\u2022 orbit - 360\u00b0 rotation around model\n\u2022 door-focus - zoom to door, pause, zoom out\n\u2022 roof-sweep - pan across roof showing structure\n\u2022 approach - start far, end close\n\u2022 explode - decladding sequence\n\u2022 walkthrough - full feature tour\n\nAllows Andrew to say \"do an orbit and door-focus\" and James knows exactly what that means.\n\n**Parent:** Animation Production Pipeline (#77)",
-      "status": "backlog",
-      "priority": "high",
-      "category": "animation",
-      "parentId": "77",
-      "createdAt": "2026-01-31T07:30:00Z"
-    },
-    {
-      "id": "81",
-      "title": "Detect model-ready state (reduce delays)",
-      "description": "Currently using fixed 4s delay after preset imports because model rebuild time is unpredictable. Investigate detecting when model is actually ready:\n\u2022 Poll for mesh count stabilization\n\u2022 Use scene.executeWhenReady()\n\u2022 Listen for rebuild-complete events\n\nWould significantly speed up capture process.\n\n**Parent:** Animation Production Pipeline (#77)",
-      "status": "backlog",
-      "priority": "medium",
-      "category": "animation",
-      "parentId": "77",
-      "createdAt": "2026-01-31T07:30:00Z"
-    },
-    {
-      "id": "82",
-      "title": "Natural language \u2192 animation mapping",
-      "description": "Build understanding of Andrew's shorthand so James can interpret requests like:\n\u2022 \"log store\" = attachment on left\n\u2022 \"walkthrough\" = specific shot sequence\n\u2022 \"show off the door detail\" = door-focus shot\n\u2022 \"nice orbit\" = smooth 360\u00b0 rotation\n\nLearned over time through collaboration. Document mappings as they emerge.\n\n**Parent:** Animation Production Pipeline (#77)",
-      "status": "in-progress",
-      "priority": "high",
-      "category": "animation",
-      "parentId": "77",
-      "createdAt": "2026-01-31T07:30:00Z"
-    },
-    {
-      "id": "83",
-      "title": "Keyframe editor improvements",
-      "description": "Enhance the browser-based keyframe editor:\n\u2022 \u2705 Editable frame numbers in list\n\u2022 Visual timeline representation\n\u2022 Preview camera positions\n\u2022 Drag-and-drop reordering\n\u2022 Import presets from configurator clipboard\n\n**File:** /keyframe-editor.html\n\n**Parent:** Animation Production Pipeline (#77)",
-      "status": "backlog",
-      "priority": "medium",
-      "category": "animation",
-      "parentId": "77",
-      "createdAt": "2026-01-31T07:30:00Z"
-    },
-    {
-      "id": "84",
-      "title": "v8 animation capture complete",
-      "description": "Successfully captured 65-frame animation with proper rendering (no wireframe flicker).\n\n**Sequence:**\n\u2022 Frames 1-40: Zoom in\n\u2022 Frames 41-53: Door widening (1000\u21921350mm, 2-frame gaps)\n\u2022 Frame 55: Style change to double M&T\n\u2022 Frames 55-65: Door close + zoom out\n\n**Fix applied:** 4s delay after preset imports + forced render cycles.\n\n**Parent:** Animation Production Pipeline (#77)",
-      "status": "done",
-      "priority": "high",
-      "category": "animation",
-      "parentId": "77",
-      "createdAt": "2026-01-31T00:30:00Z",
-      "completedAt": "2026-01-31T01:10:00Z"
-    },
-    {
-      "id": "85",
-      "title": "Visual timeline editor in configurator",
-      "description": "In-browser timeline UI for building animations visually:\n\n**Features:**\n\u2022 Timeline bar at bottom of configurator\n\u2022 Scrub playhead to preview any point in animation\n\u2022 Click to add keyframe (captures camera + model state)\n\u2022 Drag keyframes to retime\n\u2022 Click keyframe to edit\n\u2022 Real-time preview playback\n\u2022 Export to JSON for render script\n\n**Benefits:**\n\u2022 Andrew can build sequences visually without manual frame numbers\n\u2022 Iterate timing without James in the loop\n\u2022 See the animation as you build it\n\n**Complexity:** Medium-high. Needs Babylon camera hooks + preset system integration.\n\n**Parent:** Animation Production Pipeline (#77)",
-      "status": "ideas",
-      "priority": "high",
-      "category": "animation",
-      "parentId": "77",
-      "createdAt": "2026-01-31T07:30:00Z"
-    },
-    {
-      "id": "86",
-      "title": "Back gable insulation positioning fix",
-      "description": "Fixed back gable insulation panel positioning. For back gable, interior faces toward -Z, so FRONT face of insulation (at z_mm) should be flush with inner face of back gable.\n\n**Commit:** ab398a6",
-      "status": "done",
-      "priority": "medium",
-      "category": "configurator",
-      "createdAt": "2026-01-31T20:45:00Z",
-      "completedAt": "2026-01-31T20:45:00Z"
-    },
-    {
-      "id": "87",
-      "title": "Hide 'At Eaves' tie beam for insulated apex",
-      "description": "Insulated apex roofs require raised tie beam for roof insulation to work. UI now hides and disables 'At Eaves' option when variant=insulated AND roof=apex. Auto-forces 'raised' if 'eaves' was previously selected. Shows option again when switching back to Basic.\n\n**Commits:** 0614077, 059f66f\n**Verified:** Browser DOM check confirmed display:none + disabled:true",
-      "status": "done",
-      "priority": "medium",
-      "category": "configurator",
-      "createdAt": "2026-01-31T20:55:00Z",
-      "completedAt": "2026-01-31T21:05:00Z"
-    },
-    {
-      "id": "88",
-      "title": "Review animation pipeline architecture",
-      "description": "Design review: how voice-to-preset, camera tracks, keyframe editor, and visual preview all connect.\n\n**Components:**\n\u2022 Voice-to-preset: Natural language \u2192 JSON preset \u2192 share URL\n\u2022 Camera tracks: Reusable camera movements (orbit, zoom, approach)\n\u2022 Keyframe editor: Browser tool for building sequences\n\u2022 Visual preview: Timeline slider, thumbnail strips, frame verification\n\n**Goal:** Sketch architecture diagram showing data flow from voice input to rendered video.\n\n**See also:** Mind map updated with Animation Pipeline node cluster.",
-      "status": "backlog",
-      "priority": "high",
-      "category": "animation",
-      "parentId": "77",
-      "createdAt": "2026-01-31T23:13:00Z"
-    },
-    {
-      "id": "89",
-      "title": "Design sub-agent prompts: Hygiene + Strategy",
-      "description": "Create prompt specs for two specialized sub-agents:\n\n**Hygiene Agent**\n- Reviews memory files periodically\n- Identifies clutter and outdated info\n- Proposes consolidations and archives\n- Reports recommendations for approval\n\n**Strategy Agent**\n- Reviews capability landscape (mind map, tools, recent work)\n- Looks for cross-pollination opportunities\n- Proposes new combinations and experiments\n- \"What if we connected X to Y?\" thinking\n\n**Design considerations:**\n- Clear scope and boundaries\n- Access to right files\n- Report format\n- Approval workflow\n- Run frequency (heartbeat? scheduled?)",
-      "status": "backlog",
-      "priority": "high",
-      "category": "operations",
-      "createdAt": "2026-01-31T23:37:00Z"
-    },
-    {
-      "id": "90",
-      "title": "Voice-to-voice chat with James",
-      "description": "Real-time voice conversation capability. Speak \u2192 James hears \u2192 James responds with voice.\n\n**Prototype built:** /voice-chat/\n- Browser-based speech recognition\n- Routes through Clawdbot CLI\n- TTS responses\n\n**Issues encountered:**\n- Cloudflare quick tunnels are ephemeral (new URL each time)\n- Transcript accumulation bug (fixed)\n- Server/tunnel die when sandbox restarts\n\n**For proper implementation:**\n- Persistent tunnel (Cloudflare account) or real domain\n- Keep server running reliably\n- Consider WebRTC for lower latency\n- Mobile-friendly UI improvements",
-      "status": "backlog",
-      "priority": "medium",
-      "category": "operations",
-      "createdAt": "2026-02-04T11:19:00Z"
-    },
-    {
-      "id": "91",
-      "title": "YouTube video summarization",
-      "description": "James can now fetch YouTube transcripts and summarize videos.\n\n**Script:** /scripts/youtube-summarize.py\n**Usage:** Send YouTube link + ask for summary\n**Supports:** Manual captions, auto-generated, translation from other languages",
-      "status": "done",
-      "priority": "medium",
-      "category": "operations",
-      "createdAt": "2026-02-04T11:30:00Z",
-      "completedAt": "2026-02-04T11:35:00Z"
-    },
-    {
-      "id": "92",
-      "title": "Concrete pier foundation system",
-      "description": "Dense concrete blocks on Type 1 MOT base. Stronger than timber-on-ground, never rots. Include in BOM: blocks, MOT quantity, mortar.",
-      "status": "backlog",
-      "priority": "high",
-      "category": "configurator",
-      "createdAt": "2026-02-04T12:07:00Z",
-      "source": "YouTube research - The DIY Guy"
-    },
-    {
-      "id": "93",
-      "title": "Floor frame bearers and joists",
-      "description": "5x2 or 6x2 treated timber frame on piers. Bearers run length, joists at 400mm centres. Include L-bracket fixings in BOM.",
-      "status": "backlog",
-      "priority": "high",
-      "category": "configurator",
-      "createdAt": "2026-02-04T12:07:00Z",
-      "source": "YouTube research - The DIY Guy"
-    },
-    {
-      "id": "94",
-      "title": "Anti-racking diagonal braces",
-      "description": "Diagonal braces for walls without OSB sheathing. Runs corner-to-corner on inside face. Critical for structural integrity of shed-style builds.",
-      "status": "backlog",
-      "priority": "high",
-      "category": "configurator",
-      "createdAt": "2026-02-04T12:07:00Z",
-      "source": "YouTube research - The DIY Guy"
-    },
-    {
-      "id": "95",
-      "title": "Noggins / horizontal blocking",
-      "description": "Horizontal braces between studs at mid-wall height. Strengthens wall, provides fixing points. Standard practice in UK shed building.",
-      "status": "backlog",
-      "priority": "high",
-      "category": "configurator",
-      "createdAt": "2026-02-04T12:07:00Z",
-      "source": "YouTube research - The DIY Guy"
-    },
-    {
-      "id": "96",
-      "title": "King studs and trimmers around openings",
-      "description": "Doubled-up framing around doors/windows. King stud runs full height, trimmer bears the header. Standard structural framing practice.",
-      "status": "backlog",
-      "priority": "medium",
-      "category": "configurator",
-      "createdAt": "2026-02-04T12:07:00Z",
-      "source": "YouTube research - The DIY Guy"
-    },
-    {
-      "id": "97",
-      "title": "Header beams over openings",
-      "description": "Load-bearing timber spanning door/window openings. Transfers load to king studs. Critical for structural integrity.",
-      "status": "backlog",
-      "priority": "medium",
-      "category": "configurator",
-      "createdAt": "2026-02-04T12:07:00Z",
-      "source": "YouTube research - The DIY Guy"
-    },
-    {
-      "id": "98",
-      "title": "Roof pitch calculator",
-      "description": "Input pitch in degrees, auto-calculate rafter length and cuts. Use formula or app logic (Essential Roofing App style). Display pitch angle in UI.",
-      "status": "backlog",
-      "priority": "high",
-      "category": "configurator",
-      "createdAt": "2026-02-04T12:07:00Z",
-      "source": "YouTube research - The DIY Guy"
-    },
-    {
-      "id": "99",
-      "title": "Roof overhang / eaves parameter",
-      "description": "Adjustable rafter overhang beyond wall line. Affects fascia position, soffit requirement, and weather protection. Common values: 0-300mm.",
-      "status": "backlog",
-      "priority": "high",
-      "category": "configurator",
-      "createdAt": "2026-02-04T12:07:00Z",
-      "source": "YouTube research - The DIY Guy"
-    },
-    {
-      "id": "100",
-      "title": "Ridge beam as separate element",
-      "description": "Distinct ridge beam running length of building. Rafters meet at ridge. Include in BOM separately from rafters.",
-      "status": "backlog",
-      "priority": "medium",
-      "category": "configurator",
-      "createdAt": "2026-02-04T12:07:00Z",
-      "source": "YouTube research - The DIY Guy"
-    },
-    {
-      "id": "101",
-      "title": "OSB roof deck / sheathing",
-      "description": "18mm T&G OSB on rafters before roofing membrane. Half-bond joints for strength. Include in BOM with sheet count.",
-      "status": "backlog",
-      "priority": "medium",
-      "category": "configurator",
-      "createdAt": "2026-02-04T12:07:00Z",
-      "source": "YouTube research - The DIY Guy"
-    },
-    {
-      "id": "102",
-      "title": "Cladding cover calculation",
-      "description": "Account for tongue/groove overlap when calculating cladding quantity. Cover \u2260 board width. Critical for accurate BOM.",
-      "status": "backlog",
-      "priority": "high",
-      "category": "configurator",
-      "createdAt": "2026-02-04T12:07:00Z",
-      "source": "YouTube research - The DIY Guy"
-    },
-    {
-      "id": "103",
-      "title": "Shiplap cladding detail",
-      "description": "Tongue & groove with rebate visualization. Show overlap joint detail. Different from current flat panel representation.",
-      "status": "backlog",
-      "priority": "medium",
-      "category": "configurator",
-      "createdAt": "2026-02-04T12:07:00Z",
-      "source": "YouTube research - The DIY Guy"
-    },
-    {
-      "id": "104",
-      "title": "Corner posts / trim pieces",
-      "description": "22x22mm corner posts where cladding meets. Covers end grain, gives neat finish. Include in BOM.",
-      "status": "backlog",
-      "priority": "medium",
-      "category": "configurator",
-      "createdAt": "2026-02-04T12:07:00Z",
-      "source": "YouTube research - The DIY Guy"
-    },
-    {
-      "id": "105",
-      "title": "Window and door trim pieces",
-      "description": "Finishing trim around openings. Covers cladding edges, gives professional look. Various profile options.",
-      "status": "backlog",
-      "priority": "medium",
-      "category": "configurator",
-      "createdAt": "2026-02-04T12:07:00Z",
-      "source": "YouTube research - The DIY Guy"
-    },
-    {
-      "id": "106",
-      "title": "Featheredge cladding option",
-      "description": "Alternative to shiplap - overlapping wedge-profile boards. Traditional look, different BOM calculation.",
-      "status": "backlog",
-      "priority": "medium",
-      "category": "configurator",
-      "createdAt": "2026-02-04T12:07:00Z",
-      "source": "YouTube research"
-    },
-    {
-      "id": "107",
-      "title": "Soffit boards",
-      "description": "Underside of roof overhang. Closes gap between fascia and wall. Various widths depending on overhang.",
-      "status": "backlog",
-      "priority": "medium",
-      "category": "configurator",
-      "createdAt": "2026-02-04T12:07:00Z",
-      "source": "YouTube research - The DIY Guy"
-    },
-    {
-      "id": "108",
-      "title": "Bargeboards on gable ends",
-      "description": "Trim boards following roof pitch on gable ends. Finishes roof edge, protects rafter ends.",
-      "status": "backlog",
-      "priority": "medium",
-      "category": "configurator",
-      "createdAt": "2026-02-04T12:07:00Z",
-      "source": "YouTube research - The DIY Guy"
-    },
-    {
-      "id": "109",
-      "title": "Synthetic slate tile roof covering",
-      "description": "Full layer stack for slate tile roofs (Tapco-style synthetic slate):\n\n**Completed layers:**\n\u2022 Breathable membrane (light blue, 0.5mm) - sits on OSB\n\u2022 Tile battens (25x38mm treated timber, 143mm spacing)\n\u2022 Ridge battens (25mm from ridge line, both slopes)\n\u2022 Eaves battens (25mm from eaves edge)\n\u2022 Slate tile surface (pewter grey, 5mm thick)\n\n**Still to do:**\n\u2022 Ridge tiles (V-profile cap along ridge)\n\u2022 Texture/normal map for realistic appearance\n\u2022 Visibility toggles for construction breakdown\n\n**Files:**\n\u2022 docs/src/elements/roof-tiles.js\n\n**Branch:** feature/slate-tile-roof @ b3bc44d",
-      "status": "done",
-      "priority": "high",
-      "category": "configurator",
-      "createdAt": "2026-02-04T15:30:00Z",
-      "completedAt": "2026-02-12T21:38:00Z"
-    },
-    {
-      "id": "110",
-      "title": "Internal wall cladding options",
-      "description": "Add dropdown for internal wall finish options:\n\u2022 Plywood (current default for insulated)\n\u2022 Tongue & groove (8mm planed)\n\u2022 Painted/primed options\n\nVisual update in 3D + include in BOM. Requested by customer enquiry for fully insulated build.",
-      "status": "backlog",
-      "priority": "medium",
-      "category": "configurator",
-      "createdAt": "2026-02-06T16:48:00Z"
-    },
-    {
-      "id": "111",
-      "title": "Relative door/window positioning",
-      "description": "When building dimensions change, doors and windows should maintain their relative position on the wall (percentage-based) rather than absolute mm position.\n\nExample: A centered door stays centered when wall length changes, instead of migrating to one side.\n\nSimilar to how door width changes expand from center.",
-      "status": "backlog",
-      "priority": "medium",
-      "category": "configurator",
-      "createdAt": "2026-02-06T16:50:00Z"
-    },
-    {
-      "id": "112",
-      "title": "Door hinge graphics look wrong",
-      "description": "The 3D representation of door hinges looks weird/unrealistic. Review hinge geometry and improve visual appearance. May need better positioning, scaling, or mesh detail.",
-      "status": "backlog",
-      "priority": "medium",
-      "category": "configurator",
-      "createdAt": "2026-02-09T00:22:00Z"
-    },
-    {
-      "id": "113",
-      "title": "Hipped roof insulation + ply liner not working",
-      "description": "Insulation and plywood liner for hipped roof variant isn't working properly. Needs investigation \u2014 may be geometry positioning, visibility, or build logic specific to hipped roof style.",
-      "status": "backlog",
-      "priority": "high",
-      "category": "configurator",
-      "createdAt": "2026-02-09T07:02:00Z"
-    },
-    {
-      "id": "114",
-      "title": "Attachment building polish: visibility checkboxes + insulation/ply organisation",
-      "description": "Attached buildings have good progress but need finishing touches:\n1. Visibility checkboxes not working properly for attachment elements\n2. Insulation and ply liner layers need better organisation in the attachment context\n\nLow priority - park for now, revisit later.",
-      "status": "backlog",
-      "priority": "medium",
-      "category": "configurator",
-      "createdAt": "2026-02-09T15:34:00Z"
-    },
-    {
-      "id": "115",
-      "title": "Fix share URL missing state fields",
-      "description": "Share URLs were missing roof covering, tie beam, cladding style, and attachment roof visibility fields. Added them. Commit 7b9d077.",
-      "status": "done",
-      "priority": "medium",
-      "category": "configurator",
-      "createdAt": "2026-02-09T00:13:00Z",
-      "completedAt": "2026-02-09T00:13:00Z"
-    },
-    {
-      "id": "116",
-      "title": "Fix attachment height capping 168mm too low",
-      "description": "Eaves heights should be from floor surface not ground level. Was 168mm short. Commit cea3d74.",
-      "status": "done",
-      "priority": "medium",
-      "category": "configurator",
-      "createdAt": "2026-02-09T10:42:00Z",
-      "completedAt": "2026-02-09T10:42:00Z"
-    },
-    {
-      "id": "117",
-      "title": "Preset overhaul: new presets, categories, cleanup",
-      "description": "Updated hipped garage, added Apex Garden Room + Small Pent Shed, removed debug/old presets, fixed hipped membrane/battens. 10 commits pushed.",
-      "status": "done",
-      "priority": "medium",
-      "category": "configurator",
-      "createdAt": "2026-02-09T08:00:00Z",
-      "completedAt": "2026-02-09T08:37:00Z"
-    },
-    {
-      "id": "118",
-      "title": "Pent insulation + ply follows roof slope",
-      "description": "Wall insulation and ply lining on pent roofs now follows the slope per-bay using vertex modification (not CSG). Per-wall heights for left/right walls. Multiple iterations. Commits d33558d \u2192 dfc865e.",
-      "status": "done",
-      "priority": "high",
-      "category": "configurator",
-      "createdAt": "2026-02-09T15:37:00Z",
-      "completedAt": "2026-02-09T18:25:00Z"
-    },
-    {
-      "id": "119",
-      "title": "Fix pent plyboard ghost wireframe above frame",
-      "description": "enableEdgesRendering() was called before vertex slope adjustment, causing ghost outline at original box shape. Fix: moved to after vertex mod, added updatable:true + refreshBoundingInfo(). Commit d778f6f.",
-      "status": "done",
-      "priority": "medium",
-      "category": "configurator",
-      "createdAt": "2026-02-09T18:40:00Z",
-      "completedAt": "2026-02-09T19:12:00Z"
-    },
-    {
-      "id": "120",
-      "title": "Fix pent roof plateThickness in floor stack calculation",
-      "description": "plateThickness was incorrectly included in FLOOR_STACK_MM in roof.js \u2014 it's part of the wall frame, not the floor. Removed to align with walls.js pentStackAdjust. Commit 13c0aa3.",
-      "status": "done",
-      "priority": "medium",
-      "category": "configurator",
-      "createdAt": "2026-02-09T19:20:00Z",
-      "completedAt": "2026-02-09T19:43:00Z"
-    },
-    {
-      "id": "121",
-      "title": "Pricing engine: per-component costing, margins, suppliers, VAT",
-      "description": "Full pricing system for the configurator BOM:\n- Cost price input per component\n- Multiple cost options per component (e.g. different grades/sizes)\n- Multiple suppliers per component (compare pricing)\n- Programmable margin percentages per component category\n- VAT toggle (show with/without)\n- Needs careful design thinking before implementation\n\nPart of UI polish phase.",
-      "status": "backlog",
-      "priority": "high",
-      "category": "configurator",
-      "createdAt": "2026-02-09T20:01:00Z"
-    },
-    {
-      "id": "122",
-      "title": "Fix memory_search \u2014 add embeddings API key",
-      "description": "memory_search is failing for all agents due to missing OpenAI/Google embeddings API key in auth-profiles.json. Only Anthropic key configured. Need to run: clawdbot agents auth main --provider openai --token sk-xxx (or Google). Semantic search across memory files is broken \u2014 workaround is manual file reads.",
-      "status": "backlog",
-      "priority": "high",
-      "category": "operations",
-      "createdAt": "2026-02-10T09:18:00Z"
-    },
-    {
-      "id": "123",
-      "title": "Seamless voice interaction with James",
-      "description": "High-quality, reliable voice calling between Andrew and James. Current state: Tailscale funnel + Clawdbot dashboard voice exists but setup is fragile (bind issues, DNS, auth). Goal: one-tap voice call from phone, reliable connection, natural conversation quality. Investigate: LiveKit, WebRTC, Clawdbot native voice, persistent tunnel setup.",
-      "status": "backlog",
-      "priority": "high",
-      "category": "operations",
-      "createdAt": "2026-02-10T11:03:00Z"
-    },
-    {
-      "id": "124",
-      "title": "Budget buildings range \u2014 mushroom/microgreen grow sheds",
-      "description": "Research and develop cheapest possible insulated shed range designed as controlled environments for growing mushrooms and microgreens. Includes: supplier research, material costs, insulation options, ventilation/humidity requirements, pricing.",
-      "status": "in-progress",
-      "priority": "high",
-      "category": "business",
-      "createdAt": "2026-02-10T14:34:00Z"
-    },
-    {
-      "id": "125",
-      "title": "Budget cladding render issues & colour logic",
-      "description": "Box profile/corrugated steel cladding renders too thin/transparent. Colour picker logic needs verification \u2014 materials not applying visibly. Also check galvanised trim, corner flashings, and fascia material for budget styles. Infinite loop crash fixed (CLAD_H=0) but visual quality needs work.",
-      "status": "backlog",
-      "priority": "medium",
-      "category": "configurator",
-      "createdAt": "2026-02-11T13:19:14Z"
-    },
-    {
-      "id": "126",
-      "title": "Building Type Selector \u2014 Phase 1 (Gazebo)",
-      "description": "Add building type dropdown replacing 'Design Your Shed' title. First type: Gazebo \u2014 4 corner posts (150x150), hipped roof, no walls/cladding. Store buildingType in state, hide irrelevant controls.",
-      "status": "in-progress",
-      "priority": "high",
-      "category": "configurator",
-      "createdAt": "2026-02-11T21:56:53Z"
-    },
-    {
-      "id": "127",
-      "title": "Building Type Selector \u2014 Phase 2 (Full Range)",
-      "description": "Extend building type dropdown with: Summer House, Garden Room, Garage, Workshop, Lean-to, Field Shelter. Each type defines its own defaults, visible controls, and rendering rules.",
-      "status": "backlog",
-      "priority": "high",
-      "category": "configurator",
-      "createdAt": "2026-02-11T21:56:53Z"
-    },
-    {
-      "id": "128",
-      "title": "Photo paste/attach support in dashboards",
-      "description": "Paste or attach photos into dashboard cards/ideas. PRIMARY USE: mobile phone on-site. Must be visible to ALL users (not localStorage). UX: tap button \u2192 camera/gallery picker (input accept=image/*), compress before upload (phone photos are huge), then commit to data/images/ via GitHub API. Desktop: also support paste/drag-drop. Apply across all dashboards.",
-      "status": "ideas",
-      "priority": "high",
-      "category": "configurator",
-      "createdAt": "2026-02-12T21:29:00Z"
-    },
-    {
-      "id": "129",
-      "title": "Whelpley Farm: mobile first-load is blank/zoomed out",
-      "description": "On mobile, dashboard loads looking like a blank screen \u2014 have to zoom and pan to find the content. Needs to load zoomed in on the dashboard features. Check viewport meta, sidebar collapse on mobile, initial scroll position. First impression matters.",
-      "status": "backlog",
-      "priority": "high",
-      "category": "operations",
-      "createdAt": "2026-02-12T21:42:00Z"
-    },
-    {
-      "id": "130",
-      "title": "Mobile dashboard UX: split-screen like configurator",
-      "description": "All dashboards on mobile are tough to use with the sidebar-wizard pattern. Apply the configurator split-screen approach: content top, navigation bottom, drag handle. Consistent mobile UX across all dashboards (Forge AI, Whelpley Farm, GrowCabin, Command Center, Shed Board). Major UX unification piece.",
-      "status": "backlog",
-      "priority": "high",
-      "category": "configurator",
-      "createdAt": "2026-02-12T21:52:00Z"
-    },
-    {
-      "id": "131",
-      "title": "Work sizing: Projects / Jobs / Tasks hierarchy",
-      "description": "Introduce 3-level sizing across all dashboards. Task = \u22642 hours (single action). Job = ~1 day (group of tasks). Project = multiple days (group of jobs). Add as a field to cards. Enables better time estimation, prioritisation, and filtering. Could nest Jobs under Projects and Tasks under Jobs.",
-      "status": "backlog",
-      "priority": "high",
-      "category": "operations",
-      "createdAt": "2026-02-12T22:09:00Z"
-    },
-    {
-      "id": "132",
-      "title": "Mobile: no building type selector (can't access gazebo)",
-      "description": "buildingTypeSelect dropdown is only in sidebar-wizard.js (desktop). Mobile configurator never creates it, so users can't switch building type on mobile. Fix: add building type selector to mobile layout, probably at top of Size step. Also needs to trigger updateBuildingTypeUI() and hide irrelevant steps for gazebo.",
-      "status": "backlog",
-      "priority": "high",
-      "category": "configurator",
-      "createdAt": "2026-02-12T22:25:00Z"
-    }
-  ]
-}
+[
+  {
+    "id": "1",
+    "title": "Dimension constraints implemented",
+    "description": "Max 8m x 4m in either orientation. Validation working.",
+    "status": "done",
+    "priority": "high",
+    "category": "configurator",
+    "createdAt": "2026-01-26T12:00:00Z"
+  },
+  {
+    "id": "2",
+    "title": "Pent roof positioning for attachments",
+    "description": "Fixed rotation and positioning for all 4 attachment directions (left, right, front, back).",
+    "status": "done",
+    "priority": "high",
+    "category": "configurator",
+    "createdAt": "2026-01-26T12:00:00Z"
+  },
+  {
+    "id": "3",
+    "title": "Roof height constraints",
+    "description": "Apex: eaves 800-2400mm, crest 1000-4500mm. Pent: both walls 1000-2400mm. Crest must exceed eaves. Hipped: same as apex (geometry TODO).",
+    "status": "done",
+    "priority": "medium",
+    "category": "configurator",
+    "createdAt": "2026-01-26T12:00:00Z"
+  },
+  {
+    "id": "4",
+    "title": "Door/window size validation",
+    "description": "Openings can't overlap (50mm min gap), can't exceed wall boundaries (100mm from edges). Smart placement finds free spots. Blocks adding when no space left.",
+    "status": "done",
+    "priority": "medium",
+    "category": "configurator",
+    "createdAt": "2026-01-26T12:00:00Z"
+  },
+  {
+    "id": "5",
+    "title": "Marketing landing page",
+    "description": "Create a landing page to showcase the configurator.",
+    "status": "ideas",
+    "priority": "low",
+    "category": "marketing",
+    "createdAt": "2026-01-26T12:00:00Z"
+  },
+  {
+    "id": "6",
+    "title": "README documentation",
+    "description": "Write comprehensive README for the GitHub repo.",
+    "status": "done",
+    "priority": "medium",
+    "category": "configurator",
+    "createdAt": "2026-01-26T12:00:00Z"
+  },
+  {
+    "id": "7",
+    "title": "MIT License added",
+    "description": "Added MIT license to the Parametric-shed2 repo.",
+    "status": "done",
+    "priority": "medium",
+    "category": "configurator",
+    "createdAt": "2026-01-27T08:41:00Z"
+  },
+  {
+    "id": "8",
+    "title": "Decision Map page",
+    "description": "Interactive flowchart for mapping strategic decisions. Added to project board app.",
+    "status": "done",
+    "priority": "medium",
+    "category": "operations",
+    "createdAt": "2026-01-27T08:49:00Z"
+  },
+  {
+    "id": "9",
+    "title": "Potting Shed preset",
+    "description": "Created and saved potting shed preset (2m \u00d7 3.6m) with three windows and pent roof.",
+    "status": "done",
+    "priority": "medium",
+    "category": "configurator",
+    "createdAt": "2026-01-27T09:34:00Z"
+  },
+  {
+    "id": "10",
+    "title": "Parametric shelving system",
+    "description": "Add shelving as a new element type (like doors/windows). Parameters: wall, inside/outside, height, starting position, length. Include in BOM.",
+    "status": "done",
+    "priority": "medium",
+    "category": "configurator",
+    "createdAt": "2026-01-27T09:09:00Z",
+    "completedAt": "2026-02-13T13:30:00Z"
+  },
+  {
+    "id": "11",
+    "title": "Browser access for James",
+    "description": "Set up browser access so James can see and interact with the configurator. Options: (1) Clawdbot browser tool with Chrome extension relay, (2) Puppeteer/Playwright automation, (3) VNC/remote desktop. Would enable: screenshots for README, direct visual testing, debugging UI issues like purlin positioning.",
+    "status": "backlog",
+    "priority": "high",
+    "category": "operations",
+    "createdAt": "2026-01-27T09:40:00Z"
+  },
+  {
+    "id": "12",
+    "title": "Monetization decision mapping",
+    "description": "Map monetization paths in Decision Map with full arguments and evaluation. Options: Enhanced direct sales, DIY plans, Licensing, Niche builds, Spectrum model.",
+    "status": "done",
+    "priority": "high",
+    "category": "business",
+    "createdAt": "2026-01-27T09:40:00Z"
+  },
+  {
+    "id": "13",
+    "title": "\ud83d\udd04 Competitor Intelligence (ongoing)",
+    "description": "Continuous market awareness and competitor monitoring. This is a parent project \u2014 never 'done'. See linked deliverables below.\n\n**Completed deliverables:**\n\u2022 Initial landscape analysis (card #31)\n\u2022 Tech gap analysis (card #32)\n\u2022 Quick Garden profile (card #33)\n\n**Files:**\n\u2022 /competitor-analysis.md (main report)\n\u2022 /shed-project-board/competitors.md (profiles)\n\n**Backlog:**\n\u2022 Deep-dive: Crane Garden Buildings\n\u2022 Deep-dive: Scotts of Thrapston\n\u2022 Keyword/SEO competitor research\n\u2022 Pricing intelligence\n\u2022 Quarterly refresh",
+    "status": "in-progress",
+    "priority": "medium",
+    "category": "marketing",
+    "createdAt": "2026-01-27T09:40:00Z",
+    "projectType": "ongoing"
+  },
+  {
+    "id": "14",
+    "title": "Add screenshot to README",
+    "description": "Grab a nice screenshot or GIF of the configurator for the README hero image.",
+    "status": "backlog",
+    "priority": "medium",
+    "category": "configurator",
+    "createdAt": "2026-01-27T09:52:00Z"
+  },
+  {
+    "id": "15",
+    "title": "SEO improvements",
+    "description": "Improve SEO on bespokeshedcompany.co.uk. Full analysis: /home/ser/clawd/memory/seo-analysis-bespokeshedcompany.md\n\n**Critical issues:**\n\u2022 Thin content (~100 words per product page, need 500+)\n\u2022 Poor page titles (numbered, generic)\n\u2022 No blog content since 2019\n\u2022 Weak location targeting (one mention of Wiltshire)\n\u2022 Zero reviews showing\n\u2022 Configurator not mentioned anywhere\n\n**Quick wins:**\n1. Fix page titles (remove numbers, add keywords + location)\n2. Write 500+ words per product page\n3. Get 5 Google reviews\n4. Add 'Design Your Own' page linking to configurator\n\n**Medium term:**\n\u2022 Location landing pages (/garden-buildings-salisbury/ etc)\n\u2022 Blog with case studies\n\u2022 FAQ schema markup",
+    "status": "backlog",
+    "priority": "high",
+    "category": "website",
+    "createdAt": "2026-01-27T10:15:00Z",
+    "analysisFile": "memory/seo-analysis-bespokeshedcompany.md",
+    "analysisDate": "2026-01-29"
+  },
+  {
+    "id": "16",
+    "title": "Website rebuild strategy",
+    "description": "Decide on approach: refresh current, full rebuild, add e-commerce/quote system, or hybrid configurator model. See Decision Map.",
+    "status": "ideas",
+    "priority": "high",
+    "category": "website",
+    "createdAt": "2026-01-27T10:17:00Z"
+  },
+  {
+    "id": "17",
+    "title": "Mobile UX for configurator",
+    "description": "Bottom drawer panel, 55vh height, larger fonts (14-16px), touch-friendly controls, auto-collapse on load, tap-to-close, modern IKEA-inspired theme.",
+    "status": "done",
+    "priority": "medium",
+    "category": "configurator",
+    "createdAt": "2026-01-27T10:05:00Z"
+  },
+  {
+    "id": "18",
+    "title": "Monetization strategy document",
+    "description": "Create comprehensive monetization strategy doc in the repo. Cover: direct sales, DIY plans, licensing, niche builds, spectrum model, supplier partnerships.",
+    "status": "backlog",
+    "priority": "high",
+    "category": "business",
+    "createdAt": "2026-01-27T11:04:00Z"
+  },
+  {
+    "id": "19",
+    "title": "Fastest-to-revenue roadmap",
+    "description": "Prioritize monetization paths by speed-to-revenue. Create actionable roadmap: Week 1, Month 1, Quarter 1 milestones.",
+    "status": "backlog",
+    "priority": "high",
+    "category": "business",
+    "createdAt": "2026-01-27T11:04:00Z"
+  },
+  {
+    "id": "20",
+    "title": "Embed configurator on bespokeshedcompany.co.uk",
+    "description": "Deploy parametric configurator on the business website. First monetization step: capture leads, enable quotes.",
+    "status": "backlog",
+    "priority": "high",
+    "category": "website",
+    "createdAt": "2026-01-27T11:04:00Z"
+  },
+  {
+    "id": "21",
+    "title": "Hipped roof implementation",
+    "description": "Add hipped roof style option. Currently placeholder in roof style dropdown. Requires new geometry: hip rafters from corners to ridge, jack rafters on all four sides.",
+    "status": "done",
+    "priority": "medium",
+    "category": "configurator",
+    "createdAt": "2026-01-28T09:12:00Z",
+    "completedAt": "2026-02-12T20:56:00Z"
+  },
+  {
+    "id": "22",
+    "title": "Fix apex roof on attached buildings",
+    "description": "Apex roof on attached buildings not working properly. Needs investigation and fix.",
+    "status": "backlog",
+    "priority": "high",
+    "category": "configurator",
+    "createdAt": "2026-01-28T09:12:00Z"
+  },
+  {
+    "id": "23",
+    "title": "Wall insulation + plywood lining",
+    "description": "50mm PIR insulation between studs, 12mm plywood lining inside. Skips door/window openings. Tied to insulated variant. Added to BOM.",
+    "status": "done",
+    "priority": "high",
+    "category": "configurator",
+    "createdAt": "2026-01-27T15:00:00Z",
+    "completedAt": "2026-01-27T18:00:00Z"
+  },
+  {
+    "id": "24",
+    "title": "Cripple studs below windows",
+    "description": "Added missing cripple studs from bottom plate to window sill. Works for all wall orientations.",
+    "status": "done",
+    "priority": "medium",
+    "category": "configurator",
+    "createdAt": "2026-01-27T16:00:00Z",
+    "completedAt": "2026-01-27T18:00:00Z"
+  },
+  {
+    "id": "25",
+    "title": "Divider height modes",
+    "description": "Added heightMode: 'walls' (to eaves) or 'roof' (fill to crest). Z-axis dividers get triangular gable frames, X-axis get flat fill.",
+    "status": "done",
+    "priority": "medium",
+    "category": "configurator",
+    "createdAt": "2026-01-27T14:00:00Z",
+    "completedAt": "2026-01-27T15:00:00Z"
+  },
+  {
+    "id": "26",
+    "title": "CSG boolean cuts for plywood around openings",
+    "description": "Plywood panels now use CSG subtraction to cut around doors/windows instead of skipping walls with openings.",
+    "status": "done",
+    "priority": "medium",
+    "category": "configurator",
+    "createdAt": "2026-01-27T17:00:00Z",
+    "completedAt": "2026-01-27T18:00:00Z"
+  },
+  {
+    "id": "27",
+    "title": "Fix apex purlins - horizontal positioning",
+    "description": "Purlins should be HORIZONTAL (not tilted with slope) and SIT ON TOP of rafters. Currently broken - parenting to roofRoot causes unexpected tilt. Needs investigation into transform hierarchy.",
+    "status": "done",
+    "priority": "high",
+    "category": "configurator",
+    "createdAt": "2026-01-28T21:30:00Z",
+    "completedAt": "2026-02-09T08:30:00Z"
+  },
+  {
+    "id": "28",
+    "title": "Code documentation + JSDoc comments",
+    "description": "Add proper JSDoc comments to roof.js, walls.js, attachments.js. Clean up dead code, improve console logging. PROGRESS: roof.js done (126 lines added), walls.js partial (45 lines), attachments.js partial (64 lines).",
+    "status": "in-progress",
+    "priority": "medium",
+    "category": "configurator",
+    "createdAt": "2026-01-29T09:48:00Z"
+  },
+  {
+    "id": "29",
+    "title": "Hard Rules page",
+    "description": "Added Rules page to project board with full CRUD. View, add, edit, delete rules. Pre-loaded with working guidelines. Data in data/rules.json.",
+    "status": "done",
+    "priority": "high",
+    "category": "operations",
+    "createdAt": "2026-01-29T11:41:00Z",
+    "completedAt": "2026-01-29T11:45:00Z"
+  },
+  {
+    "id": "30",
+    "title": "2D Brain view",
+    "description": "Added 2D force-directed graph view as alternative to 3D brain. Uses D3.js. Pan/zoom, click nodes for details, drag to rearrange. Shared data file (data/brain.json) keeps 2D and 3D in sync.",
+    "status": "done",
+    "priority": "medium",
+    "category": "operations",
+    "createdAt": "2026-01-29T11:47:00Z",
+    "completedAt": "2026-01-29T11:50:00Z"
+  },
+  {
+    "id": "31",
+    "title": "\ud83d\udcca Competitor: Landscape analysis",
+    "description": "Initial UK market landscape. Three-tier breakdown: Budget (BillyOh, Tiger), Premium Prefab (Quick Garden, Crane, Scotts), True Bespoke. Market positioning identified.\n\n**Parent:** Competitor Intelligence (#13)\n**File:** /competitor-analysis.md",
+    "status": "done",
+    "priority": "medium",
+    "category": "marketing",
+    "parentId": "13",
+    "createdAt": "2026-01-27T09:40:00Z",
+    "completedAt": "2026-01-27T12:00:00Z"
+  },
+  {
+    "id": "32",
+    "title": "\ud83d\udcca Competitor: Tech gap analysis",
+    "description": "Comparison table: 3D visualisation, parametric model, real-time pricing, cutting lists. Key finding: NO UK competitor has true parametric 3D with cutting list output. Major differentiator.\n\n**Parent:** Competitor Intelligence (#13)\n**File:** /competitor-analysis.md",
+    "status": "done",
+    "priority": "medium",
+    "category": "marketing",
+    "parentId": "13",
+    "createdAt": "2026-01-27T09:40:00Z",
+    "completedAt": "2026-01-27T12:00:00Z"
+  },
+  {
+    "id": "33",
+    "title": "\ud83d\udcca Competitor: Quick Garden profile",
+    "description": "Deep-dive on Quick Garden. European manufacturer, 26k+ customers, log cabin specialists. No online configurator \u2014 manual bespoke process. Lead times 4-10 weeks. Pricing examples gathered.\n\n**Parent:** Competitor Intelligence (#13)\n**File:** /shed-project-board/competitors.md",
+    "status": "done",
+    "priority": "medium",
+    "category": "marketing",
+    "parentId": "13",
+    "createdAt": "2026-01-27T09:40:00Z",
+    "completedAt": "2026-01-27T12:00:00Z"
+  },
+  {
+    "id": "34",
+    "title": "\ud83d\udcca Competitor: Crane deep-dive",
+    "description": "Full profile of Crane Garden Buildings. Norfolk workshop, 50+ years, 13 UK showrooms, National Trust partnership. Confirmed: their 'configurator' is just an options selector, NOT parametric 3D. Key weakness identified.\n\n**Parent:** Competitor Intelligence (#13)\n**File:** /competitor-crane-deep-dive.md",
+    "status": "done",
+    "priority": "medium",
+    "category": "marketing",
+    "parentId": "13",
+    "createdAt": "2026-01-29T12:06:00Z",
+    "completedAt": "2026-01-29T14:45:00Z"
+  },
+  {
+    "id": "35",
+    "title": "\ud83d\udcca Competitor: Scotts deep-dive",
+    "description": "Full profile of Scotts of Thrapston. 100+ years, hardwood specialists, equestrian/garages. Very traditional consultative model. Different customer journey but worth understanding.\n\n**Parent:** Competitor Intelligence (#13)",
+    "status": "backlog",
+    "priority": "low",
+    "category": "marketing",
+    "parentId": "13",
+    "createdAt": "2026-01-29T12:06:00Z"
+  },
+  {
+    "id": "36",
+    "title": "\ud83d\udcca Competitor: SEO/keyword research",
+    "description": "Research what keywords competitors rank for. Identify gaps and opportunities. Tools: Ubersuggest, SEMrush free tier, or manual Google research.\n\n**Parent:** Competitor Intelligence (#13)",
+    "status": "backlog",
+    "priority": "medium",
+    "category": "marketing",
+    "parentId": "13",
+    "createdAt": "2026-01-29T12:06:00Z"
+  },
+  {
+    "id": "37",
+    "title": "\ud83d\udcca Competitor: Pricing intelligence",
+    "description": "Gather real pricing data across competitors. Build comparison matrix. Understand where Andrew sits in the market and identify pricing strategy opportunities.\n\n**Parent:** Competitor Intelligence (#13)",
+    "status": "backlog",
+    "priority": "medium",
+    "category": "marketing",
+    "parentId": "13",
+    "createdAt": "2026-01-29T12:06:00Z"
+  },
+  {
+    "id": "38",
+    "title": "Avon View Garden Room preset",
+    "description": "Customer enquiry preset. 7'8\" \u00d7 9'6\" (2340 \u00d7 2900mm), apex roof 2m eaves \u2192 2.4m ridge. Door centered on front + 2 narrow windows flanking, picture window on left side.",
+    "status": "done",
+    "priority": "medium",
+    "category": "configurator",
+    "createdAt": "2026-01-27T14:00:00Z",
+    "completedAt": "2026-01-27T14:30:00Z"
+  },
+  {
+    "id": "39",
+    "title": "URL state sharing",
+    "description": "Configs can be shared via URL: ?profile=viewer&c=<base64-encoded-state>. Profile=viewer required to parse URL state. Enables sharing designs with customers.",
+    "status": "done",
+    "priority": "medium",
+    "category": "configurator",
+    "createdAt": "2026-01-27T14:00:00Z",
+    "completedAt": "2026-01-27T14:00:00Z"
+  },
+  {
+    "id": "40",
+    "title": "Project board PWA support",
+    "description": "Mobile-friendly progressive web app. Installable on phone home screen. Touch-friendly interface.",
+    "status": "done",
+    "priority": "low",
+    "category": "operations",
+    "createdAt": "2026-01-27T10:00:00Z",
+    "completedAt": "2026-01-27T10:30:00Z"
+  },
+  {
+    "id": "41",
+    "title": "Studs showing through plywood (z-fighting)",
+    "description": "Front wall exterior - studs appeared to show through plywood. Fixed by adjusting geometry/face orientation.",
+    "status": "done",
+    "priority": "medium",
+    "category": "configurator",
+    "createdAt": "2026-01-27T17:00:00Z",
+    "completedAt": "2026-01-27T18:00:00Z"
+  },
+  {
+    "id": "42",
+    "title": "Customer photography & case studies",
+    "description": "Photograph past builds for website and marketing. Create case study pages with before/after, specs, customer quotes. Identified as gap vs competitors (Crane has extensive gallery).",
+    "status": "backlog",
+    "priority": "high",
+    "category": "marketing",
+    "createdAt": "2026-01-29T13:49:00Z"
+  },
+  {
+    "id": "43",
+    "title": "Google Reviews campaign",
+    "description": "Get 5+ Google reviews from past customers. Major SEO quick win \u2014 currently showing zero reviews on all product pages. Ask satisfied customers for reviews.",
+    "status": "backlog",
+    "priority": "high",
+    "category": "marketing",
+    "createdAt": "2026-01-29T13:49:00Z"
+  },
+  {
+    "id": "44",
+    "title": "STT/voice input for James",
+    "description": "Set up speech-to-text so James can receive voice messages directly. Needs OpenAI API key (Whisper). Would enable true voice conversations.",
+    "status": "backlog",
+    "priority": "medium",
+    "category": "operations",
+    "createdAt": "2026-01-29T13:49:00Z"
+  },
+  {
+    "id": "45",
+    "title": "Roof insulation",
+    "description": "Add insulation layer to roof (between rafters). Sloped panels (L+R) from eaves to raised tie beam level, horizontal panel between tie beams. Fully parametric - adapts to truss count and building size. Only active for tieBeam: 'raised' configuration. Uses vis.roofIns visibility flag.",
+    "status": "done",
+    "priority": "medium",
+    "category": "configurator",
+    "createdAt": "2026-01-29T13:49:00Z",
+    "completedAt": "2026-01-31T16:30:00Z"
+  },
+  {
+    "id": "46",
+    "title": "Floor framing system",
+    "description": "Add floor joists/framing to configurator if not already present. Include in BOM. Consider bearer/joist options.",
+    "status": "ideas",
+    "priority": "medium",
+    "category": "configurator",
+    "createdAt": "2026-01-29T13:49:00Z"
+  },
+  {
+    "id": "47",
+    "title": "Context management alerts",
+    "description": "Proactive alerts before context compaction. James should warn Andrew when context is getting full so important info can be saved.",
+    "status": "ideas",
+    "priority": "low",
+    "category": "operations",
+    "createdAt": "2026-01-29T13:49:00Z"
+  },
+  {
+    "id": "48",
+    "title": "Planning permission guide (blog)",
+    "description": "Blog post: 'Garden Building Planning Permission Guide'. Common customer concern. Good for SEO, builds trust, answers FAQs.",
+    "status": "ideas",
+    "priority": "low",
+    "category": "website",
+    "createdAt": "2026-01-29T13:49:00Z"
+  },
+  {
+    "id": "49",
+    "title": "\"Why Parametric?\" explainer page",
+    "description": "Website page explaining the parametric difference. Why mm-precision matters, what cutting lists mean, how it's different from competitors' configurators.",
+    "status": "ideas",
+    "priority": "medium",
+    "category": "website",
+    "createdAt": "2026-01-29T13:49:00Z"
+  },
+  {
+    "id": "50",
+    "title": "Attached building frame penetrating primary plywood",
+    "description": "BUG: Geometry from attached building frame is showing through the plywood of the primary building. Needs CSG subtraction or geometry adjustment to resolve overlap.",
+    "status": "backlog",
+    "priority": "high",
+    "category": "configurator",
+    "createdAt": "2026-01-29T13:49:00Z"
+  },
+  {
+    "id": "51",
+    "title": "Divider UI improvements (mobile)",
+    "description": "Divider controls don't present well, especially on mobile. Review and improve the UI/UX for adding and configuring dividers. Make touch-friendly and visually clearer.",
+    "status": "backlog",
+    "priority": "medium",
+    "category": "configurator",
+    "createdAt": "2026-01-29T14:21:00Z"
+  },
+  {
+    "id": "52",
+    "title": "3D camera controls too fast/sensitive",
+    "description": "User feedback: 3D model navigation is too fast and hard to control. Need to dampen camera movement, slow down rotation/zoom, add smoothing/inertia. Make it much easier for non-technical users to navigate the model.",
+    "status": "backlog",
+    "priority": "high",
+    "category": "configurator",
+    "createdAt": "2026-01-29T14:22:00Z"
+  },
+  {
+    "id": "53",
+    "title": "Doors/openings on attachments and dividers",
+    "description": "Add ability to place doors, windows, and openings on:\n\u2022 Attachment buildings (currently only primary building supports openings)\n\u2022 Internal dividers (for doorways between rooms)\n\nWould enable proper multi-room layouts with access between spaces.",
+    "status": "backlog",
+    "priority": "high",
+    "category": "configurator",
+    "createdAt": "2026-01-29T14:24:00Z"
+  },
+  {
+    "id": "54",
+    "title": "More cladding options",
+    "description": "Add variety of cladding types: shiplap, featheredge, T&G, board-on-board, composite, etc. Visual appearance + material specs for BOM.",
+    "status": "ideas",
+    "priority": "medium",
+    "category": "configurator",
+    "createdAt": "2026-01-29T14:28:00Z"
+  },
+  {
+    "id": "55",
+    "title": "More window options",
+    "description": "Expand window types: fixed, opening (casement, top-hung), Georgian style, circular/porthole, etc. Different frame styles and sizes.",
+    "status": "ideas",
+    "priority": "medium",
+    "category": "configurator",
+    "createdAt": "2026-01-29T14:28:00Z"
+  },
+  {
+    "id": "56",
+    "title": "Window openers/hardware",
+    "description": "Add opening mechanisms to windows: stays, handles, locks. Include in BOM. Visual indication of which windows open.",
+    "status": "ideas",
+    "priority": "low",
+    "category": "configurator",
+    "createdAt": "2026-01-29T14:28:00Z"
+  },
+  {
+    "id": "57",
+    "title": "Stable door option",
+    "description": "Add stable door (split horizontally, top/bottom open independently). Popular for potting sheds, workshops, stables.",
+    "status": "ideas",
+    "priority": "medium",
+    "category": "configurator",
+    "createdAt": "2026-01-29T14:28:00Z"
+  },
+  {
+    "id": "58",
+    "title": "Half doors",
+    "description": "Add half-height door option. Useful for certain applications.",
+    "status": "ideas",
+    "priority": "low",
+    "category": "configurator",
+    "createdAt": "2026-01-29T14:28:00Z"
+  },
+  {
+    "id": "59",
+    "title": "Skids for field shelters",
+    "description": "Add skid runners to base for field shelters. Makes them moveable. Include in BOM. Toggle option for mobile vs fixed.",
+    "status": "ideas",
+    "priority": "medium",
+    "category": "configurator",
+    "createdAt": "2026-01-29T14:28:00Z"
+  },
+  {
+    "id": "60",
+    "title": "Pillars/posts",
+    "description": "Add ability to place structural pillars/posts. Useful for carports, covered areas, verandas.",
+    "status": "ideas",
+    "priority": "medium",
+    "category": "configurator",
+    "createdAt": "2026-01-29T14:28:00Z"
+  },
+  {
+    "id": "61",
+    "title": "Decking with railings",
+    "description": "Add decking platform option with configurable railings. Multiple railing styles (vertical slats, horizontal, glass, wire). Include in BOM.",
+    "status": "ideas",
+    "priority": "medium",
+    "category": "configurator",
+    "createdAt": "2026-01-29T14:28:00Z"
+  },
+  {
+    "id": "62",
+    "title": "More roof covering options",
+    "description": "Expand roof materials: felt, shingles, EPDM, corrugated, tiles, green roof, etc. Visual + BOM implications.",
+    "status": "ideas",
+    "priority": "medium",
+    "category": "configurator",
+    "createdAt": "2026-01-29T14:28:00Z"
+  },
+  {
+    "id": "63",
+    "title": "Skylights/roof windows",
+    "description": "Add skylights and roof windows. Position on roof slope, various sizes. Include flashing in BOM.",
+    "status": "ideas",
+    "priority": "medium",
+    "category": "configurator",
+    "createdAt": "2026-01-29T14:28:00Z"
+  },
+  {
+    "id": "64",
+    "title": "Soffit boards",
+    "description": "Add soffit boards to roof overhangs. Visual finish detail + BOM.",
+    "status": "ideas",
+    "priority": "low",
+    "category": "configurator",
+    "createdAt": "2026-01-29T14:28:00Z"
+  },
+  {
+    "id": "65",
+    "title": "Verify/debug BOM and cutting lists",
+    "description": "Comprehensive audit of Bill of Materials and cutting list output. Check calculations, quantities, dimensions against real builds. Fix any discrepancies.",
+    "status": "backlog",
+    "priority": "high",
+    "category": "configurator",
+    "createdAt": "2026-01-29T14:28:00Z"
+  },
+  {
+    "id": "66",
+    "title": "Price lists and supplier partnerships",
+    "description": "Build price lists from real supplier costs. Explore partnerships with timber merchants, hardware suppliers. Enable accurate live pricing in configurator.",
+    "status": "backlog",
+    "priority": "high",
+    "category": "business",
+    "createdAt": "2026-01-29T14:28:00Z"
+  },
+  {
+    "id": "67",
+    "title": "User activity tracking/analytics",
+    "description": "Track when users log in, interact with models, save designs. Dashboard to see engagement. Helps identify serious enquiries vs browsers.",
+    "status": "ideas",
+    "priority": "medium",
+    "category": "configurator",
+    "createdAt": "2026-01-29T14:28:00Z"
+  },
+  {
+    "id": "68",
+    "title": "AI UI assistant",
+    "description": "Introduce AI-powered UI for the configurator. Natural language input: 'I need a 3x4m workshop with double doors'. Voice or text interaction.",
+    "status": "ideas",
+    "priority": "medium",
+    "category": "configurator",
+    "createdAt": "2026-01-29T14:28:00Z"
+  },
+  {
+    "id": "69",
+    "title": "Simplified website version + 'Design Together' flow",
+    "description": "Two-tier approach:\n1. Simplified configurator on website for self-service exploration\n2. Invite to 'design together' session: 'I can come and we can design your building together'\n\nConverts self-service browsers into consultative sales.",
+    "status": "ideas",
+    "priority": "high",
+    "category": "business",
+    "createdAt": "2026-01-29T14:28:00Z"
+  },
+  {
+    "id": "70",
+    "title": "Paint and colour options",
+    "description": "Add colour/paint selection to configurator. Options could include:\n\u2022 Exterior paint colours (similar to Crane's range)\n\u2022 Wood stains/preservatives\n\u2022 Farrow & Ball or premium options\n\u2022 Two-tone (body + trim different colours)\n\nVisual update in 3D model + include in BOM/quote. Note: Crane offers Exterior range, Farrow & Ball, and Sikkens stains.",
+    "status": "ideas",
+    "priority": "medium",
+    "category": "configurator",
+    "createdAt": "2026-01-29T14:43:00Z"
+  },
+  {
+    "id": "71",
+    "title": "Douglas Fir research",
+    "description": "Research on Douglas fir timber properties, comparison to competitors (Scandinavian Redwood), untreated vs treated, and marketing angles.\n\n**File:** /research-douglas-fir.md\n\n**Key finding:** Douglas fir is stronger, harder, and stiffer than the Scandinavian Redwood competitors use. Andrew's preference for untreated is valid \u2014 better workability, customer can choose finish.",
+    "status": "done",
+    "priority": "medium",
+    "category": "marketing",
+    "createdAt": "2026-01-29T15:01:00Z",
+    "completedAt": "2026-01-29T15:05:00Z"
+  },
+  {
+    "id": "72",
+    "title": "\"Why Douglas Fir?\" website content",
+    "description": "Create content explaining Douglas fir choice:\n\u2022 Stronger, harder, stiffer than standard redwood\n\u2022 Preferred by craftsmen for workability\n\u2022 Untreated by default (nicer to work with, customer choice on finish)\n\u2022 Ages beautifully to silver-grey\n\u2022 Genuine quality differentiator vs competitors\n\nCould be website page and/or blog post.",
+    "status": "ideas",
+    "priority": "medium",
+    "category": "website",
+    "createdAt": "2026-01-29T15:05:00Z"
+  },
+  {
+    "id": "74",
+    "title": "Attachment apex roof refinements",
+    "description": "Improvements to attachment building apex roof:\n\u2022 Cripple studs (king posts) - refine positioning\n\u2022 Ridge beam/purlins - review and align with primary building\n\u2022 General apex roof quality parity with main building\n\nNot urgent - parked for later. Current implementation functional.",
+    "status": "backlog",
+    "priority": "medium",
+    "category": "configurator",
+    "createdAt": "2026-01-29T19:20:00Z"
+  },
+  {
+    "id": "75",
+    "title": "Attachment fascia board refinements",
+    "description": "Further improvements to fascia boards on attachment apex roof:\n\u2022 Eaves fascia / barge board joint alignment\n\u2022 Ensure clean meeting at corners\n\u2022 Review positioning tolerances\n\nCurrent implementation works but has room for polish.",
+    "status": "done",
+    "priority": "low",
+    "category": "configurator",
+    "createdAt": "2026-01-29T20:06:00Z",
+    "completedAt": "2026-02-09T10:00:00Z"
+  },
+  {
+    "id": "73",
+    "title": "Marketing Strategy document",
+    "description": "Consolidated marketing strategy bringing together all insights: brand story, differentiators, target customer, competitive position, messaging pillars, content strategy, SEO, sales funnel, social proof needs, pricing strategy, and action items.\n\n**File:** /marketing-strategy.md\n\n**References:**\n\u2022 /competitor-analysis.md\n\u2022 /competitor-crane-deep-dive.md\n\u2022 /research-douglas-fir.md\n\u2022 /memory/seo-analysis-bespokeshedcompany.md",
+    "status": "done",
+    "priority": "high",
+    "category": "marketing",
+    "createdAt": "2026-01-29T15:13:00Z",
+    "completedAt": "2026-01-29T15:14:00Z"
+  },
+  {
+    "id": "76",
+    "title": "Attachment apex gable end cladding infill",
+    "description": "Revisit the gable end cladding for attachment buildings with apex roofs. Currently the triangular gable area may need better infill/trimming.",
+    "status": "backlog",
+    "priority": "low",
+    "category": "configurator",
+    "createdAt": "2026-01-29T22:26:00Z"
+  },
+  {
+    "id": "77",
+    "title": "\ud83c\udfac Animation Production Pipeline (ongoing)",
+    "description": "Template system for producing professional animated videos from the configurator. Enables rapid visual demos for clients with minimal manual input.\n\n**Goal:** Andrew describes what he wants in natural language \u2192 James produces production-ready video.\n\n**Components:**\n\u2022 Keyframe template (JSON format)\n\u2022 Render script (captures frames via CDP)\n\u2022 Shot library (reusable camera moves)\n\n**Files:**\n\u2022 /keyframes-v6.json (current keyframe data)\n\u2022 /render-v8.js (capture script)\n\u2022 /keyframe-editor.html (browser-based editor)\n\u2022 /DEVELOPER-UPDATE-QUESTIONNAIRE.md",
+    "status": "in-progress",
+    "priority": "high",
+    "category": "animation",
+    "createdAt": "2026-01-31T07:30:00Z",
+    "projectType": "ongoing"
+  },
+  {
+    "id": "78",
+    "title": "Document keyframe JSON format",
+    "description": "Create proper documentation for the keyframe JSON schema:\n\u2022 frame (number) - frame index\n\u2022 camera (string) - \"alpha, beta, radius\"\n\u2022 note (string|null) - description\n\u2022 preset (object|null) - full shed-designer-v1 preset\n\nDocument best practices for timing, spacing, transitions.\n\n**Parent:** Animation Production Pipeline (#77)",
+    "status": "backlog",
+    "priority": "medium",
+    "category": "animation",
+    "parentId": "77",
+    "createdAt": "2026-01-31T07:30:00Z"
+  },
+  {
+    "id": "79",
+    "title": "Configurable render script",
+    "description": "Make render script accept parameters:\n\u2022 Model URL (not hardcoded)\n\u2022 Output folder\n\u2022 FPS (currently 12)\n\u2022 WebSocket endpoint\n\u2022 Preset delay timing\n\nEnable deploying on any model variant without code changes.\n\n**Parent:** Animation Production Pipeline (#77)",
+    "status": "backlog",
+    "priority": "medium",
+    "category": "animation",
+    "parentId": "77",
+    "createdAt": "2026-01-31T07:30:00Z"
+  },
+  {
+    "id": "80",
+    "title": "Shot library - reusable camera sequences",
+    "description": "Build library of named camera moves that can be referenced by name:\n\u2022 orbit - 360\u00b0 rotation around model\n\u2022 door-focus - zoom to door, pause, zoom out\n\u2022 roof-sweep - pan across roof showing structure\n\u2022 approach - start far, end close\n\u2022 explode - decladding sequence\n\u2022 walkthrough - full feature tour\n\nAllows Andrew to say \"do an orbit and door-focus\" and James knows exactly what that means.\n\n**Parent:** Animation Production Pipeline (#77)",
+    "status": "backlog",
+    "priority": "high",
+    "category": "animation",
+    "parentId": "77",
+    "createdAt": "2026-01-31T07:30:00Z"
+  },
+  {
+    "id": "81",
+    "title": "Detect model-ready state (reduce delays)",
+    "description": "Currently using fixed 4s delay after preset imports because model rebuild time is unpredictable. Investigate detecting when model is actually ready:\n\u2022 Poll for mesh count stabilization\n\u2022 Use scene.executeWhenReady()\n\u2022 Listen for rebuild-complete events\n\nWould significantly speed up capture process.\n\n**Parent:** Animation Production Pipeline (#77)",
+    "status": "backlog",
+    "priority": "medium",
+    "category": "animation",
+    "parentId": "77",
+    "createdAt": "2026-01-31T07:30:00Z"
+  },
+  {
+    "id": "82",
+    "title": "Natural language \u2192 animation mapping",
+    "description": "Build understanding of Andrew's shorthand so James can interpret requests like:\n\u2022 \"log store\" = attachment on left\n\u2022 \"walkthrough\" = specific shot sequence\n\u2022 \"show off the door detail\" = door-focus shot\n\u2022 \"nice orbit\" = smooth 360\u00b0 rotation\n\nLearned over time through collaboration. Document mappings as they emerge.\n\n**Parent:** Animation Production Pipeline (#77)",
+    "status": "in-progress",
+    "priority": "high",
+    "category": "animation",
+    "parentId": "77",
+    "createdAt": "2026-01-31T07:30:00Z"
+  },
+  {
+    "id": "83",
+    "title": "Keyframe editor improvements",
+    "description": "Enhance the browser-based keyframe editor:\n\u2022 \u2705 Editable frame numbers in list\n\u2022 Visual timeline representation\n\u2022 Preview camera positions\n\u2022 Drag-and-drop reordering\n\u2022 Import presets from configurator clipboard\n\n**File:** /keyframe-editor.html\n\n**Parent:** Animation Production Pipeline (#77)",
+    "status": "backlog",
+    "priority": "medium",
+    "category": "animation",
+    "parentId": "77",
+    "createdAt": "2026-01-31T07:30:00Z"
+  },
+  {
+    "id": "84",
+    "title": "v8 animation capture complete",
+    "description": "Successfully captured 65-frame animation with proper rendering (no wireframe flicker).\n\n**Sequence:**\n\u2022 Frames 1-40: Zoom in\n\u2022 Frames 41-53: Door widening (1000\u21921350mm, 2-frame gaps)\n\u2022 Frame 55: Style change to double M&T\n\u2022 Frames 55-65: Door close + zoom out\n\n**Fix applied:** 4s delay after preset imports + forced render cycles.\n\n**Parent:** Animation Production Pipeline (#77)",
+    "status": "done",
+    "priority": "high",
+    "category": "animation",
+    "parentId": "77",
+    "createdAt": "2026-01-31T00:30:00Z",
+    "completedAt": "2026-01-31T01:10:00Z"
+  },
+  {
+    "id": "85",
+    "title": "Visual timeline editor in configurator",
+    "description": "In-browser timeline UI for building animations visually:\n\n**Features:**\n\u2022 Timeline bar at bottom of configurator\n\u2022 Scrub playhead to preview any point in animation\n\u2022 Click to add keyframe (captures camera + model state)\n\u2022 Drag keyframes to retime\n\u2022 Click keyframe to edit\n\u2022 Real-time preview playback\n\u2022 Export to JSON for render script\n\n**Benefits:**\n\u2022 Andrew can build sequences visually without manual frame numbers\n\u2022 Iterate timing without James in the loop\n\u2022 See the animation as you build it\n\n**Complexity:** Medium-high. Needs Babylon camera hooks + preset system integration.\n\n**Parent:** Animation Production Pipeline (#77)",
+    "status": "ideas",
+    "priority": "high",
+    "category": "animation",
+    "parentId": "77",
+    "createdAt": "2026-01-31T07:30:00Z"
+  },
+  {
+    "id": "86",
+    "title": "Back gable insulation positioning fix",
+    "description": "Fixed back gable insulation panel positioning. For back gable, interior faces toward -Z, so FRONT face of insulation (at z_mm) should be flush with inner face of back gable.\n\n**Commit:** ab398a6",
+    "status": "done",
+    "priority": "medium",
+    "category": "configurator",
+    "createdAt": "2026-01-31T20:45:00Z",
+    "completedAt": "2026-01-31T20:45:00Z"
+  },
+  {
+    "id": "87",
+    "title": "Hide 'At Eaves' tie beam for insulated apex",
+    "description": "Insulated apex roofs require raised tie beam for roof insulation to work. UI now hides and disables 'At Eaves' option when variant=insulated AND roof=apex. Auto-forces 'raised' if 'eaves' was previously selected. Shows option again when switching back to Basic.\n\n**Commits:** 0614077, 059f66f\n**Verified:** Browser DOM check confirmed display:none + disabled:true",
+    "status": "done",
+    "priority": "medium",
+    "category": "configurator",
+    "createdAt": "2026-01-31T20:55:00Z",
+    "completedAt": "2026-01-31T21:05:00Z"
+  },
+  {
+    "id": "88",
+    "title": "Review animation pipeline architecture",
+    "description": "Design review: how voice-to-preset, camera tracks, keyframe editor, and visual preview all connect.\n\n**Components:**\n\u2022 Voice-to-preset: Natural language \u2192 JSON preset \u2192 share URL\n\u2022 Camera tracks: Reusable camera movements (orbit, zoom, approach)\n\u2022 Keyframe editor: Browser tool for building sequences\n\u2022 Visual preview: Timeline slider, thumbnail strips, frame verification\n\n**Goal:** Sketch architecture diagram showing data flow from voice input to rendered video.\n\n**See also:** Mind map updated with Animation Pipeline node cluster.",
+    "status": "backlog",
+    "priority": "high",
+    "category": "animation",
+    "parentId": "77",
+    "createdAt": "2026-01-31T23:13:00Z"
+  },
+  {
+    "id": "89",
+    "title": "Design sub-agent prompts: Hygiene + Strategy",
+    "description": "Create prompt specs for two specialized sub-agents:\n\n**Hygiene Agent**\n- Reviews memory files periodically\n- Identifies clutter and outdated info\n- Proposes consolidations and archives\n- Reports recommendations for approval\n\n**Strategy Agent**\n- Reviews capability landscape (mind map, tools, recent work)\n- Looks for cross-pollination opportunities\n- Proposes new combinations and experiments\n- \"What if we connected X to Y?\" thinking\n\n**Design considerations:**\n- Clear scope and boundaries\n- Access to right files\n- Report format\n- Approval workflow\n- Run frequency (heartbeat? scheduled?)",
+    "status": "backlog",
+    "priority": "high",
+    "category": "operations",
+    "createdAt": "2026-01-31T23:37:00Z"
+  },
+  {
+    "id": "90",
+    "title": "Voice-to-voice chat with James",
+    "description": "Real-time voice conversation capability. Speak \u2192 James hears \u2192 James responds with voice.\n\n**Prototype built:** /voice-chat/\n- Browser-based speech recognition\n- Routes through Clawdbot CLI\n- TTS responses\n\n**Issues encountered:**\n- Cloudflare quick tunnels are ephemeral (new URL each time)\n- Transcript accumulation bug (fixed)\n- Server/tunnel die when sandbox restarts\n\n**For proper implementation:**\n- Persistent tunnel (Cloudflare account) or real domain\n- Keep server running reliably\n- Consider WebRTC for lower latency\n- Mobile-friendly UI improvements",
+    "status": "backlog",
+    "priority": "medium",
+    "category": "operations",
+    "createdAt": "2026-02-04T11:19:00Z"
+  },
+  {
+    "id": "91",
+    "title": "YouTube video summarization",
+    "description": "James can now fetch YouTube transcripts and summarize videos.\n\n**Script:** /scripts/youtube-summarize.py\n**Usage:** Send YouTube link + ask for summary\n**Supports:** Manual captions, auto-generated, translation from other languages",
+    "status": "done",
+    "priority": "medium",
+    "category": "operations",
+    "createdAt": "2026-02-04T11:30:00Z",
+    "completedAt": "2026-02-04T11:35:00Z"
+  },
+  {
+    "id": "92",
+    "title": "Concrete pier foundation system",
+    "description": "Dense concrete blocks on Type 1 MOT base. Stronger than timber-on-ground, never rots. Include in BOM: blocks, MOT quantity, mortar.",
+    "status": "backlog",
+    "priority": "high",
+    "category": "configurator",
+    "createdAt": "2026-02-04T12:07:00Z",
+    "source": "YouTube research - The DIY Guy"
+  },
+  {
+    "id": "93",
+    "title": "Floor frame bearers and joists",
+    "description": "5x2 or 6x2 treated timber frame on piers. Bearers run length, joists at 400mm centres. Include L-bracket fixings in BOM.",
+    "status": "backlog",
+    "priority": "high",
+    "category": "configurator",
+    "createdAt": "2026-02-04T12:07:00Z",
+    "source": "YouTube research - The DIY Guy"
+  },
+  {
+    "id": "94",
+    "title": "Anti-racking diagonal braces",
+    "description": "Diagonal braces for walls without OSB sheathing. Runs corner-to-corner on inside face. Critical for structural integrity of shed-style builds.",
+    "status": "backlog",
+    "priority": "high",
+    "category": "configurator",
+    "createdAt": "2026-02-04T12:07:00Z",
+    "source": "YouTube research - The DIY Guy"
+  },
+  {
+    "id": "95",
+    "title": "Noggins / horizontal blocking",
+    "description": "Horizontal braces between studs at mid-wall height. Strengthens wall, provides fixing points. Standard practice in UK shed building.",
+    "status": "backlog",
+    "priority": "high",
+    "category": "configurator",
+    "createdAt": "2026-02-04T12:07:00Z",
+    "source": "YouTube research - The DIY Guy"
+  },
+  {
+    "id": "96",
+    "title": "King studs and trimmers around openings",
+    "description": "Doubled-up framing around doors/windows. King stud runs full height, trimmer bears the header. Standard structural framing practice.",
+    "status": "backlog",
+    "priority": "medium",
+    "category": "configurator",
+    "createdAt": "2026-02-04T12:07:00Z",
+    "source": "YouTube research - The DIY Guy"
+  },
+  {
+    "id": "97",
+    "title": "Header beams over openings",
+    "description": "Load-bearing timber spanning door/window openings. Transfers load to king studs. Critical for structural integrity.",
+    "status": "backlog",
+    "priority": "medium",
+    "category": "configurator",
+    "createdAt": "2026-02-04T12:07:00Z",
+    "source": "YouTube research - The DIY Guy"
+  },
+  {
+    "id": "98",
+    "title": "Roof pitch calculator",
+    "description": "Input pitch in degrees, auto-calculate rafter length and cuts. Use formula or app logic (Essential Roofing App style). Display pitch angle in UI.",
+    "status": "backlog",
+    "priority": "high",
+    "category": "configurator",
+    "createdAt": "2026-02-04T12:07:00Z",
+    "source": "YouTube research - The DIY Guy"
+  },
+  {
+    "id": "99",
+    "title": "Roof overhang / eaves parameter",
+    "description": "Adjustable rafter overhang beyond wall line. Affects fascia position, soffit requirement, and weather protection. Common values: 0-300mm.",
+    "status": "backlog",
+    "priority": "high",
+    "category": "configurator",
+    "createdAt": "2026-02-04T12:07:00Z",
+    "source": "YouTube research - The DIY Guy"
+  },
+  {
+    "id": "100",
+    "title": "Ridge beam as separate element",
+    "description": "Distinct ridge beam running length of building. Rafters meet at ridge. Include in BOM separately from rafters.",
+    "status": "backlog",
+    "priority": "medium",
+    "category": "configurator",
+    "createdAt": "2026-02-04T12:07:00Z",
+    "source": "YouTube research - The DIY Guy"
+  },
+  {
+    "id": "101",
+    "title": "OSB roof deck / sheathing",
+    "description": "18mm T&G OSB on rafters before roofing membrane. Half-bond joints for strength. Include in BOM with sheet count.",
+    "status": "backlog",
+    "priority": "medium",
+    "category": "configurator",
+    "createdAt": "2026-02-04T12:07:00Z",
+    "source": "YouTube research - The DIY Guy"
+  },
+  {
+    "id": "102",
+    "title": "Cladding cover calculation",
+    "description": "Account for tongue/groove overlap when calculating cladding quantity. Cover \u2260 board width. Critical for accurate BOM.",
+    "status": "backlog",
+    "priority": "high",
+    "category": "configurator",
+    "createdAt": "2026-02-04T12:07:00Z",
+    "source": "YouTube research - The DIY Guy"
+  },
+  {
+    "id": "103",
+    "title": "Shiplap cladding detail",
+    "description": "Tongue & groove with rebate visualization. Show overlap joint detail. Different from current flat panel representation.",
+    "status": "backlog",
+    "priority": "medium",
+    "category": "configurator",
+    "createdAt": "2026-02-04T12:07:00Z",
+    "source": "YouTube research - The DIY Guy"
+  },
+  {
+    "id": "104",
+    "title": "Corner posts / trim pieces",
+    "description": "22x22mm corner posts where cladding meets. Covers end grain, gives neat finish. Include in BOM.",
+    "status": "backlog",
+    "priority": "medium",
+    "category": "configurator",
+    "createdAt": "2026-02-04T12:07:00Z",
+    "source": "YouTube research - The DIY Guy"
+  },
+  {
+    "id": "105",
+    "title": "Window and door trim pieces",
+    "description": "Finishing trim around openings. Covers cladding edges, gives professional look. Various profile options.",
+    "status": "backlog",
+    "priority": "medium",
+    "category": "configurator",
+    "createdAt": "2026-02-04T12:07:00Z",
+    "source": "YouTube research - The DIY Guy"
+  },
+  {
+    "id": "106",
+    "title": "Featheredge cladding option",
+    "description": "Alternative to shiplap - overlapping wedge-profile boards. Traditional look, different BOM calculation.",
+    "status": "backlog",
+    "priority": "medium",
+    "category": "configurator",
+    "createdAt": "2026-02-04T12:07:00Z",
+    "source": "YouTube research"
+  },
+  {
+    "id": "107",
+    "title": "Soffit boards",
+    "description": "Underside of roof overhang. Closes gap between fascia and wall. Various widths depending on overhang.",
+    "status": "backlog",
+    "priority": "medium",
+    "category": "configurator",
+    "createdAt": "2026-02-04T12:07:00Z",
+    "source": "YouTube research - The DIY Guy"
+  },
+  {
+    "id": "108",
+    "title": "Bargeboards on gable ends",
+    "description": "Trim boards following roof pitch on gable ends. Finishes roof edge, protects rafter ends.",
+    "status": "backlog",
+    "priority": "medium",
+    "category": "configurator",
+    "createdAt": "2026-02-04T12:07:00Z",
+    "source": "YouTube research - The DIY Guy"
+  },
+  {
+    "id": "109",
+    "title": "Synthetic slate tile roof covering",
+    "description": "Full layer stack for slate tile roofs (Tapco-style synthetic slate):\n\n**Completed layers:**\n\u2022 Breathable membrane (light blue, 0.5mm) - sits on OSB\n\u2022 Tile battens (25x38mm treated timber, 143mm spacing)\n\u2022 Ridge battens (25mm from ridge line, both slopes)\n\u2022 Eaves battens (25mm from eaves edge)\n\u2022 Slate tile surface (pewter grey, 5mm thick)\n\n**Still to do:**\n\u2022 Ridge tiles (V-profile cap along ridge)\n\u2022 Texture/normal map for realistic appearance\n\u2022 Visibility toggles for construction breakdown\n\n**Files:**\n\u2022 docs/src/elements/roof-tiles.js\n\n**Branch:** feature/slate-tile-roof @ b3bc44d",
+    "status": "done",
+    "priority": "high",
+    "category": "configurator",
+    "createdAt": "2026-02-04T15:30:00Z",
+    "completedAt": "2026-02-12T21:38:00Z"
+  },
+  {
+    "id": "110",
+    "title": "Internal wall cladding options",
+    "description": "Add dropdown for internal wall finish options:\n\u2022 Plywood (current default for insulated)\n\u2022 Tongue & groove (8mm planed)\n\u2022 Painted/primed options\n\nVisual update in 3D + include in BOM. Requested by customer enquiry for fully insulated build.",
+    "status": "backlog",
+    "priority": "medium",
+    "category": "configurator",
+    "createdAt": "2026-02-06T16:48:00Z"
+  },
+  {
+    "id": "111",
+    "title": "Relative door/window positioning",
+    "description": "When building dimensions change, doors and windows should maintain their relative position on the wall (percentage-based) rather than absolute mm position.\n\nExample: A centered door stays centered when wall length changes, instead of migrating to one side.\n\nSimilar to how door width changes expand from center.",
+    "status": "backlog",
+    "priority": "medium",
+    "category": "configurator",
+    "createdAt": "2026-02-06T16:50:00Z"
+  },
+  {
+    "id": "112",
+    "title": "Door hinge graphics look wrong",
+    "description": "The 3D representation of door hinges looks weird/unrealistic. Review hinge geometry and improve visual appearance. May need better positioning, scaling, or mesh detail.",
+    "status": "backlog",
+    "priority": "medium",
+    "category": "configurator",
+    "createdAt": "2026-02-09T00:22:00Z"
+  },
+  {
+    "id": "113",
+    "title": "Hipped roof insulation + ply liner not working",
+    "description": "Insulation and plywood liner for hipped roof variant isn't working properly. Needs investigation \u2014 may be geometry positioning, visibility, or build logic specific to hipped roof style.",
+    "status": "backlog",
+    "priority": "high",
+    "category": "configurator",
+    "createdAt": "2026-02-09T07:02:00Z"
+  },
+  {
+    "id": "114",
+    "title": "Attachment building polish: visibility checkboxes + insulation/ply organisation",
+    "description": "Attached buildings have good progress but need finishing touches:\n1. Visibility checkboxes not working properly for attachment elements\n2. Insulation and ply liner layers need better organisation in the attachment context\n\nLow priority - park for now, revisit later.",
+    "status": "backlog",
+    "priority": "medium",
+    "category": "configurator",
+    "createdAt": "2026-02-09T15:34:00Z"
+  },
+  {
+    "id": "115",
+    "title": "Fix share URL missing state fields",
+    "description": "Share URLs were missing roof covering, tie beam, cladding style, and attachment roof visibility fields. Added them. Commit 7b9d077.",
+    "status": "done",
+    "priority": "medium",
+    "category": "configurator",
+    "createdAt": "2026-02-09T00:13:00Z",
+    "completedAt": "2026-02-09T00:13:00Z"
+  },
+  {
+    "id": "116",
+    "title": "Fix attachment height capping 168mm too low",
+    "description": "Eaves heights should be from floor surface not ground level. Was 168mm short. Commit cea3d74.",
+    "status": "done",
+    "priority": "medium",
+    "category": "configurator",
+    "createdAt": "2026-02-09T10:42:00Z",
+    "completedAt": "2026-02-09T10:42:00Z"
+  },
+  {
+    "id": "117",
+    "title": "Preset overhaul: new presets, categories, cleanup",
+    "description": "Updated hipped garage, added Apex Garden Room + Small Pent Shed, removed debug/old presets, fixed hipped membrane/battens. 10 commits pushed.",
+    "status": "done",
+    "priority": "medium",
+    "category": "configurator",
+    "createdAt": "2026-02-09T08:00:00Z",
+    "completedAt": "2026-02-09T08:37:00Z"
+  },
+  {
+    "id": "118",
+    "title": "Pent insulation + ply follows roof slope",
+    "description": "Wall insulation and ply lining on pent roofs now follows the slope per-bay using vertex modification (not CSG). Per-wall heights for left/right walls. Multiple iterations. Commits d33558d \u2192 dfc865e.",
+    "status": "done",
+    "priority": "high",
+    "category": "configurator",
+    "createdAt": "2026-02-09T15:37:00Z",
+    "completedAt": "2026-02-09T18:25:00Z"
+  },
+  {
+    "id": "119",
+    "title": "Fix pent plyboard ghost wireframe above frame",
+    "description": "enableEdgesRendering() was called before vertex slope adjustment, causing ghost outline at original box shape. Fix: moved to after vertex mod, added updatable:true + refreshBoundingInfo(). Commit d778f6f.",
+    "status": "done",
+    "priority": "medium",
+    "category": "configurator",
+    "createdAt": "2026-02-09T18:40:00Z",
+    "completedAt": "2026-02-09T19:12:00Z"
+  },
+  {
+    "id": "120",
+    "title": "Fix pent roof plateThickness in floor stack calculation",
+    "description": "plateThickness was incorrectly included in FLOOR_STACK_MM in roof.js \u2014 it's part of the wall frame, not the floor. Removed to align with walls.js pentStackAdjust. Commit 13c0aa3.",
+    "status": "done",
+    "priority": "medium",
+    "category": "configurator",
+    "createdAt": "2026-02-09T19:20:00Z",
+    "completedAt": "2026-02-09T19:43:00Z"
+  },
+  {
+    "id": "121",
+    "title": "Pricing engine: per-component costing, margins, suppliers, VAT",
+    "description": "Full pricing system for the configurator BOM:\n- Cost price input per component\n- Multiple cost options per component (e.g. different grades/sizes)\n- Multiple suppliers per component (compare pricing)\n- Programmable margin percentages per component category\n- VAT toggle (show with/without)\n- Needs careful design thinking before implementation\n\nPart of UI polish phase.",
+    "status": "backlog",
+    "priority": "high",
+    "category": "configurator",
+    "createdAt": "2026-02-09T20:01:00Z"
+  },
+  {
+    "id": "122",
+    "title": "Fix memory_search \u2014 add embeddings API key",
+    "description": "memory_search is failing for all agents due to missing OpenAI/Google embeddings API key in auth-profiles.json. Only Anthropic key configured. Need to run: clawdbot agents auth main --provider openai --token sk-xxx (or Google). Semantic search across memory files is broken \u2014 workaround is manual file reads.",
+    "status": "backlog",
+    "priority": "high",
+    "category": "operations",
+    "createdAt": "2026-02-10T09:18:00Z"
+  },
+  {
+    "id": "123",
+    "title": "Seamless voice interaction with James",
+    "description": "High-quality, reliable voice calling between Andrew and James. Current state: Tailscale funnel + Clawdbot dashboard voice exists but setup is fragile (bind issues, DNS, auth). Goal: one-tap voice call from phone, reliable connection, natural conversation quality. Investigate: LiveKit, WebRTC, Clawdbot native voice, persistent tunnel setup.",
+    "status": "backlog",
+    "priority": "high",
+    "category": "operations",
+    "createdAt": "2026-02-10T11:03:00Z"
+  },
+  {
+    "id": "124",
+    "title": "Budget buildings range \u2014 mushroom/microgreen grow sheds",
+    "description": "Research and develop cheapest possible insulated shed range designed as controlled environments for growing mushrooms and microgreens. Includes: supplier research, material costs, insulation options, ventilation/humidity requirements, pricing.",
+    "status": "in-progress",
+    "priority": "high",
+    "category": "business",
+    "createdAt": "2026-02-10T14:34:00Z"
+  },
+  {
+    "id": "125",
+    "title": "Budget cladding render issues & colour logic",
+    "description": "Box profile/corrugated steel cladding renders too thin/transparent. Colour picker logic needs verification \u2014 materials not applying visibly. Also check galvanised trim, corner flashings, and fascia material for budget styles. Infinite loop crash fixed (CLAD_H=0) but visual quality needs work.",
+    "status": "backlog",
+    "priority": "medium",
+    "category": "configurator",
+    "createdAt": "2026-02-11T13:19:14Z"
+  },
+  {
+    "id": "126",
+    "title": "Building Type Selector \u2014 Phase 1 (Gazebo)",
+    "description": "Add building type dropdown replacing 'Design Your Shed' title. First type: Gazebo \u2014 4 corner posts (150x150), hipped roof, no walls/cladding. Store buildingType in state, hide irrelevant controls.",
+    "status": "in-progress",
+    "priority": "high",
+    "category": "configurator",
+    "createdAt": "2026-02-11T21:56:53Z"
+  },
+  {
+    "id": "127",
+    "title": "Building Type Selector \u2014 Phase 2 (Full Range)",
+    "description": "Extend building type dropdown with: Summer House, Garden Room, Garage, Workshop, Lean-to, Field Shelter. Each type defines its own defaults, visible controls, and rendering rules.",
+    "status": "backlog",
+    "priority": "high",
+    "category": "configurator",
+    "createdAt": "2026-02-11T21:56:53Z"
+  },
+  {
+    "id": "128",
+    "title": "Photo paste/attach support in dashboards",
+    "description": "Paste or attach photos into dashboard cards/ideas. PRIMARY USE: mobile phone on-site. Must be visible to ALL users (not localStorage). UX: tap button \u2192 camera/gallery picker (input accept=image/*), compress before upload (phone photos are huge), then commit to data/images/ via GitHub API. Desktop: also support paste/drag-drop. Apply across all dashboards.",
+    "status": "in-progress",
+    "priority": "high",
+    "category": "configurator",
+    "createdAt": "2026-02-12T21:29:00Z"
+  },
+  {
+    "id": "129",
+    "title": "Whelpley Farm: mobile first-load is blank/zoomed out",
+    "description": "On mobile, dashboard loads looking like a blank screen \u2014 have to zoom and pan to find the content. Needs to load zoomed in on the dashboard features. Check viewport meta, sidebar collapse on mobile, initial scroll position. First impression matters.",
+    "status": "backlog",
+    "priority": "high",
+    "category": "operations",
+    "createdAt": "2026-02-12T21:42:00Z"
+  },
+  {
+    "id": "130",
+    "title": "Mobile dashboard UX: split-screen like configurator",
+    "description": "All dashboards on mobile are tough to use with the sidebar-wizard pattern. Apply the configurator split-screen approach: content top, navigation bottom, drag handle. Consistent mobile UX across all dashboards (Forge AI, Whelpley Farm, GrowCabin, Command Center, Shed Board). Major UX unification piece.",
+    "status": "backlog",
+    "priority": "high",
+    "category": "configurator",
+    "createdAt": "2026-02-12T21:52:00Z"
+  },
+  {
+    "id": "131",
+    "title": "Work sizing: Projects / Jobs / Tasks hierarchy",
+    "description": "Introduce 3-level sizing across all dashboards. Task = \u22642 hours (single action). Job = ~1 day (group of tasks). Project = multiple days (group of jobs). Add as a field to cards. Enables better time estimation, prioritisation, and filtering. Could nest Jobs under Projects and Tasks under Jobs.",
+    "status": "backlog",
+    "priority": "high",
+    "category": "operations",
+    "createdAt": "2026-02-12T22:09:00Z"
+  },
+  {
+    "id": "132",
+    "title": "Mobile: no building type selector (can't access gazebo)",
+    "description": "buildingTypeSelect dropdown is only in sidebar-wizard.js (desktop). Mobile configurator never creates it, so users can't switch building type on mobile. Fix: add building type selector to mobile layout, probably at top of Size step. Also needs to trigger updateBuildingTypeUI() and hide irrelevant steps for gazebo.",
+    "status": "backlog",
+    "priority": "high",
+    "category": "configurator",
+    "createdAt": "2026-02-12T22:25:00Z"
+  }
+]
