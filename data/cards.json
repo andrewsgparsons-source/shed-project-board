@@ -1256,5 +1256,15 @@
     "priority": "high",
     "category": "configurator",
     "createdAt": "2026-02-12T22:25:00Z"
+  },
+  {
+    "id": "133",
+    "title": "Whelpley Farm: Ideas sync across devices",
+    "description": "Ideas stored in data/ideas.json in repo, synced via GitHub API. PAT entered once, stored in localStorage. Merge logic: remote wins conflicts, local adds new offline ideas.",
+    "status": "done",
+    "priority": "medium",
+    "category": "operations",
+    "createdAt": "2026-02-14T17:30:00Z",
+    "completedAt": "2026-02-14T17:45:00Z"
   }
 ]
