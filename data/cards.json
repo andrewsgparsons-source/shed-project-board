@@ -1266,5 +1266,15 @@
     "category": "operations",
     "createdAt": "2026-02-14T17:30:00Z",
     "completedAt": "2026-02-14T17:45:00Z"
+  },
+  {
+    "id": "134",
+    "title": "AI Transition Coaching Business (Forge AI)",
+    "description": "Started as a business idea in the configurator incubator. Now graduated to its own project with dashboard, branding (Ember Palette), and website planning underway. Archived from garden buildings Ideas.",
+    "status": "done",
+    "priority": "high",
+    "category": "business",
+    "createdAt": "2026-02-12T10:00:00Z",
+    "completedAt": "2026-02-14T17:50:00Z"
   }
 ]
