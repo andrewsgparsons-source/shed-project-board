@@ -1276,5 +1276,68 @@
     "category": "business",
     "createdAt": "2026-02-12T10:00:00Z",
     "completedAt": "2026-02-14T17:50:00Z"
+  },
+  {
+    "id": "135",
+    "title": "\ud83d\ude80 Landing Pages \u2014 Vercel Deployment",
+    "description": "Deploy 3 SEO-targeted local landing pages on Vercel. Pages funnel visitors into the configurator. Priority from ChatGPT Week 1 roadmap (16 Feb). Covers: domain setup, Vercel project, deployment pipeline.",
+    "status": "backlog",
+    "priority": "high",
+    "category": "website",
+    "createdAt": "2026-02-17T00:00:00Z"
+  },
+  {
+    "id": "136",
+    "title": "\ud83c\udf0d Landing Page 1: Garden Buildings Salisbury",
+    "description": "Local SEO landing page targeting \"bespoke garden buildings Salisbury\" and related keywords. Includes configurator embed/link, testimonials placeholder, service area, contact CTA.",
+    "status": "backlog",
+    "priority": "high",
+    "category": "marketing",
+    "createdAt": "2026-02-17T00:00:00Z"
+  },
+  {
+    "id": "137",
+    "title": "\ud83c\udf0d Landing Page 2: Garden Offices Wiltshire",
+    "description": "Local SEO landing page targeting \"garden offices Wiltshire\" and related keywords. Configurator link, benefits of bespoke vs prefab, pricing transparency via configurator.",
+    "status": "backlog",
+    "priority": "high",
+    "category": "marketing",
+    "createdAt": "2026-02-17T00:00:00Z"
+  },
+  {
+    "id": "138",
+    "title": "\ud83c\udf0d Landing Page 3: Custom Sheds Hampshire",
+    "description": "Local SEO landing page targeting \"custom sheds Hampshire\" and related keywords. Showcases range of building types, links to configurator for instant design.",
+    "status": "backlog",
+    "priority": "high",
+    "category": "marketing",
+    "createdAt": "2026-02-17T00:00:00Z"
+  },
+  {
+    "id": "139",
+    "title": "\ud83d\udd17 Lead Capture Integration",
+    "description": "Add lead capture to configurator and landing pages. When customer designs a shed and wants a quote, capture email/phone + configurator state URL. Feeds into pipeline tracking.",
+    "status": "backlog",
+    "priority": "high",
+    "category": "website",
+    "createdAt": "2026-02-17T00:00:00Z"
+  },
+  {
+    "id": "140",
+    "title": "\ud83d\udcca Domain & Vercel Setup",
+    "description": "Connect bespokeshedcompany.co.uk domain to Vercel. Set up project, deployment from GitHub, DNS configuration.",
+    "status": "backlog",
+    "priority": "high",
+    "category": "website",
+    "createdAt": "2026-02-17T00:00:00Z"
+  },
+  {
+    "id": "141",
+    "title": "\ud83d\udd0d SEO Keyword Research \u2014 Local Terms",
+    "description": "Research best local keyword targets for the 3 landing pages. Validate search volume for Salisbury/Wiltshire/Hampshire garden building terms. Feeds into page copy and meta tags.",
+    "status": "backlog",
+    "priority": "high",
+    "category": "marketing",
+    "createdAt": "2026-02-17T00:00:00Z"
   }
 ]
