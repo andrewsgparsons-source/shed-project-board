@@ -501,6 +501,13 @@
       '<span class="task-date">Created: ' + date + completedDate + '</span>' +
       '<span class="badge badge-category">' + (CAT_EMOJI[card.category] || "") + ' ' + card.category + '</span>' +
       '</div>' +
+      '<button class="firebase-detail-btn" data-card-id="' + card.id + '" style="' +
+      'margin-top:8px;padding:6px 14px;border-radius:8px;border:1.5px solid #E7E0D8;' +
+      'background:#F5F0EB;font-size:13px;cursor:pointer;transition:all 0.15s;' +
+      'font-family:inherit;color:#57534E;"' +
+      ' onmouseover="this.style.borderColor=\'#C4823A\';this.style.color=\'#C4823A\'"' +
+      ' onmouseout="this.style.borderColor=\'#E7E0D8\';this.style.color=\'#57534E\'"' +
+      '>📝 Notes &amp; Details</button>' +
       '<div class="card-photos" data-photo-card-id="' + card.id + '"></div>' +
       '</div>' +
       '</details>';
@@ -817,6 +824,13 @@
     if (del.updated) html += '<span class="del-last-saved">Last saved: ' + del.updated + '</span>';
     html += '</div>';
 
+    // Firebase notes & collaboration section
+    html += '<div class="del-section">';
+    html += '<h3>🔥 Real-time Notes & Collaboration</h3>';
+    html += '<p style="color:var(--gb-text-muted,#78716C);font-size:13px;margin-bottom:12px;">Add notes, docs, and photos that sync across all devices in real-time.</p>';
+    html += '<button id="delFirebaseBtn" style="padding:10px 20px;border-radius:10px;border:1.5px solid #C4823A;background:#FEF3C7;font-size:14px;cursor:pointer;font-family:inherit;color:#92400E;transition:all 0.15s;">📝 Open Notes &amp; Details Panel</button>';
+    html += '</div>';
+
     // Photo gallery placeholder
     html += '<div class="del-section">';
     html += '<div id="delPhotos-' + cardId + '"></div>';
@@ -855,6 +869,14 @@
       btn.style.background = '#2D5016';
       setTimeout(function() { btn.textContent = '💾 Save Notes'; btn.style.background = ''; }, 1500);
     });
+
+    // Firebase notes button on deliverable page
+    var fbBtn = document.getElementById('delFirebaseBtn');
+    if (fbBtn) {
+      fbBtn.addEventListener('click', function() {
+        openCardDetail(cardId);
+      });
+    }
 
     // Child card click handlers
     mainContent.querySelectorAll('.del-child-card').forEach(function(el) {
@@ -897,6 +919,16 @@
         e.preventDefault();
         e.stopPropagation();
         openDeliverablePage(btn.getAttribute('data-card-id'));
+      });
+    });
+
+    // Firebase detail buttons on all cards
+    container.querySelectorAll('.firebase-detail-btn').forEach(function(btn) {
+      btn.addEventListener('click', function(e) {
+        e.preventDefault();
+        e.stopPropagation();
+        var cardId = btn.getAttribute('data-card-id');
+        openCardDetail(cardId);
       });
     });
 
@@ -959,6 +991,7 @@
     html += '<th data-col="priority">Priority <span class="sort-arrow">▲</span></th>';
     html += '<th data-col="category">Category <span class="sort-arrow">▲</span></th>';
     html += '<th data-col="createdAt">Created <span class="sort-arrow">▲</span></th>';
+    html += '<th>📝</th>';
     html += '</tr></thead>';
     html += '<tbody id="allTasksBody">';
     html += '</tbody></table></div>';
@@ -1047,13 +1080,25 @@
         '<td><span class="badge badge-priority-' + c.priority + '">' + c.priority + '</span></td>' +
         '<td>' + (CAT_EMOJI[c.category] || "") + ' ' + c.category + '</td>' +
         '<td>' + formatDate(c.createdAt) + '</td>' +
+        '<td><button class="firebase-detail-btn table-notes-btn" data-card-id="' + c.id + '" style="padding:4px 10px;border-radius:6px;border:1px solid #E7E0D8;background:#F5F0EB;font-size:12px;cursor:pointer;color:#57534E;">📝</button></td>' +
         '</tr>';
     }).join("");
 
     // Make Done rows clickable
     tbody.querySelectorAll('.done-row').forEach(function(row) {
-      row.addEventListener('click', function() {
+      row.addEventListener('click', function(e) {
+        // Don't navigate if clicking the notes button
+        if (e.target.classList.contains('firebase-detail-btn')) return;
         openDeliverablePage(row.getAttribute('data-deliverable-id'));
+      });
+    });
+
+    // Firebase detail buttons in table
+    tbody.querySelectorAll('.firebase-detail-btn').forEach(function(btn) {
+      btn.addEventListener('click', function(e) {
+        e.stopPropagation();
+        var cardId = btn.getAttribute('data-card-id');
+        openCardDetail(cardId);
       });
     });
   }
@@ -1198,7 +1243,159 @@
     return str.replace(/"/g, "&quot;").replace(/'/g, "&#39;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
   }
 
+  // ── Firebase Integration ──
+  var SHED_TASKS_PATH = 'business/sheds/tasks';
+  var firebaseTasks = {};  // Firebase tasks keyed by firebase ID
+  var firebaseReady = false;
+
+  function initFirebase() {
+    // Auto-set user to Andrew (single-user dashboard)
+    if (window.FireSync) {
+      FireSync.setUser('Andrew');
+
+      // Listen for shed tasks from Firebase
+      FireSync.onTasks(SHED_TASKS_PATH, function(tasks) {
+        firebaseTasks = tasks || {};
+        firebaseReady = true;
+        // Re-render if a step is active
+        if (activeStep) {
+          var body = document.getElementById("flyoutBody");
+          if (body && activeStep !== "overview" && activeStep !== "all-tasks" && activeStep !== "ideas") {
+            // Don't re-render while user is interacting — just mark as stale
+          }
+        }
+      });
+
+      // Sync cards.json items to Firebase (one-time seed)
+      syncCardsToFirebase();
+
+      // Render attention items in main content
+      renderAttentionSection();
+    }
+  }
+
+  // Sync cards.json → Firebase (only adds missing cards, never overwrites)
+  function syncCardsToFirebase() {
+    if (!window.FireSync) return;
+    FireSync.getTasks(SHED_TASKS_PATH, function(existingTasks) {
+      var existing = existingTasks || {};
+      // Build a map of existing card IDs (stored as cardJsonId field)
+      var existingCardIds = {};
+      Object.keys(existing).forEach(function(fbId) {
+        if (existing[fbId].cardJsonId) {
+          existingCardIds[existing[fbId].cardJsonId] = fbId;
+        }
+      });
+
+      // Add any cards from cards.json that aren't in Firebase yet
+      cards.forEach(function(card) {
+        if (!existingCardIds[card.id]) {
+          var fbTask = {
+            cardJsonId: card.id,
+            title: card.title,
+            description: card.description || '',
+            status: card.status,
+            priority: card.priority || 'medium',
+            category: card.category,
+            createdAt: card.createdAt || new Date().toISOString(),
+            source: 'cards.json'
+          };
+          if (card.completedAt) fbTask.completedAt = card.completedAt;
+          FireSync._addTask(SHED_TASKS_PATH, fbTask);
+        }
+      });
+    });
+  }
+
+  // ── Attention Items Section (main content area) ──
+  function renderAttentionSection() {
+    if (!window.FireSync) return;
+
+    FireSync.onAttentionItems(function(items) {
+      var mainContent = document.getElementById("mainContent");
+      // Only render attention section if we're showing the welcome screen
+      var welcomeDiv = mainContent.querySelector('.gb-welcome');
+      if (!welcomeDiv) return;
+
+      // Filter for active shed-related attention items
+      var activeItems = [];
+      Object.keys(items).forEach(function(id) {
+        var item = items[id];
+        if (item.status === 'active' && (item.biz === 'sheds' || item.biz === '🏡' || !item.biz)) {
+          item._id = id;
+          activeItems.push(item);
+        }
+      });
+
+      // Remove existing attention section if present
+      var existingSection = mainContent.querySelector('.gb-attention-section');
+      if (existingSection) existingSection.remove();
+
+      if (activeItems.length === 0) return;
+
+      var section = document.createElement('div');
+      section.className = 'gb-attention-section';
+      var html = '<h3 style="margin:24px 0 12px;color:var(--gb-accent,#C4823A);">⚡ Needs Your Attention</h3>';
+      html += '<div class="gb-attention-list">';
+
+      activeItems.forEach(function(item) {
+        var prioClass = item.priority === 'high' ? 'badge-priority-high' : item.priority === 'low' ? 'badge-priority-low' : 'badge-priority-medium';
+        html += '<div class="gb-attention-card" data-attention-id="' + item._id + '" style="' +
+          'background:var(--gb-surface,#fff);border:1px solid var(--gb-border,#E7E0D8);border-radius:10px;' +
+          'padding:12px 16px;margin-bottom:8px;cursor:pointer;transition:all 0.15s;display:flex;align-items:center;gap:12px;">';
+        html += '<span class="badge ' + prioClass + '" style="flex-shrink:0;">' + (item.priority || 'medium') + '</span>';
+        html += '<div style="flex:1;min-width:0;">';
+        html += '<div style="font-weight:600;color:var(--gb-text,#1C1917);">' + escHtml(item.title || '') + '</div>';
+        if (item.detail) html += '<div style="font-size:13px;color:var(--gb-text-muted,#78716C);margin-top:2px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;">' + escHtml(item.detail) + '</div>';
+        html += '</div>';
+        html += '<span style="color:var(--gb-text-muted,#78716C);font-size:18px;">→</span>';
+        html += '</div>';
+      });
+
+      html += '</div>';
+      section.innerHTML = html;
+      welcomeDiv.after(section);
+
+      // Click handlers for attention items
+      section.querySelectorAll('.gb-attention-card').forEach(function(el) {
+        el.addEventListener('click', function() {
+          var id = el.getAttribute('data-attention-id');
+          var item = items[id];
+          if (item && window.ItemDetail) {
+            ItemDetail.open(id, item);
+          }
+        });
+        // Hover effect
+        el.addEventListener('mouseenter', function() { el.style.borderColor = 'var(--gb-accent,#C4823A)'; });
+        el.addEventListener('mouseleave', function() { el.style.borderColor = 'var(--gb-border,#E7E0D8)'; });
+      });
+    });
+  }
+
+  // ── Open Item Detail for a card ──
+  function openCardDetail(cardId) {
+    var card = cards.find(function(c) { return c.id === cardId; });
+    if (!card) return;
+
+    if (window.ItemDetail) {
+      // Build an item-detail-compatible object from the card
+      var itemData = {
+        title: card.title,
+        detail: card.description || '',
+        biz: '🏡',
+        priority: card.priority || 'medium',
+        status: card.status === 'in-progress' ? 'active' : card.status
+      };
+      // Use 'card-' prefix so card notes don't collide with attention item notes
+      ItemDetail.open('card-' + cardId, itemData);
+    }
+  }
+
   // ── Init ──
-  document.addEventListener("DOMContentLoaded", loadData);
+  document.addEventListener("DOMContentLoaded", function() {
+    loadData();
+    // Init Firebase after a short delay to let FireSync load its SDK
+    setTimeout(initFirebase, 500);
+  });
 
 })();
