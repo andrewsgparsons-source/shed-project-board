@@ -42,8 +42,11 @@
       hamburger.classList.remove('hidden');
     }
 
+    var sidebarClose = document.getElementById('gbSidebarClose');
+
     hamburger.addEventListener('click', openMenu);
     overlay.addEventListener('click', closeMenu);
+    if (sidebarClose) sidebarClose.addEventListener('click', closeMenu);
 
     // Close menu when a nav step is clicked
     sidebar.addEventListener('click', function(e) {

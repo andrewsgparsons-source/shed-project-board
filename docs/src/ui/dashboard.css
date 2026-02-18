@@ -970,8 +970,11 @@ html, body {
   * { transition-duration: 0.01s !important; }
 }
 
-/* ===== MOBILE HAMBURGER BUTTON (hidden on desktop) ===== */
+/* ===== MOBILE HAMBURGER BUTTON + SIDEBAR CLOSE (hidden on desktop) ===== */
 .gb-hamburger {
+  display: none;
+}
+.gb-sidebar-close {
   display: none;
 }
 
@@ -1008,9 +1011,28 @@ html, body {
   }
 
   /* Hide hamburger when flyout is open */
-  .gb-flyout.open ~ .gb-hamburger,
   body:has(.gb-flyout.open) .gb-hamburger {
     display: none;
+  }
+
+  /* Sidebar close button */
+  .gb-sidebar-close {
+    display: block;
+    position: absolute;
+    top: 12px;
+    right: 12px;
+    width: 32px;
+    height: 32px;
+    border: none;
+    background: transparent;
+    font-size: 18px;
+    color: var(--gb-text-muted);
+    cursor: pointer;
+    z-index: 10;
+    border-radius: 6px;
+  }
+  .gb-sidebar-close:hover {
+    background: var(--gb-bg);
   }
 
   /* Sidebar - hidden by default on mobile */
