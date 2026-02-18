@@ -1065,15 +1065,17 @@ html, body {
     display: block;
   }
 
-  /* Flyout takes full screen */
+  /* Flyout takes full screen when open */
   .gb-flyout {
     left: 0;
-    width: 100vw !important;
+    width: 0;
     z-index: 1060;
+    pointer-events: none;
   }
 
   .gb-flyout.open {
     width: 100vw;
+    pointer-events: auto;
   }
 
   #mainContent {
