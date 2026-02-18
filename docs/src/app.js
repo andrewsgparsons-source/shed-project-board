@@ -23,6 +23,38 @@
     animation: "🎬"
   };
 
+  // ── Mobile hamburger menu ──
+  (function setupMobileMenu() {
+    var hamburger = document.getElementById('gbHamburger');
+    var sidebar = document.getElementById('sidebar');
+    var overlay = document.getElementById('gbSidebarOverlay');
+    if (!hamburger || !sidebar || !overlay) return;
+
+    function openMenu() {
+      sidebar.classList.add('mobile-open');
+      overlay.classList.add('active');
+      hamburger.classList.add('hidden');
+    }
+
+    function closeMenu() {
+      sidebar.classList.remove('mobile-open');
+      overlay.classList.remove('active');
+      hamburger.classList.remove('hidden');
+    }
+
+    hamburger.addEventListener('click', openMenu);
+    overlay.addEventListener('click', closeMenu);
+
+    // Close menu when a nav step is clicked
+    sidebar.addEventListener('click', function(e) {
+      var step = e.target.closest('.gb-step');
+      if (step) closeMenu();
+    });
+
+    // Expose for use by flyout close
+    window.__gbMobileMenu = { open: openMenu, close: closeMenu };
+  })();
+
   // Status display order
   var STATUS_ORDER = ["in-progress", "backlog", "ideas", "done"];
   var STATUS_LABELS = {
@@ -159,13 +191,17 @@
 
     // Open flyout
     document.getElementById("flyout").classList.add("open");
-    document.getElementById("sidebar").classList.add("flyout-active");
+    // Hide hamburger while flyout is open
+    var hb = document.getElementById('gbHamburger');
+    if (hb) hb.classList.add('hidden');
   }
 
   // ── Close flyout ──
   document.getElementById("flyoutClose").addEventListener("click", function () {
     document.getElementById("flyout").classList.remove("open");
-    document.getElementById("sidebar").classList.remove("flyout-active");
+    // Show hamburger again
+    var hb = document.getElementById('gbHamburger');
+    if (hb) hb.classList.remove('hidden');
     activeStep = null;
     document.querySelectorAll(".gb-step").forEach(function (el) {
       el.classList.remove("active");
@@ -742,7 +778,8 @@
 
     // Close the flyout when viewing a deliverable
     document.getElementById("flyout").classList.remove("open");
-    document.getElementById("sidebar").classList.remove("flyout-active");
+    var hb = document.getElementById('gbHamburger');
+    if (hb) hb.classList.remove('hidden');
 
     var html = '<div class="deliverable-page">';
     html += '<button class="gb-back-btn" id="delBackBtn">← Back</button>';
