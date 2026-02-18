@@ -973,19 +973,26 @@ html, body {
 /* ===== MOBILE ===== */
 @media (max-width: 768px) {
   :root {
-    --gb-sidebar-w: 100vw;
+    --gb-sidebar-w: 260px;
   }
 
   #sidebar {
-    width: 100%;
-    position: relative;
-    height: auto;
-    max-height: none;
+    width: var(--gb-sidebar-w);
+    position: fixed;
+    height: 100%;
+    z-index: 1000;
+    transition: transform 0.25s ease;
+  }
+
+  /* When flyout is open, slide sidebar off-screen */
+  #sidebar.flyout-active {
+    transform: translateX(-100%);
   }
 
   .gb-flyout {
     left: 0;
     width: 100vw !important;
+    z-index: 1001;
   }
 
   .gb-flyout.open {
@@ -1003,6 +1010,22 @@ html, body {
 
   .gb-kpi-grid {
     grid-template-columns: repeat(2, 1fr);
+  }
+
+  /* Back button for mobile - return to sidebar */
+  .gb-mobile-back {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    padding: 6px 12px;
+    margin: 8px 12px;
+    background: var(--gb-bg);
+    border: 1px solid var(--gb-border);
+    border-radius: var(--gb-radius-sm);
+    color: var(--gb-text-secondary);
+    font-size: 12px;
+    font-weight: 600;
+    cursor: pointer;
   }
 }
 

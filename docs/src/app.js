@@ -159,11 +159,13 @@
 
     // Open flyout
     document.getElementById("flyout").classList.add("open");
+    document.getElementById("sidebar").classList.add("flyout-active");
   }
 
   // ── Close flyout ──
   document.getElementById("flyoutClose").addEventListener("click", function () {
     document.getElementById("flyout").classList.remove("open");
+    document.getElementById("sidebar").classList.remove("flyout-active");
     activeStep = null;
     document.querySelectorAll(".gb-step").forEach(function (el) {
       el.classList.remove("active");
@@ -740,6 +742,7 @@
 
     // Close the flyout when viewing a deliverable
     document.getElementById("flyout").classList.remove("open");
+    document.getElementById("sidebar").classList.remove("flyout-active");
 
     var html = '<div class="deliverable-page">';
     html += '<button class="gb-back-btn" id="delBackBtn">← Back</button>';
