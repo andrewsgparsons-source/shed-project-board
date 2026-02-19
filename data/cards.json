@@ -1335,10 +1335,11 @@
     "id": "141",
     "title": "\ud83d\udd0d SEO Keyword Research \u2014 Local Terms",
     "description": "Research best local keyword targets for the 3 landing pages. Validate search volume for Salisbury/Wiltshire/Hampshire garden building terms. Feeds into page copy and meta tags.",
-    "status": "backlog",
+    "status": "done",
     "priority": "high",
     "category": "marketing",
-    "createdAt": "2026-02-17T00:00:00Z"
+    "createdAt": "2026-02-17T00:00:00Z",
+    "completedAt": "2026-02-19T10:50:00Z"
   },
   {
     "id": "142",
