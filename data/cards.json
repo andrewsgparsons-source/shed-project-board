@@ -1339,5 +1339,14 @@
     "priority": "high",
     "category": "marketing",
     "createdAt": "2026-02-17T00:00:00Z"
+  },
+  {
+    "id": "142",
+    "title": "Custom domain for share links (Edge compatibility)",
+    "description": "Edge blocks .workers.dev domains (ERR_CONNECTION_CLOSED). Add a custom domain to the Cloudflare Worker (e.g. share.andrewsgparsons.com) so share links work in all browsers including Edge. Many customers are retired and use Edge as default. Steps: 1) Add custom domain route in Cloudflare Workers dashboard, 2) Update WORKER_URL in share-link.js, 3) Test in Edge.",
+    "status": "backlog",
+    "priority": "high",
+    "category": "configurator",
+    "createdAt": "2026-02-19T10:17:00Z"
   }
 ]
