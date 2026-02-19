@@ -160,19 +160,21 @@
     "id": "18",
     "title": "Monetization strategy document",
     "description": "Create comprehensive monetization strategy doc in the repo. Cover: direct sales, DIY plans, licensing, niche builds, spectrum model, supplier partnerships.",
-    "status": "backlog",
+    "status": "done",
     "priority": "high",
     "category": "business",
-    "createdAt": "2026-01-27T11:04:00Z"
+    "createdAt": "2026-01-27T11:04:00Z",
+    "completedAt": "2026-02-19T11:10:00Z"
   },
   {
     "id": "19",
     "title": "Fastest-to-revenue roadmap",
     "description": "Prioritize monetization paths by speed-to-revenue. Create actionable roadmap: Week 1, Month 1, Quarter 1 milestones.",
-    "status": "backlog",
+    "status": "done",
     "priority": "high",
     "category": "business",
-    "createdAt": "2026-01-27T11:04:00Z"
+    "createdAt": "2026-01-27T11:04:00Z",
+    "completedAt": "2026-02-19T11:10:00Z"
   },
   {
     "id": "20",
