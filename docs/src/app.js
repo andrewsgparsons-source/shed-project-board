@@ -250,14 +250,14 @@
 
     // KPI row
     html += '<div class="gb-kpi-grid">';
-    html += kpiCard("📋", cards.length, "Total Cards", "amber");
-    html += kpiCard("🔄", counts["in-progress"], "In Progress", "blue");
-    html += kpiCard("📥", counts.backlog, "Backlog", "amber");
-    html += kpiCard("✅", counts.done, "Done", "green");
-    html += kpiCard("💡", counts.ideas, "Ideas", "");
+    html += kpiCard("📋", cards.length, "Total Cards", "amber", "all");
+    html += kpiCard("🔄", counts["in-progress"], "In Progress", "blue", "in-progress");
+    html += kpiCard("📥", counts.backlog, "Backlog", "amber", "backlog");
+    html += kpiCard("✅", counts.done, "Done", "green", "done");
+    html += kpiCard("💡", counts.ideas, "Ideas", "", "ideas");
     html += kpiCard("📈", completionPct + "%", "Completion", "green");
-    html += kpiCard("🔴", priorityCounts.high, "High Priority", "red");
-    html += kpiCard("🟡", priorityCounts.medium, "Medium Priority", "amber");
+    html += kpiCard("🔴", priorityCounts.high, "High Priority", "red", "high");
+    html += kpiCard("🟡", priorityCounts.medium, "Medium Priority", "amber", "medium");
     html += '</div>';
 
     // Charts
@@ -295,6 +295,30 @@
 
     container.innerHTML = html;
 
+    // KPI card click handlers — navigate to All Tasks with filter
+    container.querySelectorAll('.kpi-clickable').forEach(function(kpi) {
+      kpi.addEventListener('click', function() {
+        var filter = kpi.getAttribute('data-kpi-filter');
+        openStep('all-tasks');
+        setTimeout(function() {
+          var select = document.getElementById('allTasksStatusFilter');
+          if (select && (filter === 'in-progress' || filter === 'backlog' || filter === 'done' || filter === 'ideas' || filter === 'all')) {
+            select.value = filter === 'all' ? 'all' : filter;
+            select.dispatchEvent(new Event('change'));
+          }
+          // Handle priority filters
+          var prioSelect = document.getElementById('allTasksPriorityFilter');
+          if (prioSelect && (filter === 'high' || filter === 'medium')) {
+            prioSelect.value = filter;
+            prioSelect.dispatchEvent(new Event('change'));
+          }
+        }, 50);
+      });
+      // Hover effect
+      kpi.addEventListener('mouseenter', function() { kpi.style.transform = 'translateY(-2px)'; kpi.style.boxShadow = '0 4px 12px rgba(0,0,0,0.15)'; });
+      kpi.addEventListener('mouseleave', function() { kpi.style.transform = ''; kpi.style.boxShadow = ''; });
+    });
+
     // Create charts
     createStatusChart(counts);
     createCategoryChart(catCounts);
@@ -302,8 +326,9 @@
     createTimelineChart();
   }
 
-  function kpiCard(icon, value, label, colorClass) {
-    return '<div class="gb-kpi ' + colorClass + '">' +
+  function kpiCard(icon, value, label, colorClass, filterValue) {
+    var clickable = filterValue ? ' kpi-clickable" data-kpi-filter="' + filterValue : '';
+    return '<div class="gb-kpi ' + colorClass + clickable + '" style="' + (filterValue ? 'cursor:pointer;' : '') + '">' +
       '<div class="gb-kpi-icon">' + icon + '</div>' +
       '<div class="gb-kpi-value">' + value + '</div>' +
       '<div class="gb-kpi-label">' + label + '</div>' +
