@@ -1459,11 +1459,563 @@
     }
   }
 
+  // ================================================================
+  //  BESPOKE SHED COMPANY (BSC) — Business Metrics Section
+  // ================================================================
+
+  var currentBusiness = 'garden-buildings';
+
+  var BSC_STEPS = [
+    { id: 'bsc-overview',   label: 'Overview',          icon: '📊' },
+    { id: 'bsc-financials', label: 'Financial Summary',  icon: '💰' },
+    { id: 'bsc-sales',      label: 'Sales Pipeline',     icon: '📈' },
+    { id: 'bsc-customers',  label: 'Customers',          icon: '👥' },
+    { id: 'bsc-quotes',     label: 'Quotes & Orders',    icon: '📋' },
+    { id: 'bsc-expenses',   label: 'Expenses',           icon: '💳' },
+    { id: 'bsc-notes',      label: 'Notes',              icon: '📝' },
+    { id: 'bsc-ideas',      label: 'Ideas',              icon: '💡' }
+  ];
+
+  // Firebase data stores
+  var bscData = {
+    income: [],
+    expenses: [],
+    quotes: [],
+    customers: [],
+    notes: []
+  };
+  var bscListeners = {};
+
+  function initBscFirebase() {
+    if (!window.FireSync) return;
+
+    var paths = {
+      income: 'business/bsc/income',
+      expenses: 'business/bsc/expenses',
+      quotes: 'business/bsc/quotes',
+      customers: 'business/bsc/customers',
+      notes: 'business/bsc/notes'
+    };
+
+    Object.keys(paths).forEach(function(key) {
+      FireSync.onTasks(paths[key], function(data) {
+        bscData[key] = [];
+        if (data) {
+          Object.keys(data).forEach(function(id) {
+            var item = data[id];
+            item._id = id;
+            bscData[key].push(item);
+          });
+        }
+        // Re-render if BSC is active and the relevant step is showing
+        if (currentBusiness === 'bsc') {
+          var body = document.getElementById('mainContent');
+          if (body && body.querySelector('.bsc-page')) {
+            openBscStep(activeStep);
+          }
+        }
+      });
+    });
+  }
+
+  function buildBscNav() {
+    var nav = document.getElementById('navSteps');
+    nav.innerHTML = '';
+    BSC_STEPS.forEach(function(step) {
+      var btn = document.createElement('button');
+      btn.className = 'gb-step';
+      btn.setAttribute('data-step', step.id);
+      btn.innerHTML =
+        '<span class="gb-step-num">' + step.icon + '</span>' +
+        '<span class="gb-step-label">' + step.label + '</span>' +
+        '<span class="gb-step-arrow">›</span>';
+      btn.addEventListener('click', function() { openBscStep(step.id); });
+      nav.appendChild(btn);
+    });
+  }
+
+  function openBscStep(stepId) {
+    activeStep = stepId;
+    var body = document.getElementById('mainContent');
+    var flyout = document.getElementById('flyout');
+    if (flyout) flyout.classList.remove('open');
+
+    // Highlight active step
+    document.querySelectorAll('.gb-step').forEach(function(b) { b.classList.remove('active'); });
+    var activeBtn = document.querySelector('.gb-step[data-step="' + stepId + '"]');
+    if (activeBtn) activeBtn.classList.add('active');
+
+    var html = '<div class="bsc-page">';
+
+    switch(stepId) {
+      case 'bsc-overview':
+        html += renderBscOverview();
+        break;
+      case 'bsc-financials':
+        html += renderBscFinancials();
+        break;
+      case 'bsc-sales':
+        html += renderBscSales();
+        break;
+      case 'bsc-customers':
+        html += renderBscCustomers();
+        break;
+      case 'bsc-quotes':
+        html += renderBscQuotes();
+        break;
+      case 'bsc-expenses':
+        html += renderBscExpenses();
+        break;
+      case 'bsc-notes':
+        html += renderBscNotes();
+        break;
+      case 'bsc-ideas':
+        html += renderBscIdeas();
+        break;
+      default:
+        html += '<p>Coming soon.</p>';
+    }
+
+    html += '</div>';
+    body.innerHTML = html;
+
+    // Bind handlers after render
+    bindBscHandlers(stepId);
+  }
+
+  function bscFmt(n) { return '£' + Number(n || 0).toLocaleString('en-GB', { minimumFractionDigits: 2, maximumFractionDigits: 2 }); }
+  function bscFmtShort(n) { return n >= 1000 ? '£' + (n/1000).toFixed(1) + 'k' : '£' + Number(n).toFixed(0); }
+  function bscSum(arr) { var t = 0; arr.forEach(function(i) { t += Number(i.amount || 0); }); return t; }
+
+  // ── BSC Overview ──
+  function renderBscOverview() {
+    var totalIncome = bscSum(bscData.income);
+    var totalExpenses = bscSum(bscData.expenses);
+    var net = totalIncome - totalExpenses;
+    var totalQuotes = bscData.quotes.length;
+    var activeQuotes = bscData.quotes.filter(function(q) { return q.status === 'sent' || q.status === 'draft'; }).length;
+    var wonQuotes = bscData.quotes.filter(function(q) { return q.status === 'won'; }).length;
+    var totalCustomers = bscData.customers.length;
+
+    var html = '';
+    html += '<div class="gb-kpi-grid">';
+    html += kpiCard('💰', bscFmtShort(totalIncome), 'Total Income', 'green');
+    html += kpiCard('💳', bscFmtShort(totalExpenses), 'Total Expenses', 'red');
+    html += kpiCard('📈', bscFmtShort(net), 'Net Profit', net >= 0 ? 'green' : 'red');
+    html += kpiCard('📋', totalQuotes, 'Total Quotes', 'amber');
+    html += kpiCard('✉️', activeQuotes, 'Active Quotes', 'blue');
+    html += kpiCard('🏆', wonQuotes, 'Won', 'green');
+    html += kpiCard('👥', totalCustomers, 'Customers', '');
+    html += kpiCard('📊', totalIncome > 0 ? ((net/totalIncome)*100).toFixed(0) + '%' : '—', 'Margin', 'green');
+    html += '</div>';
+
+    // Quick actions
+    html += '<div style="display:flex;gap:8px;margin:16px 0;flex-wrap:wrap;">';
+    html += '<button class="bsc-quick-btn" data-goto="bsc-quotes" style="padding:10px 16px;border-radius:8px;border:1px solid #E7E0D8;background:#F5F0EB;cursor:pointer;font-size:14px;">+ New Quote</button>';
+    html += '<button class="bsc-quick-btn" data-goto="bsc-customers" style="padding:10px 16px;border-radius:8px;border:1px solid #E7E0D8;background:#F5F0EB;cursor:pointer;font-size:14px;">+ New Customer</button>';
+    html += '<button class="bsc-quick-btn" data-goto="bsc-financials" style="padding:10px 16px;border-radius:8px;border:1px solid #E7E0D8;background:#F5F0EB;cursor:pointer;font-size:14px;">+ Add Income</button>';
+    html += '<button class="bsc-quick-btn" data-goto="bsc-expenses" style="padding:10px 16px;border-radius:8px;border:1px solid #E7E0D8;background:#F5F0EB;cursor:pointer;font-size:14px;">+ Add Expense</button>';
+    html += '</div>';
+
+    // Recent activity
+    var allItems = [];
+    bscData.income.forEach(function(i) { allItems.push({ type: 'Income', title: i.description || i.category || 'Income', amount: i.amount, date: i.date, created: i.created }); });
+    bscData.expenses.forEach(function(e) { allItems.push({ type: 'Expense', title: e.description || e.category || 'Expense', amount: e.amount, date: e.date, created: e.created }); });
+    bscData.quotes.forEach(function(q) { allItems.push({ type: 'Quote', title: q.customer + ' — ' + q.description, amount: q.amount, date: q.date, created: q.created }); });
+    allItems.sort(function(a, b) { return (b.created || b.date || '').localeCompare(a.created || a.date || ''); });
+
+    html += '<h3 class="gb-section-header">Recent Activity</h3>';
+    if (allItems.length === 0) {
+      html += '<p style="color:#78716C;padding:16px;">No data yet. Use the buttons above to start adding business data.</p>';
+    } else {
+      html += '<div class="gb-table-wrap"><table class="gb-table"><thead><tr><th>Date</th><th>Type</th><th>Description</th><th>Amount</th></tr></thead><tbody>';
+      allItems.slice(0, 20).forEach(function(item) {
+        var cls = item.type === 'Income' ? 'style="color:#2D5016;font-weight:600;"' : item.type === 'Expense' ? 'style="color:#c0392b;font-weight:600;"' : '';
+        html += '<tr><td>' + (item.date || '—') + '</td><td>' + item.type + '</td><td>' + escHtml(item.title) + '</td><td ' + cls + '>' + bscFmt(item.amount) + '</td></tr>';
+      });
+      html += '</tbody></table></div>';
+    }
+
+    return html;
+  }
+
+  // ── BSC Financials ──
+  function renderBscFinancials() {
+    var totalIncome = bscSum(bscData.income);
+    var totalExpenses = bscSum(bscData.expenses);
+    var net = totalIncome - totalExpenses;
+
+    var html = '';
+    html += '<div class="gb-kpi-grid">';
+    html += kpiCard('💰', bscFmtShort(totalIncome), 'Income', 'green');
+    html += kpiCard('💳', bscFmtShort(totalExpenses), 'Expenses', 'red');
+    html += kpiCard('📈', bscFmtShort(net), 'Net Profit', net >= 0 ? 'green' : 'red');
+    html += kpiCard('📊', totalIncome > 0 ? ((net/totalIncome)*100).toFixed(1) + '%' : '—', 'Margin', 'green');
+    html += '</div>';
+
+    // Add income form
+    html += '<h3 class="gb-section-header">Add Income</h3>';
+    html += '<div class="bsc-form" style="background:#F5F0EB;padding:16px;border-radius:10px;margin-bottom:16px;">';
+    html += '<div style="display:flex;gap:8px;flex-wrap:wrap;">';
+    html += '<input type="date" id="bscIncDate" style="padding:8px;border:1px solid #ddd;border-radius:6px;">';
+    html += '<input type="text" id="bscIncDesc" placeholder="Description" style="flex:1;min-width:150px;padding:8px;border:1px solid #ddd;border-radius:6px;">';
+    html += '<input type="text" id="bscIncCategory" placeholder="Category" style="width:120px;padding:8px;border:1px solid #ddd;border-radius:6px;">';
+    html += '<input type="number" id="bscIncAmount" placeholder="Amount £" step="0.01" style="width:100px;padding:8px;border:1px solid #ddd;border-radius:6px;">';
+    html += '<button id="bscIncSave" style="padding:8px 16px;border-radius:6px;border:none;background:#2D5016;color:#fff;cursor:pointer;">+ Add</button>';
+    html += '</div></div>';
+
+    // Income table
+    html += '<h3 class="gb-section-header">Income (' + bscData.income.length + ')</h3>';
+    if (bscData.income.length > 0) {
+      var sorted = bscData.income.slice().sort(function(a,b) { return (b.date||'').localeCompare(a.date||''); });
+      html += '<div class="gb-table-wrap"><table class="gb-table"><thead><tr><th>Date</th><th>Description</th><th>Category</th><th>Amount</th><th></th></tr></thead><tbody>';
+      sorted.forEach(function(i) {
+        html += '<tr><td>' + (i.date||'—') + '</td><td>' + escHtml(i.description||'') + '</td><td>' + escHtml(i.category||'') + '</td><td style="color:#2D5016;font-weight:600;">' + bscFmt(i.amount) + '</td>';
+        html += '<td><button class="bsc-delete-btn" data-path="business/bsc/income" data-id="' + i._id + '" style="padding:4px 8px;border:1px solid #ddd;border-radius:4px;background:#fff;cursor:pointer;font-size:12px;">🗑️</button></td></tr>';
+      });
+      html += '</tbody></table></div>';
+    } else {
+      html += '<p style="color:#78716C;">No income recorded yet.</p>';
+    }
+
+    return html;
+  }
+
+  // ── BSC Sales Pipeline ──
+  function renderBscSales() {
+    var stages = { draft: [], sent: [], negotiation: [], won: [], lost: [] };
+    var stageLabels = { draft: '📝 Draft', sent: '✉️ Sent', negotiation: '🤝 Negotiation', won: '🏆 Won', lost: '❌ Lost' };
+    bscData.quotes.forEach(function(q) {
+      var s = q.status || 'draft';
+      if (!stages[s]) stages[s] = [];
+      stages[s].push(q);
+    });
+
+    var totalPipeline = bscSum(stages.draft) + bscSum(stages.sent) + bscSum(stages.negotiation);
+    var totalWon = bscSum(stages.won);
+
+    var html = '';
+    html += '<div class="gb-kpi-grid">';
+    html += kpiCard('📋', stages.draft.length + stages.sent.length + stages.negotiation.length, 'Active Pipeline', 'blue');
+    html += kpiCard('💰', bscFmtShort(totalPipeline), 'Pipeline Value', 'amber');
+    html += kpiCard('🏆', stages.won.length, 'Won', 'green');
+    html += kpiCard('💵', bscFmtShort(totalWon), 'Won Value', 'green');
+    html += '</div>';
+
+    // Pipeline by stage
+    ['draft', 'sent', 'negotiation', 'won', 'lost'].forEach(function(stage) {
+      var items = stages[stage];
+      if (!items.length) return;
+      html += '<h3 class="gb-section-header">' + stageLabels[stage] + ' (' + items.length + ')</h3>';
+      html += '<div class="gb-table-wrap"><table class="gb-table"><thead><tr><th>Customer</th><th>Description</th><th>Amount</th><th>Date</th><th>Status</th></tr></thead><tbody>';
+      items.forEach(function(q) {
+        html += '<tr><td>' + escHtml(q.customer||'') + '</td><td>' + escHtml(q.description||'') + '</td><td style="font-weight:600;">' + bscFmt(q.amount) + '</td><td>' + (q.date||'—') + '</td>';
+        html += '<td><select class="bsc-quote-status" data-id="' + q._id + '" style="padding:4px;border-radius:4px;border:1px solid #ddd;">';
+        Object.keys(stageLabels).forEach(function(s) {
+          html += '<option value="' + s + '"' + (s === stage ? ' selected' : '') + '>' + stageLabels[s] + '</option>';
+        });
+        html += '</select></td></tr>';
+      });
+      html += '</tbody></table></div>';
+    });
+
+    return html;
+  }
+
+  // ── BSC Customers ──
+  function renderBscCustomers() {
+    var html = '';
+
+    // Add customer form
+    html += '<h3 class="gb-section-header">Add Customer</h3>';
+    html += '<div class="bsc-form" style="background:#F5F0EB;padding:16px;border-radius:10px;margin-bottom:16px;">';
+    html += '<div style="display:flex;gap:8px;flex-wrap:wrap;">';
+    html += '<input type="text" id="bscCustName" placeholder="Name" style="flex:1;min-width:150px;padding:8px;border:1px solid #ddd;border-radius:6px;">';
+    html += '<input type="text" id="bscCustEmail" placeholder="Email" style="flex:1;min-width:150px;padding:8px;border:1px solid #ddd;border-radius:6px;">';
+    html += '<input type="text" id="bscCustPhone" placeholder="Phone" style="width:130px;padding:8px;border:1px solid #ddd;border-radius:6px;">';
+    html += '<input type="text" id="bscCustLocation" placeholder="Location" style="width:130px;padding:8px;border:1px solid #ddd;border-radius:6px;">';
+    html += '<button id="bscCustSave" style="padding:8px 16px;border-radius:6px;border:none;background:#2D5016;color:#fff;cursor:pointer;">+ Add</button>';
+    html += '</div></div>';
+
+    // Customer list
+    html += '<h3 class="gb-section-header">Customers (' + bscData.customers.length + ')</h3>';
+    if (bscData.customers.length > 0) {
+      html += '<div class="gb-table-wrap"><table class="gb-table"><thead><tr><th>Name</th><th>Email</th><th>Phone</th><th>Location</th><th>Added</th><th></th></tr></thead><tbody>';
+      bscData.customers.forEach(function(c) {
+        html += '<tr><td><strong>' + escHtml(c.name||'') + '</strong></td><td>' + escHtml(c.email||'') + '</td><td>' + escHtml(c.phone||'') + '</td><td>' + escHtml(c.location||'') + '</td><td>' + (c.date||'—') + '</td>';
+        html += '<td><button class="bsc-delete-btn" data-path="business/bsc/customers" data-id="' + c._id + '" style="padding:4px 8px;border:1px solid #ddd;border-radius:4px;background:#fff;cursor:pointer;font-size:12px;">🗑️</button></td></tr>';
+      });
+      html += '</tbody></table></div>';
+    } else {
+      html += '<p style="color:#78716C;">No customers yet.</p>';
+    }
+
+    return html;
+  }
+
+  // ── BSC Quotes & Orders ──
+  function renderBscQuotes() {
+    var html = '';
+
+    // Add quote form
+    html += '<h3 class="gb-section-header">New Quote</h3>';
+    html += '<div class="bsc-form" style="background:#F5F0EB;padding:16px;border-radius:10px;margin-bottom:16px;">';
+    html += '<div style="display:flex;gap:8px;flex-wrap:wrap;margin-bottom:8px;">';
+    html += '<input type="text" id="bscQuoteCust" placeholder="Customer name" style="flex:1;min-width:150px;padding:8px;border:1px solid #ddd;border-radius:6px;">';
+    html += '<input type="text" id="bscQuoteDesc" placeholder="Description (e.g. 4m x 3m Apex)" style="flex:2;min-width:200px;padding:8px;border:1px solid #ddd;border-radius:6px;">';
+    html += '</div>';
+    html += '<div style="display:flex;gap:8px;flex-wrap:wrap;">';
+    html += '<input type="number" id="bscQuoteAmount" placeholder="Amount £" step="0.01" style="width:120px;padding:8px;border:1px solid #ddd;border-radius:6px;">';
+    html += '<input type="date" id="bscQuoteDate" style="padding:8px;border:1px solid #ddd;border-radius:6px;">';
+    html += '<select id="bscQuoteStatus" style="padding:8px;border:1px solid #ddd;border-radius:6px;">';
+    html += '<option value="draft">📝 Draft</option><option value="sent">✉️ Sent</option><option value="negotiation">🤝 Negotiation</option><option value="won">🏆 Won</option><option value="lost">❌ Lost</option></select>';
+    html += '<button id="bscQuoteSave" style="padding:8px 16px;border-radius:6px;border:none;background:#2D5016;color:#fff;cursor:pointer;">+ Add Quote</button>';
+    html += '</div></div>';
+
+    // Quotes list
+    html += '<h3 class="gb-section-header">All Quotes (' + bscData.quotes.length + ')</h3>';
+    if (bscData.quotes.length > 0) {
+      var sorted = bscData.quotes.slice().sort(function(a,b) { return (b.date||b.created||'').localeCompare(a.date||a.created||''); });
+      html += '<div class="gb-table-wrap"><table class="gb-table"><thead><tr><th>Customer</th><th>Description</th><th>Amount</th><th>Date</th><th>Status</th><th></th></tr></thead><tbody>';
+      sorted.forEach(function(q) {
+        html += '<tr><td>' + escHtml(q.customer||'') + '</td><td>' + escHtml(q.description||'') + '</td><td style="font-weight:600;">' + bscFmt(q.amount) + '</td><td>' + (q.date||'—') + '</td>';
+        html += '<td><select class="bsc-quote-status" data-id="' + q._id + '" style="padding:4px;border-radius:4px;border:1px solid #ddd;">';
+        ['draft','sent','negotiation','won','lost'].forEach(function(s) {
+          html += '<option value="' + s + '"' + (s === q.status ? ' selected' : '') + '>' + s + '</option>';
+        });
+        html += '</select></td>';
+        html += '<td><button class="bsc-delete-btn" data-path="business/bsc/quotes" data-id="' + q._id + '" style="padding:4px 8px;border:1px solid #ddd;border-radius:4px;background:#fff;cursor:pointer;font-size:12px;">🗑️</button></td></tr>';
+      });
+      html += '</tbody></table></div>';
+    } else {
+      html += '<p style="color:#78716C;">No quotes yet. Add your first quote above.</p>';
+    }
+
+    return html;
+  }
+
+  // ── BSC Expenses ──
+  function renderBscExpenses() {
+    var totalExp = bscSum(bscData.expenses);
+    var html = '';
+
+    html += '<div class="gb-kpi-grid">';
+    html += kpiCard('💳', bscFmtShort(totalExp), 'Total Expenses', 'red');
+    html += kpiCard('📋', bscData.expenses.length, 'Transactions', '');
+    html += '</div>';
+
+    // Add expense form
+    html += '<h3 class="gb-section-header">Add Expense</h3>';
+    html += '<div class="bsc-form" style="background:#F5F0EB;padding:16px;border-radius:10px;margin-bottom:16px;">';
+    html += '<div style="display:flex;gap:8px;flex-wrap:wrap;">';
+    html += '<input type="date" id="bscExpDate" style="padding:8px;border:1px solid #ddd;border-radius:6px;">';
+    html += '<input type="text" id="bscExpDesc" placeholder="Description" style="flex:1;min-width:150px;padding:8px;border:1px solid #ddd;border-radius:6px;">';
+    html += '<input type="text" id="bscExpCategory" placeholder="Category" style="width:120px;padding:8px;border:1px solid #ddd;border-radius:6px;">';
+    html += '<input type="number" id="bscExpAmount" placeholder="Amount £" step="0.01" style="width:100px;padding:8px;border:1px solid #ddd;border-radius:6px;">';
+    html += '<button id="bscExpSave" style="padding:8px 16px;border-radius:6px;border:none;background:#c0392b;color:#fff;cursor:pointer;">+ Add</button>';
+    html += '</div></div>';
+
+    // Expenses table
+    html += '<h3 class="gb-section-header">Expenses (' + bscData.expenses.length + ')</h3>';
+    if (bscData.expenses.length > 0) {
+      var sorted = bscData.expenses.slice().sort(function(a,b) { return (b.date||'').localeCompare(a.date||''); });
+      html += '<div class="gb-table-wrap"><table class="gb-table"><thead><tr><th>Date</th><th>Description</th><th>Category</th><th>Amount</th><th></th></tr></thead><tbody>';
+      sorted.forEach(function(e) {
+        html += '<tr><td>' + (e.date||'—') + '</td><td>' + escHtml(e.description||'') + '</td><td>' + escHtml(e.category||'') + '</td><td style="color:#c0392b;font-weight:600;">' + bscFmt(e.amount) + '</td>';
+        html += '<td><button class="bsc-delete-btn" data-path="business/bsc/expenses" data-id="' + e._id + '" style="padding:4px 8px;border:1px solid #ddd;border-radius:4px;background:#fff;cursor:pointer;font-size:12px;">🗑️</button></td></tr>';
+      });
+      html += '</tbody></table></div>';
+    } else {
+      html += '<p style="color:#78716C;">No expenses recorded yet.</p>';
+    }
+
+    return html;
+  }
+
+  // ── BSC Notes ──
+  function renderBscNotes() {
+    var html = '';
+    html += '<h3 class="gb-section-header">Add Note</h3>';
+    html += '<div class="bsc-form" style="background:#F5F0EB;padding:16px;border-radius:10px;margin-bottom:16px;">';
+    html += '<input type="text" id="bscNoteTitle" placeholder="Title" style="width:100%;padding:8px;border:1px solid #ddd;border-radius:6px;margin-bottom:8px;box-sizing:border-box;">';
+    html += '<textarea id="bscNoteContent" placeholder="Note content..." style="width:100%;height:80px;padding:8px;border:1px solid #ddd;border-radius:6px;resize:vertical;box-sizing:border-box;"></textarea>';
+    html += '<button id="bscNoteSave" style="margin-top:8px;padding:8px 16px;border-radius:6px;border:none;background:#2D5016;color:#fff;cursor:pointer;">+ Add Note</button>';
+    html += '</div>';
+
+    html += '<h3 class="gb-section-header">Notes (' + bscData.notes.length + ')</h3>';
+    var sorted = bscData.notes.slice().sort(function(a,b) { return (b.created||'').localeCompare(a.created||''); });
+    sorted.forEach(function(n) {
+      html += '<div style="background:#fff;border:1px solid #E7E0D8;border-radius:10px;padding:14px;margin-bottom:8px;">';
+      html += '<div style="display:flex;justify-content:space-between;align-items:center;">';
+      html += '<strong>' + escHtml(n.title||'Note') + '</strong>';
+      html += '<div style="display:flex;gap:8px;align-items:center;">';
+      html += '<span style="font-size:12px;color:#999;">' + (n.created ? new Date(n.created).toLocaleDateString('en-GB') : '') + '</span>';
+      html += '<button class="bsc-delete-btn" data-path="business/bsc/notes" data-id="' + n._id + '" style="padding:2px 6px;border:1px solid #ddd;border-radius:4px;background:#fff;cursor:pointer;font-size:12px;">🗑️</button>';
+      html += '</div></div>';
+      if (n.content) html += '<p style="margin:8px 0 0;color:#555;white-space:pre-wrap;">' + escHtml(n.content) + '</p>';
+      html += '</div>';
+    });
+    if (bscData.notes.length === 0) html += '<p style="color:#78716C;">No notes yet.</p>';
+
+    return html;
+  }
+
+  // ── BSC Ideas ──
+  function renderBscIdeas() {
+    // Reuse the notes pattern but labelled as ideas
+    var ideas = [];
+    if (window.FireSync) {
+      // We'll store ideas under business/bsc/ideas
+    }
+    return '<p style="color:#78716C;padding:16px;">Ideas section — coming soon. Use Notes for now.</p>';
+  }
+
+  // ── BSC Event Handlers ──
+  function bindBscHandlers(stepId) {
+    // Quick nav buttons
+    document.querySelectorAll('.bsc-quick-btn').forEach(function(btn) {
+      btn.addEventListener('click', function() { openBscStep(btn.getAttribute('data-goto')); });
+    });
+
+    // Delete buttons
+    document.querySelectorAll('.bsc-delete-btn').forEach(function(btn) {
+      btn.addEventListener('click', function() {
+        if (!confirm('Delete this item?')) return;
+        var path = btn.getAttribute('data-path');
+        var id = btn.getAttribute('data-id');
+        if (window.FireSync) FireSync.deleteTask(path, id);
+      });
+    });
+
+    // Quote status changes
+    document.querySelectorAll('.bsc-quote-status').forEach(function(sel) {
+      sel.addEventListener('change', function() {
+        var id = sel.getAttribute('data-id');
+        if (window.FireSync) FireSync.updateTask('business/bsc/quotes', id, { status: sel.value });
+      });
+    });
+
+    // Income save
+    var incBtn = document.getElementById('bscIncSave');
+    if (incBtn) {
+      incBtn.addEventListener('click', function() {
+        var desc = document.getElementById('bscIncDesc').value.trim();
+        var amount = parseFloat(document.getElementById('bscIncAmount').value);
+        if (!desc || !amount) { alert('Please enter description and amount'); return; }
+        if (window.FireSync) FireSync.addTask('business/bsc/income', {
+          date: document.getElementById('bscIncDate').value || new Date().toISOString().split('T')[0],
+          description: desc,
+          category: document.getElementById('bscIncCategory').value.trim() || 'General',
+          amount: amount,
+          created: new Date().toISOString()
+        });
+      });
+    }
+
+    // Expense save
+    var expBtn = document.getElementById('bscExpSave');
+    if (expBtn) {
+      expBtn.addEventListener('click', function() {
+        var desc = document.getElementById('bscExpDesc').value.trim();
+        var amount = parseFloat(document.getElementById('bscExpAmount').value);
+        if (!desc || !amount) { alert('Please enter description and amount'); return; }
+        if (window.FireSync) FireSync.addTask('business/bsc/expenses', {
+          date: document.getElementById('bscExpDate').value || new Date().toISOString().split('T')[0],
+          description: desc,
+          category: document.getElementById('bscExpCategory').value.trim() || 'General',
+          amount: amount,
+          created: new Date().toISOString()
+        });
+      });
+    }
+
+    // Customer save
+    var custBtn = document.getElementById('bscCustSave');
+    if (custBtn) {
+      custBtn.addEventListener('click', function() {
+        var name = document.getElementById('bscCustName').value.trim();
+        if (!name) { alert('Please enter customer name'); return; }
+        if (window.FireSync) FireSync.addTask('business/bsc/customers', {
+          name: name,
+          email: document.getElementById('bscCustEmail').value.trim(),
+          phone: document.getElementById('bscCustPhone').value.trim(),
+          location: document.getElementById('bscCustLocation').value.trim(),
+          date: new Date().toISOString().split('T')[0],
+          created: new Date().toISOString()
+        });
+      });
+    }
+
+    // Quote save
+    var quoteBtn = document.getElementById('bscQuoteSave');
+    if (quoteBtn) {
+      quoteBtn.addEventListener('click', function() {
+        var cust = document.getElementById('bscQuoteCust').value.trim();
+        var desc = document.getElementById('bscQuoteDesc').value.trim();
+        if (!cust || !desc) { alert('Please enter customer and description'); return; }
+        if (window.FireSync) FireSync.addTask('business/bsc/quotes', {
+          customer: cust,
+          description: desc,
+          amount: parseFloat(document.getElementById('bscQuoteAmount').value) || 0,
+          date: document.getElementById('bscQuoteDate').value || new Date().toISOString().split('T')[0],
+          status: document.getElementById('bscQuoteStatus').value || 'draft',
+          created: new Date().toISOString()
+        });
+      });
+    }
+
+    // Note save
+    var noteBtn = document.getElementById('bscNoteSave');
+    if (noteBtn) {
+      noteBtn.addEventListener('click', function() {
+        var title = document.getElementById('bscNoteTitle').value.trim();
+        if (!title) { alert('Please enter a title'); return; }
+        if (window.FireSync) FireSync.addTask('business/bsc/notes', {
+          title: title,
+          content: document.getElementById('bscNoteContent').value.trim(),
+          created: new Date().toISOString()
+        });
+      });
+    }
+  }
+
+  // ── Business Section Switcher ──
+  var bizSelect = document.getElementById('businessSelect');
+  if (bizSelect) {
+    bizSelect.addEventListener('change', function() {
+      var val = bizSelect.value;
+      currentBusiness = val;
+      if (val === 'bsc') {
+        // Update dashboard strip for BSC
+        var dashSummary = document.getElementById('dashSummary');
+        if (dashSummary) {
+          dashSummary.innerHTML =
+            '<div class="gb-dash-row">' +
+              '<div class="gb-dash-item"><span class="gb-dash-label">Income</span><span class="gb-dash-value" style="color:#2D5016;">' + bscFmtShort(bscSum(bscData.income)) + '</span></div>' +
+              '<div class="gb-dash-item"><span class="gb-dash-label">Expenses</span><span class="gb-dash-value" style="color:#c0392b;">' + bscFmtShort(bscSum(bscData.expenses)) + '</span></div>' +
+            '</div>' +
+            '<div class="gb-dash-row">' +
+              '<div class="gb-dash-item accent"><span class="gb-dash-label">Net Profit</span><span class="gb-dash-value">' + bscFmtShort(bscSum(bscData.income) - bscSum(bscData.expenses)) + '</span></div>' +
+              '<div class="gb-dash-item"><span class="gb-dash-label">Quotes</span><span class="gb-dash-value">' + bscData.quotes.length + '</span></div>' +
+            '</div>';
+        }
+        buildBscNav();
+        openBscStep('bsc-overview');
+      } else {
+        // Switch back to garden buildings
+        loadData(); // Rebuilds nav + dashboard
+      }
+    });
+  }
+
   // ── Init ──
   document.addEventListener("DOMContentLoaded", function() {
     loadData();
     // Init Firebase after a short delay to let FireSync load its SDK
-    setTimeout(initFirebase, 500);
+    setTimeout(function() {
+      initFirebase();
+      initBscFirebase();
+    }, 500);
   });
 
 })();
