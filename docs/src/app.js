@@ -88,6 +88,12 @@
 
   // ── Load data ──
   function loadData() {
+    // If cards are already loaded (e.g. switching back from BSC), just rebuild UI
+    if (cards.length > 0) {
+      updateDashStrip();
+      buildNav();
+      return;
+    }
     // Try data/cards.json first (GitHub Pages serves from docs/),
     // then fall back to ../data/cards.json (local dev server from docs/)
     fetch("data/cards.json")
@@ -123,6 +129,19 @@
     cards.forEach(function (c) {
       if (counts[c.status] !== undefined) counts[c.status]++;
     });
+    // Restore original dashboard strip HTML if it was replaced by BSC view
+    var dashSummary = document.getElementById('dashSummary');
+    if (dashSummary && !document.getElementById('dash-inprogress')) {
+      dashSummary.innerHTML =
+        '<div class="gb-dash-row">' +
+          '<div class="gb-dash-item" data-filter="in-progress"><span class="gb-dash-label">In Progress</span><span class="gb-dash-value" id="dash-inprogress">—</span></div>' +
+          '<div class="gb-dash-item" data-filter="backlog"><span class="gb-dash-label">Backlog</span><span class="gb-dash-value" id="dash-backlog">—</span></div>' +
+        '</div>' +
+        '<div class="gb-dash-row">' +
+          '<div class="gb-dash-item" data-filter="done"><span class="gb-dash-label">Done</span><span class="gb-dash-value" id="dash-done">—</span></div>' +
+          '<div class="gb-dash-item"><span class="gb-dash-label">Total</span><span class="gb-dash-value" id="dash-total">—</span></div>' +
+        '</div>';
+    }
     document.getElementById("dash-inprogress").textContent = counts["in-progress"];
     document.getElementById("dash-backlog").textContent = counts.backlog;
     document.getElementById("dash-done").textContent = counts.done;
